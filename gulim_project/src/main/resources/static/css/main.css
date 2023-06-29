@@ -3,10 +3,12 @@
 /* Neo둥근모 Code */
 @import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
 
+/* 페이지 전체 글꼴 */
 .all_body{
 	font-family: 'NeoDunggeunmo Code';
 }
 
+/* 폰트사이즈 */
 .fs_30{
 	font-size: 30px;
 }
@@ -27,10 +29,12 @@
 	font-size: 13px;
 }
 
+/* 왼쪽 padding */
 .pl_20{
 	padding-left: 20px;
 }
 
+/* 상단 padding */
 .pt_10{
 	padding-top: 10px;
 }
@@ -43,47 +47,55 @@
 	padding-top: 30px;
 }
 
+/* 상단 margin */
 .mt_20{
 	margin-top: 20px;
 }
 
+/* 요소 높이 */
 .h_50{
 	height: 50px;
 }
 
+/* 요소 넓이 */
 .w_190{
 	width: 190px;
 }
 
+/* 부모요소 넓이에 맞추기 */
 .fill{
 	width: 95%;
 }
 
+/* text 가운데정렬 */
 .center{
 	margin-left:auto;
 	margin-right:auto;
 }
 
+/* 회원가입 form 테이블 전체 너비 */
 .regist_form{
 	width: 1500px;
 }
 
+/* 텍스트 가운데정렬 */
 .ta_c{
 	text-align: center;
 }
 
+/* 텍스트 왼쪽정렬 */
 .ta_l{
 	text-align: left;
 }
 
+/* 텍스트 오른쪽정렬 */
 .ta_r{
 	text-align: right;
 }
 
+/* 색 변경 */
 .col_r{
 	color: red;
 }
 
-.hidden{
-	visibility: hidden;
-}
+

@@ -15,7 +15,7 @@ $(function(){
 	// 아이디 중복확인 버튼 클릭 이벤트
 	$("#idCheck").click(function(event){
 		event.preventDefault();
-		$.ajax({
+		/* $.ajax({
 			type		: 'post'
 			,data		: $("#id").val()
 			,url		: '/idCheck'
@@ -26,7 +26,8 @@ $(function(){
 				alert('error');
 				console.log(err);
 			}
-		}); // end of ajax
+		}); // end of ajax */
+		$("#checkResult").text("성공");
 	}); // end of click evt
 
 	// 화면 로딩 시 메시지 가림
@@ -53,24 +54,35 @@ $(function(){
         }).open();
 	}); // end of click evt
 
-	// form submit 시 주소, 상세주소내용 합해서 address의 value로 setting
+	// form submit 시 주소, 상세주소내용 합해서 address의 value로 setting 후 아이디 중복검사 여부 check
 	$("#regist_form").submit(function(){
 		var addr1 = $("#addr1").val();
 		var addr2 = $("#addr2").val();
 
 		$("#address").val(addr1+" "+addr2);
+
+		var checkResult = $("#checkResult").text();
+
+		if(checkResult == "사용 가능한 아이디입니다!"){
+			return true;
+		}else{
+			alert("아이디 중복검사를 실시해주세요.");
+			return false;
+		}
 	}); // end of submit evt
 	
 }); // end of $
 </script>
 </head>
 <body>
+<!-- 헤더 -->
 <jsp:include page="../../../header_before.jsp"></jsp:include>
 <div class="all_body pl_20">
 	<div class="fs_30 pt_30">굴림세상으로 떠나기 전 준비해주세요!</div>
 	<div class="fs_20 pt_10">소중한 개인정보는 굴림에서 게임용도로만 사용되며 마케팅용으로는 사용되지 않아요!</div>
 	
 	<div class="pt_30">
+		<!-- 회원가입 form -->
 		<form action="/main/email_confirm" class="fs_25" method="post" id="regist_form">
 		
 			<input type="hidden" name="address" id="address">
@@ -100,7 +112,7 @@ $(function(){
 						<input type="text" name="id" id="id" class="fill" required>
 					</td>
 					<td class="ta_l w_190">
-						<button id="idCheck">중복확인</button>
+						<button id="idCheck">중복확인</button><span class="fs_15" id="checkResult"></span>
 					</td>
 					<td class="ta_c">
 						<label for="birthday">생년월일</label>
