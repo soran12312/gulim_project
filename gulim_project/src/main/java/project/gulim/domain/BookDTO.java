@@ -15,4 +15,6 @@ public class BookDTO {
 	private Integer stock;
 	private String genre;
 	private Integer adult; // 19금 여부(0-일반도서 / 1-19금도서)
+	private Integer sale_state; // 판매상태(0-기본값 / 1-판매중지)
+	private String simple_info;
 }

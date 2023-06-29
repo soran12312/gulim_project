@@ -10,7 +10,6 @@ public class PlaceDTO {
 	private String category;
 	private String latitude;
 	private String longitude;
-	private String explain;
 	private String place_address;
 	private String tel;
 	private Integer partnership; // 제휴여부(0-제휴x / 1-제휴매장)
