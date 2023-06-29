@@ -1,0 +1,35 @@
+@charset "EUC-KR";
+
+/* NeoµÕ±Ù¸ð Code */
+@import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
+
+/* header */
+.header {
+	background-color: black;
+	height: 70px;
+	align-items: center;
+}
+.header_logo{
+	display: inline;
+	
+}
+.header_logo img{
+	height: 50px;
+	display: inline;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+.header_nav{
+	font-family: 'NeoDunggeunmo Code';
+	font-size: 15px;
+	color: white;
+	margin-right: 20px;
+	padding-top: 25px;
+	display: inline;
+	float: right;
+}
+.header_nav td {
+	padding-right : 15px;
+	text-align: center;
+}
+
