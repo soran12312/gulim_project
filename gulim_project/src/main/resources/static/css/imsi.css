@@ -1,0 +1,127 @@
+/* ================ START OF MY PAGE ====================== */
+.mypagebackpage {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/mypage/mypage_back.jpg");
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}
+/* ================ START OF SUBNAV ====================== */
+.subnav {
+  width: 250px;
+  height: 631px;
+  background: white;
+  opacity: 0.7;
+  position: absolute;
+  top: 140px;
+  left: 100px;
+  border: 10px solid rgba(112,112,112,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+  overflow: hidden;
+}
+.subnav_menu {
+  width: 247px;
+  color: rgba(0,0,0,1);
+  opacity: 1;
+  text-align: left;
+}
+.subnav_menu a{
+  display: block;
+  padding-top: 35px;
+  padding-left: 10px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  text-align: center;
+}
+/* 이거 _post만 바꾸고 top조정하면 메뉴선택 바뀜 */
+.subnav_select_post { 
+  width: 200px;
+  height: 50px;
+  opacity: 1;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 7px solid rgba(217,217,217,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+}
+
+/* ================ END OF SUBNAV ====================== */
+
+/* ================ START OF POST ====================== */
+.page_name {
+  width: 100px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 130px;
+  left: 950px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: center;
+}
+.post_back {
+  width: 1000px;
+  height: 574px;
+  background: rgba(217,217,217,1);
+  opacity: 0.5;
+  position: absolute;
+  top: 186px;
+  left: 500px;
+  overflow: hidden;
+}
+.post_table{
+  width: 1000px;
+  height: 530px;
+  position: absolute;
+  top: 186px;
+  left: 500px;
+  overflow: hidden;
+ 
+  opacity: 1;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  text-align: center;
+}
+.table_menu1{
+  font-size: 32px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.table_menu2{
+  font-size: 32px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.table_menu3{
+  font-size: 32px;
+  width:500px;
+  height:50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.post_td{
+  font-size: 20px;
+}
+.send_post{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  text-align: right;
+   position: absolute;
+  bottom: 20px;
+  right: 20px;
+  
+}
+/* ================ END OF POST ====================== */
+
+/* ================ END OF MY PAGE ====================== */
