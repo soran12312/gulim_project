@@ -18,7 +18,7 @@ $(function(){
 		/* $.ajax({
 			type		: 'post'
 			,data		: $("#id").val()
-			,url		: '/idCheck'
+			,url		: '/main/idCheck'
 			,success	: function(result){
 				alert(result);
 			}
@@ -87,6 +87,7 @@ $(function(){
 		
 			<input type="hidden" name="address" id="address">
 			<input type="hidden" name="email" id="email">
+			<input type="hidden" name="regist_type" id="regist_type">
 			
 			<table class="regist_form">
 				<tr class="h_50">

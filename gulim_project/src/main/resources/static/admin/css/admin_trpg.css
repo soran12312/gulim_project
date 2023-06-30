@@ -1,0 +1,272 @@
+@charset "EUC-KR";
+
+/* ================START OF FONT============================== */
+/* Neo�ձٸ� Code */
+@import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
+/* ================END OF FONT============================== */
+
+
+
+
+
+/* ================START OF HEADER============================== */
+
+.header_logo{
+	display: inline;
+	
+}
+.header_logo img{
+	height: 50px;
+	display: inline;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+.header_nav{
+	font-family: 'NeoDunggeunmo Code';
+	font-size: 15px;
+	color: white;
+	margin-right: 20px;
+	padding-top: 25px;
+	display: inline;
+	float: right;
+}
+.header_nav td {
+	padding-right : 15px;
+	text-align: center;
+}
+/* ================END OF HEADER============================== */
+
+
+
+
+/* ================START OF FOOTER============================== */
+/* Ǫ�� ��ü */
+.footer {
+	background-color: #343957;
+	height: 200px;
+	align-items: center;
+}
+
+/* Ǫ�� ����(1��) */
+.footer_left{
+	font-family: 'NeoDunggeunmo Code';
+	font-size: 15px;
+	color: white;
+	display: inline;
+	float:left;
+	width:40%;
+	margin-left: 10%;
+}
+
+/* Ǫ�� ���� ��Ʈ ������ */
+.footer_left a {
+	font-size: 10px;
+	
+}
+
+/* Ǫ�� ����(2��) */
+.footer_right{
+	font-family: 'NeoDunggeunmo Code';
+	font-size: 10px;
+	color: white;
+	display: inline;
+	float: right;
+	width:30%;
+	padding-top: 2%;
+}
+
+/* Ǫ�� ���� ��ġ���� */
+.footer_right a{
+	margin-right: 20px;
+}
+
+/* Ǫ�� ���� info���� ��ġ���� */
+.footer_info{
+	padding-top: 5%;
+}
+/* ================END OF FOOTER============================== */
+
+/* ================START OF MAIN.jsp============================== */
+/* ��� */
+.backpage {
+  width: 100%;
+  height: 1024px;
+  background: rgba(255,255,255,1); /* <======���� �̹��������� ��׶��� �ٲ� */
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+/* �����ø޼���1 */
+.marketing_messge1 {
+  width: 600px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 160px;
+  left: 208px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 50px;
+  opacity: 1;
+  text-align: left;
+}
+/* �����ø޼���2 */
+.marketing_messge2 {
+  width: 500px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 300px;
+  left: 227px;
+  font-family:NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+/* �α����� */
+.loginform_back {
+  width: 379px;
+  height: 442px;
+  background: rgba(217,217,217,1);
+  opacity: 1;
+  position: absolute;
+  top: 131px;
+  right: 10%;
+  border: 1px solid rgba(0,0,0,1);
+  border-top-left-radius: 37px;
+  border-top-right-radius: 37px;
+  border-bottom-left-radius: 37px;
+  border-bottom-right-radius: 37px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.loginform_login {
+  width: 121px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 154px;
+  right: 10%;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.password_input {
+  width: 323px;
+  height: 56px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 420px;
+  right: 213px;
+  overflow: hidden;
+}
+.id_input {
+  width: 323px;
+  height: 56px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 286px;
+  right: 213px;
+  overflow: hidden;
+}
+.loginform_id {
+  width: 54px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 243px;
+  right: 25%;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+.loginform_password {
+  width: 53px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 373px;
+  right: 25%;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.loginform_submit{
+  width: 98px;
+  color: rgba(255,255,255,1);
+  background: rgba(217,217,217,1);
+  position: absolute;
+  top: 498px;
+  right: 200px;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 25px;
+  opacity: 1;
+  text-align: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.go_regist{
+  width: 323px;
+  height: 50px;
+  background: rgba(217,217,217,1);
+  opacity: 1;
+  position: absolute;
+  top: 739px;
+  right: 11%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+  font-family:NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 30px;
+}
+.kakaologin_Btn {
+  width: 323px;
+  height: 50px;
+  background: rgba(217,217,217,1);
+  color: rgba(0,0,0,1);
+  opacity: 1;
+  position: absolute;
+  top: 605px;
+  right: 11%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+  font-family:NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 30px;
+}
+.googlelogin_Btn{
+  width: 323px;
+  height: 50px;
+  background: rgba(217,217,217,1);
+  color: rgba(0,0,0,1);
+  opacity: 1;
+  position: absolute;
+  top: 670px;
+  right: 11%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+  font-family:NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 30px;
+}
+
+/* ================END OF MAIN.jsp============================== */
