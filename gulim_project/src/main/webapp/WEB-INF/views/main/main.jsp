@@ -8,12 +8,51 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	// 구글 로그인 버튼 클릭 시 함수
+	const getGoogleLoginUri = ()=>{
+		console.log();
+		$.ajax({
+			url		: '/main/getGoogleLoginUri'
+			,success	: function(result){
+				location.href=result;
+			}
+			,error	: function(err){
+				alert('error');
+				console.log(err);
+			}
+		}); // end of ajax
+	}
+
+	// 카카오 로그인 버튼 클릭 시 함수
+	const getKakaoLoginUri = ()=>{
+		console.log();
+		$.ajax({
+			url		: '/main/getKakaoLoginUri'
+			,success	: function(result){
+				location.href=result;
+			}
+			,error	: function(err){
+				alert('error');
+				console.log(err);
+			}
+		}); // end of ajax
+	}
+
+	$("#g_login_btn").click(getGoogleLoginUri);
+	$("#k_login_btn").click(getKakaoLoginUri);
+	
+}); // end of $
+</script>
 </head>
 <body>
 <jsp:include page="../../../header_before.jsp"></jsp:include>
 
 <!-- START전체 div -->
-<div class="backpage">
+<div class="mypagebackpage">
 
 
 <!-- ================START OF 좌측 마케팅 메세지==================== -->
@@ -47,9 +86,9 @@
 			<button type = "submit" class="loginform_submit">LOGIN</button>
 		</form>
 		
-		<button class="kakaologin_Btn">카카오로 로그인</button>
-		<button class="v15_6 v15_5 googlelogin_Btn" >구글아이디로 로그인</button>
-		<button class="go_regist">회원가입하러 가기</button>
+		<button id="k_login_btn" class="kakaologin_Btn"></button>
+		<button id="g_login_btn" class="googlelogin_Btn" ></button>
+		<button class="go_regist"></button>
 	
 <!-- ================END OF 로그인폼==================== -->
 

@@ -4,6 +4,9 @@
 
 <mapper namespace="project.gulim.dao.MainDAO">
 
-	
+	<select id="loginCheck" parameterType="MemberDTO" resultType="String">
+		SELECT id FROM member
+		WHERE email = #{email} AND regist_type = #{regist_type}
+	</select>
 
 </mapper>
