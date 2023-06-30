@@ -1,0 +1,55 @@
+/* ================START OF FONT============================== */
+/* Neo둥근모 Code */
+@import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
+/* ================END OF FONT============================== */
+
+
+/* ================ START OF MY PAGE/SEND_POST ====================== */
+.send_post_backpage{
+  width: 400px;
+  height: 500px;
+  background-image:url("/files/images/mypage/sendpost_back.png");
+  background-size: cover;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}
+.send_post_name{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  color: white;
+  opacity: 1;
+  text-align: center;
+  padding-top: 20px;
+}
+.sendpost_menu{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  color: white;
+  text-align: left;
+}
+.sendpost_form{
+  padding-top: 10px;
+  padding-left: 40px;
+  width: 400px;
+  height: 400px;
+}
+.sendpost_btn{
+  width:100px;
+  height: 40px;
+  position: absolute;
+  top: 470px;
+  left:300px;
+}
+.post_title 
+, .post_f_id{
+  height: 30px;	
+  width: 300px;
+}
+.post_content{
+  height:130px;	
+  width: 300px;
+}
+/* ================ END OF MY PAGE/SEND_POST ====================== */
