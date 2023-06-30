@@ -15,7 +15,7 @@
 	<!-- 푸터 좌측정렬 -->
 	<div class = footer_left>
 		<div id = header_logo class = header_logo>
-			<img src="../images/LOGO_white_ver.png">
+			<img src="../files/images/LOGO_white_ver.png">
 		</div><br/>
 		<a>고객센터</a><br/>
 		<a>오전 9시 ~ 오후 6시</a>

@@ -16,7 +16,7 @@
 	<div id = header_nav class = header_nav>
 	<table><tr>
 		<td>
-			<a>오프라인모임</a>
+			<a>모임장소찾기</a>
 		</td>
 		<td>
 			<a>커뮤니티</a>
