@@ -1,16 +1,38 @@
-@charset "EUC-KR";
+@charset "utf-8";
 
 /* ================START OF FONT============================== */
 /* Neo�ձٸ� Code */
 @import url('//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
 /* ================END OF FONT============================== */
 
+/* ================START OF SIDEBAR============================== */
+.logo-image{
+	position: relative; 
+	top: -2px; 
+	right: -14px;
+	width: 190px;
+	height: 68px;
+}
 
+img.logo-image2{
+	position: relative; 
+	top: -2px; 
+	right: -4.5px;
+	width: 32px;
+	height: 32px;
+}
 
+li.nav-label{
+	color: #b3b3be;
+}
+
+.quixnav .metismenu > li.mm-active-selected > a {
+        background-color: #6b11df;
+        color: #fff; }
+/* ================END OF SIDEBAR============================== */
 
 
 /* ================START OF HEADER============================== */
-
 .header_logo{
 	display: inline;
 	
@@ -34,10 +56,55 @@
 	padding-right : 15px;
 	text-align: center;
 }
+
+  .text-uppercase {
+	top: 10px;
+	position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .text-uppercase ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+
+  .text-uppercase li {
+	  margin-left: 1.0rem;
+    margin-right: 2.0rem; /* 간격을 1.5rem으로 조정 */
+  }
+
+  .text-uppercase li:not(:last-child)::after {
+    content: "|";
+    margin-left: 3.0rem;
+    color: #000;
+  }
+
+.tab_active{
+	color:#6b11df
+}
+
+.tab_inactive{
+	color:#000;
+}
+
 /* ================END OF HEADER============================== */
 
+/* ================START OF member_management============================== */
+
+.text_answer{
+	overflow: hidden; /* 내용이 넘치면 숨기기 */
+	position: absolute; width: 100%; height: 100%;
+ 	border: 0px;
+  	background-color:#f9f9f9;
+  	top: 0px;
+  	left: 0px;
+}
 
 
+/* ================END OF member_management============================== */
 
 /* ================START OF FOOTER============================== */
 /* Ǫ�� ��ü */
@@ -46,6 +113,8 @@
 	height: 200px;
 	align-items: center;
 }
+
+
 
 /* Ǫ�� ����(1��) */
 .footer_left{

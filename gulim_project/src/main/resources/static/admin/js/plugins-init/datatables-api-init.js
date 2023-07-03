@@ -44,6 +44,7 @@
     var table = $('#example-api-3').DataTable();
  
     $('#example-api-3 tbody').on( 'click', 'tr', function () {
+		
         $(this).toggleClass('selected');
     } );
  

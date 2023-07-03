@@ -7,7 +7,7 @@
 <title>footer</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/images/favicon-32x32.png">
-<link href="/admin/css/admin_trpg.css" rel="stylesheet">
+<link href="/admin/css/admin.css" rel="stylesheet">
 </head>
 <body>
 <div class = footer style="position: relative; top: -2px; right: 244px;">

@@ -1,0 +1,20 @@
+템플릿 중에서 내가 건든 js
+
+1. custom.min.js 42번
+
+$(".nav-control").on('click', function() {
+	    $('#main-wrapper').toggleClass("menu-toggle");
+	    $(".hamburger").toggleClass("is-active");
+	    
+	    var logoImage = $(".logo-image");
+	    if ($(".hamburger").hasClass("is-active")) {
+	        logoImage.attr("src", "/admin/images/logo2.png");
+	        logoImage.addClass("logo-image2");
+	    } else {
+	        logoImage.attr("src", "/files/images/LOGO_white_ver.png");
+	        logoImage.removeClass("logo-image2");
+	    }
+	});
+	
+	
+2.
