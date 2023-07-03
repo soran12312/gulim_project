@@ -1,17 +1,16 @@
 package project.gulim.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class SaleMainController {
+public class SubscribeController {
 	
 	
-	@RequestMapping("/sale")
-	public String Book()
+	@RequestMapping("/subscribe")
+	public String subscribe()
 	{
-		return "sale/sale_main";
+		return "sale/subscribe/subscribe";
 	}
 
 }

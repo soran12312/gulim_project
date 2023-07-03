@@ -18,30 +18,27 @@
 	align-items: center;
 	justify-content: center;
 	min-height: 50vh;
-	
 }
 
 a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+	text-decoration: none;
+	color: black;
+}
 
-  .start-stream {
-    flex: 1;
-  }
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
 
-  footer {
-    flex-shrink: 0;
-  }
+.start-stream {
+	flex: 1;
+}
 
-  
+footer {
+	flex-shrink: 0;
+}
+}
 </style>
 
 </head>
@@ -54,7 +51,8 @@ a {
 	</header>
 
 
-	<div class="start-stream d-flex align-items-center justify-content-center">
+	<div
+		class="start-stream d-flex align-items-center justify-content-center">
 		<div
 			class="col-lg-12 d-flex align-items-center justify-content-center">
 			<div class="heading-section">
@@ -75,7 +73,7 @@ a {
 				</div>
 				<div class="col-lg-6">
 					<div class="item">
-						<a href="/">
+						<a href="/subscribe">
 							<div class="icon">
 								<img src="/assets/images/service-02.jpg" alt=""
 									style="max-width: 60px; border-radius: 50%;">
@@ -99,7 +97,7 @@ a {
 
 
 </body>
-	<footer>
-		<jsp:include page="../../../footer.jsp"></jsp:include>
-	</footer>
+<footer>
+	<jsp:include page="../../../footer.jsp"></jsp:include>
+</footer>
 </html>
