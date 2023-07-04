@@ -4,8 +4,8 @@
 /* ================END OF FONT============================== */
 
 
-/* ================ START OF MY PAGE/SEND_POST ====================== */
-.send_post_backpage{
+/* ================ START OF MY PAGE/SEND_MESSAGE & DETAIL_MESSAGE ====================== */
+.send_message_backpage{
   width: 400px;
   height: 500px;
   background-image:url("/files/images/mypage/sendpost_back.png");
@@ -14,7 +14,7 @@
   opacity: 1;
   overflow: hidden;
 }
-.send_post_name{
+.send_message_name{
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
   font-size: 32px;
@@ -23,32 +23,33 @@
   text-align: center;
   padding-top: 20px;
 }
-.sendpost_menu{
+.sendmessage_menu{
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
   font-size: 20px;
   color: white;
   text-align: left;
 }
-.sendpost_form{
+.sendmessage_form{
   padding-top: 10px;
   padding-left: 40px;
   width: 400px;
   height: 400px;
 }
-.sendpost_btn{
+.sendmessage_btn{
   width:100px;
   height: 40px;
   position: absolute;
   top: 470px;
   left:300px;
 }
-.post_title 
-, .post_f_id{
+.message_title 
+, .receive_id
+,.send_id{
   height: 30px;	
   width: 300px;
 }
-.post_content{
+.message_content{
   height:130px;	
   width: 300px;
 }

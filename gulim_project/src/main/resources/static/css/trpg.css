@@ -6,7 +6,11 @@
 /* ================END OF FONT============================== */
 
 
-
+/* ================START OF ALL============================== */
+.cursor{
+cursor: pointer;
+}
+/* ================END OF ALL============================== */
 
 
 /* ================START OF HEADER============================== */
@@ -37,6 +41,7 @@
 .header_nav td {
 	padding-right : 15px;
 	text-align: center;
+	cursor: pointer
 }
 /* ================END OF HEADER============================== */
 
@@ -92,10 +97,11 @@
 
 /* ================START OF MAIN.jsp============================== */
 /* 배경 */
-.backpage {
+.mainbackpage {
   width: 100%;
   height: 1024px;
-  background: rgba(255,255,255,1); /* <======여기 이미지박으면 백그라운드 바뀜 */
+  background-image:url("/files/images/wallpaper/main_wallpaper.jpg");
+  background-size: cover;
   opacity: 1;
   position: relative;
   top: 0px;
@@ -306,9 +312,10 @@
   font-weight: Regular;
   font-size: 32px;
   text-align: center;
+  cursor: pointer
 }
 /* 이거 _post만 바꾸고 top조정하면 메뉴선택 바뀜 */
-.subnav_select_post { 
+.subnav_select_message { 
   width: 200px;
   height: 50px;
   opacity: 1;
@@ -321,10 +328,23 @@
   border-bottom-left-radius: 38px;
   border-bottom-right-radius: 38px;
 }
-
+.subnav_select_calendar{ 
+  width: 200px;
+  height: 50px;
+  opacity: 1;
+  position: absolute;
+  top: 85px;
+  left: 20px;
+  border: 7px solid rgba(217,217,217,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+}
 /* ================ END OF SUBNAV ====================== */
 
-/* ================ START OF POST ====================== */
+
+/* ================ START OF MY_MESSAGE ====================== */
 .page_name {
   width: 100px;
   color: rgba(0,0,0,1);
@@ -337,7 +357,7 @@
   opacity: 1;
   text-align: center;
 }
-.post_back {
+.message_back {
   width: 1000px;
   height: 574px;
   background: rgba(217,217,217,1);
@@ -347,7 +367,7 @@
   left: 500px;
   overflow: hidden;
 }
-.post_table{
+.message_table{
   width: 1000px;
   height: 530px;
   position: absolute;
@@ -378,10 +398,10 @@
   padding-left: 50px;
   padding-right: 50px;
 }
-.post_td{
+.message_td{
   font-size: 20px;
 }
-.send_post{
+.send_message{
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
   font-size: 20px;
@@ -391,6 +411,83 @@
   right: 20px;
   
 }
-/* ================ END OF POST ====================== */
+/* ================ END OF MY_MESSAGE ====================== */
+
+/* ================ START OF MY PAGE/SEND_MESSAGE & DETAIL_MESSAGE ====================== */
+.send_message_backpage{
+  width: 400px;
+  height: 500px;
+  background-image:url("/files/images/mypage/sendpost_back.png");
+  background-size: cover;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}
+.send_message_name{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  color: white;
+  opacity: 1;
+  text-align: center;
+  padding-top: 20px;
+}
+.sendmessage_menu{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  color: white;
+  text-align: left;
+}
+.sendmessage_form{
+  padding-top: 10px;
+  padding-left: 40px;
+  width: 400px;
+  height: 400px;
+}
+.sendmessage_btn{
+  width:100px;
+  height: 40px;
+  position: absolute;
+  top: 470px;
+  left:300px;
+}
+.message_title 
+, .receive_id
+,.send_id{
+  height: 30px;	
+  width: 300px;
+}
+.message_content{
+  height:130px;	
+  width: 300px;
+}
+/* ================ END OF MY PAGE/SEND_POST ====================== */
+/* ================ START OF CALENDER ====================== */
+.calendar_table{
+  width: 1000px;
+  height: 680px;
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  overflow: hidden;
+ 
+  opacity: 1;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  text-align: center;
+}
+.calendar_back {
+  width: 1000px;
+  height: 680px;
+  background: rgba(217,217,217,1);
+  opacity: 0.5;
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  overflow: hidden;
+}
+/* ================ END OF CALENDER ====================== */
 
 /* ================ END OF MY PAGE ====================== */
