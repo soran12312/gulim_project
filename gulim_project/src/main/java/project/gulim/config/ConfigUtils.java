@@ -160,8 +160,13 @@ public class ConfigUtils {
 		return port;
 	}
     
+    @Value("${jwt.secret.key}")
+	private String jwt_secret;
+
+	public String getJwt_secret() {
+		return jwt_secret;
+	}
+	
     
-	
-	
 	
 }

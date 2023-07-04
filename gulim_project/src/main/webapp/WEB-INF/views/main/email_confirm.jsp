@@ -72,7 +72,7 @@ $(function(){
 	<div class="fs_20 pt_30">이메일 주소를 입력한 후 받은 메일함에서 인증번호를 입력해주세요!</div>
 	<div class="fs_20 pt_10">혹시, 이메일이 오지 않았다면 스펨메일함을 확인해주세요</div>
 	
-	<form action="" class="fs_25 pt_30" method="post" id="regist_form">
+	<form action="/main/regist" class="fs_25 pt_30" method="post" id="regist_form">
 			<input type="hidden" name="id" id="id" value="${member.id}">
 			<input type="hidden" name="password" id="password" value="${member.password}">
 			<input type="hidden" name="name" id="name" value="${member.name}">

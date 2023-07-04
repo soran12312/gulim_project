@@ -8,6 +8,7 @@ public interface MainService {
 	public String kakaoLogin(String code);
 	public Integer mailCheck(String email);
 	public Boolean idCheck(String id);
+	public Boolean sLoginCheck(MemberDTO member);
 	public Boolean loginCheck(MemberDTO member);
 	public void regist(MemberDTO member);
 }

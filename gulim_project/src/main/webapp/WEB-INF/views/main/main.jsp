@@ -58,7 +58,7 @@ $(function(){
 <jsp:include page="../../../header_before.jsp"></jsp:include>
 
 <!-- START전체 div -->
-<div class="mypagebackpage">
+<div class="mainbackpage">
 
 
 <!-- ================START OF 좌측 마케팅 메세지==================== -->
@@ -76,7 +76,7 @@ $(function(){
 <!-- ================START OF 로그인폼==================== -->
 		<!-- ===== 로그인폼 배경 ===== -->
 		<div class="loginform_back"></div>
-		<form action="" method="post">
+		<form action="/main/loginCheck" method="post">
 			<!-- ===== 로그인폼 상단 LOGIN 글자 ===== -->
 			<span class="loginform_login">Login</span>
 			

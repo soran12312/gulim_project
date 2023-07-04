@@ -106,6 +106,13 @@
 	        <scope>runtime</scope>
 	    </dependency>
 	    
+	    <!-- 암호화 -->
+		<dependency>
+		    <groupId>org.mindrot</groupId>
+		    <artifactId>jbcrypt</artifactId>
+		    <version>0.4</version>
+		</dependency>
+		
 		<!-- mail -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

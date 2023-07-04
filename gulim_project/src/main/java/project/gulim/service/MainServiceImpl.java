@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Random;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -264,10 +265,10 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Boolean loginCheck(MemberDTO member) {
+	public Boolean sLoginCheck(MemberDTO member) {
 		String check;
 		
-		check = mainDAO.loginCheck(member);
+		check = mainDAO.sLoginCheck(member);
 		
 		if(check == null)return false;
 		else return true;
@@ -276,7 +277,19 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public void regist(MemberDTO member) {
 		
+		String pw = BCrypt.hashpw(member.getPassword(), BCrypt.gensalt());
+		member.setPassword(pw);
+		
 		mainDAO.regist(member);
+	}
+
+	@Override
+	public Boolean loginCheck(MemberDTO member) {
+		
+		String password = mainDAO.loginCheck(member);
+		
+		if(BCrypt.checkpw(member.getPassword(), password)) return true;
+		else return false;
 	}
 	
 }

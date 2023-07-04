@@ -1,5 +1,7 @@
 package project.gulim.controller;
 
+import java.security.Key;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.jsonwebtoken.security.Keys;
 import project.gulim.config.ConfigUtils;
 import project.gulim.domain.MemberDTO;
 import project.gulim.service.MainService;
@@ -18,9 +21,6 @@ import project.gulim.service.MainService;
 @RequestMapping("/main")
 public class MainController {
 
-	@Value("${google.client.id}")
-	private String google_client_id;
-	
 	@Autowired
 	private MainService mainService;
 	
@@ -32,13 +32,6 @@ public class MainController {
 		return "main/"+step;
 	}
 	
-	@RequestMapping("/main")
-	public String mainPage(Model m) {
-		m.addAttribute("g_client_id", google_client_id);
-		
-		return "main/main";
-	}
-	
 	// 구글 로그인
 	@RequestMapping(value = "/google_login", method = RequestMethod.GET)
 	public String googleLogin(@RequestParam@PathVariable String code, Model m) {
@@ -47,8 +40,8 @@ public class MainController {
 		member.setEmail(email);
 		member.setRegist_type("google");
 		
-		if(mainService.loginCheck(member)) {
-			return "/main/main";
+		if(mainService.sLoginCheck(member)) {
+			return "/main/login";
 		}else {
 			m.addAttribute("member", member);
 			return "/main/regist_form";
@@ -66,8 +59,8 @@ public class MainController {
 		member.setRegist_type(regist_type);
 		System.out.println(member);
 		
-		if(mainService.loginCheck(member)) {
-			return "/main/main";
+		if(mainService.sLoginCheck(member)) {
+			return "/main/login";
 		}else {
 			m.addAttribute("member", member);
 			return "/main/regist_form";
@@ -105,6 +98,27 @@ public class MainController {
 			
 			return "/main/main";
 		}
+	}
+	
+	// 일반 로그인 확인
+	@RequestMapping("/loginCheck")
+	public String loginCheck(MemberDTO member) {
+		
+		if(mainService.loginCheck(member)) {
+			System.out.println("로그인 성공");
+			return "/main/login";
+		}
+		return "";
+	}
+	
+	// 로그인 jwt토큰 생성
+	@RequestMapping("/login")
+	public String login() {
+		
+		byte[] secret = util.getJwt_secret().getBytes();
+		Key key = Keys.hmacShaKeyFor(secret);
+		
+		return "";
 	}
 	
 	// 회원가입
