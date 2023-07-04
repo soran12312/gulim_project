@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>footer</title>
+<title>굴림</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
@@ -42,8 +42,14 @@ $(function(){
 		}); // end of ajax
 	}
 
+	// 회원가입 버튼 클릭 시 함수
+	const linkToRegist = () => {
+		location.href="/main/regist_form";
+	}
+
 	$("#g_login_btn").click(getGoogleLoginUri);
 	$("#k_login_btn").click(getKakaoLoginUri);
+	$("#regist").click(linkToRegist);
 	
 }); // end of $
 </script>
@@ -88,12 +94,14 @@ $(function(){
 		
 		<button id="k_login_btn" class="kakaologin_Btn"></button>
 		<button id="g_login_btn" class="googlelogin_Btn" ></button>
-		<button class="go_regist"></button>
+		<button id="regist" class="go_regist"></button>
 	
 <!-- ================END OF 로그인폼==================== -->
 
 
 	</div>
 	<!-- END 전체 div -->
+	
+<jsp:include page="../../../footer.jsp"></jsp:include>
 </body>
 </html>

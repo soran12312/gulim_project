@@ -1,4 +1,4 @@
-package project.gulim.util;
+package project.gulim.config;
 
 import org.springframework.context.annotation.PropertySource;
 

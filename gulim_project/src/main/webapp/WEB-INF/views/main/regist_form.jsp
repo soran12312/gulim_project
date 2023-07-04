@@ -15,19 +15,26 @@ $(function(){
 	// 아이디 중복확인 버튼 클릭 이벤트
 	$("#idCheck").click(function(event){
 		event.preventDefault();
-		/* $.ajax({
+		var id = $("#id").val();
+		$.ajax({
 			type		: 'post'
-			,data		: $("#id").val()
-			,url		: '/main/idCheck'
+			,url		: '/main/idCheck?id='+id
 			,success	: function(result){
-				alert(result);
+				if(result){
+					$("#checkResult").text("사용 가능한 아이디입니다!");
+					$("#checkResult").css('color','green');
+					$("#idCheck").hide();
+					$("#id").attr("readonly", true);
+				}else{
+					$("#checkResult").text("사용이 불가능한 아이디입니다!");
+					$("#checkResult").css('color','red');
+				}
 			}
 			,error	: function(err){
 				alert('error');
 				console.log(err);
 			}
-		}); // end of ajax */
-		$("#checkResult").text("성공");
+		}); // end of ajax
 	}); // end of click evt
 
 	// 화면 로딩 시 메시지 가림
@@ -86,8 +93,8 @@ $(function(){
 		<form action="/main/email_confirm" class="fs_25" method="post" id="regist_form">
 		
 			<input type="hidden" name="address" id="address">
-			<input type="hidden" name="email" id="email">
-			<input type="hidden" name="regist_type" id="regist_type">
+			<input type="hidden" name="email" id="email" value="${member.email}">
+			<input type="hidden" name="regist_type" id="regist_type" value="${member.regist_type}">
 			
 			<table class="regist_form">
 				<tr class="h_50">
@@ -110,7 +117,7 @@ $(function(){
 						<label for="id">아이디</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" name="id" id="id" class="fill" required>
+						<input type="text" name="id" id="id" class="fill" pattern="{,20}" required>
 					</td>
 					<td class="ta_l w_190">
 						<button id="idCheck">중복확인</button><span class="fs_15" id="checkResult"></span>
@@ -134,7 +141,7 @@ $(function(){
 						<label for="tel">전화번호</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" class="fill" id="tel" name="tel" placeholder="- 없이 숫자만 적어주세요" pattern="[0-9]{10,}" required>
+						<input type="text" class="fill" id="tel" name="tel" placeholder="- 없이 숫자만 적어주세요" pattern="[0-9]{9,}" required>
 					</td>
 				</tr>
 				<tr class="h_50">
@@ -173,5 +180,6 @@ $(function(){
 	
 	
 </div>
+<jsp:include page="../../../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -8,5 +8,15 @@
 		SELECT id FROM member
 		WHERE email = #{email} AND regist_type = #{regist_type}
 	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="String">
+		SELECT id FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="regist" parameterType="MemberDTO">
+		INSERT INTO member(id, password, name, address, tel, email, nickname, birthday, regist_type)
+		VALUES (#{id}, #{password}, #{name}, #{address}, #{tel}, #{email}, #{nickname}, #{birthday}, #{regist_type})
+	</insert>
 
 </mapper>

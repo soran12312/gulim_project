@@ -1,13 +1,15 @@
-package project.gulim.util;
+package project.gulim.config;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource({"classpath:security.properties"})
 public class ConfigUtils {
 	// 각 값들은 security.properties에서 가져옴
 	@Value("${google.auth.url}")
@@ -130,6 +132,36 @@ public class ConfigUtils {
                 + "?"
                 + paramStr;
 	}
+	
+	
+	@Value("${spring.mail.username}")
+    private String username;
+    @Value("${spring.mail.password}")
+    private String password;
+    @Value("${spring.mail.host}")
+    private String host;
+    @Value("${spring.mail.port}")
+    private int port;
+
+    
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+    
+    
+	
 	
 	
 }
