@@ -23,7 +23,7 @@ $(function(){
 			type : 'get',
 			url : "/main/mailCheck?email="+email, // 이메일 발송
 			success : function (data) {
-				console.log("data : " +  data);
+				//console.log("data : " +  data);
 				pass_num.attr('disabled',false);
 				authNumber = data;
 				alert('인증번호가 전송되었습니다.')

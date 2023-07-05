@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.config.ConfigUtils;
+import project.gulim.domain.JwtDTO;
 import project.gulim.domain.MemberDTO;
+import project.gulim.domain.SurveyDTO;
 import project.gulim.service.MainService;
 
 @Controller
@@ -39,9 +43,11 @@ public class MainController {
 		MemberDTO member = new MemberDTO();
 		member.setEmail(email);
 		member.setRegist_type("google");
+		String id = mainService.sLoginCheck(member);
 		
-		if(mainService.sLoginCheck(member)) {
-			return "/main/login";
+		if(id != "") {
+			m.addAttribute("id", id);
+			return "/main/main";
 		}else {
 			m.addAttribute("member", member);
 			return "/main/regist_form";
@@ -58,9 +64,11 @@ public class MainController {
 		member.setEmail(email);
 		member.setRegist_type(regist_type);
 		System.out.println(member);
+		String id = mainService.sLoginCheck(member);
 		
-		if(mainService.sLoginCheck(member)) {
-			return "/main/login";
+		if(id != "") {
+			m.addAttribute("id", id);
+			return "/main/main";
 		}else {
 			m.addAttribute("member", member);
 			return "/main/regist_form";
@@ -95,38 +103,51 @@ public class MainController {
 			return "/main/email_confirm";
 		}else {								// 구글, 카카오 회원가입인 경우 이메일인증 없이 바로 회원가입 method 호출
 			mainService.regist(member);
-			
-			return "/main/main";
+			m.addAttribute("id", member.getId());
+			return "/main/servey";
 		}
 	}
 	
 	// 일반 로그인 확인
 	@RequestMapping("/loginCheck")
+	@ResponseBody
 	public String loginCheck(MemberDTO member) {
+		String id = mainService.loginCheck(member);
 		
-		if(mainService.loginCheck(member)) {
-			System.out.println("로그인 성공");
-			return "/main/login";
-		}
-		return "";
+		return id;
 	}
 	
 	// 로그인 jwt토큰 생성
 	@RequestMapping("/login")
-	public String login() {
+	public String login(MemberDTO id, HttpServletResponse res) {
+		MemberDTO member = mainService.selectById(id);
 		
-		byte[] secret = util.getJwt_secret().getBytes();
-		Key key = Keys.hmacShaKeyFor(secret);
+		JwtDTO jwt = mainService.createJwt(member);
 		
-		return "";
+		Cookie cookie1 = new Cookie("access_token", jwt.getAccess_token());
+		long access_token_valid = jwt.getAccess_token_valid().getTime() - System.currentTimeMillis(); // 만료 날짜와 현재 시간의 차이를 계산
+		cookie1.setHttpOnly(true); // 보안설정 -> JavaScript코드로 쿠키에 접근 불가
+        cookie1.setMaxAge((int) (access_token_valid / 1000)); // 쿠키 유효기간은 초 단위로 설정
+        cookie1.setPath("/"); // 쿠키의 범위를 전체 애플리케이션으로 설정 (루트 패스 이하 모든 경로에서 쿠키 접근 가능)
+        res.addCookie(cookie1);
+        
+        Cookie cookie2 = new Cookie("refresh_token", jwt.getRefresh_token());
+		long refresh_token_valid = jwt.getRefresh_token_valid().getTime() - System.currentTimeMillis(); // 만료 날짜와 현재 시간의 차이를 계산
+		cookie2.setHttpOnly(true);
+		cookie2.setMaxAge((int) (refresh_token_valid / 1000)); // 쿠키 유효기간은 초 단위로 설정
+		cookie2.setPath("/"); // 쿠키의 범위를 전체 애플리케이션으로 설정 (루트 패스 이하 모든 경로에서 쿠키 접근 가능)
+        res.addCookie(cookie2);
+		
+		return "/main/login_main";
 	}
 	
 	// 회원가입
 	@RequestMapping("/regist")
-	public String regist(MemberDTO member) {
+	public String regist(MemberDTO member, Model m) {
 		mainService.regist(member);
 		
-		return "/main/main";
+		m.addAttribute("id", member.getId());
+		return "/main/servey";
 	}
 	
 	// 이메일 인증
@@ -148,4 +169,12 @@ public class MainController {
 		return mainService.idCheck(id);
 	}
 	
+	// 설문조사 db에 입력
+	@RequestMapping("/servey_insert")
+	public String serveyInsert(SurveyDTO servey) {
+		
+		mainService.serveyInsert(servey);
+		
+		return "/main/login_main";
+	}
 }

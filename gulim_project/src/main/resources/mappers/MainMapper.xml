@@ -23,5 +23,15 @@
 		INSERT INTO member(id, password, name, address, tel, email, nickname, birthday, regist_type)
 		VALUES (#{id}, #{password}, #{name}, #{address}, #{tel}, #{email}, #{nickname}, #{birthday}, #{regist_type})
 	</insert>
+	
+	<select id="selectById" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT * FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="serveyInsert" parameterType="SurveyDTO">
+		INSERT INTO survey(play_rull, play_genre, play_period, play_species, master, want_genre, play_class, other_site, id)
+		VALUES (#{play_rull}, #{play_genre}, #{play_period}, #{play_species}, #{master}, #{want_genre}, #{play_class}, #{other_site}, #{id})
+	</insert>
 
 </mapper>

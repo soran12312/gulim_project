@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -28,10 +31,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.mail.internet.MimeMessage;
 import project.gulim.config.ConfigUtils;
 import project.gulim.dao.MainDAO;
+import project.gulim.domain.JwtDTO;
 import project.gulim.domain.MemberDTO;
+import project.gulim.domain.SurveyDTO;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -265,13 +273,13 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Boolean sLoginCheck(MemberDTO member) {
-		String check;
+	public String sLoginCheck(MemberDTO member) {
+		String id;
 		
-		check = mainDAO.sLoginCheck(member);
+		id = mainDAO.sLoginCheck(member);
 		
-		if(check == null)return false;
-		else return true;
+		if(id == null)return "";
+		else return id;
 	}
 
 	@Override
@@ -284,12 +292,92 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Boolean loginCheck(MemberDTO member) {
+	public String loginCheck(MemberDTO member) {
 		
 		String password = mainDAO.loginCheck(member);
 		
-		if(BCrypt.checkpw(member.getPassword(), password)) return true;
-		else return false;
+		if(BCrypt.checkpw(member.getPassword(), password)) return member.getId();
+		else return "";
+	}
+
+	// memberDTO로 jwt 토큰 생성
+	public String createToken(MemberDTO member, Date expireDate) {
+		
+		byte[] secret = util.getJwt_secret().getBytes();
+	    Key key = Keys.hmacShaKeyFor(secret);
+		
+		return Jwts.builder()
+                .claim("id", member.getId())
+                .claim("name", member.getName())
+                .claim("address", member.getAddress())
+                .claim("tel", member.getTel())
+                .claim("email", member.getEmail())
+                .claim("nickname", member.getNickname())
+                .claim("birthday", member.getBirthday())
+                .claim("introduce", member.getIntroduce())
+                .claim("regist_type", member.getRegist_type())
+                .claim("dist_search", member.getDist_search())
+                .claim("name_search", member.getName_search())
+                .claim("manager", member.getManager())
+                .claim("member_state", member.getMember_state())
+                .setExpiration(expireDate)
+                .signWith(key)
+                .compact();
+	}
+
+	// 토큰으로 유저정보 확인
+	@Override
+	public Claims getClaims(String token) {
+		
+		byte[] secret = util.getJwt_secret().getBytes();
+	    Key key = Keys.hmacShaKeyFor(secret);
+		
+		return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+	}
+	
+	// jwt 생성
+	@Override
+	public JwtDTO createJwt(MemberDTO member) {
+		Date access_token_valid = getExpireDateAccessToken();
+		Date refresh_token_valid = getExpireDateRefreshToken();
+        String accessToken = createToken(member, access_token_valid);
+        String refreshToken = createToken(new MemberDTO(), refresh_token_valid);
+        
+        JwtDTO jwt = new JwtDTO();
+        jwt.setAccess_token(accessToken);
+        jwt.setRefresh_token(refreshToken);
+        jwt.setAccess_token_valid(access_token_valid);
+        jwt.setRefresh_token_valid(refresh_token_valid);
+        
+        return jwt;
+    }
+
+	// 엑세스토큰 유효기한 설정
+	public Date getExpireDateAccessToken() {
+	    long expireTimeMils = 1000 * 60 * 60;
+	    return new Date(System.currentTimeMillis() + expireTimeMils);
+	 }
+	
+	// 리프레쉬토큰 유효기한 설정
+	public Date getExpireDateRefreshToken() {
+	    long expireTimeMils = 1000L * 60 * 60 * 24 * 60;
+	    return new Date(System.currentTimeMillis() + expireTimeMils);
+	}
+
+	@Override
+	public MemberDTO selectById(MemberDTO member) {
+		
+		return mainDAO.selectById(member);
+	}
+
+	@Override
+	public void serveyInsert(SurveyDTO servey) {
+		mainDAO.serveyInsert(servey);
+		
 	}
 	
 }

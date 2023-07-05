@@ -12,8 +12,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	// 화면 로딩 시 메시지 가림
+	$("#message").hide();
+	
 	// 아이디 중복확인 버튼 클릭 이벤트
-	$("#idCheck").click(function(event){
+	const idCheck = (event) => {
 		event.preventDefault();
 		var id = $("#id").val();
 		$.ajax({
@@ -35,14 +39,11 @@ $(function(){
 				console.log(err);
 			}
 		}); // end of ajax
-	}); // end of click evt
-
-	// 화면 로딩 시 메시지 가림
-	$("#message").hide();
+	} // end of idCheck
 	
 	// 비밀번호 확인 input태그 포커스 벗어날 시 이벤트
 	// 비밀번호와 비교해서 다르면 메시지 출력
-	$("#pass_check").blur(function(){
+	const passCheck = () => {
 		var pass = $("#password").val();
 		var pass_check = $("#pass_check").val();
 		if(pass != pass_check){
@@ -50,19 +51,19 @@ $(function(){
 		}else{
 			$("#message").hide();
 		}
-	}); // end of blur evt
+	} // end of passCheck
 
 	// 주소검색 버튼 클릭 시 카카오api로 주소 검색하여 주소 input의 value로 검색결과 set
-	$("#postcodeSearch").click(function(event){
+	const postcodeSearch = (event) => {
 		event.preventDefault();
 		new daum.Postcode({oncomplete: function(data) {
 				$("#addr1").val(data.address);
 			}
         }).open();
-	}); // end of click evt
+	} // end of postcodeSearch
 
 	// form submit 시 주소, 상세주소내용 합해서 address의 value로 setting 후 아이디 중복검사 여부 check
-	$("#regist_form").submit(function(){
+	const regist = () => {
 		var addr1 = $("#addr1").val();
 		var addr2 = $("#addr2").val();
 
@@ -76,8 +77,17 @@ $(function(){
 			alert("아이디 중복검사를 실시해주세요.");
 			return false;
 		}
-	}); // end of submit evt
-	
+	}// end of regist
+
+	// form submit 시
+	$("#regist_form").submit(regist);
+	// 주소검색 버튼 클릭 시
+	$("#postcodeSearch").click(postcodeSearch);
+	// 비밀번호 확인 input태그 포커스 벗어날 시
+	$("#pass_check").blur(passCheck);
+	// 아이디 중복확인 버튼 클릭 시
+	$("#idCheck").click(idCheck);
+
 }); // end of $
 </script>
 </head>

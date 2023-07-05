@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,11 @@
 <script type="text/javascript">
 $(function(){
 
+	// Model에 id가 있으면(구글 또는 카카오 로그인확인하여 db에 데이터가 있을 경우) /main/login 으로 이동
+	if(${not empty id}) location.href="/main/login?id=${id}";
+	
 	// 구글 로그인 버튼 클릭 시 함수
 	const getGoogleLoginUri = ()=>{
-		console.log();
 		$.ajax({
 			url		: '/main/getGoogleLoginUri'
 			,success	: function(result){
@@ -25,11 +28,10 @@ $(function(){
 				console.log(err);
 			}
 		}); // end of ajax
-	}
+	} // end of getGoogleLoginUri
 
 	// 카카오 로그인 버튼 클릭 시 함수
 	const getKakaoLoginUri = ()=>{
-		console.log();
 		$.ajax({
 			url		: '/main/getKakaoLoginUri'
 			,success	: function(result){
@@ -40,17 +42,40 @@ $(function(){
 				console.log(err);
 			}
 		}); // end of ajax
-	}
+	} // end of getKakaoLoginUri
 
 	// 회원가입 버튼 클릭 시 함수
-	const linkToRegist = () => {
-		location.href="/main/regist_form";
-	}
+	const linkToRegist = () => location.href="/main/regist_form";
 
+	// 로그인 버튼 클릭 시 이벤트
+	const loginCheck = (event) => {
+		event.preventDefault();
+		var params = { id : $("#id").val() 
+				, password: $("#password").val() };
+		$.ajax({
+			type	: 'post'
+			,data	: params
+			,url	: '/main/loginCheck'
+			,success	: function(result){
+				if(result != "") location.href="/main/login?id="+result;
+				else alert("로그인 실패");
+			}
+			,error	: function(err){
+				alert('error');
+				console.log(err);
+			}
+		}); // end of ajax
+	} // end of loginCheck
+
+	// 구글 로그인 버튼 클릭 시
 	$("#g_login_btn").click(getGoogleLoginUri);
+	// 카카오 로그인 버튼 클릭 시
 	$("#k_login_btn").click(getKakaoLoginUri);
+	// 회원가입 버튼 클릭 시
 	$("#regist").click(linkToRegist);
-	
+	// 로그인 버튼 클릭 시
+	$("#loginform_submit").click(loginCheck);
+
 }); // end of $
 </script>
 </head>
@@ -86,10 +111,10 @@ $(function(){
 			
 			<!-- ===== PassWord ===== -->
 			<span class="loginform_password">Password</span>
-			<input class="password_input" name = "password" id ="password"></input>
+			<input type="password" class="password_input" name = "password" id ="password"></input>
 			
 			
-			<button type = "submit" class="loginform_submit">LOGIN</button>
+			<button type = "submit" class="loginform_submit" id="loginform_submit">LOGIN</button>
 		</form>
 		
 		<button id="k_login_btn" class="kakaologin_Btn"></button>
