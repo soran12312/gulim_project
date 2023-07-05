@@ -38,7 +38,13 @@ body {
 footer {
 	flex-shrink: 0;
 }
+
+.cartbtn{
+	position: relative;
+	top:-550px;
+	left:500px;
 }
+
 </style>
 
 </head>
@@ -83,12 +89,10 @@ footer {
 						<!-- <p>If you wish to support us, you can make a <a href="https://paypal.me/templatemo" target="_blank">small contribution via PayPal</a> to info [at] templatemo.com</p> -->
 					</div>
 				</div>
-				<div class="col-lg-12">
-					<div class="main-button">
-						<a href="/">장바구니</a>
-					</div>
+				
+				<div class="cartbtn">
+					<button class="btn" >장바구니</button>
 				</div>
-
 
 			</div>
 		</div>

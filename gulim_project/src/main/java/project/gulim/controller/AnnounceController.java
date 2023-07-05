@@ -16,20 +16,6 @@ public class AnnounceController {
 	}
 	
 	
-	//공모전게시판
-	
-	
-	
-	
-	// 이벤트 게시판
-	
-	
-	
-	
-	
-	
-	
-	// 자유게시판
 	
 	
 	

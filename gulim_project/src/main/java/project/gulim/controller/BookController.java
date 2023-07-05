@@ -15,5 +15,13 @@ public class BookController {
 	{
 		return "sale/book/book_list";
 	}
+	
+	
+	// 장바구니
+	@RequestMapping("/cart")
+	public String Cart()
+	{
+		return "sale/book/basket";
+	}
 
 }

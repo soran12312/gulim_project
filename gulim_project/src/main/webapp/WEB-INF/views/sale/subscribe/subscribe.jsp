@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1, width=device-width" />
-<title>구독제</title>
+<title>구독</title>
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
@@ -25,14 +25,15 @@
 
 <style>
 body {
-	padding-top: 20px;
+	display: flex;
+	min-height: 130vh;
+	flex-direction: column;
 }
 
-footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+.container {
+	flex: 1;
+	display: flex;
+	align-items: center;
 }
 
 .carousel {
@@ -85,17 +86,39 @@ footer {
 
 /* Center content vertically */
 .container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
 }
 
 .image-container {
-	top: -150px;
+	top: -20px;
 	position: relative;
 }
+
+#cart {
+	display: none; /* 버튼 초기에는 숨김 처리 */
+	top: -120px;
+	left: 300px;
+	position: relative;
+}
+
+#share {
+	display: none; /* 버튼 초기에는 숨김 처리 */
+	top: -158px;
+	left: 450px;
+	position: relative;
+}
+
+.cartbtn{
+	position: relative;
+	top: 70px;
+	left: 1500px;
+}
+
+
 </style>
 </head>
 <body>
@@ -103,11 +126,26 @@ footer {
 		<jsp:include page="../../../../header_before.jsp"></jsp:include>
 	</header>
 
+	<div class="cartbtn">
+		<button class="btn" >장바구니</button>
+	</div>
+	
+	
 	<div class="container">
 
+		<div class="text">
+			<h3>구독권</h3>
+			<hr />
+		</div>
+	
+		
 		<div id="selected-image-container" class="image-container"
 			style="display: none;">
 			<img id="selected-image" />
+			<p id="image-month"></p>
+			<p id="image-price"></p>
+			<button class="btn btn-danger" id="cart">장바구니</button>
+			<button class="btn btn-danger" id="share">친구에게 보내기</button>
 		</div>
 
 		<div class="row">
@@ -126,81 +164,126 @@ footer {
 						<div class="carousel-item active">
 							<div class="row">
 								<div class="col-md-3">
+									<a href="#" class="thumbnail">
+										<img  src="http://placehold.it/250x250" alt="Image" style="max-width: 100%;">
+									</a>
+									<p class="month">일회권</p>
+									<p class="price">5000원</p>
+
+								</div>
+								<div class="col-md-3">
 									<a href="#" class="thumbnail"><img
 										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"
-										onclick="showImage('http://placehold.it/250x250')"></a>
+										style="max-width: 100%;"></a>
+									<p class="month">1개월</p>
+									<p class="price">9900원</p>
+									<p>첫 가입 시 한달 무료</p>
 
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+
+									<p class="month">3개월</p>
+									<p class="price">15000원</p>
+
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+
+									<p class="month">6개월</p>
+									<p class="price">9900원</p>
+									<p>6개월 권을 사면 1개월이 무료</p>
+									<p>6+1</p>
+								</div>
+								
+								
+							</div>
+							<!--.row-->
+						</div>
+						<!--.item-->
+
+						<div class="carousel-item">
+							<div class="row">
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+									<p class="month">12개월</p>
+									<p class="price">55000원</p>
+									<p>12개월 권을 사면 2개월이 무료</p>
+									<p>12+2</p>
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+										
+									<p class="month">6개월</p>
+									<p class="price">9900원</p>
+									<p>6개월 권을 사면 1개월이 무료</p>
+									<p>6+1</p>	
+
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+										
+									<p class="month">3개월</p>
+									<p class="price">15000원</p>
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+										
+									<p class="month">1개월</p>
+									<p class="price">9900원</p>
+									<p>첫 가입 시 한달 무료</p>	
+								</div>
+							</div>
+							<!--.row-->
+						</div>
+						<!--.item-->
+
+						<div class="carousel-item">
+							<div class="row">
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
+									<p class="month">일회권</p>
+									<p class="price">5000원</p>	
+								</div>
+								<div class="col-md-3">
+									<a href="#" class="thumbnail"><img
+										src="http://placehold.it/250x250" alt="Image"
+										style="max-width: 100%;"></a>
 									
+									<p class="month">1개월</p>
+									<p class="price">9900원</p>
+									<p>첫 가입 시 한달 무료</p>
 								</div>
 								<div class="col-md-3">
 									<a href="#" class="thumbnail"><img
 										src="http://placehold.it/250x250" alt="Image"
 										style="max-width: 100%;"></a>
+										
+									<p class="month">3개월</p>
+									<p class="price">15000원</p>
 								</div>
 								<div class="col-md-3">
 									<a href="#" class="thumbnail"><img
 										src="http://placehold.it/250x250" alt="Image"
 										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-							</div>
-							<!--.row-->
-						</div>
-						<!--.item-->
-
-						<div class="carousel-item">
-							<div class="row">
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-							</div>
-							<!--.row-->
-						</div>
-						<!--.item-->
-
-						<div class="carousel-item">
-							<div class="row">
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
-								</div>
-								<div class="col-md-3">
-									<a href="#" class="thumbnail"><img
-										src="http://placehold.it/250x250" alt="Image"
-										style="max-width: 100%;"></a>
+									<p class="month">6개월</p>
+									<p class="price">9900원</p>
+									<p>6개월 권을 사면 1개월이 무료</p>
+									<p>6+1</p>	
 								</div>
 							</div>
 							<!--.row-->
@@ -231,22 +314,49 @@ footer {
 
 	<script>
 		$(document).ready(function() {
-		    $('#Carousel').carousel({
-		        interval: 5000
-		    })
+			$('#Carousel').carousel({
+				interval : 5000
+			})
 		});
 
-		function showImage(imageUrl) {
-		      let selectedImage = document.getElementById("selected-image");
-		      selectedImage.src = imageUrl;
+		$(function() {
+			$('.thumbnail').on('click', showImageInfo);
 
-		      let selectedImageContainer = document.getElementById("selected-image-container");
-		      selectedImageContainer.style.display = "block";
+		});
+		
+		function showImageInfo(event) {
+			const clickedImage = $(this).find('img');
+			const month = $(this).parent().find('p.month').text();
+			
+			const price = $(this).parent().find('p.price').text();
+			
+			const cartButton = $('#cart');
+			const shareButton = $('#share');
+
+			const selectedImage = $('#selected-image');
+			
+			if (clickedImage && clickedImage.attr('src')) {
+				selectedImage.attr('src', clickedImage.attr('src'));
+			}
+
+			const imageMonth = $('#image-month');
+			imageMonth.text(month);
+
+			const imagePrice = $('#image-price');
+			imagePrice.text(price);
+
+			const selectedImageContainer = $('#selected-image-container');
+			selectedImageContainer.show();
+
+			if (cartButton && shareButton) {
+				cartButton.show();
+				shareButton.show();
+			}
 		}
 	</script>
 
-	<footer>
-		<jsp:include page="../../../../footer.jsp"></jsp:include>
-	</footer>
 </body>
+<footer>
+	<jsp:include page="../../../../footer.jsp"></jsp:include>
+</footer>
 </html>
