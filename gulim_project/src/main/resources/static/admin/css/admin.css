@@ -92,19 +92,62 @@ li.nav-label{
 
 /* ================END OF HEADER============================== */
 
-/* ================START OF member_management============================== */
+/* ================START OF question============================== */
 
 .text_answer{
 	overflow: hidden; /* 내용이 넘치면 숨기기 */
 	position: absolute; width: 100%; height: 100%;
- 	border: 0px;
+ 	border: 2px solid firebrick;
   	background-color:#f9f9f9;
   	top: 0px;
   	left: 0px;
 }
 
 
+/* ================END OF question============================== */
+
+/* ================START OF member_management============================== */
+
+
+
 /* ================END OF member_management============================== */
+
+/* ================START OF place_list============================== */
+
+.text_gameList{
+	overflow: hidden; /* 내용이 넘치면 숨기기 */
+	position: absolute; width: 100%; height: 100%;
+ 	border: 2px solid firebrick;
+  	background-color:#f9f9f9;
+  	top: 0px;
+  	left: 0px;
+}
+
+.btn_right{
+	text-align: right;
+}
+
+button.showAll {
+  width: 280px; /* 원하는 너비 값으로 변경하세요 */
+  height: 35px; /* 원하는 높이 값으로 변경하세요 */
+}
+
+button.showAffiliateOnly {
+  width: 280px; /* 원하는 너비 값으로 변경하세요 */
+  height: 35px; /* 원하는 높이 값으로 변경하세요 */
+}
+
+/* ================END OF place_list============================== */
+
+/* ================START OF insert_form============================== */
+.note-popover {
+    display: none !important;
+}
+
+.postTable td {
+	border: 2px solid black;
+}
+/* ================END OF insert_form============================== */
 
 /* ================START OF FOOTER============================== */
 /* Ǫ�� ��ü */

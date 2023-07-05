@@ -2239,7 +2239,8 @@ fieldset:disabled a.btn {
 
 .btn-outline-success {
   color: #7ED321;
-  border-color: #7ED321; }
+  border-color: #7ED321; 
+  height: 35px;}
   .btn-outline-success:hover {
     color: #212529;
     background-color: #7ED321;
@@ -2302,7 +2303,8 @@ fieldset:disabled a.btn {
 
 .btn-outline-danger {
   color: #FF1616;
-  border-color: #FF1616; }
+  border-color: #FF1616; 
+  height: 35px;}
   .btn-outline-danger:hover {
     color: #fff;
     background-color: #FF1616;

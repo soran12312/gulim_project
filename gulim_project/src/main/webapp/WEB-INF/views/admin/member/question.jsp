@@ -177,11 +177,11 @@
                     <li class="nav-label first">Menu</li>
                     <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li> -->
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
                     
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
                     <li><a href="javascript:void()"><i

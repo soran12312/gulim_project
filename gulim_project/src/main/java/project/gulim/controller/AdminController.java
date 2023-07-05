@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.gulim.domain.MemberDTO;
 import project.gulim.service.AdminService;
@@ -38,6 +39,34 @@ public class AdminController {
 		return "/admin/member/member_management";
 	}
 	
+	@RequestMapping("/place_list")
+	public String viewPage_place_list() {
+		return "/admin/place/place_list";
+	}
 	
+	@RequestMapping("/sales_stats")
+	public String viewPage_sales_stats() {
+		return "/admin/sales/sales_stats";
+	}
+	
+	@RequestMapping("/delivery_refund")
+	public String viewPage_delivery_refund() {
+		return "/admin/sales/delivery_refund";
+	}
+	
+	@RequestMapping("/view_list")
+	public String viewPage_view_list() {
+		return "/admin/event_announce_contest/view_list";
+	}
+	
+	@RequestMapping("/insert_form")
+	public String viewPage_insert_form() {
+		return "/admin/event_announce_contest/insert_form";
+	}
+	
+	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	public String save() {
+		return "";
+	}
 
 }

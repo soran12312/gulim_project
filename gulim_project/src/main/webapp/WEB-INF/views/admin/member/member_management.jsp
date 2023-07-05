@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>문의사항 답변</title>
+    <title>제재 관리</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
     <!-- Datatable -->
@@ -74,7 +74,7 @@
                             <div class="text-uppercase">
                                 <ul>
                                     <li><a href="/admin/question" class="tab_inactive">문의사항 답변</a></li>
-                                    <li><a href="/admin/member_management" class="tab_active">제재관리</a></li>
+                                    <li><a href="/admin/member_management" class="tab_active">제재 관리</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -177,11 +177,11 @@
                     <li class="nav-label first">Menu</li>
                     <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li> -->
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
                     
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
                     <li><a href="javascript:void()"><i
