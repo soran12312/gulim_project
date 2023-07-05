@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="/files/images/favicon-32x32.png">
+<link href="/css/trpg.css" rel="stylesheet">
 <!-- sweet alert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -160,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	<div class="subnav">
 		<div class="subnav_select_calendar"></div>
 			<div class="subnav_menu">
-					<a>쪽지</a>
-					<a>캘린더</a>
+					<a href ="my_message">쪽지</a>
+					<a href ="calender">캘린더</a>
 					<a>나의 게임관리</a>
 					<a>나의 게시글</a>
 					<a>나의 문의사항</a>

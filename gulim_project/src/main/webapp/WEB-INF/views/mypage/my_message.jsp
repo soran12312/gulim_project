@@ -8,6 +8,7 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
+<link href="/css/place.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,8 +20,8 @@
 	<div class="subnav">
 		<div class="subnav_select_message"></div>
 			<div class="subnav_menu">
-					<a>쪽지</a>
-					<a>캘린더</a>
+					<a href="my_message">쪽지</a>
+					<a href ="calender">캘린더</a>
 					<a>나의 게임관리</a>
 					<a>나의 게시글</a>
 					<a>나의 문의사항</a>
@@ -53,6 +54,7 @@
 				</tr>
 			</table>
 		</div>
+		
 		
 <!-- ===================== END OF 쪽지함list =====================-->			
 		

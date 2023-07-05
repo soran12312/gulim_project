@@ -10,6 +10,21 @@
 .cursor{
 cursor: pointer;
 }
+.fs15{
+font-size: 15px;
+}
+.fs17{
+font-size: 17px;
+}
+.l_margin20{
+margin-left:  20px;
+}
+.center_text{
+	text-align: center;
+}
+.fs_light{
+font-weight: lighter;
+}
 /* ================END OF ALL============================== */
 
 
@@ -312,7 +327,8 @@ cursor: pointer;
   font-weight: Regular;
   font-size: 32px;
   text-align: center;
-  cursor: pointer
+  cursor: pointer;
+  text-decoration-line : none;
 }
 /* 이거 _post만 바꾸고 top조정하면 메뉴선택 바뀜 */
 .subnav_select_message { 
@@ -340,6 +356,19 @@ cursor: pointer;
   border-top-right-radius: 38px;
   border-bottom-left-radius: 38px;
   border-bottom-right-radius: 38px;
+}
+.subnav_select_mygame{
+  width: 220px;
+  height: 50px;
+  opacity: 1;
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  border: 7px solid rgba(217,217,217,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;	
 }
 /* ================ END OF SUBNAV ====================== */
 
@@ -489,5 +518,160 @@ cursor: pointer;
   overflow: hidden;
 }
 /* ================ END OF CALENDER ====================== */
-
+/* ================ START OF MYGAME ====================== */
+.game_back {
+  width: 1000px;
+  height: 1000px;
+  background: rgba(217,217,217,1);
+  opacity: 0.5;
+  position: absolute;
+  top: 136px;
+  left: 500px;
+  overflow: hidden;
+}
+.game_table{
+  width: 1000px;
+  height: 1000px;
+  position: absolute;
+  top: 136px;
+  left: 500px;
+  overflow: hidden;
+ 
+  opacity: 1;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+}
+.my_game_title1 {
+  width: 1000px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+}
+.my_game_title2 {
+  width: 1000px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 220px;
+  left: 20px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+}
+.my_game_title3 {
+  width: 1000px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 550px;
+  left: 20px;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+}
+.game_line1{
+	position: absolute;
+	width: 1000px;
+	bottom: 500px;
+	top:40px;
+	left: 0px;
+	background:black;
+    height:2px;
+    border:0;
+}
+.game_line2{
+	position: absolute;
+	width: 1000px;
+	bottom: 500px;
+	top:260px;
+	left: 0px;
+	background:black;
+    height:2px;
+    border:0;
+}
+.game_line3{
+	position: absolute;
+	width: 1000px;
+	bottom: 500px;
+	top:590px;
+	left: 0px;
+	background:black;
+    height:2px;
+    border:0;
+}
+.mygame_tag{
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  text-align: center;
+}
+.mygame_entry_request{
+	padding-left: 90px;
+}
+.bxslider_size{
+	padding-top: 70px;
+	padding-left: 30px;
+}
+.bxslider_size2{
+	padding-top: 30px;
+	padding-left: 30px;
+}
+.bxslider li{
+	width: 200px;
+}
+.bxslider li img{
+	height: 100px;
+}
+.bx-wrapper {
+	background: none;
+	border:none;
+}
+.mygame_entry_request img{
+	margin: auto;
+    display: block;
+}
+.mygame_tag{
+  width:50px;
+  background-color : #6AB3FD;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding:3px;	
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: lighter;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+.mygame_master_title{
+	height: 10px;
+}
+.height1{height: 1px;}
+.mygame_master{
+	width: 900px;
+}
+.mygame_go_calendar{
+  width:90px;
+  background-color : #FD786A;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding:3px;	
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: lighter;
+  font-size: 12px;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+/* ================ END OF MYGAME ====================== */
 /* ================ END OF MY PAGE ====================== */

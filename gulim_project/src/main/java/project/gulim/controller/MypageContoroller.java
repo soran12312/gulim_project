@@ -12,4 +12,8 @@ public class MypageContoroller {
 	public String viewPage(@PathVariable String step) { // 페이지 이동(DB접속없는경우)
 		return "/mypage/"+step;
 	}
+	@RequestMapping("/game/my_game_list")
+	public String viewPage2() { // 페이지 이동(DB접속없는경우)
+		return "/mypage/game/my_game_list";
+	}
 }
