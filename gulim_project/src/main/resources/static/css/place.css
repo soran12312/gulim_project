@@ -18,17 +18,25 @@
   width: 100px;
   color: rgba(0,0,0,1);
   position: absolute;
-  left: 250px;
-  bottom: 750px;
+  left: 150px;
+  bottom: 700px;
  
 }
 
 
+.place_allplace {
+  width: 100px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  left: 280px;
+  bottom: 700px;
+ 
+}
 
 /*추천 모임 장소 글씨*/
 .place_recommend {
   width: 300px;
-  color: rgba(0,0,0,1);
+  color: white;
   position: absolute;
   top: 115px;
   left: 850px;
@@ -44,7 +52,7 @@
   opacity: 1;
   position: absolute;
   top: 278px;
-  left: 250px;
+  left: 150px;
   overflow: hidden;
 }
 /*카페 상세보기*/
@@ -76,16 +84,33 @@
 	left: 750px;
 }
 
-
-
+/*상세보기 테이블*/
 .place_detail_table{
 	position: absolute;
-	background: grey;
-	width: 500px;
+	background: white;
+	width: 700px;
 	bottom: 300px;
 	top:300px;
-	left: 1150px;
+	left: 1000px;
 }
+
+/*상세보기 이름 css*/
+.place_name_css{
+	text-align: center;
+	width: 150px;
+}
+
+/*상세보기 전화번호 css*/
+.place_tel_css{
+	text-align: center;
+	width: 150px;
+}
+/*상세보기 주소 css*/
+.address_css{
+	text-align: center;
+	width: 500px;
+}
+
 
 
 /*제휴 글씨 박스*/
@@ -96,7 +121,7 @@
   opacity: 1;
   position: absolute;
   top: 804px;
-  left: 1200px;
+  left: 1000px;
   overflow: hidden;
 }
 /*제휴 글씨*/
@@ -105,13 +130,26 @@
   color: rgba(0,0,0,1);
   position: absolute;
   top: 813px;
-  left: 1220px;
+  left: 1020px;
   font-family: Inter;
-  font-size: 25px;
+  font-size: 28px;
   font-weight: Regular;
   opacity: 1;
-  text-align: left;
+  text-align:center;
   font-family: 'NeoDunggeunmo Code';
+}
+
+/*다음 버튼*/
+.place_next{
+	position: absolute;
+	left: 600px;
+	bottom: 1px;
+	
+}
+/*이전 버튼*/
+.place_prev{
+	position: absolute;
+	bottom: 1px;
 }
 
 
@@ -120,10 +158,12 @@
 
 /*이 위에는 지도에 관한 css 임*/
 /*****************************/
+
+
+
+
+
 /* 여기 부터는 근처 친구 찾기 css 임*/
-
-
-
 .friend_section {
   width: 100%;
   height: 1024px;
