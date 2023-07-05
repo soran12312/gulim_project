@@ -6,12 +6,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 
 
 <style>
@@ -118,20 +124,30 @@
 	</header>
 
 	<div class="div">
-		<div class="child"></div>
-		<div class="div2">공지사항</div>
-		<div class="div3">공모전게시판</div>
-		<div class="div4">이벤트게시판</div>
-		<div class="div5">자유게시판</div>
-		<div class="inner"></div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-		<div class="item"></div>
-		
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">이벤트게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">공모전게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+				</ul>
+			</div>
+		</nav>
+
 		<div class="text-editer">
-			 <textarea id="summernote" class="summernote" placeholder="내용을 입력해주세요"></textarea></br>
-                    <textarea id="detail" name="detail" style="display: none;"></textarea>
-                    
-		</div>
+            <input type="text" id="title" placeholder="제목을 입력하세요">
+            <select id="category">
+                <option value="">카테고리 선택</option>
+                <option value="free">자유게시판</option>
+                <option value="event">이벤트게시판</option>
+                <option value="contest">공모전게시판</option>
+                <option value="notice">공지사항</option>
+            </select>
+            <textarea id="summernote" class="summernote" placeholder="내용을 입력해주세요"></textarea>
+            
+        </div>
 
 		<div class="inner"></div>
 
