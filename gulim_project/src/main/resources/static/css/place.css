@@ -1,6 +1,6 @@
 
 
-/*전체 셕센*/
+/*전체*/
 .place_section {
   width: 100%;
   height: 1024px;
@@ -13,7 +13,7 @@
 }
 
 
-/* 제휴매장만보기 버튼*/
+/* 제휴매장보기 버튼*/
 .place_partnership {
   width: 100px;
   color: rgba(0,0,0,1);
@@ -23,7 +23,7 @@
  
 }
 
-
+/*전체 매장 보기 버튼*/
 .place_allplace {
   width: 100px;
   color: rgba(0,0,0,1);
