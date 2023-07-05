@@ -8,7 +8,11 @@
 	<select id="listQuestion" resultType="QuestionDTO">
 		select *
 		from question
-		order by question_num DESC;
+		order by question_num DESC
 	</select>
+	
+	<update id="answerQuestion" parameterType="QuestionDTO">
+		UPDATE question SET answer=#{answer} WHERE id=#{id}
+	</update>
 
 </mapper>

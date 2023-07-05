@@ -182,12 +182,12 @@
                     </li>
                     
                     <li><a href="/admin/place_list"><i
-                                class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
+                        class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
@@ -197,6 +197,7 @@
                     <li><a href="widget-basic.html"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
+                    
                     
                 </ul>
             </div>

@@ -85,8 +85,8 @@
                         <div class="header-left">
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/view_list" class="tab_inactive">관리자 글목록</a></li>
-                                    <li><a href="/admin/insert_form" class="tab_active">글 작성</a></li>
+                                    <li><a href="/admin/view_list" class="tab_active">관리자 글목록</a></li>
+                                    <li><a href="/admin/insert_form" class="tab_inactive">글 작성</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -196,10 +196,10 @@
                     <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
@@ -234,7 +234,7 @@
                 <form action="/admin/insert" method="POST">
                     <div class="row">
                         <div class="card col-sm-12 p-md-12">
-                            <table class="postTable" style="border: 2px solid black;">
+                            <table>
                                 <tr>
                                     <td colspan="9">
                                         <div class="card-body">

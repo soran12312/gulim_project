@@ -183,10 +183,10 @@
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 

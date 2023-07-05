@@ -73,8 +73,8 @@
                         <div class="header-left">
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/place_list" class="tab_inactive">판매 통계</a></li>
-                                    <li><a href="/admin/place_list" class="tab_active">환불</a></li>
+                                    <li><a href="/admin/sales_stats" class="tab_inactive">판매 통계</a></li>
+                                    <li><a href="/admin/delivery_refund" class="tab_active">환불</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -184,17 +184,17 @@
                     <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
                     <li><a href="javascript:void()"><i
                                 class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li><a href="widget-basic.html"><i
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
                     

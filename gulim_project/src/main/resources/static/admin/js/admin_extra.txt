@@ -17,4 +17,4 @@ $(".nav-control").on('click', function() {
 	});
 	
 	
-2.
+2. morris-init.js 전부

@@ -73,8 +73,8 @@
                         <div class="header-left">
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/place_list" class="tab_active">판매 통계</a></li>
-                                    <li><a href="/admin/place_list" class="tab_inactive">환불</a></li>
+                                    <li><a href="/admin/sales_stats" class="tab_active">판매 통계</a></li>
+                                    <li><a href="/admin/delivery_refund" class="tab_inactive">환불</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -178,16 +178,16 @@
                     <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                     </li> -->
                     <li><a href="/admin/question"><i
-                                class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
+                        class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
                     
                     <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
@@ -226,13 +226,17 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <button class="btn_year btn btn-square btn-dark">연간매출</button>
-                                        <button class="btn_year_product btn  btn-square btn-success">상품별</button>
-                                        <button class="btn_year_subscribe btn  btn-square btn-primary">구독권별</button>
-                                        <button class="btn_year_book btn  btn-square btn-danger">설정집별</button>                                        
+                                        <button id="btn_year" class="btn btn-square btn-dark">전체</button>
+                                        <button id="btn_year_product" class="btn  btn-square btn-success">상품</button>
+                                        <button id="btn_year_subscribe" class="btn  btn-square btn-primary">구독권</button>
+                                        <button id="btn_year_book" class="btn  btn-square btn-danger">설정집</button>                                        
+                                        <a style="user-select: none; cursor: not-allowed; pointer-events: none; color: rgba(0, 0, 0, 0.00);">gulim</a>
                                         <a class="col-8"></a>
                                     </div>
                                     <div class="card-body">
+                                        <div>
+                                            <h6 class="h6_year" style="color:black;">2023년 연매출</h6>
+                                        </div>
                                         <div id="line_chart_2" class="morris_chart_height"></div>
                                     </div>
                                 </div>
@@ -240,13 +244,20 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <button class="btn btn-square btn-dark">분기매출</button>
-                                        <button class="btn_year_product btn  btn-square btn-success">상품별</button>
-                                        <button class="btn_year_subscribe btn  btn-square btn-primary">구독권별</button>
-                                        <button class="btn_year_book btn  btn-square btn-danger">설정집별</button>                                        
+                                        <select class="selectYear" id="selectYear_quarter">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <button id="btn_quarter" class="btn btn-square btn-dark">전체</button>
+                                        <button id="btn_quarter_product" class="btn  btn-square btn-success">상품</button>
+                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">구독권</button>
+                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
                                     </div>
                                     <div class="card-body">
+                                        <div>
+                                            <h6 class="h6_quarter" style="color:black;"></h6>
+                                        </div>
                                         <div id="morris_donught" class="morris_chart_height"></div>
                                     </div>
                                 </div>
@@ -254,13 +265,20 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <button class="btn btn-square btn-dark">월매출</button>
-                                        <button class="btn_year_product btn  btn-square btn-success">상품별</button>
-                                        <button class="btn_year_subscribe btn  btn-square btn-primary">구독권별</button>
-                                        <button class="btn_year_book btn  btn-square btn-danger">설정집별</button>                                        
+                                        <select class="selectYear" id="selectYear_month">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <button id="btn_month" class="btn btn-square btn-dark">전체</button>
+                                        <button id="btn_month_product" class="btn  btn-square btn-success">상품</button>
+                                        <button id="btn_month_subscribe" class="btn  btn-square btn-primary">구독권</button>
+                                        <button id="btn_month_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
                                     </div>
                                     <div class="card-body">
+                                        <div>
+                                            <h6 style="color:black;">2023년 월매출</h6>
+                                        </div>
                                         <div id="morris_bar_2" class="morris_chart_height"></div>
                                     </div>
                                 </div>
@@ -268,13 +286,21 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <button class="btn btn-square btn-dark">일매출</button>
-                                        <button class="btn_year_product btn  btn-square btn-success">상품별</button>
-                                        <button class="btn_year_subscribe btn  btn-square btn-primary">구독권별</button>
-                                        <button class="btn_year_book btn  btn-square btn-danger">설정집별</button>                                        
+                                        <select class="selectYear" id="selectYear_day">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <button id="btn_day" class="btn btn-square btn-dark">전체</button>
+                                        <button id="btn_day_product" class="btn  btn-square btn-success">상품</button>
+                                        <button id="btn_day_subscribe" class="btn  btn-square btn-primary">구독권</button>
+                                        <button id="btn_day_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
                                     </div>
                                     <div class="card-body">
+                                        <div>
+                                            <h6 style="color:black;">2023년 일매출</h6>
+                                        </div>
+
                                         <div id="morris_area_2" class="morris_chart_height"></div>
                                     </div>
                                 </div>

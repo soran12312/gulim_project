@@ -140,13 +140,17 @@ button.showAffiliateOnly {
 /* ================END OF place_list============================== */
 
 /* ================START OF insert_form============================== */
+.selectYear{
+	border: 0px;
+	background-color:rgba(0, 0, 0, 0.00);
+}
+/* ================END OF place_list============================== */
+
+/* ================START OF insert_form============================== */
 .note-popover {
     display: none !important;
 }
 
-.postTable td {
-	border: 2px solid black;
-}
 /* ================END OF insert_form============================== */
 
 /* ================START OF FOOTER============================== */

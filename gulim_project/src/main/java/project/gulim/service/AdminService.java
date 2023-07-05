@@ -2,10 +2,11 @@ package project.gulim.service;
 
 import java.util.List;
 
-import project.gulim.domain.MemberDTO;
+import project.gulim.domain.QuestionDTO;
 
 public interface AdminService {
 	
-	List<MemberDTO> listQuestion();
+	public List<QuestionDTO> listQuestion();
+	public void answerQuestion(QuestionDTO qDTO);
 
 }

@@ -37,7 +37,7 @@
             return;
         }
         
-        var inputRow = $('<tr class="input-row"><td height="200px" colspan="4" style="position: relative;"><textarea class="text_answer"/></td><input type="button" value="asdf"></tr><tr class="input-row"><td colspan="3"></td><td><button type="submit" class="btn btn-outline-success">답변등록</button><button class="btn btn-outline-danger">취소</button></td></tr>');
+        var inputRow = $('<tr class="input-row"><td height="200px" colspan="4" style="position: relative;"><textarea class="text_answer"></textarea></td><input type="button" value="asdf"></tr><tr class="input-row"><td colspan="3"></td><td><button type="submit" class="btn btn-outline-success">답변등록</button><button class="btn btn-outline-danger">취소</button></td></tr>');
         
         if ($(this).hasClass('selected')) {
             table.$('');

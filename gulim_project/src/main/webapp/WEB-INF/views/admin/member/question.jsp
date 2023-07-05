@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -182,12 +182,12 @@
                     </li>
                     
                     <li><a href="/admin/place_list"><i
-                                class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
+                        class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
-                    <li><a href="javascript:void()"><i
+                    <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
@@ -240,24 +240,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>New York</td>
-                                                    <td><span class="badge badge-danger">답변대기</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>a</td>
-                                                    <td>a</td>
-                                                    <td>a</td>
-                                                    <td><span class="badge badge-success">답변완료</span></td>
-                                                </tr>
-                                                <c:forEach items="${list_question}" var="lq">
+                                                <c:forEach items="${listQuestion}" var="lq">
                                                     <tr>
                                                         <td>${lq.id}</td>
                                                         <td>${lq.question_title}</td>
                                                         <td>${lq.question_content}</td>
-                                                        <td>${lq.answer_state}</td>                   
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${lq.answer_state eq 0}">
+                                                                    <span class="badge badge-danger">답변대기</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <span class="badge badge-success">답변완료</span>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
