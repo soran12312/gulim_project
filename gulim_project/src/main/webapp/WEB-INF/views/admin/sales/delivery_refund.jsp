@@ -273,6 +273,22 @@
                                                     </td>
                                                     <td>40000</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>ㅜㅁ</td>
+                                                    <td>ㅜㅁ</td>
+                                                    <td>ㅜㅁ 주사위</td>
+                                                    <td>ㅜㅁ</td>
+                                                    <td>
+                                                        <select>
+                                                            <option value="0">배송대기</option>
+                                                            <option value="1">배송완료</option>   
+                                                            <option value="2">반품신청</option>   
+                                                            <option value="3">반품완료</option>    
+                                                        </select>
+                                                    </td>
+                                                    <td>60000</td>
+                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>

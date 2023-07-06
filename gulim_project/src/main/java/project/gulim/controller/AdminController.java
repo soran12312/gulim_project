@@ -61,5 +61,25 @@ public class AdminController {
 	public String save() {
 		return "";
 	}
+	
+	@RequestMapping("/product_list")
+	public String viewPage_product_list() {
+		return "/admin/product/product_list";
+	}
+	
+	@RequestMapping("/product_insert")
+	public String viewPage_product_insert() {
+		return "/admin/product/product_insert";
+	}
+	
+	@RequestMapping("/product_modify")
+	public String viewPage_product_modify() {
+		return "/admin/product/product_modify";
+	}
+	
+	@RequestMapping("/game_stats")
+	public String viewPage_game_stats() {
+		return "/admin/game_stats/game_stats";
+	}
 
 }
