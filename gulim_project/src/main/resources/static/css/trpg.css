@@ -521,7 +521,7 @@ font-weight: lighter;
 /* ================ START OF MYGAME ====================== */
 .game_back {
   width: 1000px;
-  height: 1000px;
+  height: 850px;
   background: rgba(217,217,217,1);
   opacity: 0.5;
   position: absolute;
@@ -531,7 +531,7 @@ font-weight: lighter;
 }
 .game_table{
   width: 1000px;
-  height: 1000px;
+  height: 850px;
   position: absolute;
   top: 136px;
   left: 500px;
@@ -613,17 +613,27 @@ font-weight: lighter;
 }
 .mygame_entry_request{
 	padding-left: 90px;
+	width: 300px;
 }
 .bxslider_size{
 	padding-top: 70px;
-	padding-left: 30px;
+	padding-left: 50px;
+	width: 930px;
 }
 .bxslider_size2{
 	padding-top: 30px;
-	padding-left: 30px;
+	padding-left: 50px;
+	width: 930px;
+	text-align: center;
+}
+.bxslider_size3{
+	padding-top: 80px;
+	padding-left: 50px;
+	width: 930px;
+	text-align: center;
 }
 .bxslider li{
-	width: 200px;
+	width: 300px;
 }
 .bxslider li img{
 	height: 100px;

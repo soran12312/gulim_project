@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <title>Insert title here</title>
 </head>
 <body>
-<div class="mainbackpage">
+<div class="mypagebackpage">
 <jsp:include page="../../../header_after.jsp"></jsp:include>
 <!-- ===================== START OF subnav =====================-->
 	<div class="subnav">
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<div class="subnav_menu">
 					<a href ="my_message">쪽지</a>
 					<a href ="calender">캘린더</a>
-					<a>나의 게임관리</a>
+					<a href ="game/my_game_list">나의 게임관리</a>
 					<a>나의 게시글</a>
 					<a>나의 문의사항</a>
 					<a>친구관리</a>

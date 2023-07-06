@@ -19,9 +19,10 @@ $(function(){
 	
     
 	$(".bxslider").bxSlider({
-	touchEnabled : (navigator.maxTouchPoints > 0)
-	,minSlides : 1
-	,maxSlides : 2
+	touchEnabled : (navigator.maxTouchPoints > 0),
+	minSlides : 1,
+	maxSlides : 3,
+	slideWidth : 300
 	
 	});
 	
@@ -36,7 +37,7 @@ $(function(){
 
 </head>
 <body>
-<div class="mainbackpage">
+<div class="mypagebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 <!-- ===================== START OF subnav =====================-->
 	<div class="subnav">
@@ -55,6 +56,10 @@ $(function(){
 	</div>
 	<div class ="game_back"></div>
 		<div class ="game_table">
+		
+		
+<!-- ==========요청=============================================================================================== -->
+		
 			<p class="my_game_title1 ">들어온 요청</p>
 			<hr class="game_line1">
 			<div class="bxslider_size">
@@ -89,12 +94,41 @@ $(function(){
 				</ul>
 			</div>
 			
+<!-- ==========마스터=============================================================================================== -->
 			
 			<p class="my_game_title2">게임마스터 <span class ="fs15 l_margin20">규칙 수정, 게임방 삭제는 방을 선택해주세요.</span></p>
 			<hr class="game_line2">
 			<div class="bxslider_size2">
 				<ul class="bxslider mygame_master">
-					<li><table border="1" class ="mygame_entry_request">
+					<li><table class ="mygame_entry_request">
+							<tr>
+								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
+							</tr>
+							<tr>
+								<td><img src="/files/images/game_imsi.jpg" /></td>
+							</tr>
+							<tr>
+								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
+							</tr>
+							<tr>
+								<td><div class ="mygame_tag ">플레이중</div></td>
+							</tr>
+					</table></li>
+										<li><table class ="mygame_entry_request">
+							<tr>
+								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
+							</tr>
+							<tr>
+								<td><img src="/files/images/game_imsi.jpg" /></td>
+							</tr>
+							<tr>
+								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
+							</tr>
+							<tr>
+								<td><div class ="mygame_tag ">플레이중</div></td>
+							</tr>
+					</table></li>
+										<li><table class ="mygame_entry_request">
 							<tr>
 								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
 							</tr>
@@ -110,9 +144,48 @@ $(function(){
 					</table></li>
 				</ul>
 			</div>
+			
+<!-- ==========플레이어=============================================================================================== -->
+
 			<p class="my_game_title3">게임플레이어<span class ="fs15 l_margin20">게임방 탈퇴는 방을 선택해 주세요. 게임 중 탈퇴는 게임원들과 상의 후 신중히 결정해주세요.</span></p>
 			<hr class="game_line3">
-			
+						<div class="bxslider_size3">
+				<ul class="bxslider mygame_master">
+					<li><table class ="mygame_entry_request">
+							<tr>
+								<td><img src="/files/images/game_imsi.jpg" /></td>
+							</tr>
+							<tr>
+								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
+							</tr>
+							<tr>
+								<td><div class ="mygame_tag ">플레이중</div></td>
+							</tr>
+					</table></li>
+					<li><table class ="mygame_entry_request">
+							<tr>
+								<td><img src="/files/images/game_imsi.jpg" /></td>
+							</tr>
+							<tr>
+								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
+							</tr>
+							<tr>
+								<td><div class ="mygame_tag ">플레이중</div></td>
+							</tr>
+					</table></li>
+					<li><table class ="mygame_entry_request">
+							<tr>
+								<td><img src="/files/images/game_imsi.jpg" /></td>
+							</tr>
+							<tr>
+								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
+							</tr>
+							<tr>
+								<td><div class ="mygame_tag ">플레이중</div></td>
+							</tr>
+					</table></li>
+				</ul>
+			</div>
 		</div>
 	
 </div>	
