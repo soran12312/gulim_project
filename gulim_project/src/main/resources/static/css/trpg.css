@@ -16,6 +16,9 @@ font-size: 15px;
 .fs17{
 font-size: 17px;
 }
+.fs20{
+font-size: 20px;
+}
 .l_margin20{
 margin-left:  20px;
 }
@@ -24,6 +27,14 @@ margin-left:  20px;
 }
 .fs_light{
 font-weight: lighter;
+}
+.fs_bord{
+font-weight: bold;}
+.w30per{
+	width: 30%;
+}
+.w70per{
+	width: 70%;
 }
 /* ================END OF ALL============================== */
 
@@ -370,6 +381,19 @@ font-weight: lighter;
   border-bottom-left-radius: 38px;
   border-bottom-right-radius: 38px;	
 }
+.subnav_select_info{
+  width: 220px;
+  height: 50px;
+  opacity: 1;
+  position: absolute;
+  top: 220px;
+  left: 10px;
+  border: 7px solid rgba(217,217,217,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;	
+}
 /* ================ END OF SUBNAV ====================== */
 
 
@@ -684,4 +708,149 @@ font-weight: lighter;
   display: block;
 }
 /* ================ END OF MYGAME ====================== */
+/* ================ START OF MY_INFO ====================== */
+.my_img{
+	width: 400px;
+	align-content: center;	
+	margin-top: 20px;
+	margin-left:10%;
+	display: block;
+}
+.my_img img{
+	width: 300px;
+	align-content: center;	
+	display: block;
+}
+.my_img input{
+	width: 100px;
+	height: 30px;
+	background-color : #FD786A;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: bold;
+	font-size: 20px;
+	float:right;
+	margin-right: 100px;
+	margin-top: 20px;
+}
+.my_info{
+	width: 500px;
+	align-content: center;	
+	margin: 10px;
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: bold;
+	font-size: 20px;
+}
+.my_info div{
+	margin: 10px;
+}
+.info_input{
+	display: block;
+	height: 30px;
+	width: 300px;
+	margin: 10px;
+}
+.info_input2{
+	display: inline;
+	height: 30px;
+	width: 300px;
+	margin: 10px;
+}
+.info_area{
+	display: inline;
+	height: 200px;
+	width: 300px;
+	margin: 10px;
+}
+.addr_search{
+	width: 80px;
+	height: 30px;
+	background-color : #c8c8c8;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: lighter;
+	font-size: 15px;
+	float:right;
+	margin-right: 90px;
+	margin-top:10px;
+	text-align: center;
+}
+.info_modi{
+	width: 130px;
+	height: 30px;
+	background-color : #FD786A;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: bold;
+	font-size: 20px;
+	float:right;
+	margin-right: 100px;
+	margin-top: 20px;
+}
+
+/* START플레이리스트*/
+.myinfo_play_list{
+	width: 400px;
+	align-content: center;	
+	margin-top: 10%;
+	margin-left:5%;
+	display: block;	
+}
+.myinfo_play_list_scroll{
+	width:100%; 
+	height:300px; 
+	overflow:auto;
+	margin-top: 5%;	
+	}
+/*START스크롤 바*/
+.myinfo_play_list_scroll::-webkit-scrollbar {
+    width: 20px;
+  }
+.myinfo_play_list_scroll::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+    
+}
+.myinfo_play_list_scroll::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/*END스크롤 바*/
+.myinfo_play_list_table{
+	font-size: 15px;
+	text-align: center;
+	width: 100%;
+	table-layout: fixed;	
+}
+.myinfo_play_list_table td{
+	border: 1px solid;
+	margin-top: -5%;
+	height: 50px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.myinfo_play_list_td{
+	font-size: 20px;
+}
+/* END플레이리스트*/
+/* ================ END OF MY_INFO ====================== */
 /* ================ END OF MY PAGE ====================== */

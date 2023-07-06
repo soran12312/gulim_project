@@ -46,6 +46,7 @@ $(function(){
 					<a href ="../my_message">쪽지</a>
 					<a href ="../calender">캘린더</a>
 					<a href ="my_game_list">나의 게임관리</a>
+					<a href ="../user_info/info_modify">회원정보</a>
 					<a>나의 게시글</a>
 					<a>나의 문의사항</a>
 					<a>친구관리</a>

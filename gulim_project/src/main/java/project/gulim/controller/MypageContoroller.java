@@ -16,4 +16,8 @@ public class MypageContoroller {
 	public String viewPage2() { // 페이지 이동(DB접속없는경우)
 		return "/mypage/game/my_game_list";
 	}
+	@RequestMapping("/user_info/info_modify")
+	public String viewPage3() { // 페이지 이동(DB접속없는경우)
+		return "/mypage/user_info/info_modify";
+	}
 }
