@@ -45,7 +45,7 @@
     for (var i = 0; i < locals.length; i++) {
     var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
     //마커 클릭했을 때 정보 표시
-    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><br>' + locals[i].tel + '<br><p>' + locals[i].address + '</p></div>';
+    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].address + '</p></div>';
     var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
        
@@ -111,13 +111,14 @@ $("#place_partnership").click(function() {
         success: function(result) {
             // removeMarkers 함수 호출
             removeMarkers();
+            
             // result를 기반으로 마커를 생성   
             for (var i = 0; i < result.length; i++) {
                 var markerPosition = new kakao.maps.LatLng(result[i].latitude, result[i].longitude);
                 var markerImage = new kakao.maps.MarkerImage(markerImg, imgSize);
 
                 // 마커 클릭했을 때 정보 표시 
-                var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><br>' + locals[i].tel + '<br>' + '<p>'+locals[i].address +'</p>'+ '</div>';
+                var infoContent = '<div style="padding:15px;"><strong>' + result[i].place_name + '</strong><hr>' + result[i].tel + '<hr>' + '<p>'+result[i].place_address +'</p>'+ '</div>';
                 var infowindow = new kakao.maps.InfoWindow({
                     content: infoContent
                 });
@@ -126,9 +127,9 @@ $("#place_partnership").click(function() {
                 var marker = new kakao.maps.Marker({
                     position: markerPosition,
                     map: map,
-                    place_name: locals[i].place_name,
-                    tel: locals[i].tel,
-                    address: locals[i].address,
+                    place_name: result[i].place_name,
+                    tel: result[i].tel,
+                    address: result[i].place_address,
                     image: markerImage
                 });
                 markers.push(marker);
@@ -165,12 +166,10 @@ $("#place_partnership").click(function() {
         for (var i = 0; i < locals.length; i++) {
         var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
         //마커 클릭했을 때 정보 표시 
-        var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].address + '</p></div>';
-       
+        var infoContent = '<div style="margin:20px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].address + '</p></div>';
         var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
-        
-    }); // end infowindow
+        }); // end infowindow
 
         //마커 안에 들어갈 정보
         var marker = new kakao.maps.Marker({
@@ -206,6 +205,62 @@ $("#place_partnership").click(function() {
     }// end for
     }) // end #place_allplace
    
+  // 페이징 기능 추가
+    var currentPage = 1; // 현재 페이지
+    var rowsPerPage = 10; // 페이지 당 행 수
+    var totalRows = $("#place_table tbody tr").length; // 전체 행 수
+    var totalPages = Math.ceil(totalRows / rowsPerPage); // 전체 페이지 수
+
+        // 페이지 표시 함수
+        function displayPage(page) {
+        //시작 페이지 
+        var startIndex = (page - 1) * rowsPerPage;
+        //끝 페이지
+        var endIndex = startIndex + rowsPerPage;
+        // 
+        $("#place_table tbody tr").hide();
+        $("#place_table tbody tr").slice(startIndex, endIndex).show();
+
+        var pagination = $("#pagination");
+        pagination.empty();
+
+        for (var i = 1; i <= totalPages; i++) {
+            //a 태그 생성 그 안에 숫자 1개씩 찍어줌
+            var pageLink = $("<a href='#'></a>").text(i);
+
+            if (i == page) {
+                pageLink.addClass("active");
+            }
+            pageLink.data("page", i);
+            pagination.append(pageLink);
+        }
+
+        pagination.find("a").click(function() {
+            var selectedPage = $(this).data("page");
+            goToPage(selectedPage);
+        });
+    }
+
+    function goToPage(page) {
+        if (page < 1 || page > totalPages) {
+            return;
+        }
+        currentPage = page;
+        displayPage(currentPage);
+    }
+
+    // 이전 페이지로 이동
+    $(".place_prev").click(function() {
+    goToPage(currentPage - 1);
+        });
+
+    // 다음 페이지로 이동
+    $(".place_next").click(function() {
+    goToPage(currentPage + 1);
+    });
+
+    displayPage(currentPage);
+
 }); // end function
 
 
@@ -223,22 +278,29 @@ $("#place_partnership").click(function() {
         <div id="map" style="width:1000px;height:600px;"></div>
       
     </div>
-
+    <!-- 버튼 생성 -->
     <button class="place_partnership" id="place_partnership">제휴 매장보기</button>
     <button class="place_allplace" id="place_allplace">전체 매장보기</button>
+
     <span class="place_recommend">추천 모임 장소</span>
+
     <div class="place_lines"><hr></div>
+
     <div class="place_line"><hr></div>
+    
     <div class="place_detail_table">
-        <table>
-            <tr>
-                <th>카페명</th>
-                <th>전화번호</th>
-                <th>주소</th>
-            </tr>
-            <c:forEach items="${Marker}" var="marker">
+
+        <table id="place_table">
+                
+            <thead>
                 <tr>
-                    
+                    <th>카페명</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+                <c:forEach items="${Marker}" var="marker">
+                <tr>
                     <td class="place_name_css">${marker.place_name}</td>
                     <td class="place_tel_css">${marker.tel}</td>
                     <td class="address_css">${marker.place_address}</td>
@@ -246,10 +308,11 @@ $("#place_partnership").click(function() {
                 
             </c:forEach>
             <div>
-                 <button class="place_prev">이전</button>
+                 <button class="place_prev"> << </button>
             </div>
+            <div id="pagination" class="pagination"></div>
            <div>
-            <button class="place_next">다음</button>
+            <button class="place_next"> >> </button>
            </div>
             
         </table>

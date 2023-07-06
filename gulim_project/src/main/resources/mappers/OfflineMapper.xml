@@ -11,7 +11,7 @@
 
 	<select id="showPartnership" resultType="PlaceDTO" parameterType="PlaceDTO">
 		
-		select * from place where partnership = 1;
+		select place_name,place_address,tel,latitude,longitude from place where partnership = 1;
 		
 	</select>
 

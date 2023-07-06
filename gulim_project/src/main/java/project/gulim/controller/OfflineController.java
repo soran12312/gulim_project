@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.service.OfflineService;
 
-@Controller("/offline")
+@Controller
+@RequestMapping("/offline")
 public class OfflineController {
 	
 	@Autowired
