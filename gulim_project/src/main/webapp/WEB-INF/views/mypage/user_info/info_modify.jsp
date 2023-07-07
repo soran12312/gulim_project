@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원정보</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -32,13 +31,13 @@ $(document).ready(function(){
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 <!-- ===================== START OF subnav =====================-->
 	<div class="subnav">
-		<div class="subnav_select_info"></div>
+		<div class="subnav_select_info subnav_select"></div>
 			<div class="subnav_menu">
-					<a href ="../my_message">쪽지</a>
-					<a href ="../calender">캘린더</a>
-					<a href ="../game/my_game_list">나의 게임관리</a>
-					<a href ="info_modify">회원정보</a>
-					<a>나의 게시글</a>
+					<a href ="/mypage/my_message">쪽지</a>
+					<a href ="/mypage/calender">캘린더</a>
+					<a href ="/mypage/game/my_game_list">나의 게임관리</a>
+					<a href ="/mypage/user_info/info_modify">회원정보</a>
+					<a href ="/mypage/my_post">나의 게시글</a>
 					<a>나의 문의사항</a>
 					<a>친구관리</a>
 					<a>결제내역</a>

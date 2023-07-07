@@ -30,7 +30,7 @@
 					<textarea name="message_content" id="message_content" class="message_content" placeholder="쪽지 내용을 입력하세요" onblur="this.placeholder='쪽지 내용을 입력하세요'"></textarea> 
 				</div>
 				<div class = "sendmessage_btn cursor">
-				<button type="submit" class="cursor ">쪽지 보내기</button>
+				<button type="submit" class="cursor">쪽지 보내기</button>
 				</div>
 			</form>
 		</div>

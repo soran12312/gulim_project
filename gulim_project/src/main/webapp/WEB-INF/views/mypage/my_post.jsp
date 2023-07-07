@@ -4,27 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지함</title>
+<title>나의 게시글</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
 </head>
-<body>
-
-
-	
+<body>	
 <div class="mypagebackpage">
 <jsp:include page="../../../header_after.jsp"></jsp:include>
 <!-- ===================== START OF subnav =====================-->
 	<div class="subnav">
-		<div class="subnav_select_post"></div>
+		<div class="subnav_select_post subnav_select"></div>
 			<div class="subnav_menu">
-					<a>쪽지</a>
-					<a>캘린더</a>
-					<a>나의 게임관리</a>
-					<a>나의 게시글</a>
-					<a>나의 문의사항</a>
-					<a>친구관리</a>
+					<a href ="/mypage/my_message">쪽지</a>
+					<a href ="/mypage/calender">캘린더</a>
+					<a href ="/mypage/game/my_game_list">나의 게임관리</a>
+					<a href ="/mypage/user_info/info_modify">회원정보</a>
+					<a href ="/mypage/my_post">나의 게시글</a>
+					<a href ="/mypage/my_question">나의 문의사항</a>
+					<a href ="/mypage/friends">친구관리</a>
 					<a>결제내역</a>
 					<a>공모전</a>
 					<a>참여내역</a>
@@ -32,30 +30,44 @@
 	</div>
 	
 <!-- ===================== END OF subnav =====================-->
+<!-- ===================== START OF SIDE BAR =====================-->
+	<div style="width: 100px; height: 400px;background-color: black;border: 7px solid black;border-top-left-radius: 50px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;position: fixed;right: 3%;top: 30%">
+	<a href="/main/login_main"><img src="/files/images/sideBar홈.png" style="width: 70px;margin: 15px;"></a>
+  	<a href="/mypage/user_info/info_modify"><img src="/files/images/sideBar마이페이지.png" style="width: 70px;margin: 15px;"></a>
+  	<a href="/sale/sale_main"><img src="/files/images/sideBar장바구니.png" style="width: 70px;margin: 15px;"></a>
+  	<a href="/customer_service/main"><img src="/files/images/sideBar챗봇.png" style="width: 70px;margin: 15px;"></a>
+	</div>
+<!-- ===================== END OF SIDE BAR =====================-->		
 	
-<!-- ===================== START OF 쪽지함list =====================-->
-		<span class="page_name">쪽지함</span>
-		<div class="post_back">
-		<a class="send_post" id="send_post">쪽지 보내기</a></div>
-		<div class= post_table>
-			<table >
-				<tr>
-					<td class= table_menu1>날짜</td>
-					<td class= table_menu2>이름</td>
-					<td class= table_menu3>내용</td>
-					<td></td>					
-				</tr>
-				<tr>
-					<td class= "post_td ">23.06.30 15:10</td>
-					<td class= "post_td "><a>나한솔</a></td>
-					<td class= "post_td "><a>☆★갸꿀잼☆★온라인☆★ㅂrㅋ「ㄹr☆★돈먹기</a></td>
-					<td class= "post_td " ><a>삭제</a></td>					
-				</tr>
-			</table>
-		</div>
-		
-<!-- ===================== END OF 쪽지함list =====================-->			
-		
+<div class="message_back"></div>
+<span class="page_name">나의 게시글</span>
+<div class=" post_back_table">
+	<div class="back_heiget_90per">
+	<table class="my_post_table">
+		<tr>
+			<td class="my_post_td1"></td>
+			<td class="my_post_td2">
+				<select>
+					<option>전체보기</option>
+					<option>말머리1</option>
+					<option>말머리2</option>
+					<option>말머리3</option>
+				</select>
+			</td>
+			<td class="my_post_td3">게시글 제목</td>
+			<td class="my_post_td4">날짜</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox"></td>
+			<td>말머리</td>
+			<td>게시글제목표시</td>
+			<td>23.06.27 10:08</td>			
+		</tr>		
+	</table>
+	</div>
+	<input type="button" class="my_post_delete" id='my_post_delete' value="글삭제"/>
+	<input type="button" class="my_post_modify" id='my_post_modify' value="글수정"/>
+</div>		
 </div>
 <jsp:include page="../../../footer.jsp"></jsp:include>
 </body>

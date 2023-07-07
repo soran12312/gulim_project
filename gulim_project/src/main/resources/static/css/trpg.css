@@ -330,6 +330,9 @@ font-weight: bold;}
   opacity: 1;
   text-align: left;
 }
+.subnav_menu a:link,/* 링크컬러블랙 */
+.subnav_menu a:visited,/* 방문햇던링크컬러블랙 */
+.subnav_menu a:active, /* 마우스호버없음 */
 .subnav_menu a{
   display: block;
   padding-top: 35px;
@@ -340,70 +343,66 @@ font-weight: bold;}
   text-align: center;
   cursor: pointer;
   text-decoration-line : none;
+  color: black;
+  text-decoration:none; /* 마우스호버없음 */
+}
+
+.subnav_select { 
+  width: 220px;
+  height: 50px;
+  opacity: 1;
+  border: 7px solid rgba(217,217,217,1);
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
 }
 /* 이거 _post만 바꾸고 top조정하면 메뉴선택 바뀜 */
 .subnav_select_message { 
-  width: 200px;
-  height: 50px;
-  opacity: 1;
   position: absolute;
   top: 20px;
-  left: 20px;
-  border: 7px solid rgba(217,217,217,1);
-  border-top-left-radius: 38px;
-  border-top-right-radius: 38px;
-  border-bottom-left-radius: 38px;
-  border-bottom-right-radius: 38px;
+  left: 10px;
 }
 .subnav_select_calendar{ 
-  width: 200px;
-  height: 50px;
-  opacity: 1;
   position: absolute;
   top: 85px;
-  left: 20px;
-  border: 7px solid rgba(217,217,217,1);
-  border-top-left-radius: 38px;
-  border-top-right-radius: 38px;
-  border-bottom-left-radius: 38px;
-  border-bottom-right-radius: 38px;
+  left: 10px;
 }
 .subnav_select_mygame{
-  width: 220px;
-  height: 50px;
-  opacity: 1;
   position: absolute;
   top: 150px;
   left: 10px;
-  border: 7px solid rgba(217,217,217,1);
-  border-top-left-radius: 38px;
-  border-top-right-radius: 38px;
-  border-bottom-left-radius: 38px;
-  border-bottom-right-radius: 38px;	
 }
 .subnav_select_info{
-  width: 220px;
-  height: 50px;
-  opacity: 1;
   position: absolute;
   top: 220px;
   left: 10px;
-  border: 7px solid rgba(217,217,217,1);
-  border-top-left-radius: 38px;
-  border-top-right-radius: 38px;
-  border-bottom-left-radius: 38px;
-  border-bottom-right-radius: 38px;	
+}
+.subnav_select_post{
+  position: absolute;
+  top: 285px;
+  left: 10px;
+}
+.subnav_select_qna{
+  position: absolute;
+  top: 350px;
+  left: 10px;
+}
+.subnav_select_friends{
+  position: absolute;
+  top: 420px;
+  left: 10px;
 }
 /* ================ END OF SUBNAV ====================== */
 
 
 /* ================ START OF MY_MESSAGE ====================== */
 .page_name {
-  width: 100px;
-  color: rgba(0,0,0,1);
+  width: 300px;
+  color: black;
   position: absolute;
   top: 130px;
-  left: 950px;
+  left: 41%;
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
   font-size: 32px;
@@ -592,7 +591,7 @@ font-weight: bold;}
   width: 1000px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 550px;
+  top: 540px;
   left: 20px;
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
@@ -600,33 +599,30 @@ font-weight: bold;}
   opacity: 1;
 }
 .game_line1{
+	width: 98%;
 	position: absolute;
-	width: 1000px;
-	bottom: 500px;
 	top:40px;
-	left: 0px;
+	left:1%;
 	background:black;
-    height:2px;
+    height:1px;
     border:0;
 }
 .game_line2{
+	width: 98%;
 	position: absolute;
-	width: 1000px;
-	bottom: 500px;
 	top:260px;
-	left: 0px;
+	left:1%;
 	background:black;
-    height:2px;
+    height:1px;
     border:0;
 }
 .game_line3{
+	width: 98%;
 	position: absolute;
-	width: 1000px;
-	bottom: 500px;
-	top:590px;
-	left: 0px;
+	top:580px;
+	left:1%;
 	background:black;
-    height:2px;
+    height:1px;
     border:0;
 }
 .mygame_tag{
@@ -645,13 +641,13 @@ font-weight: bold;}
 	width: 930px;
 }
 .bxslider_size2{
-	padding-top: 30px;
+	padding-top: 35px;
 	padding-left: 50px;
 	width: 930px;
 	text-align: center;
 }
 .bxslider_size3{
-	padding-top: 80px;
+	padding-top: 70px;
 	padding-left: 50px;
 	width: 930px;
 	text-align: center;
@@ -724,15 +720,16 @@ font-weight: bold;}
 .my_img input{
 	width: 100px;
 	height: 30px;
-	background-color : #FD786A;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+	background-color : black;
+	color:white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 	display: block;
 	font-family: NeoDunggeunmo Code, Inter;
-	font-weight: bold;
-	font-size: 20px;
+	font-weight: normal;
+	font-size: 18px;
 	float:right;
 	margin-right: 100px;
 	margin-top: 20px;
@@ -746,7 +743,7 @@ font-weight: bold;}
 	top: 0px;
 	left: 50%;
 	font-family: NeoDunggeunmo Code, Inter;
-	font-weight: bold;
+	font-weight: bolder;
 	font-size: 20px;
 }
 .my_info div{
@@ -773,11 +770,12 @@ font-weight: bold;}
 .addr_search{
 	width: 80px;
 	height: 30px;
-	background-color : #c8c8c8;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+	background-color : black;
+	color:white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 	display: block;
 	font-family: NeoDunggeunmo Code, Inter;
 	font-weight: lighter;
@@ -790,15 +788,16 @@ font-weight: bold;}
 .info_modi{
 	width: 130px;
 	height: 30px;
-	background-color : #FD786A;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+	background-color : black;
+	color:white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 	display: block;
 	font-family: NeoDunggeunmo Code, Inter;
-	font-weight: bold;
-	font-size: 20px;
+	font-weight: normal;
+	font-size: 18px;
 	float:right;
 	margin-right: 100px;
 	margin-top: 20px;
@@ -853,4 +852,353 @@ font-weight: bold;}
 }
 /* END플레이리스트*/
 /* ================ END OF MY_INFO ====================== */
+/* ================ START OF MY_POST ====================== */
+.post_back_table{
+  width: 1000px;
+  height: 575px;
+  position: absolute;
+  top: 186px;
+  left: 500px;
+  overflow: hidden;
+  opacity: 1;
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: Regular;
+  font-size: 32px;
+  text-align: center;
+  table-layout: fixed;
+}
+.back_heiget_90per{
+	height: 90%;
+}
+.my_post_table{
+	width: 100%;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 25px;
+	border-bottom: 1px solid;
+	
+}
+.my_post_td1{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	height: 40px !important;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 5%;
+}
+.my_post_td2{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 20%;
+	font-size: 20px !important;
+}
+.my_post_td3{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 60%;
+	font-size: 20px !important;
+}
+.my_post_td4{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 15%;
+	font-size: 20px !important;
+}
+.my_post_td2 select{
+	width: 100%;
+	height:100%;
+	background: none;
+	border: none;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 20px;
+}
+.my_post_table td{
+	height: 10%;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	border-right: 1px solid;
+	padding: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.my_post_delete{
+	width: 75px;
+	height: 30px;
+	background-color : black;
+	color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: center;
+	float:right;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+.my_post_modify{
+	width: 75px;
+	height: 30px;
+	background-color : black;
+	color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: center;
+	float:right;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+/* ================ END OF MY_POST ====================== */
+/* ================ START OF MY_QNA====================== */
+.my_qna_table{	
+	width: 100%;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 15px;
+	border-bottom: 1px solid;
+	table-layout: fixed;	
+	}
+.my_qna_td1{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	height: 40px !important;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 20%;
+	font-size: 20px !important;
+}
+.my_qna_td2{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 40%;
+	font-size: 20px !important;
+}
+.my_qna_td3{
+	border-bottom: 2px solid;
+	border-right: 1px solid;
+	margin-top: -5%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 40%;
+	font-size: 20px !important;
+}
+.my_qna_table td{
+	height: 10%;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	border-right: 1px solid;
+	padding: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+/* ================ END OF MY_QNA ====================== */
+/* ================ START OF MY_FRIENDS ====================== */
+.myfriend_back1{
+	width:45%;
+	height:70%;
+	position: absolute;
+	top:20%;
+	right: 50%;
+	background-color: white;
+	opacity: 0.8;
+	margin: 20px;
+}
+.myfriend_back2{
+	width:45%;
+	height:70%;
+	position: absolute;
+	top:20%;
+	left: 50%;
+	background-color: white;
+	opacity: 0.8;
+	margin: 20px;
+}
+.friend_line1{
+	width: 98%;
+	position: absolute;
+	top:50px;
+	left:1%;
+	background:black;
+    height:1px;
+    border:0;
+}
+.friend_line2{
+	width: 98%;
+	position: absolute;
+	top:150px;
+	left:1%;
+	background:black;
+    height:1px;
+    border:0;
+}
+.friend_line3{
+	width: 90%;
+	position: absolute;
+	top:50px;
+	left:1%;
+	background:black;
+    height:1px;
+    border:0;
+}
+.friend_line4{
+	width: 90%;
+	position: absolute;
+	top:50px;
+	left:1%;
+	background:black;
+    height:1px;
+    border:0;
+}
+.myfriend_pagename{
+	padding-top: 20px;
+	padding-left: 20px;
+}
+.friend_search_check{
+	width:100%;
+	font-size: 20px;
+	position: absolute;
+	top:70px;
+	left: 20%
+}
+.search_place{
+	margin-right: 10%;
+}
+.search_place input,
+.search_name input{
+	margin : 30px;
+	height: 20px;
+	width: 20px; 	
+}
+.myfriend_list{
+	width:46%;
+	height:70%;
+	position: absolute;
+	top:20%;
+	right: 47%;
+	margin: 20px;
+}
+.myfriend_addlist{
+	width:46%;
+	height:70%;
+	position: absolute;
+	top:20%;
+	left: 52%;
+	margin: 20px;
+}
+.myfriend_list_scroll{
+	width:100%; 
+	height:80%; 
+	overflow:auto;
+	margin-top: 5%;	
+	}
+.myfriend_addlist_scroll{
+	width:100%; 
+	height:70%; 
+	overflow:auto;
+	position: absolute;
+	top:23%;
+}
+/*START스크롤 바*/
+.myfriend_addlist_scroll::-webkit-scrollbar,
+.myfriend_list_scroll::-webkit-scrollbar {
+    width: 20px;
+  }
+.myfriend_addlist_scroll::-webkit-scrollbar-thumb,
+.myfriend_list_scroll::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+.myfriend_addlist_scroll::-webkit-scrollbar-track,
+.myfriend_list_scroll::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/*END스크롤 바*/
+.myfriend_list_table{
+	font-size: 15px;
+	text-align: center;
+	width: 98%;
+	margin-left:0%;
+	table-layout: fixed;
+	border-bottom: 1px solid;
+}
+.myfriend_list_table td{
+	margin-top: -5%;
+	height: 20px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding: 5px;
+}
+.searchimg{
+	position:absolute;
+	top:12%;
+	left:10%;
+	width: 320px;
+	height:72px;
+	background-image: url("/files/images/mypage/searchbox.png");
+ 	background-size: contain;
+}
+.friend_search_input{
+	position:absolute;
+	top:19%;
+	left:4%;
+	width:72%;
+	height:50%;
+	border: none;
+}
+.friend_search_btn{
+	position:absolute;
+	top:15%;
+	right:4%;
+	width: 50px;
+	height:50px;
+	opacity:0;
+}
+.send_message a:link,/* 링크컬러블랙 */
+.send_message a:visited,/* 방문햇던링크컬러블랙 */
+.send_message a:active,
+.send_message,
+.myfriend_addlist a:link,/* 링크컬러블랙 */
+.myfriend_addlist a:visited,/* 방문햇던링크컬러블랙 */
+.myfriend_addlist a:active, /* 마우스호버없음 */
+.myfriend_addlist a
+.myfriend_list a:link,/* 링크컬러블랙 */
+.myfriend_list a:visited,/* 방문햇던링크컬러블랙 */
+.myfriend_list a:active, /* 마우스호버없음 */
+.myfriend_list a{
+  text-decoration-line : none;
+  color: black;
+  text-decoration:none; /* 마우스호버없음 */
+}
+/* END플레이리스트*/
+/* ================ END OF MY_FRIENDS ====================== */
 /* ================ END OF MY PAGE ====================== */
