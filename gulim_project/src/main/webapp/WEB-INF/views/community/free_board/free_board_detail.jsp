@@ -456,30 +456,28 @@
 				  
 		            <div class="well">
 		
-		    			<form class="form-horizontal" METHOD="POST" name="example" ID="edit" ACTION="?">
+		    			<form class="form-horizontal" METHOD="POST" name="example" id="edit" action="/freeupdate?post_num=${post.post_num}">
 		
 								<div class="form-group">
 									<div class="col-lg-12">
 		                                <label for="title">Title</label>
-									    <input type="text" class="form-control" Name="title" placeholder="title">
+		                                <input type="hidden" name="post_num" value="${post.post_num}">
+									    <input type="text" class="form-control" name="post_title" placeholder="title" value="${post.post_title }">
 									    <label for="subject">subject</label>
-									    <input type="text" class="form-control" Name="subject" placeholder="subject">
+									    <input type="text" class="form-control" name="subject" placeholder="subject" value="${post.subject}">
 									</div>
 								</div>
 		                        
 								<div class="form-group">
 		                            <div class="col-lg-12">
-		                                <div class="summernote">
-		                                    <div id="summernote" class="summernote">
-		                                        <p></p>
-		                                    </div>
-		                                </div>
+                                        <textarea class="form-control summernote" name="post_content" >${post.post_content}</textarea>
 		                            </div>
 		                        </div>
 		
-							<!-- <button type="submit" class="btn btn-primary">Save</button> -->
-							<button type="button" class="btn btn-default" id="delete" class="btn">삭제</button>
-							<button type="button" class="btn btn-default" id="modify" class="btn">수정</button>
+							<c:if test="${loggedInUserId eq post.id}">
+							    <button type="submit" class="btn btn-primary">수정</button>
+							    <button type="button" class="btn btn-default" id="cancel" onclick="deletePost(${post.post_num})">삭제</button>
+							</c:if>
 							
 						</form>
 						
@@ -526,6 +524,14 @@
 
 	    let postForm = function() {
 	    	let content = $('textarea[name="content"]').html($('#summernote').code());
+	    }
+
+
+	    function deletePost(post_num) {
+	        if (confirm("정말로 삭제하시겠습니까?")) {
+	            document.getElementById("edit").action = "/freedelete?post_num=" + post_num;
+	            document.getElementById("edit").submit();
+	        }
 	    }
 					
 	</script>

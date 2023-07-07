@@ -456,28 +456,25 @@
 				  
 		            <div class="well">
 		
-		    			<form class="form-horizontal" METHOD="POST" name="example" ID="edit" ACTION="?">
+		    			<form class="form-horizontal" METHOD="POST" name="example" id="edit" action="/freeinsert">
 		
 								<div class="form-group">
 									<div class="col-lg-12">
 		                                <label for="title">Title</label>
-									    <input type="text" class="form-control" Name="title" placeholder="title">
+									    <input type="text" class="form-control" name="post_title" placeholder="title">
 									    <label for="subject">subject</label>
-									    <input type="text" class="form-control" Name="subject" placeholder="subject">
+									    <input type="text" class="form-control" name="subject" placeholder="subject">
 									</div>
 								</div>
 		                        
 								<div class="form-group">
 		                            <div class="col-lg-12">
-		                                <div class="summernote">
-		                                    <div id="summernote" class="summernote">
-		                                        <p></p>
-		                                    </div>
-		                                </div>
+                                        <textarea class="form-control summernote" name="post_content"></textarea>
+                                        
 		                            </div>
 		                        </div>
 		
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit"  class="btn btn-primary">Save</button>
 							<button type="button" class="btn btn-default" id="cancel" class="btn">Cancel</button>
 							
 						</form>

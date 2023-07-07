@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -240,10 +242,8 @@ section.notice {
 					<ul class="nav">
 						<li class="nav-item"><a class="nav-link" href="/freelist">자유게시판</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="/event">이벤트
-								게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/contest">공모전
-								게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/event">이벤트 게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/contest">공모전 게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="/announce">공지사항</a>
 						</li>
 					</ul>
@@ -256,12 +256,12 @@ section.notice {
 			<div class="container">
 				<div class="search-window">
 					<form action="">
-						<div class="search-wrap">
+						<!-- <div class="search-wrap">
 							<label for="search" class="blind">공지사항 내용 검색</label> <input
 								id="search" type="search" name="" placeholder="검색어를 입력해주세요."
 								value="">
 							<button type="submit" class="btn btn-dark">검색</button>
-						</div>
+						</div> -->
 					</form>
 				</div>
 			</div>
@@ -279,7 +279,7 @@ section.notice {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<!-- <tr>
 							<td>중간파티원 모집</td>
 							<th><a href="#!">이웃집 주사위 룰을 적용하고 있습니다.</a>
 								<p>테스트</p></th>
@@ -290,7 +290,16 @@ section.notice {
 							<td>게임개설요청</td>
 							<th><a href="#!">굴림 더 락! 룰을 적용한 게임이 하고 싶습니다.</a></th>
 							<td>최다비니</td>
-						</tr>
+						</tr> -->
+						
+						 <c:forEach items="${posts}" var="post">
+				            <tr>
+				            	<input type="hidden" name="post_num" value="${post.post_num}">
+				                <td><a href="/freedetail?post_num=${post.post_num}">${post.subject}</a></td>
+				                <td><a href="/freedetail?post_num=${post.post_num}">${post.post_title}</a></td>
+				                <td>${post.id}</td>
+				            </tr>
+				        </c:forEach>
 
 						
 					</tbody>

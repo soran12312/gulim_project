@@ -4,6 +4,89 @@
 
 <mapper namespace="project.gulim.dao.CommunityDAO">
 
+	<!-- post 테이블 전체 컬럼 -->
+	<sql id="postColumns">
+        post_title
+        , id
+        , writing_date
+        , post_content
+        , board				<!-- 게시판(자유, 이벤트, 공지, 공모전) -->
+        , subject
+        , view_count
+        , post_state      <!-- 등록상태(0-기본값(게시중) / 1-삭제된게시글(게시중단)) -->
+    </sql>
+    
+   
+    
+    <!-- 게시글 저장 -->
+    <insert id="save" parameterType="project.gulim.domain.PostDTO" >
+        INSERT INTO post (
+            <include refid="postColumns" />
+        ) VALUES (
+            #{post_title}
+            , #{id}
+            , NOW()
+            , #{post_content}
+            , '자유'
+            , #{subject}
+            , 0
+            , 0
+        )  
+    </insert>
+    
+    <!-- 게시글 이미지 저장 -->
+    <insert id="insertImage" parameterType="project.gulim.domain.PostDTO">
+		INSERT INTO image 
+		(post_num, origin_img_name, `path`, img_size, id)
+		VALUES
+		( (SELECT MAX(post_num) FROM post)
+		, #{origin_img_name}, #{path}, #{img_size}, #{id})
+	</insert>
 	
 
+
+    <!-- 게시글 상세정보 조회 -->
+   <select id="findByNum" parameterType="int" resultType="project.gulim.domain.PostDTO">
+        SELECT *
+		FROM post LEFT OUTER JOIN image 
+		ON post.post_num = image.post_num
+        WHERE
+            post.post_num = #{post_num}
+    </select>
+
+
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="project.gulim.domain.PostDTO">
+        UPDATE post
+        SET
+             post_title = #{post_title}
+            ,subject = #{subject}
+            ,post_content = #{post_content}
+        WHERE
+            post_num = #{post_num}
+    </update>
+
+
+    <!-- 게시글 삭제 -->
+    <update id="deleteByPostNum" parameterType="int">
+        UPDATE post
+        SET
+            post_state = 1
+        WHERE
+            post_num = #{post_num}
+    </update>
+
+
+    <!-- 게시글 리스트 조회 -->
+    <select id="findAll" resultType="project.gulim.domain.PostDTO">
+        SELECT *
+		FROM post LEFT OUTER JOIN image 
+		ON post.post_num = image.post_num
+        WHERE
+            post.post_state = 0
+        ORDER BY
+            post.post_num DESC
+    </select>
+	
+ 
 </mapper>
