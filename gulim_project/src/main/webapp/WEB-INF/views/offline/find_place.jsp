@@ -15,7 +15,7 @@
            
             var markers =[]
             var markerinfomation = [];
-            
+
             //지도를 띄우기
             var container = document.getElementById('map');
             var options = {
@@ -33,7 +33,7 @@
                     longitude: ${marker.longitude},
                     place_name: "${marker.place_name}",
                     tel : "${marker.tel}",
-                    address:"${marker.place_address}"
+                    place_address:"${marker.place_address}"
                 },
             </c:forEach>
             ];
@@ -45,7 +45,7 @@
     for (var i = 0; i < locals.length; i++) {
     var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
     //마커 클릭했을 때 정보 표시
-    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].address + '</p></div>';
+    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
     var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
        
@@ -56,7 +56,7 @@
         map: map,
         place_name: locals[i].place_name,
         tel: locals[i].tel,
-        address: locals[i].address
+        place_address: locals[i].place_address
     });
     //
     markers.push(marker);
@@ -66,7 +66,13 @@
         marker: marker,
         infowindow: infowindow
     });
+
+ 
     }
+
+
+
+
 
     // 지도에 있는 마커에 정보 담기
     for (var i = 0; i < markerinfomation.length; i++) {
@@ -94,8 +100,6 @@
         }
 
 
-
-
         
 
     //제휴 매장보기 버튼을 눌렀을 때
@@ -104,6 +108,7 @@
 
 // 제휴 매장보기 버튼을 눌렀을 때
 $("#place_partnership").click(function() {
+    
     $.ajax({
         type: "post",
         url: 'show_partnership',
@@ -111,10 +116,11 @@ $("#place_partnership").click(function() {
         success: function(result) {
             // removeMarkers 함수 호출
             removeMarkers();
-            
+            $("#data_marker tr").remove();
             // result를 기반으로 마커를 생성   
             for (var i = 0; i < result.length; i++) {
                 var markerPosition = new kakao.maps.LatLng(result[i].latitude, result[i].longitude);
+                //이미지 붙히기 위한 변수
                 var markerImage = new kakao.maps.MarkerImage(markerImg, imgSize);
 
                 // 마커 클릭했을 때 정보 표시 
@@ -129,7 +135,7 @@ $("#place_partnership").click(function() {
                     map: map,
                     place_name: result[i].place_name,
                     tel: result[i].tel,
-                    address: result[i].place_address,
+                    place_address: result[i].place_address,
                     image: markerImage
                 });
                 markers.push(marker);
@@ -139,14 +145,63 @@ $("#place_partnership").click(function() {
                     marker: marker,
                     infowindow: infowindow
                 });
-            }
 
+                //테이블에 붙힐 새로운 tr 만듬
+                var partnership_detail = $('<tr></tr>');
+                // td 안에 result 값 붙힘
+                var partnership_name = $('<td class="place_name_css"></td>').text(result[i].place_name);
+                var partnership_tel = $('<td class="place_tel_css"></td>').text(result[i].tel);
+                var partnership_address = $('<td class="address_css"></td>').text(result[i].place_address);
+                // tr에 그 값들을 붙힘
+                partnership_detail.append(partnership_name, partnership_tel, partnership_address);
+                // table에 새로만든 tr 붙힘
+                $("#data_marker").append(partnership_detail);
+
+
+                
+                partnership_name.click(function() {
+                    
+                // 가장 가까운 tr 의 인덱스를 찾는다
+                var index = $(this).closest("tr").index();
+                var marker = markers[index];
+
+                if (marker) {
+                //지도 이동
+                map.panTo(marker.getPosition());
+                //해당 마커 생성
+                var infowindowContent = '<div style="padding:15px;"><strong>' + result[index].place_name + '</strong><hr>' + result[index].tel + '<hr>' + '<p>'+result[index].place_address +'</p>'+ '</div>';
+                //x 누르면 창 닫기
+                iwRemoveable = true;
+                var infowindow = new kakao.maps.InfoWindow({
+                content: infowindowContent,
+                removable : iwRemoveable
+                });
+
+                infowindow.open(map, marker);
+                }
+                });
+
+                // 현재 페이지 지정
+                currentPage = 1;
+                //끝 페이지를 result의 길이 만큼 지정
+                totalRows = result.length;
+                // 전체 페이지
+                totalPages = Math.ceil(totalRows / rowsPerPage);
+                //displaypage 함수 호출 
+                displayPage(currentPage);
+               } // end result for
+
+
+
+               
+      
             // 지도에 있는 마커에 정보 담기
             for (var i = 0; i < markerinfomation.length; i++) {
                 var markerInfo = markerinfomation[i];
                 // 마커에 클릭 이벤트 걸기
                 function addClickListener(markerInfo) {
                     kakao.maps.event.addListener(markerInfo.marker, 'mouseover', function() {
+                        
                         markerInfo.infowindow.open(map, markerInfo.marker);
                     });
                     kakao.maps.event.addListener(markerInfo.marker, 'mouseout', function() {
@@ -162,11 +217,12 @@ $("#place_partnership").click(function() {
     //전체 매장 보기 버튼을 눌렀을 때
     $("#place_allplace").click(function(){
         removeMarkers();
-
+        $("#data_marker tr").remove();
         for (var i = 0; i < locals.length; i++) {
         var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
+       
         //마커 클릭했을 때 정보 표시 
-        var infoContent = '<div style="margin:20px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].address + '</p></div>';
+        var infoContent = '<div style="margin:20px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
         var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
         }); // end infowindow
@@ -177,7 +233,7 @@ $("#place_partnership").click(function() {
         map: map,
         place_name: locals[i].place_name,
         tel: locals[i].tel,
-        address: locals[i].address
+        address: locals[i].place_address
         });// end marker
         
         markers.push(marker);
@@ -187,7 +243,49 @@ $("#place_partnership").click(function() {
         marker: marker,
         infowindow: infowindow
         }); // end markerinfomation
-        }// end for
+
+        //테이블에 붙힐 새로운 tr 만듬
+        var place_all_datail = $('<tr></tr>');
+        // td 안에 locals 값 붙힘
+        var place_all_name = $('<td class="place_name_css"></td>').text(locals[i].place_name);
+        var place_all_tel = $('<td class="place_tel_css"></td>').text(locals[i].tel);
+        var place_all_address = $('<td class="address_css"></td>').text(locals[i].place_address);   
+        // tr에 그 값들을 붙힘
+        place_all_datail.append(place_all_name, place_all_tel, place_all_address);
+        // table에 새로만든 tr 붙힘
+        $("#data_marker").append(place_all_datail);   
+
+        // place_all_name 을 클릭시 실행하는 이벤트
+        place_all_name.click(function() {
+           
+            var index = $(this).closest("tr").index();
+            var marker = markers[index];
+            if (marker) {
+            map.panTo(marker.getPosition());
+            var infowindowContent = '<div style="padding:15px;"><strong>' + locals[index].place_name + '</strong><hr>' + locals[index].tel + '<hr>' + '<p>'+locals[index].place_address +'</p>'+ '</div>';
+            iwRemoveable = true;
+            var infowindow = new kakao.maps.InfoWindow({
+            content: infowindowContent,
+            removable : iwRemoveable
+            });
+            infowindow.open(map, marker);
+            }
+        });
+
+
+
+
+        
+        // 현재 페이지 지정
+        currentPage = 1;
+        //끝 페이지를 locals 길이 만큼 지정
+        totalRows = locals.length;
+        // 전체 페이지
+        totalPages = Math.ceil(totalRows / rowsPerPage);
+        //displaypage 함수 호출 
+        displayPage(currentPage);
+
+        }// end for locals
 
     // 지도에 있는 마커에 정보 담기
     for (var i = 0; i < markerinfomation.length; i++) {
@@ -202,7 +300,8 @@ $("#place_partnership").click(function() {
         });
     }
     addClickListener(markerInfo);
-    }// end for
+    }// end for markerinfomation
+
     }) // end #place_allplace
    
   // 페이징 기능 추가
@@ -272,7 +371,7 @@ $("#place_partnership").click(function() {
 <div class="mypagebackpage">
     <!-- 헤더 -->
     <jsp:include page="../../../header_after.jsp"></jsp:include>
-
+    <jsp:include page="../../../sidebar.jsp"></jsp:include>
     <!-- 지도 띄우기 -->
     <div class="place_map">
         <div id="map" style="width:1000px;height:600px;"></div>
@@ -290,7 +389,7 @@ $("#place_partnership").click(function() {
     
     <div class="place_detail_table">
 
-        <table id="place_table">
+        <table id="place_table" class="place_table" >
                 
             <thead>
                 <tr>
@@ -300,12 +399,14 @@ $("#place_partnership").click(function() {
                 </tr>
             </thead>
                 <c:forEach items="${Marker}" var="marker">
-                <tr>
-                    <td class="place_name_css">${marker.place_name}</td>
-                    <td class="place_tel_css">${marker.tel}</td>
-                    <td class="address_css">${marker.place_address}</td>
-                </tr>
-                
+                    <tbody id="data_marker">        
+                    <tr>
+                        <td class="place_name_css">${marker.place_name}</td>
+                        <td class="place_tel_css">${marker.tel}</td>
+                        <td class="address_css">${marker.place_address}</td>
+                    </tr>
+                </tbody>
+
             </c:forEach>
             <div>
                  <button class="place_prev"> << </button>

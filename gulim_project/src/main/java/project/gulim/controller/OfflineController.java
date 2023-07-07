@@ -29,11 +29,6 @@ public class OfflineController {
 		return "/offline/find_place";
 	}
 	
-	@RequestMapping("/offline_friend")
-	public String offline_friend() {
-		
-		return "/offline/find_near_friend";
-	}
 	
 	@RequestMapping("/show_partnership")
 	@ResponseBody
