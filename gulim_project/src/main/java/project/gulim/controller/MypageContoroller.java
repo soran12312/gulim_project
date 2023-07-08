@@ -38,7 +38,7 @@ public class MypageContoroller {
 		return "/mypage/user_info/info_modify";
 	}
 	
-	@RequestMapping(value = "/{room_num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/room/{room_num}", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getRoomInfo(@PathVariable Integer room_num) {
 		String user_id = "nahs001";
