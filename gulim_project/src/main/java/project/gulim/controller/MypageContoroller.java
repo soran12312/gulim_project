@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.service.MypageService;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RequestMapping("/mypage")
 public class MypageContoroller {
@@ -38,33 +37,4 @@ public class MypageContoroller {
 		return "/mypage/user_info/info_modify";
 	}
 	
-	@RequestMapping(value = "/room/{room_num}", method = RequestMethod.GET)
-	@ResponseBody
-	public Map getRoomInfo(@PathVariable Integer room_num) {
-		String user_id = "nahs001";
-		
-		Map map = new HashMap();
-		List member_info = new ArrayList();
-		
-		HashMap room = mypageService.getRoomInfo(room_num);
-		map.putAll(room);
-		
-		String master_nickname = mypageService.getNicknameById((String)(room.get("id")));
-		map.put("master_nickname", master_nickname);
-		
-		List<Integer> join_list = mypageService.getJoinNumByRoomNum(room_num);
-		
-		for(Integer join_num : join_list) {
-			HashMap sheet = mypageService.getSheetByJoinNum(join_num);
-			String id = mypageService.getIdByJoinNum(join_num);
-			sheet.put("id", id);
-			member_info.add(sheet);
-		}
-		map.put("member_info", member_info);
-		map.put("user_id", user_id);
-		System.out.println(map.toString());
-		
-		
-		return map;
-	}
 }

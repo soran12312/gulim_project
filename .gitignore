@@ -150,3 +150,6 @@ $RECYCLE.BIN/
 
 ### securiry ###
 security.properties
+
+# Ignore key folder
+/src/main/resource/key/

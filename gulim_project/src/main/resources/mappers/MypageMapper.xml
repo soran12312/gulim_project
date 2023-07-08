@@ -4,29 +4,6 @@
 
 <mapper namespace="project.gulim.dao.MypageDAO">
 
-	<select id="getRoomInfo" parameterType="Integer" resultType="HashMap">
-		SELECT * FROM chating
-		WHERE room_num = #{room_num}
-	</select>
 	
-	<select id="getJoinNumByRoomNum" parameterType="Integer" resultType="Integer">
-		SELECT join_num FROM `join`
-		WHERE room_num = #{room_num}
-	</select>
-	
-	<select id="getSheetByJoinNum" parameterType="Integer" resultType="HashMap">
-		SELECT * FROM character_sheet
-		WHERE join_num = #{join_num}
-	</select>
-	
-	<select id="getIdByJoinNum" parameterType="Integer" resultType="String">
-		SELECT id FROM `join`
-		WHERE join_num = #{join_num}
-	</select>
-	
-	<select id="getNicknameById" parameterType="String" resultType="String">
-		SELECT nickname FROM member
-		WHERE id = #{id}
-	</select>
 
 </mapper>
