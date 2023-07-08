@@ -152,4 +152,4 @@ $RECYCLE.BIN/
 security.properties
 
 # Ignore key folder
-/src/main/resource/key/
+/src/main/resource/key/*
