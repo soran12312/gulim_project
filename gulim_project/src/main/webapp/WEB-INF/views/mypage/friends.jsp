@@ -25,16 +25,15 @@ $(document).ready(function(){
 	<div class="subnav">
 		<div class="subnav_select_friends subnav_select"></div>
 			<div class="subnav_menu">
-					<a href ="/mypage/my_message">쪽지</a>
-					<a href ="/mypage/calender">캘린더</a>
-					<a href ="/mypage/game/my_game_list">나의 게임관리</a>
-					<a href ="/mypage/user_info/info_modify">회원정보</a>
-					<a href ="/mypage/my_post">나의 게시글</a>
-					<a href ="/mypage/my_question">나의 문의사항</a>
-					<a href ="/mypage/friends">친구관리</a>
-					<a>결제내역</a>
-					<a>공모전</a>
-					<a>참여내역</a>
+				<a href ="/mypage/my_message">쪽지</a>
+				<a href ="/mypage/calender">캘린더</a>
+				<a href ="/mypage/game/my_game_list">나의 게임관리</a>
+				<a href ="/mypage/user_info/info_modify">회원정보</a>
+				<a href ="/mypage/my_post">나의 게시글</a>
+				<a href ="/mypage/my_question">나의 문의사항</a>
+				<a href ="/mypage/friends">친구관리</a>
+				<a href ="/mypage/my_purchase">결제내역</a>
+				<a href ="/mypage/my_contest">공모전</a>
 			</div>
 	</div>
 	
@@ -100,7 +99,7 @@ $(document).ready(function(){
 			<table class="myfriend_list_table">
 				<tr>
 					<td>나한솔</td>
-					<td><a href = "/mypage/profile" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">
+					<td><a href = "/mypage/friends_profile" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">
 					프로필보기</a></td>
 				</tr>
 				<tr><td>나한솔</td></tr>

@@ -14,7 +14,9 @@
 
 
 	<div class="send_message_backpage">
-		<div class="send_message_name">쪽지 보내기</div>
+		<div class="send_message_name_back">
+			<div class="send_message_name">쪽지보내기</div>
+		</div>
 		<div class = "sendmessage_form">
 			<form action="">
 				<div>
