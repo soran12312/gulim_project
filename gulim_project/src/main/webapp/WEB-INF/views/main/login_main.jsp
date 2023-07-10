@@ -31,7 +31,7 @@
 				<td>커뮤니티</td>
 			</tr>
 			<tr>
-				<td><img src="/files/images/no_image.jpg"/></td>
+				<td><img src="/files/images/화상채팅.jpg"/></td>
 				<td><img src="/files/images/모임장소 찾기.jpg"/></td>
 				<td><img src="/files/images/커뮤니티.jpg"/></td>
 			</tr>
@@ -42,8 +42,8 @@
 			</tr>
 			<tr>
 				<td><img src="/files/images/초보자가이드.jpg"/></td>
-				<td><img src="/files/images/no_image.jpg"/></td>
-				<td><img src="/files/images/no_image.jpg"/></td>
+				<td><img src="/files/images/지도.jpg"/></td>
+				<td><img src="/files/images/게임정보.jpg"/></td>
 			</tr>
 		</table>
 		</div>
