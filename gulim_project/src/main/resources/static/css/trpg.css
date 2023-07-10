@@ -1521,5 +1521,55 @@ purchase_bookname{
     padding:2%;
 }
 /* ================ END OF MY_CONTEST ====================== */
-
+/* ================ START OF PASSWORD_CHECK ====================== */
+.password_check_form{
+  padding-top: 100px;
+  padding-left: 40px;
+  width: 400px;
+  height: 400px;
+}
+.password_check_btn{
+	width: 75px;
+	height: 30px;
+	background-color : black;
+	color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+	display: block;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: center;
+	float:right;
+	margin-top: 20px;
+	margin-right: 100px;
+}
+.password_backpage{
+  width:400px;
+  height:400px;
+  background-image:url("/files/images/wallpaper/배경1.jpg");
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top : 10%;
+  box-shadow: 0px 0px 30px 30px black;
+}
+.password_check_name{
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: center;
+}
+.password_check_form input{
+	width: 60%;
+	height: 30px;
+	border: none;
+	box-shadow: 0px 0px 10px 10px white;
+	margin-left: 10%;
+}
+/* ================ END OF PASSWORD_CHECK ====================== */
 /* ================ END OF MY PAGE ====================== */

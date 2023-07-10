@@ -11,6 +11,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#mypage_info').hide();
+	
+	$('#password_check_btn').click(function(){
+		$('#password_check').hide();
+		$('#mypage_info').show();
+		return false;
+	});
 	
 	$('#img_modify').click(function(){
 			if(this.value === '사진수정'){
@@ -45,15 +52,24 @@ $(document).ready(function(){
 			</div>
 	</div>
 <!-- ===================== START OF SIDE BAR =====================-->
-	<div style="width: 100px; height: 400px;background-color: black;border: 7px solid black;border-top-left-radius: 50px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;position: fixed;right: 3%;top: 30%">
-	<a href="../../main/login_main"><img src="/files/images/sideBar홈.png" style="width: 70px;margin: 15px;"></a>
-  	<a href="info_modify"><img src="/files/images/sideBar마이페이지.png" style="width: 70px;margin: 15px;"></a>
-  	<a href="../../sale/sale_main"><img src="/files/images/sideBar장바구니.png" style="width: 70px;margin: 15px;"></a>
-  	<a href="../../customer_service/main"><img src="/files/images/sideBar챗봇.png" style="width: 70px;margin: 15px;"></a>
+	<div style="width: 100px; height: 400px;background-color: black;border: 7px solid black;border-top-left-radius: 50px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;border-bottom-right-radius: 50px;position: fixed;right: 3%;top: 30%"><a href="/main/login_main"><img src="/files/images/sideBar홈.png" style="width: 70px;margin: 15px;"></a><a href="/mypage/game/mygame_list"><img src="/files/images/sideBar마이페이지.png" style="width: 70px;margin: 15px;"></a><a href="/sale/sale_main"><img src="/files/images/sideBar장바구니.png" style="width: 70px;margin: 15px;"></a><a href="/customer_service/main"><img src="/files/images/sideBar챗봇.png" style="width: 70px;margin: 15px;"></a></div>
+<!-- ===================== END OF SIDE BAR =====================-->	
+<!-- ===================== START OF PASSWORD CHECK =====================-->	
+	<div class="password_backpage" id="password_check">
+			<p class="password_check_name">비밀번호 확인</p>
+			<div class ="password_check_form">
+				<div>
+					<input name="password" id="password_check" placeholder="비밀번호를 입력하세요">
+				</div>
+					<button  class="password_check_btn" id="password_check_btn">확인</button>
+			</div>
 	</div>
-<!-- ===================== END OF SIDE BAR =====================-->
+<!-- ===================== END OF PASSWORD CHECK =====================-->	
+
+
 <!-- ===================== START OF IMG =====================-->
-	<div class ="game_back"></div>
+<div id="mypage_info">
+	<div class ="game_back"></div>s
 		<div class ="game_table">
 			<div class="my_img">
 				<img src="/files/images/no_image.jpg">
@@ -115,6 +131,7 @@ $(document).ready(function(){
 					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
 				</table>
 			</div>
+		</div>
 		</div>
 		</div>
 </div>

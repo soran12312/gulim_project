@@ -37,4 +37,14 @@ public class MypageContoroller {
 		return "/mypage/user_info/info_modify";
 	}
 	
+	//마이페이지/회원정보 접속 시 패스워드 체크 
+	@RequestMapping("/user_info/password_check")
+	public String mypage_password_check() { // 페이지 이동(DB접속없는경우)
+		return "/mypage/user_info/password_check";
+	}
+	@RequestMapping("/my_message")
+	public String my_message() {
+		
+		return "/mypage/my_message";
+	}
 }

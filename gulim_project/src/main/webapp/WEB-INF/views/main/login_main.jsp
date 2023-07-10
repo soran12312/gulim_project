@@ -13,6 +13,7 @@
 <!-- START전체 div -->
 <div class="loginmain_wallpaper">
 <jsp:include page="../../../header_after.jsp"></jsp:include>
+	<!-- 페이지 상단 ZEP연결+마케팅 메세지 -->
 	<div class="loginmain1">
 		<div class="loginmain1_back"></div>
 		<button class="go_zep">Gulim<br/>!!Go!!</button>
@@ -20,6 +21,7 @@
 			하지만 굴림세상에서 즐겨보시는 건 어떨까요?</div>
 		
 	</div>
+	<!-- 페이지 하단 기능 소개 + 링크 -->
 	<div class="loginmain2">
 		
 		<div class="loginmain_name">굴림에서 지원하는 기능<hr/></div>
