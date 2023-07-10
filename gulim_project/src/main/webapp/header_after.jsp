@@ -11,27 +11,27 @@
 <body>
 <div id = header class = header>
 	<span id = header_logo class = header_logo>
-		<img src="/files/images/LOGO_white_ver.png">
+		<a href="/main/login_main"><img src="/files/images/LOGO_white_ver.png"></a>
 	</span>
 	<div id = header_nav class = header_nav>
 	<table><tr>
 		<td>
-			<a>모임장소찾기</a>
+			<a href="/offline/map">모임장소찾기</a>
 		</td>
 		<td>
-			<a>커뮤니티</a>
+			<a href="/community/free_board/free_board_list">커뮤니티</a>
 		</td>
 		<td>
-			<a>게임</a>
+			<a href="/game/play/room_list">게임</a>
 		</td>
 		<td>
-			<a>결제</a>
+			<a href="/sale/sale_main">결제</a>
 		</td>
 		<td>
-			<a>마이페이지</a>
+			<a href="/mypage/user_info/info_modify">마이페이지</a>
 		</td>
 		<td>
-			<a>고객센터</a>
+			<a href="/customer_service/main">고객센터</a>
 		</td>
 		<td>	
 			<a>로그아웃</a>

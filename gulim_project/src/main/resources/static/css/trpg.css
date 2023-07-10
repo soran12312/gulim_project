@@ -72,6 +72,14 @@ font-weight: bold;}
 	text-align: center;
 	cursor: pointer
 }
+.header_nav a:link,/* 링크컬러블랙 */
+.header_nav a:visited,/* 방문햇던링크컬러블랙 */
+.header_nav a:active, /* 마우스호버없음 */
+.header_nav a{
+  text-decoration-line : none;
+  color: white;
+  text-decoration:none; /* 마우스호버없음 */
+}
 /* ================END OF HEADER============================== */
 
 
@@ -315,7 +323,146 @@ font-weight: bold;}
   cursor: pointer;
 }
 /* ================END OF MAIN.jsp============================== */
-
+/* ================START OF LOGINMAIN.jsp============================== */
+/* 배경 */
+.loginmain_wallpaper {
+  width: 100%;
+  height: 2600px;
+  background-image:url("/files/images/wallpaper/loginmain_wallpaper.jpg");
+  background-size: cover;
+  background-repeat: repeat-y;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.loginmain1_back{
+	width: 600px;
+	height: 70px;
+	background-color:black;
+	position: absolute;
+  	top: 16%;
+  	left: 20%;
+  	padding: 3%;
+  	opacity: 0.5;
+  	box-shadow:0px 0px 50px 100px black;
+}
+.loginmain1{
+	width:100%;
+	height: 1200px;
+}
+.go_zep{
+	width:200px;
+	height:200px;
+	border: 5px solid white;
+	background-color: black;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	position: absolute;
+  	top: 15%;
+  	left: 20%;
+  	font-family: Papyrus, fantasy; 
+	font-weight: Regular;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+  	
+}
+.loginmain1_message{
+	position: absolute;
+  	top: 17%;
+  	left: 32%;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+    font-size: 15px;
+    color: white;
+}
+.loginmain2{
+	position: absolute;
+	top: 1200px;
+	width:100%;
+	height: 1024px;
+}
+.loginmain_name_back{
+  width: 400px;
+  height: 100px;
+  background:black;
+  opacity: 0.8;
+  margin-left :40%;
+  margin-top :20%;
+  border-top-left-radius: 37px;
+  border-top-right-radius: 37px;
+  border-bottom-left-radius: 37px;
+  border-bottom-right-radius: 37px;
+  box-shadow:0px 0px 30px 30px red;
+  overflow: hidden;
+  display: inline-block;
+}
+.loginmain_name{
+	width: 400px;
+	text-align: center;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+    font-size: 30px;
+    color: white;
+    margin-top: 25%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 37px;
+	border-top-right-radius: 37px;
+    border-bottom-left-radius: 37px;
+    border-bottom-right-radius: 37px;
+    box-shadow:0px 0px 30px 30px rgba(0,0,0,0.7);
+    background:rgba(0,0,0,0.7);
+}
+.loginmain_name hr{
+	width: 90%;
+	position: absolute;
+	top:38%;
+	left:1%;
+	background:white;
+    height:3px;
+    border:0;
+    color: white;
+    margin-left: 5%;
+}
+.loginmain_table_back{
+	width : 800px;
+	padding-bottom:5%;
+	border-top-left-radius: 37px;
+	border-top-right-radius: 37px;
+    border-bottom-left-radius: 37px;
+    border-bottom-right-radius: 37px;
+    box-shadow:0px 0px 30px 30px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.5);
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.loginmain_table{
+	width : 800px;
+	margin: auto;
+	text-align: center;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+    font-size: 20px;
+    color: white;
+    table-layout: fixed;
+}
+.loginmain_table td{
+	padding-top: 5%;
+}
+.loginmain_table img{
+	width: 200px;
+	height: 200px;
+	margin: auto;
+}
+/* ================END OF LOGINMAIN.jsp============================== */
 /* ================ START OF MY PAGE ====================== */
 .mypagebackpage {
   width: 100%;
