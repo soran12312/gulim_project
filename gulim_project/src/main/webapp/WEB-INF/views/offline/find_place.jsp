@@ -6,13 +6,13 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link href="/css/place.css" rel="stylesheet" />
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af5116371e6fcb826c25a4987ca0a0b2"></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=af5116371e6fcb826c25a4987ca0a0b2"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="text/javascript">
 
        $(function() {
         
-           
+            var infodelete=[];
             var markers =[]
             var markerinfomation = [];
 
@@ -50,6 +50,7 @@
         content: infoContent,
        
     });
+    
     //마커 안에 들어갈 정보
     var marker = new kakao.maps.Marker({
         position: markerPosition,
@@ -58,7 +59,17 @@
         tel: locals[i].tel,
         place_address: locals[i].place_address
     });
-    //
+
+    if(locals[i].place_name == "레드버튼 창원상남점"){
+        console.log("마커",marker);
+        console.log(markerPosition,"마커포지션");
+        console.log(locals[i].place_name,"네임");
+    }
+    if(locals[i].place_name == "홈즈앤루팡 서면점"){
+        console.log("마커",marker);
+        console.log(markerPosition,"마커포지션");
+        console.log(locals[i].place_name,"네임");
+    }
     markers.push(marker);
 
     // 마커 정보 객체에 담기
@@ -66,10 +77,36 @@
         marker: marker,
         infowindow: infowindow
     });
+    
 
+    $('.place_name_css').each(function(event) {
+    $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
+
+    // this 클릭시
+    $(this).click(function() {
+    var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
+    var marker = markers[markerIndex];
+    if (marker) {
+        //지도 이동
+      map.panTo(marker.getPosition());
+      //마커 생성
+      var infowindowContent = '<div style="padding:15px;"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
+      // 생성된 마커의 정보 저장
+      var infowindow = new kakao.maps.InfoWindow({
+        content: infowindowContent,
+        removable : true
+      });
+      // 맵에 마커 생성
+      infowindow.open(map, marker);
+      // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
+      $("#place_partnership, #place_allplace").click(function() {
+        infowindow.close();
+      });// end click func
+    }// end if
+  }); // end this func
+}); // end place_name_css func
  
-    }
-
+    }// end for
 
 
 
@@ -99,6 +136,7 @@
         markers = [];
         }
 
+     
 
         
 
@@ -175,9 +213,12 @@ $("#place_partnership").click(function() {
                 var infowindow = new kakao.maps.InfoWindow({
                 content: infowindowContent,
                 removable : iwRemoveable
-                });
-
-                infowindow.open(map, marker);
+                });      
+                    infowindow.open(map, marker);
+                //전체 매장 보기 버튼을 누르면 인포 창 전부 닫기
+                $("#place_allplace").click(function() {
+                infowindow.close();
+                });                
                 }
                 });
 
@@ -269,8 +310,12 @@ $("#place_partnership").click(function() {
             removable : iwRemoveable
             });
             infowindow.open(map, marker);
+            $("#place_partnership").click(function() {
+                infowindow.close();
+            });
             }
-        });
+        }); 
+
 
 
 
