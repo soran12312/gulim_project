@@ -471,8 +471,13 @@
 								<div class="form-group">
 		                            <div class="col-lg-12">
                                         <textarea class="form-control summernote" name="post_content" >${post.post_content}</textarea>
+                                        
+                                        
 		                            </div>
 		                        </div>
+		                        
+		                        
+		
 		
 							<c:if test="${loggedInUserId eq post.id}">
 							    <button type="submit" class="btn btn-primary">수정</button>

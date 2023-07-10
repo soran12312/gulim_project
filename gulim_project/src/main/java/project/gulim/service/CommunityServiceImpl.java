@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import project.gulim.dao.CommunityDAO;
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 
 @Service
@@ -72,17 +73,46 @@ public class CommunityServiceImpl implements CommunityService{
      * @return 게시글 리스트
      */
 	@Override
-	public List<PostDTO> findAllPost() {
+	public List<PostDTO> findPostsByPage(int start, int size) {
 		// TODO Auto-generated method stub
-		return communityDAO.findAll();
+		return communityDAO.findAll(start, size);
+	}
+
+
+
+	// 공지
+	@Override
+	public List<PostDTO> findAllAnnounce() {
+		// TODO Auto-generated method stub
+		return communityDAO.findAnnounce();
+	}
+
+
+
+	/**
+     * 게시글 수 조회
+     * @return 게시글 수
+     */
+	@Override
+	public int countAllPosts() {
+		// TODO Auto-generated method stub
+		return communityDAO.count();
 	}
 
 
 
 	@Override
-	public void insertImgByPath(String path) {
+	public List<PostDTO> findAllPost() {
 		// TODO Auto-generated method stub
-		communityDAO.insertImgByPath(path);
+		return null;
+	}
+
+
+
+	@Override
+	public void saveImage(ImageDTO img) {
+		// TODO Auto-generated method stub
+		communityDAO.saveImage(img);
 	}
 	
 	

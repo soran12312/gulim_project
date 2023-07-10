@@ -470,7 +470,6 @@
 								<div class="form-group">
 		                            <div class="col-lg-12">
                                         <textarea class="form-control summernote" name="post_content"></textarea>
-                                        
 		                            </div>
 		                        </div>
 		
@@ -523,6 +522,23 @@
 	    let postForm = function() {
 	    	let content = $('textarea[name="content"]').html($('#summernote').code());
 	    }
+
+
+	    function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
+				}
+			});
+		}
 					
 	</script>
 </body>

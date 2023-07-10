@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 
 @Mapper
@@ -37,9 +38,11 @@ public interface CommunityDAO {
 
     /**
      * 게시글 리스트 조회
+     * @param size 
+     * @param start 
      * @return 게시글 리스트
      */
-    List<PostDTO> findAll();
+    List<PostDTO> findAll(int start, int size);
 
     /**
      * 게시글 수 카운팅
@@ -47,6 +50,16 @@ public interface CommunityDAO {
      */
     int count();
 
+    // 이미지 저장
+    public void saveImage(ImageDTO img);
 
-	public void insertImgByPath(String path);
+
+	// 공지사항 조회
+	public List<PostDTO> findAnnounce();
+	
+	// 이벤트 조회
+	public List<PostDTO> findEvent();
+
+
+	
 }
