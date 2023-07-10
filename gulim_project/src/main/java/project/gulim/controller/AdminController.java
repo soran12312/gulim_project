@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
@@ -19,11 +21,17 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@RequestMapping("/question")
-	public String viewPage_question(Model m) { // 페이지 이동(DB접속없는경우)
-		List<QuestionDTO> listQuestion = adminService.listQuestion();
-		// result를 list라는 이름으로 모델에 추가함 => list라는 이름으로 데이터를 뷰에 전달
-		m.addAttribute("listQuestion", listQuestion);
-		return "/admin/member/question";
+	public String viewPage_question(Model m) {
+	    List<QuestionDTO> listQuestion = adminService.listQuestion();
+	    m.addAttribute("listQuestion", listQuestion);
+	    return "/admin/member/question";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/question", method=RequestMethod.POST)
+	public void answerQuestion(@RequestBody QuestionDTO qDTO) {
+		System.out.println(qDTO);
+		adminService.answerQuestion(qDTO);
 	}
 	
 	

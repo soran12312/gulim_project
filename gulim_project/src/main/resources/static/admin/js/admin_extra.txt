@@ -18,3 +18,5 @@ $(".nav-control").on('click', function() {
 	
 	
 2. morris-init.js 전부
+
+3. chartist-init.js 전부

@@ -4,15 +4,15 @@
 
 <mapper namespace="project.gulim.dao.AdminDAO">
 
-	<!-- 문의사항 답변에 회원목록 띄우기 -->
 	<select id="listQuestion" resultType="QuestionDTO">
-		select *
-		from question
-		order by question_num DESC
+	    select *
+	    from question
+	    order by question_num DESC
 	</select>
-	
+		
+	<!---->
 	<update id="answerQuestion" parameterType="QuestionDTO">
-		UPDATE question SET answer=#{answer} WHERE id=#{id}
+		UPDATE question SET answer=#{answer}, answer_state=1 WHERE question_num=#{question_num}
 	</update>
 
 </mapper>

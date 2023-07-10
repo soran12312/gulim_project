@@ -13,33 +13,45 @@
 	
 	
     var table = $('#example').DataTable();
-    var previousInputRow = null;
-
-    $('#example tbody').on('click', 'tr', function(e) {
-        
-        if ($(this).hasClass('selected')) {
-            table.$('tr.selected').removeClass('selected');
-        } else {
-            table.$('tr.selected').removeClass('selected');
-            table.$('tr.selected').addClass('selected');
-        }
-    });
     
+    // 문의사항 테이블
     var table_question = $('.questionTable').DataTable();
-    $('.questionTable tbody').on('click', 'tr', function(e) {
-		if ($(e.target).is('input')) {
-            // input 요소를 클릭한 경우, 선택 상태 유지
-            return;
-        }
-
-        // 클릭한 요소가 textarea인 경우, 처리하지 않음
-        if ($(e.target).is('textarea')) {
-            return;
-        }
-        
-        var inputRow = $('<tr class="input-row"><td height="200px" colspan="4" style="position: relative;"><textarea class="text_answer"></textarea></td><input type="button" value="asdf"></tr><tr class="input-row"><td colspan="3"></td><td><button type="submit" class="btn btn-outline-success">답변등록</button><button class="btn btn-outline-danger">취소</button></td></tr>');
-        
-        if ($(this).hasClass('selected')) {
+    // 이전에 있던 답변창
+	var previousInputRow = null;
+	
+	// 문의사항 테이블의 tbody 내의 tr을 클릭했을 시
+	$('.questionTable tbody').on('click', '.answer-link', function(e) {
+	
+		$('tbody tr').removeClass('selected');
+	
+	    if ($(e.target).is('input') || $(e.target).is('textarea')) {
+	        // input 요소를 클릭한 경우 혹은 클릭한 요소가 textarea인 경우, 선택 상태 유지
+	        return;
+	    }
+	
+		var answerField = $(this).find('td:nth-child(5)')
+		var answer = answerField.text();
+		alert('answer: '+ answer);
+		var textArea1 = '<textarea name="answer" class="text_answer">' 
+		    + answer 
+		    +'</textarea></td>'
+		
+	    var inputRow1 = $(
+		'<tr class="input-row tr1"><td height="200px" colspan="4" style="position: relative;">'
+		    + textArea1
+	    +'</tr>'
+	    +'<tr class="input-row tr2">'
+		    +'<td colspan="3"></td>'
+		    +'<td>'
+		    +'<button type="submit" id="answerQuestion" class="btn btn-outline-success">답변등록</button>'
+		    +'<button id="cancelAnswer" class="btn btn-outline-danger">취소</button>'
+		    +'</td>'
+		+'</tr>');
+	
+		
+	
+		if ($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
             table.$('');
             if (previousInputRow) {
                 previousInputRow.remove();
@@ -49,10 +61,79 @@
             if (previousInputRow) {
                 previousInputRow.remove();
             }
-            $(this).after(inputRow);
-            previousInputRow = inputRow;
+            $(this).after(inputRow1);
+            previousInputRow = inputRow1;
         }
+	/*
+	    if ($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
+	        if (previousInputRow) {
+	            previousInputRow.remove();
+	            previousInputRow = null;
+	        }
+	    } else {
+	        if (previousInputRow) {
+	            previousInputRow.remove();
+	        }
+	        $(this).addClass('selected');
+	        $(this).css("color", "#593BDB");
+	        $(this).after(inputRow1);
+	        previousInputRow = inputRow1;
+	        answerField.empty().append(textArea1);
+	    }*/
+	    var question_num = $(this).find('#question_num').text(); // 선택한 질문 번호를 가져옵니다.
+	   	alert('question_num: ' + question_num); 
+	   	
+	   	
+	   	$('.questionTable tbody tr').on('click', '#answerQuestion', function(e) {
+	    	//var updatedAnswer = $(textArea1).val();
+	    	answerField.empty().append(textArea1);
+	    	var updatedAnswer = $(this).closest('.tr2').parent().parent().parent().find('.tr1 .text_answer').val();
+	    	alert('updatedAnswer:' + updatedAnswer);
+	    	//alert(updatedAnswer);
+	    	console.log($(this).parents('tbody').find('.text_answer').val());
+	    
+	   		 $.ajax({
+				anyne:true,
+		        url: "/admin/question",
+		        method: 'POST',
+		        data: JSON.stringify({ answer: updatedAnswer, question_num: question_num }), // 서버로 전송할 데이터를 설정합니다.
+		        contentType:"application/json; charset=UTF-8",
+		        success: function(response) {
+		            alert('성공, questionNum: ' + question_num + ', answer: ' + updatedAnswer);
+		            location.reload();
+		            // 성공적으로 응답을 받았을 때 실행할 코드
+		            // 예: 업데이트된 데이터를 표시하거나 처리 완료 메시지를 표시하는 등의 동작
+		            // 답변 등록 후 필요한 동작을 수행합니다.
+		        },
+		        error: function(xhr, status, error) {
+		            // 요청이 실패했을 때 실행할 코드
+		            // 예: 오류 메시지를 표시하거나 오류 처리 로직을 수행하는 등의 동작
+		            alert('실패, questionNum: ' + question_num + ', answer: ' + updatedAnswer);
+		            console.log(xhr);
+		            console.log(status);
+		            console.log(error);
+		        }
+		    });
+		});
+		
+		$('.questionTable tbody tr').on('click', '#cancelAnswer', function(e) {
+			$(this).closest('.tr2').parent().parent().parent().find('.tr1').remove();
+			$(this).closest('.tr2').remove();
+			$('tbody tr').removeClass('selected');
+		});
+		
+		
+	   	
 	});
+
+	
+
+
+
+	
+	
+	
 	
 	var showAllButton = $('button.showAll');
 	var showAffiliateOnlyButton = $('button.showAffiliateOnly');

@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,9 +72,10 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/question" class="tab_active">문의사항 답변</a></li>
+                                    <li><a href="/admin/question" class="tab_active">문의사항 답변</a></li> <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/member_management" class="tab_inactive">제재관리</a></li>
                                   </ul>  
                             </div>
@@ -173,12 +175,11 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
-                    <li class="selected_sidebar mm-active-selected"><a href="/admin/question"><i
-                                class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/question"><i    
+                                class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a> <!-- 현재 선택된 회원관리 -->
                     </li>
                     
                     <li><a href="/admin/place_list"><i
@@ -227,7 +228,6 @@
                             <div class="card-header">
                                 <h4 class="card-title">LIST</h4>
                             </div>
-                            <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example" class="display questionTable" style="min-width: 845px">
@@ -237,11 +237,14 @@
                                                     <th>날짜</th>
                                                     <th>문의</th>
                                                     <th>답변</th>
+                                                    <th hidden>a</th>
+                                                    <th hidden>b</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${listQuestion}" var="lq">
-                                                    <tr>
+                                                    <tr class="answer-link">
+                                                        
                                                         <td>${lq.id}</td>
                                                         <td>${lq.question_title}</td>
                                                         <td>${lq.question_content}</td>
@@ -255,13 +258,16 @@
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </td>
+                                                        <td hidden>${lq.answer}</td>
+                                                        <td id="question_num" hidden>${lq.question_num}</td>
                                                     </tr>
                                                 </c:forEach>
+                                                    
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -306,14 +312,23 @@
     <script src="/admin/js/quixnav-init.js"></script>
     <script src="/admin/js/custom.min.js"></script>
     
-
-
     <!-- Datatable -->
     <script src="/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/admin/js/plugins-init/datatables.init.js"></script>
 
     <!-- 관리자 전용 js -->
     <script src="/admin/js/admin.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+
+        }); // end of $
+    </script>
 
 </body>
 

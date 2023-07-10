@@ -74,7 +74,7 @@
                         <div class="header-left">
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/question" class="tab_active">상품 등록 및 수정</a></li>
+                                    <li><a href="/admin/question" class="tab_active">게임 통계</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -191,10 +191,10 @@
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
+                    <li><a href="javascript:void()"><i
                                 class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li class="selected_sidebar mm-active-selected"><a href="widget-basic.html"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
                     
@@ -205,9 +205,6 @@
             Sidebar end
         ***********************************-->
 
-       <!--**********************************
-            Content body start
-        ***********************************-->
         <!--**********************************
             Content body start
         ***********************************-->
@@ -226,133 +223,24 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6">
+                            <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Basic Bar Chart</h4>
+                                        <select class="selectYear" id="selectYear_quarter">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <button id="btn_quarter" class="btn btn-square btn-dark">룰북 점유율</button>
+                                        <button id="btn_quarter_product" class="btn  btn-square btn-success">플레이해본 룰북</button>
+                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">플레이해본 장르</button>
+                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger">플레이해본 직업</button>     
+                                        <a class="col-3"></a>
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="barChart_1"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Gradient Bar Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="barChart_2"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Stalked Bar Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="barChart_3"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Basic Line Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="lineChart_1"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Gradient Line Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="lineChart_2"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Dual Line Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="lineChart_3"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Basic Area Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="areaChart_1"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Gradinet Area Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="areaChart_2"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Dual Area Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="areaChart_3"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Radar Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="radar_chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Pie Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="pie_chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Doughnut Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="doughnut_chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Polar Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="polar_chart"></canvas>
+                                        <div>
+                                            <h6 style="color:black;">2023년 월매출</h6>
+                                        </div>
+                                        <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
                                     </div>
                                 </div>
                             </div>
@@ -402,10 +290,10 @@
     
 
 
-    <!-- Chart ChartJS plugin files -->
-    <script src="./vendor/chart.js/Chart.bundle.min.js"></script>
-    <script src="./js/plugins-init/chartjs-init.js"></script>
-    
+        <!-- Chart Chartist plugin files -->
+        <script src="./vendor/chartist/js/chartist.min.js"></script>
+        <script src="./vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+        <script src="./js/plugins-init/chartist-init.js"></script>
 
     <!-- 관리자 전용 js -->
     <script src="/admin/js/admin.js"></script>
