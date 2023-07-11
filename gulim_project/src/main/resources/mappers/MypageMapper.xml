@@ -4,6 +4,15 @@
 
 <mapper namespace="project.gulim.dao.MypageDAO">
 
+	<select id="mypage_password_check" parameterType="MemberDTO" resultType="String">
+		SELECT password FROM member
+		WHERE id=#{id} 
+	</select>
 	
+	<select id="find_info" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT name,address,tel,email,nickname,birthday,introduce
+		FROM member
+		WHERE id=#{id}
+	</select>
 
 </mapper>

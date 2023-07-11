@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,50 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#mypage_info').hide();
-	
+	$('#addr_search').hide();
+	$('#img_modify').hide();
+
+//
 	$('#password_check_btn').click(function(){
-		$('#password_check').hide();
-		$('#mypage_info').show();
-		return false;
+		
+		$.ajax({
+			 type 		: 'post'
+			,data 		: {password: $('#password_check_input').val(), id: "ekqls1102"}
+			,url 		: '/mypage/user_info/mypage_password_check'
+			,success 	: function(result){
+ 							$('#password_check_input').val('');
+
+							if (result){
+								$('#password_check').hide();
+								$('#mypage_info').show();
+								find_info();
+							}
+							else {
+								alert("비밀번호가 틀렸어용");
+							}
+						}
+						
+			//END of success
+			,error 		: function(err){console.log(err);}//END of error
+		});//END of ajax
 	});
 	
+	function find_info(){
+		$.ajax({
+			 type 		: 'post'
+			,data 		: {id: "ekqls1102"}
+			,url 		: '/mypage/user_info/find_info'
+			,success 	: function(){
+							alert ("아 머지");
+						}
+						
+			//END of success
+			,error 		: function(err){console.log(err);}//END of error
+		});//END of ajax
+	}
+
+
+
 	$('#img_modify').click(function(){
 			if(this.value === '사진수정'){
 				this.value = "수정완료"}
@@ -56,84 +94,82 @@ $(document).ready(function(){
 <!-- ===================== END OF SIDE BAR =====================-->	
 <!-- ===================== START OF PASSWORD CHECK =====================-->	
 	<div class="password_backpage" id="password_check">
-			<p class="password_check_name">비밀번호 확인</p>
-			<div class ="password_check_form">
-				<div>
-					<input name="password" id="password_check" placeholder="비밀번호를 입력하세요">
-				</div>
-					<button  class="password_check_btn" id="password_check_btn">확인</button>
+		<p class="password_check_name">비밀번호 확인</p>
+		<div class ="password_check_form">
+			<div>
+				<input type="password" name="password" id="password_check_input" placeholder="비밀번호를 입력하세요">
 			</div>
+				<button  class="password_check_btn" id="password_check_btn">확인</button>
+		</div>
 	</div>
 <!-- ===================== END OF PASSWORD CHECK =====================-->	
-
-
 <!-- ===================== START OF IMG =====================-->
-<div id="mypage_info">
-	<div class ="game_back"></div>s
-		<div class ="game_table">
-			<div class="my_img">
-				<img src="/files/images/no_image.jpg">
-				<input type="button" class="img_modify" id='img_modify' value="사진수정"/>
+	<div id="mypage_info">
+		<div class ="game_back"></div>s
+			<div class ="game_table">
+				<div class="my_img">
+					<img src="/files/images/no_image.jpg">
+					<input type="button" class="img_modify" id='img_modify' value="사진수정"/>
+				</div>
+			
+	<!-- ===================== END OF IMG =====================-->
+	<!-- ===================== START OF INFO =====================-->
+				<form action="">
+				<div class="my_info">
+					<div>이름</div>
+					<input name ="name" value="dd" disabled class="info_input"/>
+					<div>닉네임</div>
+					<input name="nickname" value="dd" disabled class="info_input"/>
+					<div>주소</div>
+					<input name="address" value="서울시 금천구 가산 1로" disabled class="info_input2"/>
+					<input type="button" class="addr_search" id="addr_search" value="주소검색"/>
+					<div>이메일</div>
+					<input name="email" value="ch_db@naver.com" disabled class="info_input"/>
+					<div>전화번호</div>
+					<input name ="tel" value="010-6767-0795" disabled class="info_input"/>
+					<div>자기소개</div>
+					<textarea name ="introduce" disabled class="info_area">저는 최큐티에요~</textarea>
+					<input type="button" class="info_modi" id='info_modi' value="회원정보수정"/>
+				</div>
+				</form>
+	<!-- ===================== END OF INFO =====================-->
+			<div class="myinfo_play_list">
+				<div class="fs20 fs_bord">플레이리스트</div>
+				<div class="fs15">공개여부는 체크 시 공개입니다.</div>
+				<div class="myinfo_play_list_scroll">
+					<table class="myinfo_play_list_table">
+						<tr>
+							<td class="myinfo_play_list_td w30per">게임명</td>
+							<td class="myinfo_play_list_td w70per">게임설명</td>
+						</tr>
+						<tr>
+							<td >게임이름알엉러아밍</td>
+							<td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td>
+						</tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+						<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
+					</table>
+				</div>
 			</div>
-		
-<!-- ===================== END OF IMG =====================-->
-<!-- ===================== START OF INFO =====================-->
-			<form action="">
-			<div class="my_info">
-				<div>이름</div>
-				<input name ="name" value="최다빈" disabled class="info_input"/>
-				<div>닉네임</div>
-				<input name="nickname" value="최큐티~" disabled class="info_input"/>
-				<div>주소</div>
-				<input name="address" value="서울시 금천구 가산 1로" disabled class="info_input2"/>
-				<input type="button" class="addr_search" id="addr_search" value="주소검색"/>
-				<div>이메일</div>
-				<input name="email" value="ch_db@naver.com" disabled class="info_input"/>
-				<div>전화번호</div>
-				<input name ="tel" value="010-6767-0795" disabled class="info_input"/>
-				<div>자기소개</div>
-				<textarea name ="introduce" disabled class="info_area">저는 최큐티에요~</textarea>
-				<input type="button" class="info_modi" id='info_modi' value="회원정보수정"/>
 			</div>
-			</form>
-<!-- ===================== END OF INFO =====================-->
-		<div class="myinfo_play_list">
-			<div class="fs20 fs_bord">플레이리스트</div>
-			<div class="fs15">공개여부는 체크 시 공개입니다.</div>
-			<div class="myinfo_play_list_scroll">
-				<table class="myinfo_play_list_table">
-					<tr>
-						<td class="myinfo_play_list_td w30per">게임명</td>
-						<td class="myinfo_play_list_td w70per">게임설명</td>
-					</tr>
-					<tr>
-						<td >게임이름알엉러아밍</td>
-						<td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td>
-					</tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-					<tr><td>게임이름알엉러아밍</td><td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td></tr>
-				</table>
 			</div>
-		</div>
-		</div>
-		</div>
 </div>
 <jsp:include page="../../../../footer.jsp"></jsp:include>
 </body>
