@@ -12,7 +12,6 @@
 
        $(function() {
         
-            var infodelete=[];
             var markers =[]
             var markerinfomation = [];
 
@@ -46,9 +45,10 @@
     var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
     //마커 클릭했을 때 정보 표시
     var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
+   
     var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
-       
+        
     });
     
     //마커 안에 들어갈 정보
@@ -60,16 +60,6 @@
         place_address: locals[i].place_address
     });
 
-    if(locals[i].place_name == "레드버튼 창원상남점"){
-        console.log("마커",marker);
-        console.log(markerPosition,"마커포지션");
-        console.log(locals[i].place_name,"네임");
-    }
-    if(locals[i].place_name == "홈즈앤루팡 서면점"){
-        console.log("마커",marker);
-        console.log(markerPosition,"마커포지션");
-        console.log(locals[i].place_name,"네임");
-    }
     markers.push(marker);
 
     // 마커 정보 객체에 담기
@@ -84,6 +74,7 @@
 
     // this 클릭시
     $(this).click(function() {
+       
     var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
     var marker = markers[markerIndex];
     if (marker) {
@@ -92,15 +83,22 @@
       //마커 생성
       var infowindowContent = '<div style="padding:15px;"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
       // 생성된 마커의 정보 저장
-      var infowindow = new kakao.maps.InfoWindow({
+       var iwRemoveable = true;
+        var infowindow = new kakao.maps.InfoWindow({
         content: infowindowContent,
-        removable : true
-      });
+        removable : iwRemoveable
+        });      
       // 맵에 마커 생성
-      infowindow.open(map, marker);
+        infowindow.open(map, marker);
+        
+        removable.click(function(){
+        infowindow.close();
+        })
+
       // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
       $("#place_partnership, #place_allplace").click(function() {
         infowindow.close();
+
       });// end click func
     }// end if
   }); // end this func
