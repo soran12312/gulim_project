@@ -236,27 +236,29 @@
                                                 <tr>
                                                     <th>카페명</th>
                                                     <th>주소</th>
-                                                    <th>보유 룰북</th>
+                                                    <th>전화번호</th>
                                                     <th>제휴 여부</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>퍼스트보드게임카페 대학로점</td>
-                                                    <td>서울특별시 금천구 가산디지털2로 101</td>
-                                                    <td>크툴루의 부름, 최애의 굴림</td>
-                                                    <td>
-                                                        <span data-value="1" class="badge badge-success">제휴중</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>더홀릭보드게임카페 수유역점</td>
-                                                    <td>서울특별시 동작구 양녕로25길 101</td>
-                                                    <td></td>
-                                                    <td>
-                                                        <span data-value="0" class="badge badge-danger">제휴아님</span>
-                                                    </td>
-                                                </tr>
+
+                                                <c:forEach items="${listPlace}" var="lp">
+                                                    <tr class="place-link">
+                                                        <td>${lp.place_name}</td>
+                                                        <td>${lp.place_address}</td>
+                                                        <td>${lp.tel}</td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${lp.partnership eq 0}">
+                                                                    <span data-value="0" class="badge badge-danger">제휴아님</span>
+                                                                </c:when>
+                                                                <c:when test="${lp.partnership eq 1}">
+                                                                    <span data-value="1" class="badge badge-success">제휴중</span>
+                                                                </c:when>   
+                                                            </c:choose>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

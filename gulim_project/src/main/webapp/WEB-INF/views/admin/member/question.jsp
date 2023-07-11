@@ -234,8 +234,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>날짜</th>
-                                                    <th>문의</th>
+                                                    <th>제목</th>
+                                                    <th>문의내용</th>
                                                     <th>답변</th>
                                                     <th hidden>a</th>
                                                     <th hidden>b</th>
@@ -245,10 +245,12 @@
                                                 <c:forEach items="${listQuestion}" var="lq">
                                                     <tr class="answer-link">
                                                         
-                                                        <td>${lq.id}</td>
-                                                        <td>${lq.question_title}</td>
-                                                        <td>${lq.question_content}</td>
-                                                        <td>
+                                                        <td style="width: 110px;">${lq.id}</td>
+                                                        <td style="width: 165px;height: auto;">${lq.question_title}</td>
+                                                        <td style="width: 465px;display: inline-block; vertical-align: top; height: auto;">
+                                                            ${lq.question_content}
+                                                        </td>
+                                                        <td style="width: 140px;">
                                                             <c:choose>
                                                                 <c:when test="${lq.answer_state eq 0}">
                                                                     <span class="badge badge-danger">답변대기</span>
@@ -262,7 +264,6 @@
                                                         <td id="question_num" hidden>${lq.question_num}</td>
                                                     </tr>
                                                 </c:forEach>
-                                                    
                                             </tbody>
                                         </table>
                                     </div>

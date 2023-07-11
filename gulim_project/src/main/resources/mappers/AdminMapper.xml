@@ -3,16 +3,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.gulim.dao.AdminDAO">
-
+	
+	<!-- 문의사항 리스트 보기 -->
 	<select id="listQuestion" resultType="QuestionDTO">
 	    select *
 	    from question
 	    order by question_num DESC
 	</select>
 		
-	<!---->
+	<!-- 문의사항 답변하기 -->
 	<update id="answerQuestion" parameterType="QuestionDTO">
 		UPDATE question SET answer=#{answer}, answer_state=1 WHERE question_num=#{question_num}
 	</update>
+	
+	<!-- 제재 리스트 보기 -->
+	<select id="listMember" resultType="MemberDTO">
+		select id, nickname, member_state
+		from member
+	</select>
+	
+	<!-- 제재 상태 변경 -->
+	<update id="changeMemberState" parameterType="MemberDTO">
+		update member set member_state=#{member_state} where id=#{id};
+	</update>
+	
+	<!-- 모임장소 리스트 보기 -->
+	<select id="listPlace" resultType="PlaceDTO">
+	    select *
+	    from place
+	</select>
+	
+	<select id="listRefund" resultType="HashMap">
+		SELECT bk.basket_num basket_num, bk.purchase_date purchase_date,
+		    CONCAT(b.book_title
+			    , IF((SELECT COUNT(*) FROM purchase WHERE basket_num = bk.basket_num) > 1	-- if의 조건문
+			    		, CONCAT(' 외 '
+			    			, (SELECT COUNT(*) FROM purchase WHERE basket_num = bk.basket_num) - 1
+			    			, '권')	-- 조건문이 참일 시
+			    , '') -- 조건문이 거짓일 시
+			) book_title
+		    , bk.id id, bk.delivery_state delivery_state
+		    , SUM(b.price) price
+		FROM purchase p INNER JOIN book b ON p.book_num = b.book_num
+		INNER JOIN basket bk ON p.basket_num = bk.basket_num
+		GROUP BY bk.basket_num
+		ORDER BY p.purchase_num DESC;
+	</select>
 
 </mapper>

@@ -31,11 +31,9 @@
 	
 		var answerField = $(this).find('td:nth-child(5)')
 		var answer = answerField.text();
-		alert('answer: '+ answer);
 		var textArea1 = '<textarea name="answer" class="text_answer">' 
 		    + answer 
 		    +'</textarea></td>'
-		
 	    var inputRow1 = $(
 		'<tr class="input-row tr1"><td height="200px" colspan="4" style="position: relative;">'
 		    + textArea1
@@ -43,13 +41,11 @@
 	    +'<tr class="input-row tr2">'
 		    +'<td colspan="3"></td>'
 		    +'<td>'
-		    +'<button type="submit" id="answerQuestion" class="btn btn-outline-success">답변등록</button>'
+		    +'<button type="submit" id="answerQuestion" class="btn btn-outline-success">답변</button>'
 		    +'<button id="cancelAnswer" class="btn btn-outline-danger">취소</button>'
 		    +'</td>'
 		+'</tr>');
-	
 		
-	
 		if ($(this).hasClass('selected')) {
 			$(this).removeClass('selected');
             table.$('');
@@ -64,33 +60,12 @@
             $(this).after(inputRow1);
             previousInputRow = inputRow1;
         }
-	/*
-	    if ($(this).hasClass('selected')) {
-			$(this).removeClass('selected');
-	        if (previousInputRow) {
-	            previousInputRow.remove();
-	            previousInputRow = null;
-	        }
-	    } else {
-	        if (previousInputRow) {
-	            previousInputRow.remove();
-	        }
-	        $(this).addClass('selected');
-	        $(this).css("color", "#593BDB");
-	        $(this).after(inputRow1);
-	        previousInputRow = inputRow1;
-	        answerField.empty().append(textArea1);
-	    }*/
 	    var question_num = $(this).find('#question_num').text(); // 선택한 질문 번호를 가져옵니다.
-	   	alert('question_num: ' + question_num); 
-	   	
 	   	
 	   	$('.questionTable tbody tr').on('click', '#answerQuestion', function(e) {
 	    	//var updatedAnswer = $(textArea1).val();
 	    	answerField.empty().append(textArea1);
 	    	var updatedAnswer = $(this).closest('.tr2').parent().parent().parent().find('.tr1 .text_answer').val();
-	    	alert('updatedAnswer:' + updatedAnswer);
-	    	//alert(updatedAnswer);
 	    	console.log($(this).parents('tbody').find('.text_answer').val());
 	    
 	   		 $.ajax({
@@ -100,16 +75,14 @@
 		        data: JSON.stringify({ answer: updatedAnswer, question_num: question_num }), // 서버로 전송할 데이터를 설정합니다.
 		        contentType:"application/json; charset=UTF-8",
 		        success: function(response) {
-		            alert('성공, questionNum: ' + question_num + ', answer: ' + updatedAnswer);
-		            location.reload();
+		           
+					location.reload();
 		            // 성공적으로 응답을 받았을 때 실행할 코드
 		            // 예: 업데이트된 데이터를 표시하거나 처리 완료 메시지를 표시하는 등의 동작
 		            // 답변 등록 후 필요한 동작을 수행합니다.
 		        },
 		        error: function(xhr, status, error) {
-		            // 요청이 실패했을 때 실행할 코드
-		            // 예: 오류 메시지를 표시하거나 오류 처리 로직을 수행하는 등의 동작
-		            alert('실패, questionNum: ' + question_num + ', answer: ' + updatedAnswer);
+		            alert('error: '+error);
 		            console.log(xhr);
 		            console.log(status);
 		            console.log(error);
@@ -126,11 +99,33 @@
 		
 	   	
 	});
+	
+	$('.memberTable tbody').on('click', '.member-link', function(e) {
+		$('tbody tr').removeClass('selected');
+	});
 
 	
-
-
-
+	$('.memberTable tbody').on('change', '.selectMember', function(e) {
+		
+		var member_state = $(this).val();
+		var id = $(this).parent().parent().find('td:first-child').text();
+		
+		$.ajax({
+			anyne:true,
+			url: "/admin/member_management",
+			method: "POST",
+			data: JSON.stringify({member_state: member_state, id:id}),
+			contentType:"application/json; charset=UTF-8",
+			success: function(response){
+				location.reload();
+			},
+			error: function(xhr, status, error){
+				alert('error: '+error);
+			}
+		});
+	});
+	
+	
 	
 	
 	
@@ -154,31 +149,7 @@
 	});
 	
 	$('.placeTable tbody').on('click', 'tr', function(e) {
-		if ($(e.target).is('input')) {
-            // input 요소를 클릭한 경우, 선택 상태 유지
-            return;
-        }
-
-        // 클릭한 요소가 textarea인 경우, 처리하지 않음
-        if ($(e.target).is('textarea')) {
-            return;
-        }
-        
-        var inputRow = $('<tr class="input-row"><td colspan="2"></td><td height="80px" colspan="1" style="position: relative;"><textarea class="text_gameList"/></td><td colspan="1"></td></tr><tr class="input-row"><td colspan="2"></td><td><div class="btn_right"><button type="submit" class="btn btn-outline-success">룰북등록</button><button class="btn btn-outline-danger">취소</button></div></td></tr>');
-        
-        if ($(this).hasClass('selected')) {
-            table.$('');
-            if (previousInputRow) {
-                previousInputRow.remove();
-                previousInputRow = null;
-            }
-        } else {
-            if (previousInputRow) {
-                previousInputRow.remove();
-            }
-            $(this).after(inputRow);
-            previousInputRow = inputRow;
-        }
+		$('tbody tr').removeClass('selected');
 	});
 	
 	var filterSelect = $('#filter-select');

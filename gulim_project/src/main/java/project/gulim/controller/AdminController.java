@@ -1,5 +1,6 @@
 package project.gulim.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.gulim.domain.BasketDTO;
+import project.gulim.domain.BookDTO;
+import project.gulim.domain.MemberDTO;
+import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
 
@@ -20,6 +25,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	// 문의사항 리스트 보기
 	@RequestMapping("/question")
 	public String viewPage_question(Model m) {
 	    List<QuestionDTO> listQuestion = adminService.listQuestion();
@@ -27,6 +33,7 @@ public class AdminController {
 	    return "/admin/member/question";
 	}
 	
+	// 문의사항 답변하기
 	@ResponseBody
 	@RequestMapping(value = "/question", method=RequestMethod.POST)
 	public void answerQuestion(@RequestBody QuestionDTO qDTO) {
@@ -34,14 +41,27 @@ public class AdminController {
 		adminService.answerQuestion(qDTO);
 	}
 	
-	
+	// 제재 리스트 보기
 	@RequestMapping("/member_management")
-	public String viewPage_member_management() { // 페이지 이동(DB접속없는경우)
+	public String viewPage_member_management(Model m) { // 페이지 이동(DB접속없는경우)
+		List<MemberDTO> listMember = adminService.listMember();
+		m.addAttribute("listMember", listMember);
 		return "/admin/member/member_management";
 	}
 	
+	// 제재 상태 변경
+	@ResponseBody
+	@RequestMapping(value = "/member_management", method=RequestMethod.POST)
+	public void changeMemberState(@RequestBody MemberDTO mDTO) {
+		System.out.println(mDTO);
+		adminService.changeMemberState(mDTO);
+	}
+	
+	// 모임장소 리스트 보기
 	@RequestMapping("/place_list")
-	public String viewPage_place_list() {
+	public String viewPage_place_list(Model m) {
+		List<PlaceDTO> listPlace = adminService.listPlace();
+		m.addAttribute("listPlace", listPlace);
 		return "/admin/place/place_list";
 	}
 	

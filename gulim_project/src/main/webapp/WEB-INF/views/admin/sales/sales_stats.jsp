@@ -227,7 +227,6 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <button id="btn_year" class="btn btn-square btn-dark">전체</button>
-                                        <button id="btn_year_product" class="btn  btn-square btn-success">상품</button>
                                         <button id="btn_year_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_year_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a style="user-select: none; cursor: not-allowed; pointer-events: none; color: rgba(0, 0, 0, 0.00);">gulim</a>
@@ -249,7 +248,6 @@
                                             <option value="2022">2022</option>
                                         </select>
                                         <button id="btn_quarter" class="btn btn-square btn-dark">전체</button>
-                                        <button id="btn_quarter_product" class="btn  btn-square btn-success">상품</button>
                                         <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_quarter_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
@@ -270,7 +268,6 @@
                                             <option value="2022">2022</option>
                                         </select>
                                         <button id="btn_month" class="btn btn-square btn-dark">전체</button>
-                                        <button id="btn_month_product" class="btn  btn-square btn-success">상품</button>
                                         <button id="btn_month_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_month_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
@@ -291,7 +288,6 @@
                                             <option value="2022">2022</option>
                                         </select>
                                         <button id="btn_day" class="btn btn-square btn-dark">전체</button>
-                                        <button id="btn_day_product" class="btn  btn-square btn-success">상품</button>
                                         <button id="btn_day_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_day_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a class="col-8"></a>
@@ -355,8 +351,8 @@
     <script src="./vendor/morris/morris.min.js"></script>
     <script src="./js/plugins-init/morris-init.js"></script>
 
-    <!-- 관리자 전용 js -->
-    <script src="/admin/js/admin.js"></script>
+    <!-- 관리자 차트 전용 js -->
+    <script src="/admin/js/adminChart.js"></script>
 
 </body>
 

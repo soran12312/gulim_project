@@ -231,7 +231,7 @@
                             <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="example" class="display" style="min-width: 845px">
+                                        <table id="example" class="display memberTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -240,27 +240,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>
-                                                        <select style="border: 0px;
-                                                        background-color:#ffffff;">
-                                                            <option value="0">일반회원</option>
-                                                            <option value="1">제재회원</option>   
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>a</td>
-                                                    <td>a</td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="0">일반회원</option>
-                                                            <option value="1">제재회원</option>   
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                                <c:forEach items="${listMember}" var="lm">
+                                                    <tr class="member-link">
+                                                        <td>${lm.id}</td>
+                                                        <td>${lm.nickname}</td>
+                                                        <td style="width: 140px;">
+                                                            <select class="selectMember" style="border: 0px; background-color:#ffffff;">
+                                                                <c:choose>
+                                                                    <c:when test="${lm.member_state eq 0}">
+                                                                        <option selected value="0">일반회원</option>
+                                                                        <option value="1">제재회원</option>  
+                                                                    </c:when>
+                                                                    <c:when test="${lm.member_state eq 1}">
+                                                                        <option value="0">일반회원</option>
+                                                                        <option selected value="1">제재회원</option>  
+                                                                    </c:when>   
+                                                                </c:choose>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
