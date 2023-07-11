@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.gulim.service.ChatDataService;
 
-@CrossOrigin(origins = {"https://192.168.0.68:3000"})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/chatData")
 public class ChatDataController {
@@ -26,7 +26,6 @@ public class ChatDataController {
 	
 	@GetMapping(value = "/room/{room_num}")
 	public Map getRoomInfo(@PathVariable Integer room_num) {
-		String user_id = "123";
 		
 		Map map = new HashMap();
 		List member_info = new ArrayList();
@@ -46,7 +45,6 @@ public class ChatDataController {
 			member_info.add(sheet);
 		}
 		map.put("member_info", member_info);
-		map.put("user_id", user_id);
 		System.out.println(map.toString());
 		
 		
