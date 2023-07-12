@@ -33,6 +33,7 @@
 	    from place
 	</select>
 	
+	<!-- 배송/환불 리스트 보기 -->
 	<select id="listRefund" resultType="HashMap">
 		SELECT bk.basket_num basket_num, bk.purchase_date purchase_date,
 		    CONCAT(b.book_title
@@ -45,9 +46,46 @@
 		    , bk.id id, bk.delivery_state delivery_state
 		    , SUM(b.price) price
 		FROM purchase p INNER JOIN book b ON p.book_num = b.book_num
-		INNER JOIN basket bk ON p.basket_num = bk.basket_num
+						INNER JOIN basket bk ON p.basket_num = bk.basket_num
 		GROUP BY bk.basket_num
 		ORDER BY p.purchase_num DESC;
+	</select>
+	
+	<!-- 배송/환불 상태 변경 -->
+	<update id="changeDeliveryState" parameterType="BasketDTO">
+		update basket set delivery_state=#{delivery_state} where basket_num=#{basket_num}
+	</update>
+	
+	<!-- 관리자 글목록 리스트 보기 -->
+	<select id="listPost" resultType="HashMap">
+		select p.post_num post_num, p.board board, p.post_title post_title, p.post_state post_state, p.writing_date writing_date, c.start_date start_date, c.end_date end_date
+		from post p left outer join contest c on p.contest_num = c.contest_num;
+	</select>
+	
+	<!-- 관리자 글 등록상태 변경 -->
+	<update id="changePostState" parameterType="PostDTO">
+		update post set post_state=#{post_state} where post_num=#{post_num}
+	</update>
+	
+	<!-- 관리자 글 작성 1 -->
+	<insert id="insert_1" parameterType="ContestDTO">
+		insert into contest(contest_title, contest_content, start_date, end_date) VALUES(#{contest_title}, #{contest_content}, #{start_date}, #{end_date})
+	</insert>
+	
+	<!-- 관리자 글 작성 2 -->
+	<insert id="insert_2" parameterType="PostDTO">
+		insert into post(board, subject, contest_num) VALUES(#{board}, #{subject}, #{contest_num})
+	</insert>
+	
+	<!-- 관리자 글 작성 3 -->
+	<insert id="insert_3" parameterType="ImageDTO">
+		insert into image(origin_img_name, path, img_size, post_num) VALUES(#{origin_img_name}, #{path}, #{img_size}, #{post_num})
+	</insert>
+	
+	<!-- 등록된 상품 리스트 보기 -->
+	<select id="listProduct" resultType="HashMap">
+		select i.path path, b.book_title book_title, b.sale_state sale_state, b.stock stock
+		from book b left outer join image i on b.book_num = i.book_num
 	</select>
 
 </mapper>

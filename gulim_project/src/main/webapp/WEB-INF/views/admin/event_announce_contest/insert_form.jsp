@@ -85,8 +85,8 @@
                         <div class="header-left">
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/view_list" class="tab_active">관리자 글목록</a></li>
-                                    <li><a href="/admin/insert_form" class="tab_inactive">글 작성</a></li>
+                                    <li><a href="/admin/view_list" class="tab_inactive">관리자 글목록</a></li>
+                                    <li><a href="/admin/insert_form" class="tab_active">글 작성</a></li>
                                   </ul>  
                             </div>
                         </div>
@@ -202,14 +202,12 @@
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
-
-                    <li><a href="javascript:void()"><i
-                                class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
+                    <li><a href="/admin/product_list"><i
+                        class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
@@ -376,7 +374,7 @@
 
 
     <!-- 관리자 전용 js -->
-    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/adminChart.js"></script>
 
 
 </body>

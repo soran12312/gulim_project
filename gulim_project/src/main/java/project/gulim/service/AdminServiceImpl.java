@@ -5,10 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.gulim.dao.AdminDAO;
+import project.gulim.domain.BasketDTO;
+import project.gulim.domain.ContestDTO;
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
+import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -34,6 +39,33 @@ public class AdminServiceImpl implements AdminService {
 	
 	public List<PlaceDTO> listPlace(){
 		return adminDAO.listPlace();
+	}
+	
+	public List<HashMap> listRefund(){
+		return adminDAO.listRefund();
+	}
+	
+	public void changeDeliveryState(BasketDTO bdto) {
+		adminDAO.changeDeliveryState(bdto);
+	}
+	
+	public List<HashMap> listPost(){
+		return adminDAO.listPost();
+	}
+	
+	@Transactional
+	public void insertAll(ContestDTO cDTO, PostDTO pDTO, ImageDTO iDTO) {
+		adminDAO.insert_1(cDTO);
+		adminDAO.insert_2(pDTO);
+		adminDAO.insert_3(iDTO);
+	}
+	
+	public void changePostState(PostDTO pDTO) {
+		adminDAO.changePostState(pDTO);
+	}
+	
+	public List<HashMap> listProduct(){
+		return adminDAO.listProduct();
 	}
 	
 }

@@ -14,6 +14,9 @@
 	
     var table = $('#example').DataTable();
     
+    
+    //***********문의사항 ***********//
+    
     // 문의사항 테이블
     var table_question = $('.questionTable').DataTable();
     // 이전에 있던 답변창
@@ -125,11 +128,6 @@
 		});
 	});
 	
-	
-	
-	
-	
-	
 	var showAllButton = $('button.showAll');
 	var showAffiliateOnlyButton = $('button.showAffiliateOnly');
 	var selectElement = $('select');
@@ -152,6 +150,40 @@
 		$('tbody tr').removeClass('selected');
 	});
 	
+	
+	
+	//*********** 환불 ***********//
+    $('.refundTable tbody').on('click', '.refund-link', function(e) {
+		$('tbody tr').removeClass('selected');
+	});
+	
+	$('.refundTable tbody').on('change', '.selectRefund', function(e) {
+		
+		var delivery_state = $(this).val();
+		var basket_num = $(this).parent().parent().find('td:first-child').text();
+		
+		$.ajax({
+			anyne:true,
+			url: "/admin/delivery_refund",
+			method: "POST",
+			data: JSON.stringify({delivery_state: delivery_state, basket_num:basket_num}),
+			contentType:"application/json; charset=UTF-8",
+			success: function(response){
+				location.reload();
+			},
+			error: function(xhr, status, error){
+				alert('error: '+error);
+			}
+		});
+	});
+	
+	
+	//*********** 관리자 글목록 ***********//
+	
+	$('.postTable tbody').on('click', '.post-link', function(e) {
+		$('tbody tr').removeClass('selected');
+	});
+	
 	var filterSelect = $('#filter-select');
 	var tablePost = $('.postTable').DataTable();
 	
@@ -159,17 +191,40 @@
 		var selectedPost = filterSelect.val(); // 선택한 게시판의 값 가져오기
 		
 		if (selectedPost != '전체보기') {
-		    tablePost.columns(0).search(selectedPost).draw();
+		    tablePost.columns(1).search(selectedPost).draw();
 		} else {
-		    tablePost.columns(0).search('').draw();
+		    tablePost.columns(1).search('').draw();
 		}
 	});
 	
-	function cancelAction() {
-        // 원하는 동작을 수행하도록 JavaScript 코드를 작성합니다.
-        // 예: 취소 버튼을 클릭했을 때 어떤 동작을 수행하거나 다른 페이지로 이동하도록 설정할 수 있습니다.
-        alert("취소 버튼이 클릭되었습니다.");
-    }
+	$('.postTable tbody').on('click', '.post-link', function(e) {
+		$('tbody tr').removeClass('selected');
+	});
+	
+	$('.postTable tbody').on('change', '.selectPost', function(e) {
+		
+		var post_state = $(this).val();
+		var post_num = $(this).parents('tr').find('td:first-child').text();
+		
+		$.ajax({
+			anyne:true,
+			url: "/admin/view_list",
+			method: "POST",
+			data: JSON.stringify({post_state: post_state, post_num:post_num}),
+			contentType:"application/json; charset=UTF-8",
+			success: function(response){
+				location.reload();
+			},
+			error: function(xhr, status, error){
+				alert('실패'+post_state + post_num);
+				console.log(error);
+			}
+		});
+	});
+	
+	$('.productTable tbody').on('click', '.product-link', function(e) {
+		$('tbody tr').removeClass('selected');
+	});
     
     
 })(jQuery);

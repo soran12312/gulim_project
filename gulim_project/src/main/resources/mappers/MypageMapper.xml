@@ -9,10 +9,20 @@
 		WHERE id=#{id} 
 	</select>
 	
-	<select id="find_info" parameterType="MemberDTO" resultType="MemberDTO">
+	<select id="find_info" parameterType="MemberDTO" resultType="Map">
 		SELECT name,address,tel,email,nickname,birthday,introduce
 		FROM member
 		WHERE id=#{id}
 	</select>
+	
+	<update id="modify_info" parameterType="MemberDTO">
+		UPDATE 	 member 
+		SET		 name		= #{name}
+				,nickname	= #{nickname}
+				,address	= #{address}
+				,tel		= #{tel}
+				,introduce 	= #{introduce}
+		WHERE 	 id = #{id}
+	</update>
 
 </mapper>

@@ -202,13 +202,12 @@
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
-                                class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/product_list"><i
+                        class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
