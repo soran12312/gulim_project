@@ -1,5 +1,8 @@
 package project.gulim.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,12 @@ public class MypageServiceImpl implements MypageService {
 		else return false;
 	}
 	
-	public MemberDTO find_info(MemberDTO member) {
+	public Map find_info(MemberDTO member) {
 		return mypageDAO.find_info(member);
+	}
+	public void modify_info(MemberDTO member) {
+		System.out.println(member);
+		mypageDAO.find_info(member);
+		
 	}
 }

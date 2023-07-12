@@ -1,5 +1,8 @@
 package project.gulim.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,14 +51,20 @@ public class MypageContoroller {
 	
 	@RequestMapping("/user_info/find_info")
 	@ResponseBody
-	public String find_info(MemberDTO member, Model m) { // 페이지 이동(DB접속없는경우)
-		MemberDTO vo = mypageService.find_info(member);
-		//됫음 System.out.println(vo);
-		m.addAttribute("info", vo);
-		return "/mypage/user_info/info_modify";
+	public Map find_info(MemberDTO member) { // 페이지 이동(DB접속없는경우)
+		Map result = new HashMap();
+		
+		Map vo = mypageService.find_info(member);
+		result.putAll(vo);
+		
+		return result;
 	}
 	
-	
+	@RequestMapping("/user_info/modify_info")
+	@ResponseBody
+	public void modify_info(MemberDTO member) {
+		mypageService.modify_info(member);
+	}
 	
 	
 	
