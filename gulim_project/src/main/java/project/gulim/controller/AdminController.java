@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.gulim.domain.BasketDTO;
-import project.gulim.domain.BookDTO;
+import project.gulim.domain.ContestDTO;
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
+import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
 
@@ -71,13 +73,33 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/delivery_refund")
-	public String viewPage_delivery_refund() {
-		return "/admin/sales/delivery_refund";
+    public String viewPageDeliveryRefund(Model m) {
+        
+		List<HashMap> listRefund = adminService.listRefund();
+		m.addAttribute("listRefund", listRefund);
+		
+        return "/admin/sales/delivery_refund";
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/delivery_refund", method=RequestMethod.POST)
+	public void changeDeliveryState(@RequestBody BasketDTO bDTO) {
+		adminService.changeDeliveryState(bDTO);
 	}
 	
 	@RequestMapping("/view_list")
-	public String viewPage_view_list() {
+	public String viewPage_view_list(Model m) {
+		
+		List<HashMap> listPost = adminService.listPost();
+		m.addAttribute("listPost", listPost);
+		
 		return "/admin/event_announce_contest/view_list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/view_list", method=RequestMethod.POST)
+	public void changePostState(@RequestBody PostDTO pDTO) {
+		adminService.changePostState(pDTO);
 	}
 	
 	@RequestMapping("/insert_form")
@@ -85,13 +107,16 @@ public class AdminController {
 		return "/admin/event_announce_contest/insert_form";
 	}
 	
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
+	
+	@RequestMapping(value="/insert_form", method=RequestMethod.POST)
 	public String save() {
 		return "";
 	}
 	
 	@RequestMapping("/product_list")
-	public String viewPage_product_list() {
+	public String viewPage_product_list(Model m) {
+		List<HashMap> listProduct = adminService.listProduct();
+		m.addAttribute("listProduct", listProduct);
 		return "/admin/product/product_list";
 	}
 	

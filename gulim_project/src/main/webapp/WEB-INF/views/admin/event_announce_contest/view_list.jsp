@@ -190,14 +190,12 @@
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
-
-                    <li><a href="javascript:void()"><i
-                                class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
+                    <li><a href="/admin/product_list"><i
+                        class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
@@ -238,6 +236,7 @@
                                         <table id="example" class="display postTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
+                                                    <th>글번호</th>
                                                     <th>게시판</th>
                                                     <th>제목</th>
                                                     <th>등록상태</th>
@@ -246,30 +245,35 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>이벤트</td>
-                                                    <td>Customer Support</td>
-                                                    <td>
-                                                        <select style="border: 0px; background-color:#ffffff;">
-                                                            <option value="0">게시중</option>
-                                                            <option value="1">게시중단</option>   
-                                                        </select>
-                                                    </td>
-                                                    <td>23.07.05</td>
-                                                    <td>-</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>공모전</td>
-                                                    <td>Customer Support</td>
-                                                    <td>
-                                                        <select style="border: 0px; background-color:#ffffff;">
-                                                            <option value="0">게시중</option>
-                                                            <option value="1">게시중단</option>     
-                                                        </select>
-                                                    </td>
-                                                    <td>23.06.26</td>
-                                                    <td>23.06.27 ~ 23.06.30</td>
-                                                </tr>
+                                                <c:forEach items="${listPost}" var="lpo">
+                                                    <tr class="post-link">
+                                                        <td>${lpo.post_num}</td>
+                                                        <td>${lpo.board}</td>
+                                                        <td>${lpo.post_title}</td>
+                                                        <td>
+                                                            <select class="selectPost" style="border: 0px; background-color:#ffffff;">
+                                                                <c:choose>
+                                                                    <c:when test="${lpo.post_state eq 0}">
+                                                                        <option selected value="0">게시중</option>
+                                                                        <option value="1">게시중단</option>                                                                   
+                                                                    </c:when>
+                                                                    <c:when test="${lpo.post_state eq 1}">
+                                                                        <option value="0">게시중</option>
+                                                                        <option selected value="1">게시중단</option>                                                               
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </select>
+                                                        </td>
+                                                        <td>${lpo.writing_date}</td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${lpo.start_date ne null}">
+                                                                    ${lpo.start_date} ~ ${lpo.end_date}                                                                
+                                                                 </c:when>
+                                                            </c:choose>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

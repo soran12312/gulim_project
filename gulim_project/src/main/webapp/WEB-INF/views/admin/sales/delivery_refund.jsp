@@ -190,14 +190,12 @@
                     <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
-
-                    <li><a href="javascript:void()"><i
-                                class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
+                    <li><a href="/admin/product_list"><i
+                        class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i
+                    <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
-                    </li>
-                    
+                    </li>                    
                 </ul>
             </div>
         </div>
@@ -230,9 +228,10 @@
                             <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="example" class="display" style="min-width: 845px">
+                                        <table id="example" class="display refundTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
+                                                    <th>주문번호</th>
                                                     <th>ID</th>
                                                     <th>주문일자</th>
                                                     <th>상품명</th>
@@ -242,53 +241,46 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>이웃집 주사위</td>
-                                                    <td>황윤재진</td>
-                                                    <td>
-                                                        <select style="border: 0px;
-                                                        background-color:#ffffff;">
-                                                            <option value="0">배송대기</option>
-                                                            <option value="1">배송완료</option>   
-                                                            <option value="2">반품신청</option>   
-                                                            <option value="3">반품완료</option>   
-                                                        </select>
-                                                    </td>
-                                                    <td>500000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>a</td>
-                                                    <td>a</td>
-                                                    <td>느그집 주사위</td>
-                                                    <td>누군가</td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="0">배송대기</option>
-                                                            <option value="1">배송완료</option>   
-                                                            <option value="2">반품신청</option>   
-                                                            <option value="3">반품완료</option>    
-                                                        </select>
-                                                    </td>
-                                                    <td>40000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ㅜㅁ</td>
-                                                    <td>ㅜㅁ</td>
-                                                    <td>ㅜㅁ 주사위</td>
-                                                    <td>ㅜㅁ</td>
-                                                    <td>
-                                                        <select>
-                                                            <option value="0">배송대기</option>
-                                                            <option value="1">배송완료</option>   
-                                                            <option value="2">반품신청</option>   
-                                                            <option value="3">반품완료</option>    
-                                                        </select>
-                                                    </td>
-                                                    <td>60000</td>
-                                                </tr>
-                                                
+                                                <c:forEach items="${listRefund}" var="lf">
+                                                    <tr class="refund-link">
+                                                        <td>${lf.basket_num}</td>
+                                                        <td>${lf.id}</td>
+                                                        <td>${lf.purchase_date}</td>
+                                                        <td>${lf.book_title}</td>
+                                                        <td>${lf.id}</td>
+                                                        <td>
+                                                            <select class="selectRefund" style="border: 0px; background-color:#ffffff;">
+                                                                <c:choose>
+                                                                    <c:when test="${lf.delivery_state eq '배송대기'}">
+                                                                        <option selected value="배송대기">배송대기</option>
+                                                                        <option value="배송완료">배송완료</option>  
+                                                                        <option value="반품신청">반품신청</option>
+                                                                        <option value="반품완료">반품완료</option>                                                                        
+                                                                    </c:when>
+                                                                    <c:when test="${lf.delivery_state eq '배송완료'}">
+                                                                        <option value="배송대기">배송대기</option>
+                                                                        <option selected value="배송완료">배송완료</option>  
+                                                                        <option value="반품신청">반품신청</option>
+                                                                        <option value="반품완료">반품완료</option>                                                                        
+                                                                    </c:when>
+                                                                    <c:when test="${lf.delivery_state eq '반품신청'}">
+                                                                        <option value="배송대기">배송대기</option>
+                                                                        <option value="배송완료">배송완료</option>  
+                                                                        <option selected value="반품신청">반품신청</option>
+                                                                        <option value="반품완료">반품완료</option>                                                                        
+                                                                    </c:when>
+                                                                    <c:when test="${lf.delivery_state eq '반품완료'}">
+                                                                        <option value="배송대기">배송대기</option>
+                                                                        <option value="배송완료">배송완료</option>  
+                                                                        <option value="반품신청">반품신청</option>
+                                                                        <option selected value="반품완료">반품완료</option>                                                                        
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </select>
+                                                        </td>
+                                                        <td>${lf.price}</td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

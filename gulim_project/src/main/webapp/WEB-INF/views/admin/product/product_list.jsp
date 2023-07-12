@@ -190,10 +190,10 @@
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
 
-                    <li class="selected_sidebar mm-active-selected"><a href="javascript:void()"><i
-                                class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
+                    <li class="selected_sidebar mm-active-selected"><a href="/admin/product_list"><i
+                        class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
-                    <li><a href="widget-basic.html"><i 
+                    <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
                     
@@ -239,31 +239,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
-                                                    <tr>
-                                                        <td><img width="80" height="80" src="/files/images/game_imsi.jpg"/></td>
-                                                        <td>b</td>
+
+                                                <c:forEach items="${listProduct}" var="lpr">
+                                                    <tr class="product-link">
+                                                        <td><img width="80" height="80" src="${lpr.path}"/></td>
+                                                        <td>${lpr.book_title}</td>
                                                         <td>
-                                                            <span class="badge badge-success">판매중</span>
+                                                            <c:choose>
+                                                                <c:when test="${lpr.sale_state eq 0}">
+                                                                    <span data-value="0" class="badge badge-success">판매중</span>
+                                                                </c:when>
+                                                                <c:when test="${lpr.sale_state eq 1}">
+                                                                    <span data-value="1" class="badge badge-danger">품절</span>
+                                                                </c:when>   
+                                                            </c:choose>
                                                         </td>
-                                                        <td>1</td>
+                                                        <td>${lpr.stock}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><img width="80" height="80" src="/files/images/game_imsi.jpg"/></td>
-                                                        <td>a</td>
-                                                        <td>
-                                                            <span class="badge badge-danger">품절</span>
-                                                        </td>
-                                                        <td>0</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img width="80" height="80" src="/files/images/game_imsi.jpg"/></td>
-                                                        <td>c</td>
-                                                        <td>
-                                                            <span class="badge badge-success">판매중</span>
-                                                        </td>
-                                                        <td>3</td>
-                                                    </tr>
+                                                </c:forEach>
                                                     <tfoot>
                                                         <tr>
                                                             <th colspan="3"></th>
