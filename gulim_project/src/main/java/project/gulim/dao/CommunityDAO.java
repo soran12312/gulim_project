@@ -60,6 +60,21 @@ public interface CommunityDAO {
 	// 이벤트 조회
 	public List<PostDTO> findEvent();
 
+	
+	// 해당 게시글 이미지
+	public List<ImageDTO> findImagesByPostNum(Integer post_num);
+
+
+	public List<ImageDTO> updateImage(ImageDTO img);
+
+	
+	// event list
+	public List<PostDTO> findAllEvent();
+
+	
+	// event img list
+	public List<ImageDTO> findEventImg();
+
 
 	
 }

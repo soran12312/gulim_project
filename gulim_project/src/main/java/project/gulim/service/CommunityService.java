@@ -40,5 +40,18 @@ public interface CommunityService {
 
 	// 이미지 저장
 	public void saveImage(ImageDTO img);
+
+	// 해당 게시글 이미지
+	public List<ImageDTO> findImagesByPostNum(Integer post_num);
+
+	// 게시글 이미지 수정
+	public List<ImageDTO> updateImage(ImageDTO img);
+
+	// 이벤트 리스트 조회
+	public List<PostDTO> findAllEvent();
+
+	// 이벤트 이미지 조회
+	public List<ImageDTO> findEventImg();
+
 	
 }

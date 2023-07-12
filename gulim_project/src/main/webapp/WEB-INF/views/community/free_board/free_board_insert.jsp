@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,7 @@
 <meta name="viewport" content="initial-scale=1, width=device-width" />
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -438,10 +441,10 @@
 
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="/freelist">자유게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="/event">이벤트게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="/contest">공모전게시판</a></li>
-					<li class="nav-item"><a class="nav-link" href="/announce">공지사항</a></li>
+					<li class="nav-item"><a class="nav-link" href="./free_board_list">자유게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="./event_list">이벤트게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="./contest_main">공모전게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -456,16 +459,26 @@
 				  
 		            <div class="well">
 		
-		    			<form class="form-horizontal" METHOD="POST" name="example" id="edit" action="/freeinsert">
+		    			<form class="form-horizontal" METHOD="POST" name="freeinsert" id="edit" action="/community/freeinsert">
+								<div class="col-sm-4">
+									<select class="form-control" name="subject">
+									  <optgroup label="요청">
+									    <option value="game">게임 개설 요청</option>
+									  </optgroup>
+									  <optgroup label="모집">
+									    <option value="master">게임마스터 모집</option>
+									    <option value="user">중간 파티원 모집</option>
+									  </optgroup>
+									</select>
+								</div>
 		
 								<div class="form-group">
 									<div class="col-lg-12">
-		                                <label for="title">Title</label>
+		                                <label for="title">제목</label>
 									    <input type="text" class="form-control" name="post_title" placeholder="title">
-									    <label for="subject">subject</label>
-									    <input type="text" class="form-control" name="subject" placeholder="subject">
 									</div>
 								</div>
+								
 		                        
 								<div class="form-group">
 		                            <div class="col-lg-12">
@@ -524,21 +537,9 @@
 	    }
 
 
-	    function uploadSummernoteImageFile(file, el) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "uploadSummernoteImageFile",
-				contentType : false,
-				enctype : 'multipart/form-data',
-				processData : false,
-				success : function(data) {
-					$(el).summernote('editor.insertImage', data.url);
-				}
-			});
-		}
+	    document.getElementById("cancel").addEventListener("click", function() {
+		  	window.location.href = "/community/free_board_list";
+		});
 					
 	</script>
 </body>

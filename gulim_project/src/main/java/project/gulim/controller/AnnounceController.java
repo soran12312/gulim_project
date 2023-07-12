@@ -11,13 +11,14 @@ import project.gulim.domain.PostDTO;
 import project.gulim.service.CommunityService;
 
 @Controller
+@RequestMapping(value = "/community")
 public class AnnounceController {
 	
 	@Autowired
 	CommunityService communityService;
 	
 	// 공지사항
-	@RequestMapping("/announce")
+	@RequestMapping("/announce_list")
 	public String Announce(Model m)
 	{
 		

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,9 +156,30 @@
 	cursor: pointer;
 }
 
-.single_product.completed img{
-		filter: grayscale(100%);
-	}
+.single_product.complete img.resized-image {
+    filter: grayscale(100%);
+    
+}
+	
+	
+.row {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/mypage/mypage_back.jpg");
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}	
+
+
+.product_image .resized-image {
+    width: 350px;
+    height: 350px;
+}
+
+
+
+	
 </style>
 
 </head>
@@ -170,16 +193,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/freelist">자유게시판</a>
+                    <a class="nav-link" href="./free_board_list">자유게시판</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/event">이벤트게시판</a>
+                    <a class="nav-link" href="./event_list">이벤트게시판</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contest">공모전게시판</a>
+                    <a class="nav-link" href="./contest_main">공모전게시판</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/announce">공지사항</a>
+                    <a class="nav-link" href="./announce_list">공지사항</a>
                 </li>
             </ul>
         </div>
@@ -187,28 +210,75 @@
 
 	<div class="product_item">
 		<div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
-				style="display: inline-block;" data-bound="">
-				<div class="single_product">
-					<div class="product_image">
-						<img
-							src="https://www.karosearch.com/images/categories/medical-hospitals.jpg"
-							alt="">
-						<div class="box-content">
-							<a href="#"><i class="fa fa-heart-o"></i></a> <a href="#"><i
-								class="fa fa-cart-plus"></i></a> <a href="#"><i
-								class="fa fa-search"></i></a>
+			
+			
+			<c:forEach items="${events}" var="event">
+			    <div class="col-lg-4 col-md-4 col-sm-6 mix sale" style="display: inline-block;" data-bound="">
+			        <div class="single_product ${event.post_state == 1 ? 'complete' : ''}">
+			            <c:forEach items="${eventimages}" var="eventimage">
+			                <c:if test="${eventimage.post_num == event.post_num}">
+			                	
+			                	
+			                    <div class="product_image">
+			                        <c:choose>
+			                            <c:when test="${event.post_state == 1}">
+			                                <img class="resized-image" src="/images/gulim/${eventimage.origin_img_name}.png" onclick="return false;">
+			                                <input type="hidden" name="post_num" value="${event.post_num}">
+			                            </c:when>
+			                            
+			                            <c:otherwise>
+			                                <a href="./event_detail?post_num=${event.post_num}">
+			                                    <img class="resized-image" src="/images/gulim/${eventimage.origin_img_name}.png">
+			                                </a>
+			                            </c:otherwise>
+			                        </c:choose>
+			                        
+			                    </div>
+			                </c:if>
+			            </c:forEach>
+			            <div class="product_btm_text">
+			                <h4>
+			                    <a href="./event_detail?post_num=${event.post_num}" ${event.post_state == 1 ? 'onclick="return false;"' : ''}>${event.post_title}</a>
+			                </h4>
+			                
+			            </div>
+			        </div>
+			    </div>
+			</c:forEach>
+			
+			
+			
+			
+			
+			<c:if test="${empty events}">
+				<%-- <c:set var="count" value="1" />
+				    <c:forEach begin="1" end="6"> --%>
+					    <div class="col-lg-4 col-md-4 col-sm-6 mix sale"style="display: inline-block;" data-bound="">
+							<div class="single_product">
+								<div class="product_image">
+									<img
+										src="https://www.karosearch.com/images/categories/medical-hospitals.jpg" alt="">
+									<div class="box-content">
+										<a href="#"><i class="fa fa-heart-o"></i></a> <a href="#"><i
+											class="fa fa-cart-plus"></i></a> <a href="#"><i
+											class="fa fa-search"></i></a>
+									</div>
+								</div>
+								<div class="product_btm_text">
+									<h4>
+										<a href="#">이벤트가 없습니다.</a>
+									</h4>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="product_btm_text">
-						<h4>
-							<a href="#">이벤트1</a>
-						</h4>
-					</div>
-				</div>
-			</div>
+								
+					<%-- </c:forEach> --%>
+			</c:if>
+			
+			
+			
 			<!-- Add more product items here -->
-			<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
+			<!-- <div class="col-lg-4 col-md-4 col-sm-6 mix sale"
 				style="display: inline-block;" data-bound="">
 				<div class="single_product">
 					<div class="product_image">
@@ -308,7 +378,7 @@
 						</h4>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 		</div>
 	</div>

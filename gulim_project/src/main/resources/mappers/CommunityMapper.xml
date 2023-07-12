@@ -53,6 +53,13 @@
 		WHERE
 		post.post_num = #{post_num}
 	</select>
+	
+	<!-- 해당 게시글 이미지 조회 -->
+	<select id="findImagesByPostNum" parameterType="int" resultType="project.gulim.domain.ImageDTO">
+		SELECT *
+		FROM image
+		WHERE post_num = #{post_num}
+	</select>
 
 
 	<!-- 게시글 수정 -->
@@ -64,6 +71,13 @@
 		,post_content = #{post_content}
 		WHERE
 		post_num = #{post_num}
+	</update>
+	
+	<update id="updateImage" parameterType="project.gulim.domain.ImageDTO">
+		UPDATE image
+		(post_num, origin_img_name, `path`, img_size, id)
+		SET
+		#{post_num}, #{origin_img_name}, #{path}, #{img_size}, #{id}
 	</update>
 
 
@@ -118,8 +132,18 @@
 	</select>
 	
 	<!-- 이벤트 조회 -->
-	<select id="findEvent" resultType="project.gulim.domain.PostDTO">
+	<select id="findAllEvent" resultType="project.gulim.domain.PostDTO">
 		SELECT *
+		FROM post 
+		WHERE
+		post.board = '이벤트'
+		ORDER BY
+		post.post_num DESC
+	</select>
+	
+	<!-- 이벤트 이미지 조회 -->
+	<select id="findEventImg" resultType="project.gulim.domain.ImageDTO">
+		SELECT image.origin_img_name , image.post_num
 		FROM post LEFT OUTER JOIN image
 		ON post.post_num = image.post_num
 		WHERE

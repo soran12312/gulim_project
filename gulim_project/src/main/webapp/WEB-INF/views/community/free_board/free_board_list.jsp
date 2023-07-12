@@ -223,6 +223,14 @@ section.notice {
 .navbar li a {
 	text-decoration: none;
 }
+
+
+#register {
+  float: right;
+  border: 1px solid black;
+  border-radius: 5px; /* 원하는 모서리의 둥글기 정도 조절 */
+}
+
 </style>
 
 
@@ -240,11 +248,11 @@ section.notice {
 			<nav class="navbar">
 				<div class="container">
 					<ul class="nav">
-						<li class="nav-item"><a class="nav-link" href="/freelist">자유게시판</a>
+						<li class="nav-item"><a class="nav-link" href="./free_board_list">자유게시판</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="/event">이벤트 게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/contest">공모전 게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/announce">공지사항</a>
+						<li class="nav-item"><a class="nav-link" href="./event_list">이벤트 게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="./contest_main">공모전 게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a>
 						</li>
 					</ul>
 				</div>
@@ -295,8 +303,23 @@ section.notice {
 						 <c:forEach items="${posts}" var="post">
 				            <tr>
 				            	<input type="hidden" name="post_num" value="${post.post_num}">
-				                <td><a href="/freedetail?post_num=${post.post_num}">${post.subject}</a></td>
-				                <td><a href="/freedetail?post_num=${post.post_num}">${post.post_title}</a></td>
+				                <td>
+						            <c:choose>
+						                <c:when test="${post.subject == 'game'}">
+						                    게임 개설 요청
+						                </c:when>
+						                <c:when test="${post.subject == 'master'}">
+						                    게임마스터 모집
+						                </c:when>
+						                <c:when test="${post.subject == 'user'}">
+						                    중간 파티원 모집
+						                </c:when>
+						                <c:otherwise>
+						                    기타
+						                </c:otherwise>
+						            </c:choose>
+						        </td>
+				                <td><a href="/community/free_board_detail?post_num=${post.post_num}">${post.post_title}</a></td>
 				                <td>${post.id}</td>
 				            </tr>
 				        </c:forEach>
@@ -308,7 +331,7 @@ section.notice {
 				<!-- 페이징 번호 표시 -->
 				<div class="pagination">
 				    <c:if test="${currentPage > 1}">
-				        <a href="/freelist?page=${currentPage - 1}">이전</a>
+				        <a href="/community/freelist?page=${currentPage - 1}">이전</a>
 				    </c:if>
 				    
 				    <c:forEach begin="1" end="${totalPages}" var="pageNum">
@@ -317,19 +340,33 @@ section.notice {
 				                <strong>${pageNum}</strong>
 				            </c:when>
 				            <c:otherwise>
-				                <a href="/freelist?page=${pageNum}">${pageNum}</a>
+				                <a href="/community/freelist?page=${pageNum}">${pageNum}</a>
 				            </c:otherwise>
 				        </c:choose>
 				    </c:forEach>
 				    
 				    <c:if test="${currentPage < totalPages}">
-				        <a href="/freelist?page=${currentPage + 1}">다음</a>
+				        <a href="/community/freelist?page=${currentPage + 1}">다음</a>
 				    </c:if>
 				</div>
+					<button type="button" class="btn btn-default" id="register" class="btn">등록</button>
 			</div>
 		</div>
+		
 
 	</section>
+	
+	
+	<script>
+
+		document.getElementById("register").addEventListener("click", function() {
+		  	window.location.href = "/community/free_board_insert";
+		});
+
+
+
+
+	</script>
 </body>
 <footer>
 	<jsp:include page="../../../../footer.jsp"></jsp:include>

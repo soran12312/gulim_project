@@ -1,10 +1,14 @@
 package project.gulim.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import project.gulim.dao.CommunityDAO;
 import project.gulim.domain.ImageDTO;
@@ -16,6 +20,8 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Autowired
 	private final CommunityDAO communityDAO;
+	@Autowired
+	private ServletContext servletContext;
 	
 	/**
      * 게시글 저장
@@ -114,7 +120,43 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		communityDAO.saveImage(img);
 	}
-	
-	
 
+
+
+	@Override
+	public List<ImageDTO> findImagesByPostNum(Integer post_num) {
+		return communityDAO.findImagesByPostNum(post_num);
+	}
+
+
+
+	@Override
+	public List<ImageDTO> updateImage(ImageDTO img) {
+		// TODO Auto-generated method stub
+		return communityDAO.updateImage(img);
+	}
+
+
+
+	// 이벤트 게시글 리스트
+	@Override
+	public List<PostDTO> findAllEvent() {
+		// TODO Auto-generated method stub
+		return communityDAO.findAllEvent();
+	}
+
+
+
+	@Override
+	public List<ImageDTO> findEventImg() {
+		// TODO Auto-generated method stub
+		return communityDAO.findEventImg();
+	}
+	
+	
+	
+	
+	
+	
+	
 }

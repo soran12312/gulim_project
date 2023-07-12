@@ -13,6 +13,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     //private String resourcePath = "file:/Users/"+System.getProperty("user.name")+"/Pictures/yumyum/";
 
 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(connectPath)
