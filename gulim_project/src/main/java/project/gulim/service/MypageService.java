@@ -1,9 +1,12 @@
 package project.gulim.service;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
 
 public interface MypageService {
@@ -11,5 +14,7 @@ public interface MypageService {
 
 	public Map find_info(MemberDTO member);
 	public void modify_info(MemberDTO member);
+
+	public Integer modify_info_img(HashMap map);
 
 }

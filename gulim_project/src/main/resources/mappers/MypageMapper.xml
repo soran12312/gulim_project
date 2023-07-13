@@ -24,5 +24,9 @@
 				,introduce 	= #{introduce}
 		WHERE 	 id = #{id}
 	</update>
+	<insert id="modify_info_img" parameterType = "java.util.HashMap">
+		INSERT INTO image (origin_img_name,path,id) 
+		VALUES (#{originFilename}, #{filepath}, #{id});		
+	</insert>
 
 </mapper>

@@ -152,23 +152,38 @@ $(document).ready(function(){
 		this.value = "수정완료"
 		}
 		else{
+			alert();
+			save_img();
 			this.value = "사진수정"
+			$('#img_modify_real').hide();
+			$('#img_modify').hide();
 		}	
 	});//END of img_modify .click
 
-	$('#img_modift_real').click(
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-				document.getElementById('img_modify_img').src = e.target.result;
-				};
-				reader.readAsDataURL(input.files[0]);
-			} else {
-				document.getElementById('img_modify_img').src = "";
-			}
-		}
-	);
+	//이미지 수정 됫을때
+	$('#img_modify_real').change(function(){
+	});//END of img_modify_real .change
+
+
+	function save_img(){
+		var form = $("#infoimg_upload_form")[0];
+		var formData = new FormData(form);
+		formData.append("id", "ekqls1102");
+		formData.append("file", $('#img_modify_real')[0].files[0])
+
+         $.ajax({
+             url : '/mypage/user_info/modify_info_img'
+           , type : "POST"
+           , processData : false
+           , contentType : false
+           , data : formData
+           , success:function(response) {
+               alert("성공하였습니다.");
+               console.log(response);	   
+           }
+           ,error: function(err){console.log(err);}//END of error
+       });
+	}
 
 });//END of Open
 </script>
@@ -210,7 +225,10 @@ $(document).ready(function(){
 	</div>
 <!-- ===================== END OF PASSWORD CHECK =====================-->	
 <!-- ===================== START OF IMG =====================-->
-<input type="file" class="img_modify_real" id='img_modify_real' onchange="readURL(this);"/> <!-- 안에 두니까 CSS움직여서 밖으로 뺌 -->
+<form id="infoimg_upload_form" method="post" enctype="multipart/form-data">
+	<input type="file" class="img_modify_real" id='img_modify_real' name="img_modify_real" accept="image/*"/> <!-- 안에 두니까 CSS움직여서 밖으로 뺌 -->
+</form>
+
 	<div id="mypage_info">
 		<div class ="game_back"></div>
 			<div class ="game_table">
@@ -221,7 +239,7 @@ $(document).ready(function(){
 				
 	<!-- ===================== END OF IMG =====================-->
 	<!-- ===================== START OF INFO =====================-->
-				<form action="">
+				
 				<div class="my_info">
 					<div>이름</div>
 					<input name ="name" id="name" class="info_input" disabled/>
@@ -238,7 +256,7 @@ $(document).ready(function(){
 					<textarea name ="introduce" id ="introduce" disabled class="info_area"></textarea>
 					<input type="button" class="info_modi" id='info_modi' value="회원정보수정"/>
 				</div>
-				</form>
+				
 	<!-- ===================== END OF INFO =====================-->
 			<div class="myinfo_play_list">
 				<div class="fs20 fs_bord">플레이리스트</div>
