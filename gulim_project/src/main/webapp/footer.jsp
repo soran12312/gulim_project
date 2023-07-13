@@ -8,6 +8,11 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+	
+</script>
 </head>
 <body>
 <div class = footer>
@@ -20,9 +25,7 @@
 		<a>고객센터</a><br/>
 		<a>오전 9시 ~ 오후 6시</a>
 		<h1>1234-1234</h1>
-		<!-- 1:1문의 클릭 시 페이지 이동▼ -->
-		<button onClick="location.href='https://www.google.com/search?q=%EC%95%84%EB%AC%B4%EC%9D%BC%EB%8F%84+%EC%9D%BC%EC%96%B4%EB%82%98%EC%A7%80+%EC%95%8A%EC%95%98%EB%8B%A4&tbm=isch&ved=2ahUKEwjG4_6N6uf_AhVgl1YBHThsC1gQ2-cCegQIABAA&oq=%EC%95%84%EB%AC%B4%EC%9D%BC%EB%8F%84+&gs_lcp=CgNpbWcQARgBMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoICAAQgAQQsQM6BAgjECc6BwgjEOoCECdQmg9YmCZgszBoBHAAeACAAeYBiAHsFZIBBjAuMTQuMZgBAKABAaoBC2d3cy13aXotaW1nsAEKwAEB&sclient=img&ei=liGdZMbAEuCu2roPuNitwAU&bih=903&biw=1884&hl=en'"> 
-		1:1 문의</button>
+
 	</div>
 
 	<!-- 푸터 우측정렬 -->
