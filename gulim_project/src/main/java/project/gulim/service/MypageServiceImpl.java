@@ -29,7 +29,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	public void modify_info(MemberDTO member) {
 		System.out.println(member);
-		mypageDAO.find_info(member);
+		mypageDAO.modify_info(member);
 		
 	}
 }

@@ -39,6 +39,9 @@ font-weight: bold;}
 .color_white{
 	color: floralwhite;
 }
+.hidden{
+	visibility: hidden;
+}
 /* ================END OF ALL============================== */
 
 
@@ -909,7 +912,13 @@ font-weight: bold;}
 	align-content: center;	
 	display: block;
 }
-.my_img input{
+.img_modify_real[type="file"]{
+	width: 1px;
+	height: 1px;
+	background-color : black;
+	display: inline-block;
+}
+.img_modify{
 	width: 100px;
 	height: 30px;
 	background-color : black;
@@ -925,6 +934,7 @@ font-weight: bold;}
 	float:right;
 	margin-right: 100px;
 	margin-top: 20px;
+	display: inline;
 }
 .my_info{
 	width: 500px;
@@ -1002,6 +1012,7 @@ font-weight: bold;}
 	margin-top: 10%;
 	margin-left:5%;
 	display: block;	
+	position: absolute;
 }
 .myinfo_play_list_scroll{
 	width:100%; 
