@@ -39,7 +39,7 @@ public interface CommunityService {
 	List<PostDTO> findPostsByPage(int start, int size);
 
 	// 이미지 저장
-	public void saveImage(ImageDTO img);
+	public void saveImage(ImageDTO imge);
 
 	// 해당 게시글 이미지
 	public List<ImageDTO> findImagesByPostNum(Integer post_num);

@@ -18,4 +18,5 @@ public class PostDTO {
 	private Integer contest_num;
 	private Integer post_state; // 등록상태(0-기본값(게시중) / 1-삭제된게시글(게시중단))
 	
+	
 }

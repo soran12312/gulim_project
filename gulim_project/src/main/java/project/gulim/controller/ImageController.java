@@ -25,7 +25,7 @@ public class ImageController {
 	// 이미지 파일 불러오기
 	@GetMapping("/images/gulim/{fileName:.+}")
 	public ResponseEntity<Resource> getImage(@PathVariable String fileName) throws IOException {
-	    // 서버 내 이미지 파일 경로
+	    // 이미지 파일 경로
 	    String imagePath = servletContext.getRealPath("/images/gulim/");
 
 	    // 이미지 파일 읽기

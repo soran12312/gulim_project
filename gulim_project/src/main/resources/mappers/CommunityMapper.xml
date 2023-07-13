@@ -151,5 +151,22 @@
 		ORDER BY
 		post.post_num DESC
 	</select>
+	
+	<!-- 공모전 조회 -->
+	<!-- <select id="findAllContest" resultType="project.gulim.domain.ContestDTO">
+		select *
+		from contest c left outer join post p 
+		ON c.contest_num =  p.contest_num
+	</select>
+	
+	공모전 이미지 조회
+	<select id="findContestImg" resultType="project.gulim.domain.ImaageDTO">
+		select *
+		from contest c left outer join post p 
+		ON c.contest_num =  (select p2.contest_num 
+								from post p2 left outer join image i
+								on p2.post_num = i.post_num
+								where p2.post_state =1)    
+	</select>-->
 
 </mapper>

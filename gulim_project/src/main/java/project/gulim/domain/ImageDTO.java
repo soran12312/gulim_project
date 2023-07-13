@@ -1,5 +1,6 @@
 package project.gulim.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -14,4 +15,6 @@ public class ImageDTO {
 	private Integer room_num;
 	private Integer post_num;
 	private Integer s_img_num;
+	
+	
 }

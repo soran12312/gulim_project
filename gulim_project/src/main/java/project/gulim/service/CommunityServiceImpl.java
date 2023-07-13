@@ -1,12 +1,11 @@
 package project.gulim.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -114,11 +113,19 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 
-
+	@Transactional
 	@Override
-	public void saveImage(ImageDTO img) {
+	public void saveImage(ImageDTO imge) {
 		// TODO Auto-generated method stub
-		communityDAO.saveImage(img);
+//		if (CollectionUtils.isEmpty(imges)) {
+//            return;
+//        }
+//		for (ImageDTO image : imges) 
+//		{
+//			image.setPost_num(post_num);
+//        }
+		
+		communityDAO.saveImage(imge);
 	}
 
 
