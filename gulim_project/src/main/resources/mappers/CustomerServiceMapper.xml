@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project.gulim.dao.CustomerServiceDAO">
+<mapper namespace="project.gulim.dao.Customer_serviceDAO">
 
-	
+	<insert id="send_question">
+		
+		insert into question(question_title,question_content,id,answer,answer_state,question_type)
+					values(#{question_title},#{question_content},#{id},0,0,#{question_type})
+	</insert>
 
 </mapper>
