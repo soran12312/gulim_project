@@ -306,16 +306,16 @@ section.notice {
 				                <td>
 						            <c:choose>
 						                <c:when test="${post.subject == 'game'}">
-						                    게임 개설 요청
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임 개설 요청</a>
 						                </c:when>
 						                <c:when test="${post.subject == 'master'}">
-						                    게임마스터 모집
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임마스터 모집</a>
 						                </c:when>
 						                <c:when test="${post.subject == 'user'}">
-						                    중간 파티원 모집
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">중간 파티원 모집</a>
 						                </c:when>
 						                <c:otherwise>
-						                    기타
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">기타</a>
 						                </c:otherwise>
 						            </c:choose>
 						        </td>

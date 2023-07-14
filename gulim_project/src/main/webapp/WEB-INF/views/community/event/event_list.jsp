@@ -157,10 +157,9 @@
 }
 
 .single_product.complete img.resized-image {
-    filter: grayscale(100%);
-    
+    filter: grayscale(50%);
+
 }
-	
 	
 .row {
   width: 100%;

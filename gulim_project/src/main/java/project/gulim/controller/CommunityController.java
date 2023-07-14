@@ -456,5 +456,12 @@ public class CommunityController {
 	}
 	
 	
+	// 공모전 상세
+	@RequestMapping("/contest_detail")
+	public String contestlistdetail() {
+		return "community/contest/contest_list";
+	}
+	
+	
 	
 }
