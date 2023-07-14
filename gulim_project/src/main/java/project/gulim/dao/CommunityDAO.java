@@ -77,9 +77,4 @@ public interface CommunityDAO {
 
 
 	
-	// delete img
-	public void deletePostImage();
-
-
-	
 }

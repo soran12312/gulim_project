@@ -42,6 +42,9 @@ font-weight: bold;}
 .hidden{
 	visibility: hidden;
 }
+.display_block{
+	display: block;
+}
 /* ================END OF ALL============================== */
 
 
@@ -610,9 +613,11 @@ font-weight: bold;}
   font-size: 32px;
   text-align: center;
   margin: auto;
+  table-layout: fixed;
 }
 .message_table_size{
 	height: 520px;
+	overflow:auto;
 }
 .message_table table{
   table-layout: fixed;
@@ -630,16 +635,23 @@ font-weight: bold;}
 }
 .table_menu3{
   font-size: 32px;
-  width:500px;
+  width:450px;
   height:50px;
   padding-left: 50px;
   padding-right: 50px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
 }
 .message_td{
   height: 10%;
+  width : 450px;
   font-size: 20px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  padding : 10px;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space:nowrap !important;
+  text-align: left;
 }
 .send_message{
   font-family: NeoDunggeunmo Code, Inter;
@@ -651,6 +663,40 @@ font-weight: bold;}
   right: 20px;
   
 }
+.message_td a{
+  text-decoration-line : none;
+  color: black;
+  text-decoration:none;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space:nowrap !important;
+}
+.message_td a:link,/* 링크컬러블랙 */
+.message_td a:visited,/* 방문햇던링크컬러블랙 */
+.message_td a:active /* 마우스호버없음 */
+{
+  text-decoration-line : none;
+  color: black;
+  text-decoration:none; /* 마우스호버없음 */
+}
+
+/*START스크롤 바*/
+.message_table_size::-webkit-scrollbar {
+    width: 20px;
+  }
+.message_table_size::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+    
+}
+.message_table_size::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/*END스크롤 바*/
 /* ================ END OF MY_MESSAGE ====================== */
 
 /* ================ START OF MY PAGE/SEND_MESSAGE & DETAIL_MESSAGE ====================== */
@@ -1049,6 +1095,7 @@ font-weight: bold;}
 	height: 50px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	white-space: nowrap;
 }
 .myinfo_play_list_td{
 	font-size: 20px;

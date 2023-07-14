@@ -1,15 +1,18 @@
 package project.gulim.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +21,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
+import project.gulim.domain.MessageDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.MainService;
 import project.gulim.service.MypageService;
@@ -45,14 +49,60 @@ public class MypageContoroller {
 	public String viewPage3() { // 페이지 이동(DB접속없는경우)
 		return "/mypage/user_info/info_modify";
 	}
-	
 
+//=========== START of 쪽지 ======================================================================================================	
+	//id기준으로 쪽지목록 불러오기
 	@RequestMapping("/my_message")
-	public String my_message() {
+	@Transactional
+	public String my_message(Model m) {
 		
+		String id = "ekqls1102";
+		
+		//서비스에서  MessageDTO를 List에 담아서 쪽지내용 받아오기
+		List<MessageDTO> result = mypageService.my_message(id);
+		m.addAttribute("allmessage",result);
+		
+		Map nickname = new HashMap();
+		for(MessageDTO message : result){
+			String send_id_name = mypageService.send_id_name(message.getSend_id());
+			nickname.put(message.getSend_id(), send_id_name);
+		}
+		m.addAttribute("nickname",nickname);
 		return "/mypage/my_message";
 	}
-//=========== START of 쪽지 ======================================================================================================	
+	
+	//쪽지보내기로 이동
+	@RequestMapping("/send_message")
+	public String send_message(String send_id, Model m) {
+		System.out.println(send_id+ "왜안조");
+		if(send_id == null) {
+			send_id="";
+		}
+			m.addAttribute("send_id", send_id);
+			return "/mypage/send_message";
+	}
+	//쪽지상세보기로 이동
+	@RequestMapping("/detail_message")
+	public String detail_message(Integer num, Model m) {
+		MessageDTO message = mypageService.detail_message(num);
+		System.out.println(message);
+		m.addAttribute("message", message);
+		return "/mypage/detail_message";
+	}
+	//쪽지 보내기
+	@RequestMapping("/save_message")
+	public String save_message(@RequestParam ("message_title") String message_title, @RequestParam("receive_id") String receive_id, @RequestParam("message_content") String message_content){
+		String send_id ="ekqls1102";  
+		
+		HashMap map = new HashMap();
+		map.put("message_title", message_title);
+		map.put("receive_id", receive_id);
+		map.put("message_content", message_content);
+		map.put("send_id", send_id);
+		
+		mypageService.save_message(map);
+	return "/mypage/my_message";	
+	}
 //=========== END of 쪽지 ========================================================================================================
 //=========== START of 캘린더 ======================================================================================================	
 //=========== END of 캘린더 ========================================================================================================
@@ -226,7 +276,8 @@ public class MypageContoroller {
 	             
 	            List<QuestionDTO> quest = mypageService.find_question(question); 
 	             
-	             m.addAttribute("list", quest);
+	             m.addAttribute("list", quest); 
+	               
 	            return "/mypage/my_question";
 	   }
 

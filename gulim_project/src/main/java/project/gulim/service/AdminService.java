@@ -24,16 +24,4 @@ public interface AdminService {
 	public void changePostState(PostDTO pDTO);
 	public List<HashMap> listProduct();
 	public void insertAll(ContestDTO cDTO, PostDTO pDTO, ImageDTO iDTO);
-	public List<HashMap> playedRuleBook();
-	public List<HashMap> playedTime();
-	public List<HashMap> playedGm();
-	public List<HashMap> playedClass();
-	public List<HashMap> playedGenre();
-	public List<HashMap> playedSpecies();
-	public List<HashMap> wantedGenre();
-	public List<HashMap> otherSite();
-	public List<HashMap> preferredPropensity();
-	public List<HashMap> preferredClass();
-	public List<HashMap> preferredSpecies();
-	public List<HashMap> preferredStatsBySpecies();
 }

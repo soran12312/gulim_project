@@ -1,10 +1,10 @@
 package project.gulim.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/sale")
 public class SaleController {
 	
 	//구독권 설정집 선택 페이지

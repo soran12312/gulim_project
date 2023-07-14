@@ -24,16 +24,13 @@ public class Customer_serviceController {
 	@Autowired
 	private MainService mainService;
 	
+//	@RequestMapping("/chatBot")
+//	public String mainBot(Model m) {
+//
+//		return "/customer_service/main";
+//	}
 	
-	@RequestMapping("/main")
-	public String main() {
-		
-		return "/customer_service/main";
-	}
-	
-	
-	
-	@RequestMapping(value = "/question",method = RequestMethod.POST)
+	@RequestMapping("/question")
 	public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
 		
 		Cookie[] cookies = request.getCookies();
@@ -83,7 +80,7 @@ public class Customer_serviceController {
 	    //questionDTO에 id 붙힘
 	    questionDTO.setId(id);
 		customer_service.send_question(questionDTO);
-		return "redirect:/mypage/my_question";
+		return "/mypage/my_question";
 	}
 
 }

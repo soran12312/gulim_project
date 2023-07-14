@@ -36,7 +36,7 @@
    <a href="/main/login_main"><img src="/files/images/sideBar홈.png" style="width: 70px;margin: 15px;"></a>
      <a href="/mypage/user_info/info_modify"><img src="/files/images/sideBar마이페이지.png" style="width: 70px;margin: 15px;"></a>
      <a href="/sale/sale_main"><img src="/files/images/sideBar장바구니.png" style="width: 70px;margin: 15px;"></a>
-     <a href="/customer_service/main"><img src="/files/images/sideBar챗봇.png" style="width: 70px;margin: 15px;"></a>
+     <a href="/customer_service/question"><img src="/files/images/sideBar챗봇.png" style="width: 70px;margin: 15px;"></a>
    </div>
 <!-- ===================== END OF SIDE BAR =====================-->      
 <span class="page_name">나의 문의사항</span>

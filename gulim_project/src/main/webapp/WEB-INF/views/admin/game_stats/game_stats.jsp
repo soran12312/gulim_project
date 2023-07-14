@@ -218,157 +218,29 @@
                         </ol>
                     </div>
                 </div>
-
-                <!-- data -->
-                <table class="prbTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedRuleBook}" var="prb">
-                            <tr class="prb-link">
-                                <td>${prb.play_rull}</td>
-                                <td>${prb.count_play_rull}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="ptTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedTime}" var="pt">
-                            <tr class="pt-link">
-                                <td>${pt.play_period}</td>
-                                <td>${pt.count_play_period}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pgTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedGm}" var="pg">
-                            <tr class="pg-link">
-                                <td>${pg.master}</td>
-                                <td>${pg.count_master}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pcTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedClass}" var="pc">
-                            <tr class="pc-link">
-                                <td>${pc.play_class}</td>
-                                <td>${pc.count_play_class}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pgenTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedGenre}" var="pgen">
-                            <tr class="pgen-link">
-                                <td>${pgen.play_genre}</td>
-                                <td>${pgen.count_play_genre}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="psTable" hidden>
-                    <tbody>
-                        <c:forEach items="${playedSpecies}" var="ps">
-                            <tr class="ps-link">
-                                <td>${ps.play_species}</td>
-                                <td>${ps.count_play_species}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="wgenTable" hidden>
-                    <tbody>
-                        <c:forEach items="${wantedGenre}" var="wgen">
-                            <tr class="wgen-link">
-                                <td>${wgen.want_genre}</td>
-                                <td>${wgen.count_want_genre}</td>                                
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="osTable" hidden>
-                    <tbody>
-                        <c:forEach items="${otherSite}" var="os">
-                            <tr class="os-link">
-                                <td>${os.other_site}</td>
-                                <td>${os.count_other_site}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pfsTable" hidden>
-                    <tbody>
-                        <c:forEach items="${preferredPropensity}" var="pfs">
-                            <tr class="pfs-link">
-                                <td>${pfs.char_propensity}</td>
-                                <td>${pfs.count_char_propensity}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pfcTable" hidden>
-                    <tbody>
-                        <c:forEach items="${preferredClass}" var="pfc">
-                            <tr class="pfc-link">
-                                <td>${pfc.char_class}</td>
-                                <td>${pfc.count_char_class}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <table class="pfspTable" hidden>
-                    <tbody>
-                        <c:forEach items="${preferredSpecies}" var="pfsp">
-                            <tr class="pfsp-link">
-                                <td>${pfsp.species}</td>
-                                <td>${pfsp.count_species}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-
                 <!-- row -->
 
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6">
+                            <div class="col-lg-12 col-sm-12">
                                 <div class="card">
-                                    <div class="card-header surveyButton">
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-prb">플레이해본 룰북</button>
-                                        <button id="btn_quarter_product" class="btn  btn-square btn-success btn-pt">플레이해본 시간</button>
-                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary btn-pg">마스터 플레이 횟수</button>
-                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger btn-pc">플레이해본 직업</button>     
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-pgen">플레이해본 장르</button>
-                                        <button id="btn_quarter_product" class="btn  btn-square btn-success btn-ps">플레이해본 종족</button>
-                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary btn-wgen">플레이해보고 싶은 장르</button>
-                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger btn-os">다른 사이트 이용 경험</button> 
+                                    <div class="card-header">
+                                        <select class="selectYear" id="selectYear_quarter">
+                                            <option value="2023" selected>2023</option>
+                                            <option value="2022">2022</option>
+                                        </select>
+                                        <button id="btn_quarter" class="btn btn-square btn-dark">룰북 점유율</button>
+                                        <button id="btn_quarter_product" class="btn  btn-square btn-success">플레이해본 룰북</button>
+                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">플레이해본 장르</button>
+                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger">플레이해본 직업</button>     
+                                        <a class="col-3"></a>
                                     </div>
                                     <div class="card-body">
                                         <div>
                                             <h6 style="color:black;">2023년 월매출</h6>
                                         </div>
                                         <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header flavorButton">
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-pfs">플레이어 선호</button>
-                                        <button id="btn_quarter_product" class="btn btn-square btn-success btn-pfc">직업 선호</button>
-                                        <button id="btn_quarter_subscribe" class="btn btn-square btn-primary btn-pfsp">종족 선호</button>
-                                        <button id="btn_quarter_book" class="btn btn-square btn-danger">플레이해본 직업</button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
-                                        </div>
-                                        <div id="simple-pie2" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
                                     </div>
                                 </div>
                             </div>
@@ -424,7 +296,7 @@
         <script src="./js/plugins-init/chartist-init.js"></script>
 
     <!-- 관리자 전용 js -->
-    <script src="/admin/js/adminChart.js"></script>
+    <script src="/admin/js/admin.js"></script>
 
 </body>
 

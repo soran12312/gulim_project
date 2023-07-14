@@ -131,32 +131,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/game_stats")
-	public String viewPage_game_stats(Model m) {
-		List<HashMap> playedRuleBook = adminService.playedRuleBook();
-		m.addAttribute("playedRuleBook", playedRuleBook);
-		List<HashMap> playedTime = adminService.playedTime();
-		m.addAttribute("playedTime", playedTime);
-		List<HashMap> playedGm = adminService.playedGm();
-		m.addAttribute("playedGm", playedGm);
-		List<HashMap> playedClass = adminService.playedClass();
-		m.addAttribute("playedClass", playedClass);
-		List<HashMap> playedGenre = adminService.playedGenre();
-		m.addAttribute("playedGenre", playedGenre);
-		List<HashMap> playedSpecies = adminService.playedSpecies();
-		m.addAttribute("playedSpecies", playedSpecies);
-		List<HashMap> wantedGenre = adminService.wantedGenre();
-		m.addAttribute("wantedGenre", wantedGenre);	
-		List<HashMap> otherSite = adminService.otherSite();
-		m.addAttribute("otherSite", otherSite);
-		List<HashMap> preferredPropensity = adminService.preferredPropensity();
-		m.addAttribute("preferredPropensity", preferredPropensity);
-		List<HashMap> preferredClass = adminService.preferredClass();
-		m.addAttribute("preferredClass", preferredClass);
-		List<HashMap> preferredSpecies = adminService.preferredSpecies();
-		m.addAttribute("preferredSpecies", preferredSpecies);
-		List<HashMap> preferredStatsBySpecies = adminService.preferredStatsBySpecies();
-		m.addAttribute("preferredStatsBySpecies", preferredStatsBySpecies);
-
+	public String viewPage_game_stats() {
 		return "/admin/game_stats/game_stats";
 	}
 

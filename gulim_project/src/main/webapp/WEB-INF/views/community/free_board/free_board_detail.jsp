@@ -472,7 +472,7 @@
 							        </select>
 								</div>
 								
-								<input type="hidden" name="post_num" value="${post.post_num}">
+								
 								
 								<div class="form-group">
 									<div class="col-lg-12">

@@ -67,7 +67,7 @@ footer {
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="item">
-						<a href="./book">
+						<a href="/book">
 							<div class="icon">
 								<img src="assets/images/service-01.jpg" alt=""
 									style="max-width: 60px; border-radius: 50%;">
@@ -79,7 +79,7 @@ footer {
 				</div>
 				<div class="col-lg-6">
 					<div class="item">
-						<a href="./subscribe">
+						<a href="/subscribe">
 							<div class="icon">
 								<img src="/assets/images/service-02.jpg" alt=""
 									style="max-width: 60px; border-radius: 50%;">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
 <link href="/css/place.css" rel="stylesheet">
+<script type="text/javascript"></script>
 </head>
 <body>
 
@@ -48,23 +50,24 @@
 		
 		<div class= message_table>
 			<div class= message_table_size>
-				<table >
+				<table>
 					<tr>
 						<td class= table_menu1>날짜</td>
 						<td class= table_menu2>이름</td>
 						<td class= table_menu3>내용</td>
 						<td></td>					
 					</tr>
-					<tr>
-						<td class= "message_td ">23.06.30 15:10</td>
-						<td class= "message_td cursor"><a href = "send_message" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">나한솔</a></td>
-						<td class= "message_td cursor"><a href = "detail_message" onclick="window.open(this.href, '쪽지보기', 'width=420, height=520'); return false;">☆★갸꿀잼☆★온라인☆★ㅂrㅋ「ㄹr☆★돈먹기</a></td>
-						<td class= "message_td cursor" ><a>삭제</a></td>					
-					</tr>
+					<c:forEach items="${allmessage}" var="message">
+						<tr><input type ="hidden" value="${message.message_num}">
+							<td class= "message_td "> ${message.send_date} </td>
+							<td class= "message_td cursor"><a href = "/mypage/send_message?send_id=${message.send_id}" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">${nickname[message.send_id]} (${message.send_id})</a></td>
+							<td class= "message_td cursor display_block"><a href = "/mypage/detail_message?num=${message.message_num}" onclick="window.open(this.href, '쪽지보기', 'width=420, height=520'); return false;">${message.message_content}</a></td>
+							<td class= "message_td cursor" ><a href = "/mypage/message_delete">삭제</a></td>					
+						</tr>
+					</c:forEach>
 				</table>
 		</div>
-		<a class="send_message" id="send_message" href = "send_message" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">쪽지 보내기</a>
-
+		<a class="send_message" id="send_message" href = "/mypage/send_message" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">쪽지 보내기</a>
 		</div>
 		
 		

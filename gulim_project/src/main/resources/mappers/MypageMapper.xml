@@ -3,6 +3,33 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.gulim.dao.MypageDAO">
+
+<!--=========== START of 쪽지 ======================================================================================================-->
+	<select id="my_message" parameterType="String" resultType="MessageDTO">
+		SELECT *
+		FROM message
+		WHERE receive_id = #{id}
+		ORDER BY message_num desc
+	</select>
+	<insert id="save_message" parameterType = "java.util.HashMap">
+		INSERT INTO message (send_id, receive_id, message_title, message_content) 
+		VALUES (#{send_id}, #{receive_id}, #{message_title}, #{message_content})	
+	</insert>
+	<select id="send_id_name" parameterType="String" resultType="String">
+		SELECT nickname
+		FROM member
+		WHERE id = #{send_id}
+	</select>
+	<select id="detail_message" parameterType="Integer" resultType="MessageDTO">
+		SELECT *
+		FROM message
+		WHERE message_num = #{num}
+	</select>
+	
+	
+
+<!--=========== END of 쪽지 =====================================================================================================-->
+
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
 	<select id="mypage_password_check" parameterType="MemberDTO" resultType="String">
 		SELECT password FROM member
@@ -43,8 +70,7 @@
 <!-- =========== END of 회원정보 ======================================================================================================	 -->
 <!-- =========== START of 나의 문의사항 ======================================================================================================	 -->
 	<select id="find_question" resultType="QuestionDTO">
-      select DATE_FORMAT(question_date, '%Y-%m-%d') AS question_date,question_title,answer from question where id=#{id}
-     
+      select * from question where id=#{id}
    </select>
 <!-- =========== END of 나의 문의사항 ======================================================================================================	 -->
 </mapper>
