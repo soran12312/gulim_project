@@ -143,12 +143,6 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!-- 트랜잭션: https://mvnrepository.com/artifact/org.springframework/spring-tx -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-tx</artifactId>
-		</dependency>
-		
 		
 		
 		
