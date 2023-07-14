@@ -306,91 +306,27 @@ public class CommunityController {
 		Cookie[] cookies = request.getCookies();
 		String jwtToken = null;
 		
+
+    	if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("access_token")) {
+		            jwtToken = cookie.getValue();
+		            break;
+		        }
+		    }
+		}
 		
-		// 이미지 여부 확인
-	    String postContent = params.getPost_content();
-	    
-	    
-	    // post_content 값에서 base64 인코딩된 이미지 값을 추출
-	    List<String> imageBase64List = extractBase64Image(postContent);
-
-	    // 추출한 이미지 값을 활용하여 필요한 작업 수행
-	    if (!imageBase64List.isEmpty()) {
-	        // 이미지가 포함된 경우
-	        for (String imageBase64 : imageBase64List) {
-	            // 이미지 처리 로직
-	            // ...
-	        	System.out.println(imageBase64);
-	        	// base64 디코딩
-	            byte[] imageData = Base64.getDecoder().decode(imageBase64);
-
-	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
-	            String originImageName = generateUniqueFileName();
-	            String imagePath = "/images/gulim/";
-	            int imageSize = imageData.length;
-
-	            // 이미지 파일 저장
-	            saveImageFile(imageData, imagePath, originImageName);
-
-	            // 이미지 정보 설정
-	            ImageDTO img = new ImageDTO();
-	            img.setOrigin_img_name(originImageName);
-	            img.setPath(imagePath);
-	            img.setImg_size(imageSize);
-	            
-	            if (cookies != null) {
-				    for (Cookie cookie : cookies) {
-				        if (cookie.getName().equals("access_token")) {
-				            jwtToken = cookie.getValue();
-				            break;
-				        }
-				    }
-				}
-				
-				Claims claims = mainService.getClaims(jwtToken);
-				
-//				System.out.println(claims);
-				String id = claims.get("id", String.class);      // 로그인한 사용자 id
-				params.setId(id);                                // 
-				
-				// post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
-			    String contentWithoutImages = removeImageTags(postContent);
-			    params.setPost_content(contentWithoutImages);
-				
-				System.out.println(params); 
-				
-				// post  DB에 저장
-			    communityService.savePost(params);
-	            
-	            
-			    img.setId(id);
-
-	            // 이미지 DB update
-	            communityService.updateImage(img);
-	        }
-	    } 
-	    else {// 이미지가 포함되지 않은 경우
-	    	if (cookies != null) {
-			    for (Cookie cookie : cookies) {
-			        if (cookie.getName().equals("access_token")) {
-			            jwtToken = cookie.getValue();
-			            break;
-			        }
-			    }
-			}
-			
-			Claims claims = mainService.getClaims(jwtToken);
-			
+		Claims claims = mainService.getClaims(jwtToken);
+		
 //			System.out.println(claims);
-			String id = claims.get("id", String.class);      // 로그인한 사용자 id
-			params.setId(id);                                // 
-			
-			System.out.println(params); 
-			
-			// db update
-		    communityService.updatePost(params);
-	    }
-	     
+		String id = claims.get("id", String.class);      // 로그인한 사용자 id
+		params.setId(id);                                // 
+		
+		System.out.println(params); 
+		
+		// db update
+	    communityService.updatePost(params);
+	    
 		
 		 return "redirect:/community/free_board_list";
 	}
@@ -400,7 +336,7 @@ public class CommunityController {
 	@RequestMapping(value = "/freedelete", method = RequestMethod.POST)
 	public String deletePost(@RequestParam("post_num") Integer post_num) {
 		communityService.deletePost(post_num);
-	     
+		
 		
 		 return "redirect:/community/free_board_list";
 	}

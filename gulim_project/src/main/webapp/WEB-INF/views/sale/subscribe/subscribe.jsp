@@ -9,6 +9,7 @@
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
+	
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet">

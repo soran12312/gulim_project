@@ -79,6 +79,14 @@
 		SET
 		#{post_num}, #{origin_img_name}, #{path}, #{img_size}, #{id}
 	</update>
+	
+	<!-- 게시글 이미지 삭제 -->
+	<delete id="deletePostImage" parameterType="int">
+		DELETE image
+		WHERE 
+		post_num = #{post_num}
+	
+	</delete>
 
 
 	<!-- 게시글 삭제 -->

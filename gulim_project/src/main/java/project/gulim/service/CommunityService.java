@@ -53,5 +53,12 @@ public interface CommunityService {
 	// 이벤트 이미지 조회
 	public List<ImageDTO> findEventImg();
 
+	public void deletePostImage(Integer post_num);
+
+	void deletePostImage(PostDTO params);
+
+	// 이미지 파일 삭제
+	void deleteImageFile(ImageDTO img);
+
 	
 }

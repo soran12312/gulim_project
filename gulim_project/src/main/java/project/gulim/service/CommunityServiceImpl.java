@@ -1,11 +1,11 @@
 package project.gulim.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -159,9 +159,47 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		return communityDAO.findEventImg();
 	}
+
+
+
+	@Override
+	public void deletePostImage(PostDTO params) {
+		// TODO Auto-generated method stub
+		communityDAO.deletePostImage();
+	}
+
+
+
+	@Override
+	public void deletePostImage(Integer post_num) {
+		// TODO Auto-generated method stub
+        
+        communityDAO.deletePostImage();
+        
+	}
 	
 	
 	
+	
+	@Override
+	public void deleteImageFile(ImageDTO img) {
+		// TODO Auto-generated method stub
+		
+		
+		// Implement the logic to delete the image from the local file system
+        String imagePath = img.getPath();
+        String imageFileName = img.getOrigin_img_name();
+        String fullImagePath = imagePath + imageFileName;
+
+        // Perform the deletion of the image file
+        File imageFile = new File(fullImagePath);
+        if (imageFile.exists()) {
+            imageFile.delete();
+        }
+        
+        communityDAO.deletePostImage();
+        
+	}
 	
 	
 	
