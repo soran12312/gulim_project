@@ -1,7 +1,7 @@
 package project.gulim.service;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,17 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import project.gulim.domain.ImageDTO;
-import project.gulim.domain.MemberDTO;
-
 import project.gulim.dao.MypageDAO;
+import project.gulim.domain.MemberDTO;
+import project.gulim.domain.QuestionDTO;
 
 @Service
 public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	MypageDAO mypageDAO;
-	
+
+//=========== START of 회원정보 ======================================================================================================	
 	@Override
 	public Boolean mypage_password_check(MemberDTO member) {
 		
@@ -43,7 +43,10 @@ public class MypageServiceImpl implements MypageService {
 	}
 	public String find_info_img(MemberDTO member) {
 		String result = mypageDAO.find_info_img(member);
-		System.out.println(result + "서비스에서 받은 리절트");
 		return result;
 	}
+//=========== END of 회원정보 ======================================================================================================	
+	public List<QuestionDTO>find_question(QuestionDTO question){
+	      return mypageDAO.find_question(question);
+	   }
 }

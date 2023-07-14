@@ -17,30 +17,44 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+//※ event title :	Open hide
+//※ event info  :	페이지이동 시 마이페이지, 주소검색Btn, 사진수정Btn, 사진선택 버튼 숨김 (비밀번호체크 시 해제)
 	$('#mypage_info').hide();
 	$('#addr_search').hide();
 	$('#img_modify').hide();
 	$('#img_modify_real').hide();
+//※ END event title :	Open hide ===============================================
 
-//아이디와 비밀번호 가져와서 DB저장된 비밀번호 토큰값과 비교하는 함수
+
+
+//※ event title :	$('#password_check_btn').click (패스워드확인창의 확인 버튼 클릭)
+//※ event info  :	아이디와 비밀번호 가져와서 DB저장된 비밀번호 토큰값과 비교하는 함수
 	$('#password_check_btn').click(function(){
 		
+	//aiax로 입력한 패스워드와 아이디값 /mypage/user_info/mypage_password_check으로 보내기
 		$.ajax({
 			 type 		: 'post'
-			,data 		: {password: $('#password_check_input').val(), id: "ekqls1102"}
+			,data 		: {password: $('#password_check_input').val(), id: "ekqls1102"}		// ★★★★★★★★★★★★★★★★★★★★★★★★아이디 따올 수 있게되면 바꾸기
 			,url 		: '/mypage/user_info/mypage_password_check'
 
 			//비밀번호 일치 시 result값 true 불일치 시 false
 			,success 	: function(result){
  							$('#password_check_input').val('');
-
+						
+						//비밀번호가 맞을때(result값이 true일때) 
+						//패스워드체크div 숨기고 회원정보창출력
 							if (result){
 								$('#password_check').hide();
 								$('#mypage_info').show();
+							//회원정보리스트 불러오기
 								find_info();
+							//프로필이미지 불러오기
 								find_info_img();
 							}
+
+						//비밀번호가 틀렸을때 (result값이 false일때)
 							else {
+							//스윗Alert로 안내문구
 								Swal.fire({
 										icon: 'error',                     
   										title: '비밀번호가 틀렸습니다(T^T)',    
@@ -51,67 +65,13 @@ $(document).ready(function(){
 			,error 		: function(err){console.log(err);}//END of error
 		});//END of ajax
 	});//END of password_check_btn .click
-
-//info리스트 result로 가져와서 벨류에 넣는 함수
-	function find_info(){
-		$.ajax({
-			 type 		: 'post'
-			,data 		: {id: "ekqls1102"}
-			,url 		: '/mypage/user_info/find_info'
-			,success 	: function(result){
-							$('#name').val(result.name);
-							$('#nickname').val(result.nickname);
-							$('#address').val(result.address);
-							$('#email').val(result.email);
-							$('#tel').val(result.tel);
-							$('#introduce').html(result.introduce);
-						}
-						
-			//END of success
-			,error 		: function(err){console.log(err);}//END of error
-		});//END of ajax
-	}
-
-//info 이미지 불러오는 함수
-	function find_info_img(){
-		$.ajax({
-			type		:'post'
-			,data		:{id: "ekqls1102"}
-			,url		:'/mypage/user_info/find_info_img'
-			,success	: function(result){
-				$("#img_modify_img").attr("src",result);
-			}
-			,error		: function(err){console.log(err);}//END of error
-		});
-	}
+//※ END event title :	$('#password_check_btn').click ===============================================
 
 
 
-//info 수정시 DB보내서 수정한 info저장하는 함수
-	function modify_info(){
-		$.ajax({
-			 type 		: 'post'
-			 				//변경할 데이터
-			,data 		: 	{id:		"ekqls1102"   // ★★★★★★★★★★★★★★★★★★★★★★★★아이디 따올 수 있게되면 바꾸기
-							,name: 		$('#name').val()
-							,nickname:	$('#nickname').val()
-							,address:	$('#address').val()
-							,tel:		$('#tel').val()
-							,introduce:	$('#introduce').val()
-						}
-			,url 		: '/mypage/user_info/modify_info'
-			,success 	: function(){
-							find_info();
-						}			
-			//END of success
-			,error 		: function(err){console.log(err);}//END of error
-		});//END of ajax
-	}
-
-
-
-
-	
+//※ event title :	$('#info_modi').click (회원정보 수정 버튼 클릭)
+//※ event info  :	1. value가 회원정보수정 일때	->	수정완료 버튼으로 변경하고 입력창을 수정가능하게 변경
+//					 2.	value가 수정완료일때		->	회원정보수정 버튼으로 변경하고 입력창의 value값을 DB저장
 	$('#info_modi').click(function(){
 		//버튼이 회원정보수정일 경우 수정완료버튼으로 변경
 			if(this.value === '회원정보수정'){
@@ -128,13 +88,16 @@ $(document).ready(function(){
 				$('#tel').attr("disabled", false);
 				$('#introduce').attr("disabled", false);
 			}
+
+
+		//버튼이 수정완료일 경우 회원정보수정으로 버튼을 변경
 			else {
-			//버튼이 수정완료일 경우 회원정보수정으로 버튼을 변경
 				this.value = "회원정보수정"
 
-			
+			//주소검색Btn / 이미지수정Btn 숨김
 				$('#addr_search').hide();
 				$('#img_modify').hide();
+
 			//변경가능한 input창 수정 못하게 변경
 				$('#name').attr("disabled", true);
 				$('#nickname').attr("disabled", true);
@@ -148,62 +111,188 @@ $(document).ready(function(){
 				find_info();
 				}
 	})
+//※ END event title :	$('#info_modi').click ===============================================
 
-//#addr_search(주소검색Btn) 클릭 시 카카오 주소검색창 띄우기
+
+
+//※ event title :	#addr_search.click (주소검색Btn)
+//※ event info  :	#addr_search(주소검색Btn) 클릭 시 카카오 주소검색창 띄우기
 	$('#addr_search').click(function(){
+	
+	//카카오 주소검색창 출력
 		new daum.Postcode({
         oncomplete: function(data) {
-			//주소 input에 주소값 입력
+		
+		//주소 input에 주소값 입력
 			$('#address').val(data.address);
         }
     }).open();
 	});
-
-	//이미지 수정버튼 클릭 시 함수
-	$('#img_modify').click(function(){
-		if(this.value === "사진수정"){
-		$('#img_modify_real').show();
-		$('#img_modify_real').trigger('click');
-		this.value = "수정완료"
-		}
-		else{
-			save_img();
-			this.value = "사진수정"
-			$('#img_modify_real').hide();
-			$('#img_modify').hide();
-		}	
-	});//END of img_modify .click
-
-	//이미지 선택 했을때 미리보기
-	$('#img_modify_real').on("change",function(event){
-		var file = event.target.files[0];
-		var reader = new FileReader(); 
-		reader.onload = function(e) {
-		$("#img_modify_img").attr("src", e.target.result);}
-	reader.readAsDataURL(file);
-	});//END of img_modify_real .change
+//※ END event title :	#addr_search.click 	===============================================
 
 
-	function save_img(){
-		var form = $("#infoimg_upload_form")[0];
-		var formData = new FormData(form);
-		formData.append("id", "ekqls1102");
-		formData.append("file", $('#img_modify_real')[0].files[0])
 
-         $.ajax({
-             url : '/mypage/user_info/modify_info_img'
-           , type : "POST"
-           , processData : false
-           , contentType : false
-           , data : formData
-           , success:function(response) {
-               alert("성공하였습니다.");  
-           }
-           ,error: function(err){console.log(err);}//END of error
-       });
+//※ event title :	$('#img_modify').click (이미지 수정Btn)
+//※ event info  :	1. 버튼의 value가 사진 수정일때	->	클릭과 동시에 사진선택버튼 클릭되고 수정완료로 value변경
+//					 2. 버튼의 value가 수정 완료일때 ->	 이미지를 저장하고 사진선택버튼 & 본임 숨겨짐
+$('#img_modify').click(function(){
+
+//버튼이 사진수정일때
+	if(this.value === "사진수정"){
+
+//이미지선택버튼 보이게 & 이미지선택버튼 클릭
+	$('#img_modify_real').show();
+	$('#img_modify_real').trigger('click');
+
+//사진수정버튼을 수정완료버튼으로 변경
+	this.value = "수정완료"
 	}
 
+//버튼이 수정완료일때
+	else{
+
+	//바뀐 사진 저장
+		modify_info_img();
+
+	//사진수정버튼으로 변경 & 이미지선택버튼 & 사진수정버튼 숨김
+		this.value = "사진수정"
+		$('#img_modify_real').hide();
+		$('#img_modify').hide();
+	}	
+});//END of img_modify .click
+//※ END event title :	$('#img_modify').click	===============================================
+
+
+
+//※ event title :	$('#img_modify_real').on("change" (파일창에서 파일 선택 시)
+//※ event info  :	이미지 선택 했을때 미리보기
+$('#img_modify_real').on("change",function(event){
+
+//선택된 파일 읽어오기
+	var file = event.target.files[0];
+	var reader = new FileReader(); 
+	reader.onload = function(e) {
+
+//프로필 이미지태그의 src에 선택된이미지 입력 
+	$("#img_modify_img").attr("src", e.target.result);}
+reader.readAsDataURL(file);
+});//END of img_modify_real .change
+//※ event title :	$('#img_modify_real').on("change" 	===============================================
+
+
+
+//※ function title	:	find_info 
+//※ function info	:	회원정보리스트를 result로 가져와서 회원정보란의 value에 넣는 함수
+function find_info(){
+
+///mypage/user_info/find_info에 id 보내기
+	$.ajax({
+		 type 		: 'post'
+		,data 		: {id: "ekqls1102"}
+		,url 		: '/mypage/user_info/find_info'
+	//가져온 회원정보(result)값을 회원정보 input태그에 value에 입력
+		,success 	: function(result){
+						$('#name').val(result.name);
+						$('#nickname').val(result.nickname);
+						$('#address').val(result.address);
+						$('#email').val(result.email);
+						$('#tel').val(result.tel);
+						$('#introduce').html(result.introduce);
+					}
+					
+		//END of success
+		,error 		: function(err){console.log(err);}//END of error
+	});//END of ajax
+}
+//※ END function title	:	find_info	================================================= 
+
+
+
+//※ function title	:	find_info_img 
+//※ function info	:	회원정보란의 프로필이미지를 불러와 프로필이미지태그에 출력하는 함수
+function find_info_img(){
+
+///mypage/user_info/find_info_img에 아이디를 보내고 이미지의 위치값 가져오기
+	$.ajax({
+		type		:'post'
+		,data		:{id: "ekqls1102"}			// ★★★★★★★★★★★★★★★★★★★★★★★★아이디 따올 수 있게되면 바꾸기
+		,url		:'/mypage/user_info/find_info_img'
+	//프로필 이미지의 src속성값으로 이미지의 위치값(result)입력
+		,success	: function(result){
+			$("#img_modify_img").attr("src",result);
+		}
+		,error		: function(err){console.log(err);}//END of error
+	});
+}
+//※ END function title	:	find_info_img	================================================= 
+
+
+
+
+//※ function title	:	modify_info 
+//※ function info	:	회원정보 수정 시 DB에 수정된 회원정보를 저장하는 함수
+function modify_info(){
+
+// mypage/user_info/modify_info으로 아이디를 보내고 회원정보input태그의 값을 가져와 DB에 저장
+	$.ajax({
+		 type 		: 'post'
+						 //변경할 데이터
+		,data 		: 	{id:		"ekqls1102"   // ★★★★★★★★★★★★★★★★★★★★★★★★아이디 따올 수 있게되면 바꾸기
+						,name: 		$('#name').val()
+						,nickname:	$('#nickname').val()
+						,address:	$('#address').val()
+						,tel:		$('#tel').val()
+						,introduce:	$('#introduce').val()
+					}
+		,url 		: '/mypage/user_info/modify_info'
+	//성공 시 회원정보를 다시 가져와 회원정보input태그에 출력
+		,success 	: function(){find_info();}			
+		,error 		: function(err){console.log(err);}//END of error
+	});//END of ajax
+}
+//※ END function title	:	modify_info	================================================= 
+
+
+
+//※ function title	:	modify_info_img  
+//※ function info	:	이미지 저장하는 함수
+	function modify_info_img(){
+
+//form에 이미지넣고 form을 formData에 넣기
+	var form = $("#infoimg_upload_form")[0];
+	var formData = new FormData(form);
+
+//이미지 & id 를 formData에 넣기
+	formData.append("id", "ekqls1102");
+	formData.append("file", $('#img_modify_real')[0].files[0])
+
+//mypage/user_info/modify_info_img로 formData보내기
+	 $.ajax({
+		 url : '/mypage/user_info/modify_info_img'
+	   , type : "POST"
+	   , processData : false
+	   , contentType : false
+	   , data : formData
+	   , success:function(response) {
+		//성공 시 스윗alert
+			 if(response){
+		   		swal.fire("프로필사진이 변경되었습니다!"); 
+			 } 
+			 else{
+				swal.fire("오류입니다T^T 다시 시도하시고 지속될 경우 문의해주세요!"); 
+			 }
+	   }
+	   ,error: function(err){console.log(err);}//END of error
+   });
+}
+//※ END function title	:	modify_info_img	================================================= 
+
+
+
 });//END of Open
+
+
+
 </script>
 </head>
 <body>
