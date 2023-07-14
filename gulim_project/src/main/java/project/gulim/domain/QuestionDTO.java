@@ -1,5 +1,8 @@
 package project.gulim.domain;
 
+
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +15,5 @@ public class QuestionDTO {
 	private String answer;
 	private Integer answer_state; // 답변상태 (0-미답변 / 1-답변완료)
 	private String question_type;
+	private Date question_date;
 }
