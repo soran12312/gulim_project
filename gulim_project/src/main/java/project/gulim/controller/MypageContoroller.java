@@ -227,7 +227,6 @@ public class MypageContoroller {
 	            List<QuestionDTO> quest = mypageService.find_question(question); 
 	             
 	             m.addAttribute("list", quest);
-	             
 	            return "/mypage/my_question";
 	   }
 

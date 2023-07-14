@@ -16,7 +16,7 @@
 <script type="text/javascript">
     $(function(){
         
-        
+        $.noConflict();
         $(".bxslider").bxSlider({
         touchEnabled : (navigator.maxTouchPoints > 0),
         minSlides : 1,

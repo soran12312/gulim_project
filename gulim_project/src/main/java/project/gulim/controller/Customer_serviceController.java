@@ -23,9 +23,17 @@ public class Customer_serviceController {
 	
 	@Autowired
 	private MainService mainService;
-
 	
-	@RequestMapping("/question")
+	
+	@RequestMapping("/main")
+	public String main() {
+		
+		return "/customer_service/main";
+	}
+	
+	
+	
+	@RequestMapping(value = "/question",method = RequestMethod.POST)
 	public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
 		
 		Cookie[] cookies = request.getCookies();
