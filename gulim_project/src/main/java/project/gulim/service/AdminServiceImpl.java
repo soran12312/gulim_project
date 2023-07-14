@@ -53,7 +53,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.listPost();
 	}
 	
-	@Transactional
 	public void insertAll(ContestDTO cDTO, PostDTO pDTO, ImageDTO iDTO) {
 		adminDAO.insert_1(cDTO);
 		adminDAO.insert_2(pDTO);
