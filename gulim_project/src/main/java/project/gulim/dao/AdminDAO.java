@@ -29,4 +29,16 @@ public interface AdminDAO {
 	public void insert_1(ContestDTO cDTO);
 	public void insert_2(PostDTO pDTO);
 	public void insert_3(ImageDTO iDTO);
+	public List<HashMap> playedRuleBook();
+	public List<HashMap> playedTime();
+	public List<HashMap> playedGm();
+	public List<HashMap> playedClass();
+	public List<HashMap> playedGenre();
+	public List<HashMap> playedSpecies();
+	public List<HashMap> wantedGenre();
+	public List<HashMap> otherSite();
+	public List<HashMap> preferredPropensity();
+	public List<HashMap> preferredClass();
+	public List<HashMap> preferredSpecies();
+	public List<HashMap> preferredStatsBySpecies();
 }
