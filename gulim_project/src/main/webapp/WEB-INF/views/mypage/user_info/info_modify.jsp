@@ -38,20 +38,19 @@ $(document).ready(function(){
 								$('#password_check').hide();
 								$('#mypage_info').show();
 								find_info();
+								find_info_img();
 							}
 							else {
 								Swal.fire({
 										icon: 'error',                     
   										title: '비밀번호가 틀렸습니다(T^T)',    
   										html: '다시 확인해주시고 문제가 지속되면 <br/> 고객센터로 문의해주세요.', 
-});
+								});//END of swal.fire
 							}
-						}
-						
-			//END of success
+						}//END of success
 			,error 		: function(err){console.log(err);}//END of error
 		});//END of ajax
-	});
+	});//END of password_check_btn .click
 
 //info리스트 result로 가져와서 벨류에 넣는 함수
 	function find_info(){
@@ -72,6 +71,22 @@ $(document).ready(function(){
 			,error 		: function(err){console.log(err);}//END of error
 		});//END of ajax
 	}
+
+//info 이미지 불러오는 함수
+	function find_info_img(){
+		$.ajax({
+			type		:'post'
+			,data		:{id: "ekqls1102"}
+			,url		:'/mypage/user_info/find_info_img'
+			,success	: function(result){
+				$("#img_modify_img").attr("src",result);
+			}
+			,error		: function(err){console.log(err);}//END of error
+		});
+	}
+
+
+
 //info 수정시 DB보내서 수정한 info저장하는 함수
 	function modify_info(){
 		$.ajax({
@@ -152,7 +167,6 @@ $(document).ready(function(){
 		this.value = "수정완료"
 		}
 		else{
-			alert();
 			save_img();
 			this.value = "사진수정"
 			$('#img_modify_real').hide();
@@ -160,8 +174,13 @@ $(document).ready(function(){
 		}	
 	});//END of img_modify .click
 
-	//이미지 수정 됫을때
-	$('#img_modify_real').change(function(){
+	//이미지 선택 했을때 미리보기
+	$('#img_modify_real').on("change",function(event){
+		var file = event.target.files[0];
+		var reader = new FileReader(); 
+		reader.onload = function(e) {
+		$("#img_modify_img").attr("src", e.target.result);}
+	reader.readAsDataURL(file);
 	});//END of img_modify_real .change
 
 
@@ -178,8 +197,7 @@ $(document).ready(function(){
            , contentType : false
            , data : formData
            , success:function(response) {
-               alert("성공하였습니다.");
-               console.log(response);	   
+               alert("성공하였습니다.");  
            }
            ,error: function(err){console.log(err);}//END of error
        });
@@ -233,7 +251,7 @@ $(document).ready(function(){
 		<div class ="game_back"></div>
 			<div class ="game_table">
 				<div class="my_img">
-					<img src="/files/images/no_image.jpg" id="img_modify_img">
+					<img  id="img_modify_img" src="">
 					<input type="button" class="img_modify" id='img_modify' value="사진수정"/>
 				</div>
 				

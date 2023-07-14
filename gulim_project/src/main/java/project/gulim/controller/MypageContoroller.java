@@ -66,6 +66,18 @@ public class MypageContoroller {
 		return result;
 	}
 	
+	@RequestMapping("/user_info/find_info_img")
+	@ResponseBody
+	public String find_info_img(MemberDTO member) { // 페이지 이동(DB접속없는경우)
+		String result = mypageService.find_info_img(member);
+		System.out.println(member);
+		System.out.println(result);
+			if(result == null) {
+				result = "/files/images/no_image.jpg";
+			}
+		return result;
+	}
+	
 	@RequestMapping("/user_info/modify_info")
 	@ResponseBody
 	public void modify_info(MemberDTO member) {
@@ -76,14 +88,14 @@ public class MypageContoroller {
 	@RequestMapping("/user_info/modify_info_img")
 	@ResponseBody
 	public Boolean modify_info_img(MultipartFile file, MemberDTO member,Model m) {
-		System.out.println("컨트롤러로 넘어가긴했니?");
-		
+
 		try {
 			if (file == null || file.isEmpty()) {
 	            System.out.println("파일이 첨부안됫음");
 	        }			
 			
 			String originFilename = file.getOriginalFilename();
+			
 			if(originFilename != null && !originFilename.equals("")) {
 				System.out.println("파일첨부 있음");
 				String filename = new MD5Generator(originFilename).toString();
@@ -96,6 +108,9 @@ public class MypageContoroller {
 				}
 				
 				String filepath = savePath + "\\" +filename;
+				String path ="https://localhost:8080/files/images/mypage/info_profile/" +filename;
+//나중에 최종때 변경
+				//String filepath ="https://192.168.0.68:8080/files/images/mypage/info_profile/" +filename;
 				//fillpath = "기본폴더"\files\zxxxxxxxxxxxxxxxxxxxxxx.png
 				
 				file.transferTo(new File(filepath));
@@ -106,12 +121,9 @@ public class MypageContoroller {
 				
 				HashMap map= new HashMap();
 				map.put("originFilename", originFilename);
-				map.put("filepath", filepath);
+				map.put("filepath", path);
 				map.put("id", member.getId());
-				
-				System.out.println("originFilename" +originFilename +"filepath" +filepath);
-				
-				
+							
 				Integer result = mypageService.modify_info_img(map);
 				if (result == 1) {
 					m.addAttribute("originFilename", originFilename);

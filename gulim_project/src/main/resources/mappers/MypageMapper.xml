@@ -24,9 +24,20 @@
 				,introduce 	= #{introduce}
 		WHERE 	 id = #{id}
 	</update>
+	
 	<insert id="modify_info_img" parameterType = "java.util.HashMap">
-		INSERT INTO image (origin_img_name,path,id) 
-		VALUES (#{originFilename}, #{filepath}, #{id});		
+		INSERT INTO image (origin_img_name, path, id) 
+		VALUES (#{originFilename}, #{filepath}, #{id})	
 	</insert>
+	
+	<delete id="modify_info_imgDelete" parameterType = "java.util.HashMap">
+		DELETE FROM image 
+		WHERE id = #{id}
+	</delete>
 
+	<select id ="find_info_img" parameterType="MemberDTO" resultType="String">
+		SELECT path
+		FROM image
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
@@ -27,15 +28,22 @@ public class MypageServiceImpl implements MypageService {
 		if(BCrypt.checkpw(member.getPassword(), password)) return true;
 		else return false;
 	}
-	
+
 	public Map find_info(MemberDTO member) {
 		return mypageDAO.find_info(member);
 	}
 	public void modify_info(MemberDTO member) {
 		mypageDAO.modify_info(member);
-		
 	}
+	@Transactional
 	public Integer modify_info_img(HashMap map) {
-		return mypageDAO.modify_info_img(map);
+		mypageDAO.modify_info_imgDelete(map);
+		Integer result = mypageDAO.modify_info_img(map);
+		return result;
+	}
+	public String find_info_img(MemberDTO member) {
+		String result = mypageDAO.find_info_img(member);
+		System.out.println(result + "서비스에서 받은 리절트");
+		return result;
 	}
 }

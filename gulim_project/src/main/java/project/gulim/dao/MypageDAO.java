@@ -13,10 +13,13 @@ import project.gulim.domain.MemberDTO;
 public interface MypageDAO {
 
 	public String mypage_password_check(MemberDTO member);
-
 	public Map find_info(MemberDTO member);
 	public void modify_info(MemberDTO member);
-
+	public void modify_info_imgDelete(HashMap map);
 	public Integer modify_info_img(HashMap map);
+	public String find_info_img(MemberDTO member);
+	
+
+	
 	
 }
