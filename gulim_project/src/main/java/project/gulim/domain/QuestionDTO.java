@@ -1,6 +1,7 @@
 package project.gulim.domain;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import lombok.Data;
 
