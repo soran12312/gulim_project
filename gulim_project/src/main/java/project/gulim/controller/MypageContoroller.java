@@ -51,55 +51,80 @@ public class MypageContoroller {
 	}
 
 //=========== START of 쪽지 ======================================================================================================	
-	//id기준으로 쪽지목록 불러오기
+
+//id기준으로 쪽지목록 불러오기
 	@RequestMapping("/my_message")
 	@Transactional
 	public String my_message(Model m) {
-		
-		String id = "ekqls1102";
+		String id = "ekqls1102";				//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★아이디입력
 		
 		//서비스에서  MessageDTO를 List에 담아서 쪽지내용 받아오기
 		List<MessageDTO> result = mypageService.my_message(id);
+		
+		//모델 allmessage에 쪽지목록 담기 
 		m.addAttribute("allmessage",result);
 		
 		Map nickname = new HashMap();
+		
+		//보낸 아이디옆에 출력할 닉네임 불러오기
 		for(MessageDTO message : result){
 			String send_id_name = mypageService.send_id_name(message.getSend_id());
+			
+			//key=id  value=nickname 으로 해쉬맵에 담기
 			nickname.put(message.getSend_id(), send_id_name);
 		}
+		//모델 nickname에 해쉬맵담기
 		m.addAttribute("nickname",nickname);
 		return "/mypage/my_message";
 	}
 	
-	//쪽지보내기로 이동
+	
+	
+//쪽지보내기로 이동하면서 아이디 가져가기
 	@RequestMapping("/send_message")
 	public String send_message(String send_id, Model m) {
-		System.out.println(send_id+ "왜안조");
+		//보낸사람이 null일경우 빈공간으로(바로 쪽지보내기눌렀을 경우)
 		if(send_id == null) {
 			send_id="";
 		}
-			m.addAttribute("send_id", send_id);
-			return "/mypage/send_message";
+		
+		//모델에 받은사람 아이디 담기(답글에서 바로 아이디 출력)
+		m.addAttribute("send_id", send_id);
+		return "/mypage/send_message";
 	}
-	//쪽지상세보기로 이동
+	
+	
+	
+//쪽지상세보기로 이동
 	@RequestMapping("/detail_message")
 	public String detail_message(Integer num, Model m) {
+		//글넘버 가지고 서비스단으로 이동해서 해당 메세지데이터 가져오기
 		MessageDTO message = mypageService.detail_message(num);
-		System.out.println(message);
+		
+		//모델에 메세지 담기
 		m.addAttribute("message", message);
 		return "/mypage/detail_message";
 	}
-	//쪽지 보내기
+	
+
+	
+//쪽지 보내기
 	@RequestMapping("/save_message")
-	public String save_message(@RequestParam ("message_title") String message_title, @RequestParam("receive_id") String receive_id, @RequestParam("message_content") String message_content){
-		String send_id ="ekqls1102";  
+	public String save_message(@RequestParam ("message_title") String message_title, 
+								@RequestParam("receive_id") String receive_id, 
+								@RequestParam("message_content") String message_content){
 		
+		
+		String send_id ="ekqls1102";  				//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★아이디입력
+		
+		//쪽지 내용 해쉬맵에 담기
 		HashMap map = new HashMap();
 		map.put("message_title", message_title);
 		map.put("receive_id", receive_id);
 		map.put("message_content", message_content);
 		map.put("send_id", send_id);
 		
+		//쪽지내용들고 DB로 이동
 		mypageService.save_message(map);
 	return "/mypage/my_message";	
 	}

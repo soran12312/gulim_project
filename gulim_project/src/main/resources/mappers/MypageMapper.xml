@@ -5,43 +5,51 @@
 <mapper namespace="project.gulim.dao.MypageDAO">
 
 <!--=========== START of 쪽지 ======================================================================================================-->
+<!-- 받은 쪽지 리스트 불러오기 -->
 	<select id="my_message" parameterType="String" resultType="MessageDTO">
 		SELECT *
 		FROM message
 		WHERE receive_id = #{id}
 		ORDER BY message_num desc
 	</select>
-	<insert id="save_message" parameterType = "java.util.HashMap">
-		INSERT INTO message (send_id, receive_id, message_title, message_content) 
-		VALUES (#{send_id}, #{receive_id}, #{message_title}, #{message_content})	
-	</insert>
+	
+<!-- 보낸 아이디옆에 닉네임 띄우기 -->
 	<select id="send_id_name" parameterType="String" resultType="String">
 		SELECT nickname
 		FROM member
 		WHERE id = #{send_id}
 	</select>
+	
+<!-- 쪽지 보내기 -->
+	<insert id="save_message" parameterType = "java.util.HashMap">
+		INSERT INTO message (send_id, receive_id, message_title, message_content) 
+		VALUES (#{send_id}, #{receive_id}, #{message_title}, #{message_content})	
+	</insert>
+	
+<!-- 메세지 상세보기 -->
 	<select id="detail_message" parameterType="Integer" resultType="MessageDTO">
 		SELECT *
 		FROM message
 		WHERE message_num = #{num}
 	</select>
-	
-	
-
 <!--=========== END of 쪽지 =====================================================================================================-->
 
+
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
+<!-- 희원정보창들어갔을때 아이디체크 -->
 	<select id="mypage_password_check" parameterType="MemberDTO" resultType="String">
 		SELECT password FROM member
 		WHERE id=#{id} 
 	</select>
 	
+<!-- 회원정보 가져오기 -->
 	<select id="find_info" parameterType="MemberDTO" resultType="Map">
 		SELECT name,address,tel,email,nickname,birthday,introduce
 		FROM member
 		WHERE id=#{id}
 	</select>
 	
+<!-- 회원정보 수정 -->
 	<update id="modify_info" parameterType="MemberDTO">
 		UPDATE 	 member 
 		SET		 name		= #{name}
@@ -52,16 +60,19 @@
 		WHERE 	 id = #{id}
 	</update>
 	
+<!-- 프로필 사진 입력 -->
 	<insert id="modify_info_img" parameterType = "java.util.HashMap">
 		INSERT INTO image (origin_img_name, path, id) 
 		VALUES (#{originFilename}, #{filepath}, #{id})	
 	</insert>
 	
+<!-- 프로필 사진 있으면 삭제 -->
 	<delete id="modify_info_imgDelete" parameterType = "java.util.HashMap">
 		DELETE FROM image 
 		WHERE id = #{id}
 	</delete>
 
+<!-- 프로필 사진 불러오기 -->
 	<select id ="find_info_img" parameterType="MemberDTO" resultType="String">
 		SELECT path
 		FROM image
