@@ -1,9 +1,9 @@
 package project.gulim.controller;
 
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -82,16 +82,19 @@ public class CommunityController {
 
 	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
 	            String originImageName = generateUniqueFileName();
-	            String imagePath = "/images/gulim/";
+	            String imagePath = "C:/Users/"+System.getProperty("user.name")+"/Pictures/gulim/";
 	            int imageSize = imageData.length;
+	            
+	            String baseURL = request.getRequestURL().toString();
+	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/community"));
 
 	            // 이미지 파일 저장
 	            saveImageFile(imageData, imagePath, originImageName);
 
 	            // 이미지 정보 설정
 	            ImageDTO img = new ImageDTO();
-	            img.setOrigin_img_name(originImageName);
-	            img.setPath(imagePath);
+	            img.setOrigin_img_name(originImageName + ".png");
+	            img.setPath(basePath + "/imagePath");
 	            img.setImg_size(imageSize);
 	            
 	            if (cookies != null) {
@@ -105,7 +108,7 @@ public class CommunityController {
 				
 				Claims claims = mainService.getClaims(jwtToken);
 				
-//				System.out.println(claims);
+//					System.out.println(claims);
 				String id = claims.get("id", String.class);      // 로그인한 사용자 id
 				params.setId(id);                                // 
 				
@@ -137,7 +140,7 @@ public class CommunityController {
 			
 			Claims claims = mainService.getClaims(jwtToken);
 			
-//			System.out.println(claims);
+//				System.out.println(claims);
 			String id = claims.get("id", String.class);      // 로그인한 사용자 id
 			params.setId(id);                                // 
 			
@@ -148,7 +151,7 @@ public class CommunityController {
 	    }
 	    
 	    return "redirect:/community/free_board_list";
-	    
+		    
 	}
 	
 
@@ -161,18 +164,18 @@ public class CommunityController {
 	}
 
 	// 이미지 파일 저장 메서드
-//	private void saveImageFile(byte[] imageData, String imagePath, String imageName) {
-//	    // 이미지 파일 저장 로직 구현
-//	    // 예시: 파일 시스템 경로에 이미지 파일 저장
-//	    String filePath = imagePath + imageName + ".png";
-//	    try (OutputStream outputStream = new FileOutputStream(filePath)) {
-//	        outputStream.write(imageData);
-//	    } catch (IOException e) {
-//	        // 파일 저장 실패 시 예외 처리
-//	        e.printStackTrace();
-//	        e.getMessage();
-//	    }
-//	}
+	private void saveImageFile(byte[] imageData, String imagePath, String imageName) {
+	    // 이미지 파일 저장 로직 구현
+	    // 예시: 파일 시스템 경로에 이미지 파일 저장
+	    String filePath = imagePath + imageName + ".png";
+	    try (OutputStream outputStream = new FileOutputStream(filePath)) {
+	        outputStream.write(imageData);
+	    } catch (IOException e) {
+	        // 파일 저장 실패 시 예외 처리
+	        e.printStackTrace();
+	        e.getMessage();
+	    }
+	}
 	
 	
 	// 이미지 파일 저장
@@ -196,26 +199,26 @@ public class CommunityController {
 	
 	
 	// 이미지 파일 저장
-	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
-	    try {
-	        // 서버 내 저장 경로
-	        String serverPath = servletContext.getRealPath(imagePath);
-
-	        // 저장 디렉토리 생성
-	        File directory = new File(serverPath);
-	        if (!directory.exists()) {
-	            directory.mkdirs();
-	        }
-
-	        // 이미지 파일 생성
-	        File imageFile = new File(serverPath + fileName + ".png");
-	        FileOutputStream fos = new FileOutputStream(imageFile);
-	        fos.write(imageData);
-	        fos.close();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
+//	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
+//	    try {
+//	        // 서버 내 저장 경로
+//	        String serverPath = servletContext.getRealPath(imagePath);
+//
+//	        // 저장 디렉토리 생성
+//	        File directory = new File(serverPath);
+//	        if (!directory.exists()) {
+//	            directory.mkdirs();
+//	        }
+//
+//	        // 이미지 파일 생성
+//	        File imageFile = new File(serverPath + fileName + ".png");
+//	        FileOutputStream fos = new FileOutputStream(imageFile);
+//	        fos.write(imageData);
+//	        fos.close();
+//	    } catch (IOException e) {
+//	        e.printStackTrace();
+//	    }
+//	}
 	
 	
 	// 썸머노트 파라미터로 넘어간 내용에서 <img> 태그 제거

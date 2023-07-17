@@ -487,7 +487,7 @@
                                         <textarea class="form-control summernote" name="post_content" >${post.post_content}
 	                                        <c:forEach var="image" items="${images}">
 	                                        	<div class="note-editable card-block" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" style="height: 300px;">
-	                                        		<p><img src="/images/gulim/${image.origin_img_name}.png" data-filename="images.png" style="width: 168px;"></p>
+	                                        		<p><img src="/imagePath/${image.origin_img_name}" data-filename="images.png" style="width: 168px;"></p>
 	                                        	</div>
 											    
 											</c:forEach>
