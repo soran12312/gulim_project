@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,8 +72,10 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/sales_stats" class="tab_active">판매 통계</a></li>
                                     <li><a href="/admin/delivery_refund" class="tab_inactive">환불</a></li>
                                   </ul>  
@@ -175,8 +178,6 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                         class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
@@ -184,6 +185,7 @@
                     <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
@@ -210,6 +212,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
@@ -221,7 +224,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-12 col-sm-12">
+                            <!-- chart_year start -->
+                            <div class="chart_year col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <button id="btn_year" class="btn btn-square btn-dark">전체</button>
@@ -238,7 +242,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-sm-12">
+                            <!-- chart_year end -->
+                            <!-- chart_quarter start -->
+                            <div class="chart_quarter col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_quarter">
@@ -258,7 +264,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-sm-12">
+                            <!-- chart_quarter end -->
+                            <!-- chart_month start -->
+                            <div class="chart_month col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_month">
@@ -278,7 +286,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-sm-12">
+                            <!-- chart_month end -->
+                            <!-- chart_day start -->
+                            <div class="chart_day col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_day">
@@ -299,6 +309,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- chart_day end -->
                         </div>
                     </div>
                 </div>

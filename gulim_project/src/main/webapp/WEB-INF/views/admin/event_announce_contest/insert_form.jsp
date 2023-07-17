@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/admin/vendor/pickadate/themes/default.date.css">
     <!-- Custom Stylesheet -->
     <link href="/admin/css/style.css" rel="stylesheet">
-    <!-- 내가 만든 css -->
+    <!-- 관리자 전용 css -->
     <link href="/admin/css/admin.css" rel="stylesheet">
     <!-- Summernote -->
     <link href="/admin/vendor/summernote/summernote.css" rel="stylesheet">
@@ -62,6 +62,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -83,9 +84,11 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
                                     <li><a href="/admin/view_list" class="tab_inactive">관리자 글목록</a></li>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/insert_form" class="tab_active">글 작성</a></li>
                                   </ul>  
                             </div>
@@ -185,10 +188,9 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
@@ -199,6 +201,7 @@
                     <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
@@ -222,13 +225,15 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
-                            <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
+                            <li class="breadcrumb-item"><a id="category_big" href="/admin/view_list"></a></li>
+                            <li class="breadcrumb-item active"><a id="category_small" href="/admin/insert_form"></a></li>
                         </ol>
                     </div>
                 </div>
                 <!-- row -->
+                <!-- form 태그(POST) start -->
                 <form action="/admin/insert" method="POST">
                     <div class="row">
                         <div class="card col-sm-12 p-md-12">
@@ -238,6 +243,7 @@
                                         <div class="card-body">
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                    <!-- 게시글 제목 입력 -->
                                                     <p class="mb-1">제목</p>
                                                     <input type="text" class="form-control input-default" placeholder="제목을 입력하시오.">
                                                 </div>
@@ -246,6 +252,7 @@
                                     </td>
                                     <td colspan="2">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                        <!-- 게시판 종류 선택 -->
                                         <p class="mb-1">게시판 종류</p>
                                         <select id="inputState" class="form-control">
                                             <option>공지사항</option>
@@ -258,6 +265,7 @@
                                 <tr>
                                     <td colspan="7">
                                         <div style="position: relative; right: -18px; width: 550px;">
+                                            <!-- 이미지 추가 -->
                                             <p class="mb-1">이미지 추가</p>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="customFile">
@@ -267,12 +275,14 @@
                                     </td>
                                     <td colspan="2">
                                         <div class="card-body" style="position: relative; right: -18px; width: 230px;">
+                                            <!-- 공모전의 시작일 설정 -->
                                             <p class="mb-1">시작일</p>
                                             <input name="datepicker" class="datepicker-default form-control" id="datepicker" placeholder="시작일 선택">
                                         </div>
                                     </td>
                                     <td colspan="2">
                                         <div class="card-body" style="width: 230px;">
+                                            <!-- 공모전의 종료일 설정 -->
                                             <p class="mb-1">종료일</p>
                                             <input name="datepicker" class="datepicker-default form-control" id="datepicker" placeholder="종료일 선택">
                                         </div>
@@ -281,6 +291,7 @@
                                 <tr>
                                     <td colspan="11">
                                         <div class="card-body">
+                                            <!-- 게시글 본문 내용 입력 -->
                                             <p class="mb-1">본문 내용</p>
                                             <div class="summernote"></div>
                                         </div>
@@ -288,11 +299,13 @@
                                 </tr>
                             </table>
                             <div style="margin-bottom: 20px; text-align:right; position: relative; right: 19px;">
+                                <!-- 글 작성 버튼 -->
                                 <button type="submit" class="btn btn-outline-success">글 작성</button>
                             </div>
                         </div>
                     </div>
                 </form>
+                <!-- form 태그(POST) end -->
             </div>
         </div>
         <!--**********************************

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PlaceDTO {
-	
+
 	private Integer place_num;
 	private String place_name;
 	private String category;

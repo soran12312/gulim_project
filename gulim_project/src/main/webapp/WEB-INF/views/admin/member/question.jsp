@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,7 +19,7 @@
     <link href="/admin/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 크롬 탭의 아이콘 -->
     <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
-    <!-- 내가 만든 css -->
+    <!-- 관리자 전용 css -->
     <link href="/admin/css/admin.css" rel="stylesheet">
 
 </head>
@@ -75,7 +75,8 @@
                             <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
-                                    <li><a href="/admin/question" class="tab_active">문의사항 답변</a></li> <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
+                                    <li><a href="/admin/question" class="tab_active">문의사항 답변</a></li>
                                     <li><a href="/admin/member_management" class="tab_inactive">제재관리</a></li>
                                   </ul>  
                             </div>
@@ -178,8 +179,9 @@
                 <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/question"><i    
-                                class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a> <!-- 현재 선택된 회원관리 -->
+                                class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
                     
                     <li><a href="/admin/place_list"><i
@@ -213,9 +215,10 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
-                            <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
+                            <li class="breadcrumb-item"><a id="category_big" href="/admin/question"></a></li>
+                            <li class="breadcrumb-item active"><a id="category_small" href="/admin/question"></a></li>
                         </ol>
                     </div>
                 </div>
@@ -230,6 +233,7 @@
                             </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- questionTable start -->
                                         <table id="example" class="display questionTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -242,14 +246,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listQuestion}" var="lq">
                                                     <tr class="answer-link">
-                                                        
+                                                        <%-- ID --%>
                                                         <td style="width: 110px;">${lq.id}</td>
+                                                        <%-- 제목 --%>
                                                         <td style="width: 165px;height: auto;">${lq.question_title}</td>
+                                                        <%-- 문의내용 --%>
                                                         <td style="width: 465px;display: inline-block; vertical-align: top; height: auto;">
                                                             ${lq.question_content}
                                                         </td>
+                                                        <%-- 답변(상태) --%>
                                                         <td style="width: 140px;">
                                                             <c:choose>
                                                                 <c:when test="${lq.answer_state eq 0}">
@@ -260,12 +268,16 @@
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </td>
+                                                        <%-- 답변내용: js에 값 끌어오기 용, 화면에 출력 X --%>
                                                         <td hidden>${lq.answer}</td>
+                                                        <%-- 문의번호: js에 값 끌어오기 용, 없음 --%>
                                                         <td id="question_num" hidden>${lq.question_num}</td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                             </tbody>
                                         </table>
+                                        <!-- questionTable end -->
                                     </div>
                                 </div>
                             
@@ -319,17 +331,6 @@
 
     <!-- 관리자 전용 js -->
     <script src="/admin/js/admin.js"></script>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(function(){
-
-        }); // end of $
-    </script>
 
 </body>
 

@@ -19,7 +19,7 @@
     <link href="/admin/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 크롬 탭의 아이콘 -->
     <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
-    <!-- 내가 만든 css -->
+    <!-- 관리자 전용 css -->
     <link href="/admin/css/admin.css" rel="stylesheet">
 
 </head>
@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,8 +72,10 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/question" class="tab_active">상품 등록 및 수정</a></li>
                                   </ul>  
                             </div>
@@ -172,10 +175,9 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
@@ -189,7 +191,7 @@
                     <li><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
-
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/product_list"><i
                         class="icon icon-plug"></i><span class="nav-text">상품 및 서비스 관리</span></a>
                     </li>
@@ -211,9 +213,10 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
-                            <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
+                            <li class="breadcrumb-item"><a id="category_big" href="/admin/product_list"></a></li>
+                            <li class="breadcrumb-item active"><a id="category_small" href="/admin/product_list"></a></li>
                         </ol>
                     </div>
                 </div>
@@ -229,6 +232,7 @@
                             <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- productTable start -->
                                         <table id="example" class="display productTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -239,30 +243,40 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listProduct}" var="lpr">
                                                     <tr class="product-link">
+                                                        <%-- 상품 이미지 --%>
                                                         <td><img width="80" height="80" src="${lpr.path}"/></td>
+                                                        <%-- 상품명 --%>
                                                         <td>${lpr.book_title}</td>
                                                         <td>
+                                                            <%-- taglib choose start --%>
                                                             <c:choose>
+                                                                <%-- 상태가 판매중일 경우 --%>
                                                                 <c:when test="${lpr.sale_state eq 0}">
                                                                     <span data-value="0" class="badge badge-success">판매중</span>
                                                                 </c:when>
+                                                                <%-- 상태 품절일 경우 --%>
                                                                 <c:when test="${lpr.sale_state eq 1}">
                                                                     <span data-value="1" class="badge badge-danger">품절</span>
                                                                 </c:when>   
                                                             </c:choose>
+                                                            <%-- taglib choose end --%>
                                                         </td>
+                                                        <%-- 재고 수량 --%>
                                                         <td>${lpr.stock}</td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                                     <tfoot>
                                                         <tr>
                                                             <th colspan="3"></th>
                                                             <th>
                                                                 <div style="text-align: right;">
+                                                                    <%-- 상품등록 --%>
                                                                     <button class="btn btn-rounded btn-success"><a href="/admin/product_insert" style="color: white;">상품등록</a></button>
+                                                                    <%-- 수정 --%>
                                                                     <button class="btn btn-rounded btn-dark"><a href="/admin/product_modify" style="color: white;">수정</a></button>
                                                                 </div>
                                                             </th>
@@ -270,6 +284,7 @@
                                                     </tfoot>
                                             </tbody>
                                         </table>
+                                        <!-- productTable end -->
                                     </div>
                                 </div>
                             </form>

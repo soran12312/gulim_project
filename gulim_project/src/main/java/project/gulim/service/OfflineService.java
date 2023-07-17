@@ -10,19 +10,17 @@ import project.gulim.domain.PlaceDTO;
 
 @Service
 public class OfflineService {
-	
+
 	@Autowired
 	private OfflineDAO offlineDAO;
-	
-	public List<PlaceDTO> getMarker(PlaceDTO vo){
-		
+
+	public List<PlaceDTO> getMarker(PlaceDTO vo) {
+
 		return offlineDAO.mapMarker(vo);
 	}
-	
-	public List<PlaceDTO> showPartnership(PlaceDTO vo){
+
+	public List<PlaceDTO> showPartnership(PlaceDTO vo) {
 		return offlineDAO.showPartnership(vo);
 	}
-	
-	
-	
+
 }

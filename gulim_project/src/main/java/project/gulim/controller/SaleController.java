@@ -6,18 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SaleController {
-	
-	//구독권 설정집 선택 페이지
+
+	// 구독권 설정집 선택 페이지
 	@RequestMapping("/sale")
-	public String Book()
-	{
+	public String Book() {
 		return "sale/sale_main";
 	}
-	
+
 	// 구독 페이지
 	@RequestMapping("/subscribe")
-	public String subscribe()
-	{
+	public String subscribe() {
 		return "sale/subscribe/subscribe";
 	}
 

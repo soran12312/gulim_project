@@ -13113,16 +13113,16 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .ct-chart .ct-label {
   fill: #a3afb7;
   color: #a3afb7;
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   line-height: 1; }
 
 .ct-grid {
   stroke: rgba(49, 58, 70, 0.1); }
 
 .ct-chart.simple-pie-chart-chartist .ct-label {
-  color: #ffffff;
-  fill: #ffffff;
-  font-size: 0.725rem; }
+  color: #000000;
+  fill: #000000;
+  font-size: 0.90rem; }
 
 .ct-chart .ct-series.ct-series-a .ct-bar,
 .ct-chart .ct-series.ct-series-a .ct-line,

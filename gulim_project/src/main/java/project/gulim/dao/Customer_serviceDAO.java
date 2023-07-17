@@ -6,7 +6,7 @@ import project.gulim.domain.QuestionDTO;
 
 @Mapper
 public interface Customer_serviceDAO {
-	
+
 	public void send_question(QuestionDTO questionDTO);
 
 }

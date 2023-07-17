@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChatingDTO {
-	
+
 	private Integer room_num;
 	private String room_name;
 	private String create_date;

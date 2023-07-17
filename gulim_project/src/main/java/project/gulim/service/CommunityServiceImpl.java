@@ -15,28 +15,28 @@ import project.gulim.domain.PostDTO;
 
 @Service
 @RequiredArgsConstructor
-public class CommunityServiceImpl implements CommunityService{
-	
+public class CommunityServiceImpl implements CommunityService {
+
 	@Autowired
 	private final CommunityDAO communityDAO;
 	@Autowired
 	private ServletContext servletContext;
-	
+
 	/**
-     * 게시글 저장
-     * @param params - 게시글 정보
-     * @return Generated PK
-     */
+	 * 게시글 저장
+	 * 
+	 * @param params - 게시글 정보
+	 * @return Generated PK
+	 */
 	public void savePost(PostDTO params) {
 		// TODO Auto-generated method stub
-		
+
 		communityDAO.save(params);
 	}
 
-	
-
 	/**
 	 * 게시글 상세정보 조회
+	 * 
 	 * @param post_num
 	 * @return 게시글 상세정보
 	 */
@@ -47,24 +47,25 @@ public class CommunityServiceImpl implements CommunityService{
 		return communityDAO.findByNum(post_num);
 	}
 
-	
 	/**
-     * 게시글 수정
-     * @param params - 게시글 정보
-     * @return PK
-     */
+	 * 게시글 수정
+	 * 
+	 * @param params - 게시글 정보
+	 * @return PK
+	 */
 	@Override
 	public void updatePost(PostDTO params) {
 		// TODO Auto-generated method stub
-		communityDAO.update(params);;
+		communityDAO.update(params);
+		;
 	}
 
-	
-	 /**
-     * 게시글 삭제
-     * @param post_num - PK
-     * @return PK
-     */
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param post_num - PK
+	 * @return PK
+	 */
 	@Override
 	public int deletePost(Integer post_num) {
 		// TODO Auto-generated method stub
@@ -72,18 +73,16 @@ public class CommunityServiceImpl implements CommunityService{
 		return post_num;
 	}
 
-	
 	/**
-     * 게시글 리스트 조회
-     * @return 게시글 리스트
-     */
+	 * 게시글 리스트 조회
+	 * 
+	 * @return 게시글 리스트
+	 */
 	@Override
 	public List<PostDTO> findPostsByPage(int start, int size) {
 		// TODO Auto-generated method stub
 		return communityDAO.findAll(start, size);
 	}
-
-
 
 	// 공지
 	@Override
@@ -92,26 +91,22 @@ public class CommunityServiceImpl implements CommunityService{
 		return communityDAO.findAnnounce();
 	}
 
-
-
 	/**
-     * 게시글 수 조회
-     * @return 게시글 수
-     */
+	 * 게시글 수 조회
+	 * 
+	 * @return 게시글 수
+	 */
 	@Override
 	public int countAllPosts() {
 		// TODO Auto-generated method stub
 		return communityDAO.count();
 	}
 
-
-
 	@Override
 	public List<PostDTO> findAllPost() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Transactional
 	@Override
@@ -124,26 +119,20 @@ public class CommunityServiceImpl implements CommunityService{
 //		{
 //			image.setPost_num(post_num);
 //        }
-		
+
 		communityDAO.saveImage(imge);
 	}
-
-
 
 	@Override
 	public List<ImageDTO> findImagesByPostNum(Integer post_num) {
 		return communityDAO.findImagesByPostNum(post_num);
 	}
 
-
-
 	@Override
 	public List<ImageDTO> updateImage(ImageDTO img) {
 		// TODO Auto-generated method stub
 		return communityDAO.updateImage(img);
 	}
-
-
 
 	// 이벤트 게시글 리스트
 	@Override
@@ -152,18 +141,10 @@ public class CommunityServiceImpl implements CommunityService{
 		return communityDAO.findAllEvent();
 	}
 
-
-
 	@Override
 	public List<ImageDTO> findEventImg() {
 		// TODO Auto-generated method stub
 		return communityDAO.findEventImg();
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

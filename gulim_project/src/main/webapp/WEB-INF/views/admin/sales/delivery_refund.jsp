@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>판매 통계</title>
+    <title>환불</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
     <!-- Datatable -->
@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,9 +72,11 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
                                     <li><a href="/admin/sales_stats" class="tab_inactive">판매 통계</a></li>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/delivery_refund" class="tab_active">환불</a></li>
                                   </ul>  
                             </div>
@@ -173,10 +176,9 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
@@ -184,6 +186,7 @@
                     <li><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
@@ -210,6 +213,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
@@ -228,6 +232,7 @@
                             <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- refundTable start -->
                                         <table id="example" class="display refundTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -235,40 +240,48 @@
                                                     <th>ID</th>
                                                     <th>주문일자</th>
                                                     <th>상품명</th>
-                                                    <th>사용자</th>
                                                     <th>상태</th>
                                                     <th>결제금액</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listRefund}" var="lf">
                                                     <tr class="refund-link">
+                                                        <%-- 주문번호 --%>
                                                         <td>${lf.basket_num}</td>
+                                                        <%-- ID --%>
                                                         <td>${lf.id}</td>
+                                                        <%-- 주문일자 --%>
                                                         <td>${lf.purchase_date}</td>
+                                                        <%-- 상품명 --%>
                                                         <td>${lf.book_title}</td>
-                                                        <td>${lf.id}</td>
                                                         <td>
                                                             <select class="selectRefund" style="border: 0px; background-color:#ffffff;">
+                                                                <%-- taglib choose start --%>
                                                                 <c:choose>
+                                                                    <%-- 상태가 배송대기일 경우 --%>
                                                                     <c:when test="${lf.delivery_state eq '배송대기'}">
                                                                         <option selected value="배송대기">배송대기</option>
                                                                         <option value="배송완료">배송완료</option>  
                                                                         <option value="반품신청">반품신청</option>
                                                                         <option value="반품완료">반품완료</option>                                                                        
                                                                     </c:when>
+                                                                    <%-- 상태가 배송완료일 경우 --%>
                                                                     <c:when test="${lf.delivery_state eq '배송완료'}">
                                                                         <option value="배송대기">배송대기</option>
                                                                         <option selected value="배송완료">배송완료</option>  
                                                                         <option value="반품신청">반품신청</option>
                                                                         <option value="반품완료">반품완료</option>                                                                        
                                                                     </c:when>
+                                                                    <%-- 상태가 반품신청일 경우 --%>
                                                                     <c:when test="${lf.delivery_state eq '반품신청'}">
                                                                         <option value="배송대기">배송대기</option>
                                                                         <option value="배송완료">배송완료</option>  
                                                                         <option selected value="반품신청">반품신청</option>
                                                                         <option value="반품완료">반품완료</option>                                                                        
                                                                     </c:when>
+                                                                    <%-- 상태가 반품완료일 경우 --%>
                                                                     <c:when test="${lf.delivery_state eq '반품완료'}">
                                                                         <option value="배송대기">배송대기</option>
                                                                         <option value="배송완료">배송완료</option>  
@@ -276,11 +289,14 @@
                                                                         <option selected value="반품완료">반품완료</option>                                                                        
                                                                     </c:when>
                                                                 </c:choose>
+                                                                <%-- taglib choose end --%>
                                                             </select>
                                                         </td>
+                                                        <%-- 결제금액 --%>
                                                         <td>${lf.price}</td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                             </tbody>
                                         </table>
                                     </div>

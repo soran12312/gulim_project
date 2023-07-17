@@ -6,21 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BookController {
-	
-	
-	
-	
+
 	@RequestMapping("/book")
-	public String Book()
-	{
+	public String Book() {
 		return "sale/book/book_list";
 	}
-	
-	
+
 	// 장바구니
 	@RequestMapping("/cart")
-	public String Cart()
-	{
+	public String Cart() {
 		return "sale/book/basket";
 	}
 

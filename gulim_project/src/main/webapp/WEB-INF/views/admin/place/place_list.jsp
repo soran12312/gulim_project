@@ -19,7 +19,7 @@
     <link href="/admin/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 크롬 탭의 아이콘 -->
     <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
-    <!-- 내가 만든 css -->
+    <!-- 관리자 전용 css -->
     <link href="/admin/css/admin.css" rel="stylesheet">
 
 </head>
@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,8 +72,10 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/place_list" class="tab_active">제휴 관리</a></li>
                                   </ul>  
                             </div>
@@ -172,14 +175,13 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                                 class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
-                    
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/place_list"><i
                                 class="icon icon-world-2"></i><span class="nav-text">모임장소 관리</span></a>
                     </li>
@@ -211,6 +213,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
@@ -224,13 +227,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
+                                <!-- 전체보기 버튼 -->
                                 <button class="showAll btn btn-square btn-dark">전체보기</button>
+                                <!-- 제휴여부가 제휴중인 카페만 보기 버튼 -->
                                 <button class="showAffiliateOnly btn  btn-square btn-success">제휴카페</button>
                                 <a class="col-10"></a>
                             </div>
-                            
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- placeTable start -->
                                         <table id="example" class="display placeTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -241,26 +246,35 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listPlace}" var="lp">
                                                     <tr class="place-link">
+                                                        <%-- 카페명 --%>
                                                         <td>${lp.place_name}</td>
+                                                        <%-- 주소 --%>
                                                         <td>${lp.place_address}</td>
+                                                        <%-- 전화번호 --%>
                                                         <td>${lp.tel}</td>
                                                         <td>
+                                                            <%-- taglib choose start --%>
                                                             <c:choose>
+                                                                <%-- 제휴 여부가 제휴아님일 경우 --%>
                                                                 <c:when test="${lp.partnership eq 0}">
                                                                     <span data-value="0" class="badge badge-danger">제휴아님</span>
                                                                 </c:when>
+                                                                <%-- 제휴 여부가 제휴중일 경우 --%>
                                                                 <c:when test="${lp.partnership eq 1}">
                                                                     <span data-value="1" class="badge badge-success">제휴중</span>
                                                                 </c:when>   
                                                             </c:choose>
+                                                            <%-- taglib choose end --%>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                             </tbody>
                                         </table>
+                                        <!-- placeTable end -->
                                     </div>
                                 </div>
                         </div>

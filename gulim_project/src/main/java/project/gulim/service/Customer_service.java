@@ -8,14 +8,12 @@ import project.gulim.domain.QuestionDTO;
 
 @Service
 public class Customer_service {
-	
-	
+
 	@Autowired
 	private Customer_serviceDAO customer_serviceDAO;
-	
-	
+
 	public void send_question(QuestionDTO questionDTO) {
 		customer_serviceDAO.send_question(questionDTO);
 	}
-	
+
 }

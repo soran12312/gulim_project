@@ -10,6 +10,6 @@ import project.gulim.domain.PlaceDTO;
 public interface OfflineDAO {
 
 	public List<PlaceDTO> mapMarker(PlaceDTO vo);
-	
+
 	public List<PlaceDTO> showPartnership(PlaceDTO vo);
 }

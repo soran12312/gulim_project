@@ -14,31 +14,26 @@ import project.gulim.service.OfflineService;
 @Controller
 @RequestMapping("/offline")
 public class OfflineController {
-	
+
 	@Autowired
 	private OfflineService offlineService;
 
 	@RequestMapping("/map")
-	public String find_place(Model m,PlaceDTO vo){
-		
+	public String find_place(Model m, PlaceDTO vo) {
+
 		List<PlaceDTO> Marker = offlineService.getMarker(vo);
-		
-		m.addAttribute("Marker",Marker);
-		
-		
+
+		m.addAttribute("Marker", Marker);
+
 		return "/offline/find_place";
 	}
-	
-	
+
 	@RequestMapping("/show_partnership")
 	@ResponseBody
 	public List<PlaceDTO> showPartnership(PlaceDTO vo) {
-	    List<PlaceDTO> showPartnership = offlineService.showPartnership(vo);
-	 
-	    
-	    return showPartnership;
+		List<PlaceDTO> showPartnership = offlineService.showPartnership(vo);
+
+		return showPartnership;
 	}
 
-	
-	
 }
