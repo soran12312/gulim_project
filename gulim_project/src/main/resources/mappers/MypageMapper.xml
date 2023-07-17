@@ -13,13 +13,21 @@
 		ORDER BY message_num desc
 	</select>
 	
-<!-- 보낸 아이디옆에 닉네임 띄우기 -->
-	<select id="send_id_name" parameterType="String" resultType="String">
-		SELECT nickname
-		FROM member
-		WHERE id = #{send_id}
+<!-- 보낸 쪽지 리스트 불러오기 -->
+	<select id="my_message2" parameterType="String" resultType="MessageDTO">
+		SELECT *
+		FROM message
+		WHERE send_id = #{id}
+		ORDER BY message_num desc
 	</select>
 	
+<!-- 보낸 아이디옆에 닉네임 띄우기 -->
+	<select id="nick_same_id" parameterType="String" resultType="String">
+		SELECT nickname
+		FROM member
+		WHERE id = #{nick_same_id}
+	</select>
+
 <!-- 쪽지 보내기 -->
 	<insert id="save_message" parameterType = "java.util.HashMap">
 		INSERT INTO message (send_id, receive_id, message_title, message_content) 
@@ -32,8 +40,28 @@
 		FROM message
 		WHERE message_num = #{num}
 	</select>
+	
+<!-- 메세지 삭제 -->
+	<select id="message_delete" parameterType="Integer" resultType="MessageDTO">
+		DELETE FROM message 
+		WHERE message_num = #{num}
+	</select>
+	
+	
+	
+	
 <!--=========== END of 쪽지 =====================================================================================================-->
-
+<!--=========== START of 캘린더 =====================================================================================================-->
+	<insert id="select_evt" parameterType = "CalenderDTO">
+		INSERT INTO calender (id, calender_date, calender_title, calender_content) 
+		VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})	
+	</insert>
+	<select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
+		SELECT * 
+		FROM calender
+		WHERE id=#{id}
+	</select>
+<!--=========== END of 캘린더 ======================================================================================================-->
 
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
 <!-- 희원정보창들어갔을때 아이디체크 -->

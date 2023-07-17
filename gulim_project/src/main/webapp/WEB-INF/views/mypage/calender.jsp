@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +19,36 @@
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script type="text/javascript">
 
+
+
+
+function find_evt(){
+			$.ajax({
+					url: '/mypage/find_evt',
+					type: 'POST',
+					success: function(result) {
+						
+
+
 /* 캘린더 설정 */
 document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth'
           
-          /* 날짜 선택가능 */
+          // 날짜 선택가능
           ,selectable: true
           
-          /* 한글패치*/
+          // 한글패치
           ,locale: 'kr'
           
-          /* 캘린더 스크롤 */
+          // 캘린더 스크롤 
           ,Boolean, default: true
           
-          /* date 높이? */
+          // date 높이? 
           ,contentHeight: 600
           
-          /* 날짜옆에 '일' 글자 없애기 */
+          // 날짜옆에 '일' 글자 없애기 
 		  ,dayCellContent: function(info){
 		  		var number = document.createElement("a");
 		  		number.classList.add("fc-daygrid-day-number");
@@ -51,30 +63,37 @@ document.addEventListener('DOMContentLoaded', function() {
 		   content:info.event._def.title,
 		   placement:"bottom",
 		   offset:[0,0],
-		   interactive:true,})}      
+		   interactive:true,})}  
+
+		   ,eventDidMount: function(info) {
+            	tippy(info.el, {
+                content:  info.event.extendedProps.description,//이벤트 디스크립션을 툴팁으로 가져옵니다. 
+            	});
+        	}
+
           
-          /* 일정 json으로 받기 description은 안됨 */
+          /* 일정 json으로 받기 */
 		    ,eventColor: 'green',
-		    events: [
-		      {
-		        title: 'Lunch',
-		        description: '툴팁뜬당',
-		        start: '2023-06-12T12:00:00'
-		      },
-		      {
-		        title: 'Meeting',
-		        start: '2023-06-12T14:30:00'
-		      },
-		      {
-		        title: 'Birthday Party',
-		        url: 'http://google.com/',
-		        start: '2023-06-13T07:00:00'
+			events: ${evt}
+/*			[
+	      	{
+				start: '2023-06-12T12:00:00'
+				,title: 'Lunch'
+				,description: '툴팁뜬당'
+				,url: 'http://google.com/'
 		      }
+		  
+   
 		    ]
-		    
+*/
 		   /* 날짜 클릭 이벤트 */
 		   ,dateClick: function (info) {
-          
+				const clickedDate = info.date; // 클릭한 날짜
+				const year = clickedDate.getFullYear();
+				const month = String(clickedDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1을 해줍니다.
+				const day = String(clickedDate.getDate()).padStart(2, '0');
+				let start_time; // start_time 변수를 선언합니다.
+							
            /* sweet alert2로 시간 받기 */
           (async () => {
 			
@@ -113,26 +132,50 @@ document.addEventListener('DOMContentLoaded', function() {
 			  inputValidator: (value) => {
 			       return new Promise((resolve) => {
 				      if (value != null) {
+						start_time = year + "-" + month + "-" + day + value;
 				        resolve()
 				      } else {
-				        resolve('You need to select oranges :)')
-				      }
+				        resolve('You need to select time :)')
+				      }			  
 				    })
 				  }
 				})
 				 /* 시간 선택 시 일정명 입력 */
 				if (time) {
-						
 					(async () => {
-				    const { value: schedule } = await Swal.fire({
+				    const { value: schedule_title } = await Swal.fire({
 				        title: '약속을 뭐라고 저장할까요?',
 				        input: 'text',
-				        inputPlaceholder: '이름을 입력..'
+				        inputPlaceholder: '약속이름을 적어주세요'
 				    })
 				
 				    // 이후 처리되는 내용.
-				    if (schedule) {
-				        Swal.fire(schedule)     /* 이벤트 발생 + DB에 저장 + 창 다시 띄우기 */
+				    if (schedule_title) {
+						const { value: schedule_content } = await Swal.fire({
+				        title: '내용을 뭐라고 저장할까요?',
+				        input: 'text',
+				        inputPlaceholder: '내용을 적어주세요'
+				    })
+						console.log(start_time);
+						console.log(schedule_title);    
+						console.log(schedule_content);   
+						
+							$.ajax({
+								url: '/mypage/select_evt',
+								type: 'POST',
+								data: {
+									calender_date: start_time
+									,calender_title: schedule_title
+									,calender_content: schedule_content
+								},
+								success: function() {
+									alert("일정이저장되었습니다.");
+									$('#calendar').fullCalendar('destroy');
+									find_evt();
+
+								}
+							});
+
 				    }
 				})()
 						
@@ -149,8 +192,19 @@ document.addEventListener('DOMContentLoaded', function() {
        
        /* 캘린더 오픈 */
         calendar.render();
-      });
-    </script>
+
+
+
+						
+					}
+				});
+
+		}
+
+		
+
+});
+</script>
 
 
 

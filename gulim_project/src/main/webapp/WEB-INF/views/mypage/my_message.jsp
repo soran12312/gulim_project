@@ -9,13 +9,32 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
-<link href="/css/place.css" rel="stylesheet">
-<script type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#message_table_size2').hide();
+		// $('#message_page_name').text="받은 쪽지함"
+
+
+		$('#message2').click(function(){
+			if(this.value === '보낸쪽지함'){
+		 		this.value = "받은쪽지함"
+		 		$('#message_table_size').hide();
+		 		$('#message_table_size2').show();
+		 		$('#message_page_name').text("보낸쪽지함");
+		 	}
+		 	else{
+		 		this.value = "보낸쪽지함"
+		 		$('#message_table_size').show();
+		 		$('#message_table_size2').hide();
+		 		$('#message_page_name').text("받은쪽지함");
+		 	}
+		});
+
+	});
+</script>
 </head>
 <body>
-
-
-	
 <div class="mypagebackpage">
 <jsp:include page="../../../header_after.jsp"></jsp:include>
 <!-- ===================== START OF subnav =====================-->
@@ -40,28 +59,47 @@
 <!-- ===================== END OF SIDE BAR =====================-->
 	
 <!-- ===================== START OF 쪽지함list =====================-->
-		<span class="page_name">쪽지함</span>
+		<span class="page_name" id="message_page_name">받은쪽지함</span>
 		<div class="message_back"></div>
 		
 		<div class= message_table>
-			<div class= message_table_size>
+			<div class= message_table_size id="message_table_size">
 				<table>
 					<tr>
 						<td class= table_menu1>날짜</td>
 						<td class= table_menu2>이름</td>
-						<td class= table_menu3>내용</td>
+						<td class= table_menu3>제목</td>
 						<td></td>					
 					</tr>
 					<c:forEach items="${allmessage}" var="message">
 						<tr><input type ="hidden" value="${message.message_num}">
 							<td class= "message_td "> ${message.send_date} </td>
 							<td class= "message_td cursor"><a href = "/mypage/send_message?send_id=${message.send_id}" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">${nickname[message.send_id]} (${message.send_id})</a></td>
-							<td class= "message_td cursor display_block"><a href = "/mypage/detail_message?num=${message.message_num}" onclick="window.open(this.href, '쪽지보기', 'width=420, height=520'); return false;">${message.message_content}</a></td>
-							<td class= "message_td cursor" ><a href = "/mypage/message_delete">삭제</a></td>					
+							<td class= "message_td cursor display_block"><a href = "/mypage/detail_message?num=${message.message_num}" onclick="window.open(this.href, '쪽지보기', 'width=420, height=520'); return false;">${message.message_title}</a></td>
+							<td class= "message_td cursor" ><a href = "/mypage/message_delete?num=${message.message_num}">삭제</a></td>					
 						</tr>
 					</c:forEach>
 				</table>
-		</div>
+			</div>
+			<div class= message_table_size id="message_table_size2">
+				<table>
+					<tr>
+						<td class= table_menu1>날짜</td>
+						<td class= table_menu2>이름</td>
+						<td class= table_menu3>제목</td>
+						<td></td>					
+					</tr>
+					<c:forEach items="${allmessage2}" var="message2">
+						<tr><input type ="hidden" value="${message.message_num}">
+							<td class= "message_td "> ${message2.send_date} </td>
+							<td class= "message_td cursor"><a>${nickname2[message2.receive_id]} (${message2.receive_id})</a></td>
+							<td class= "message_td cursor display_block"><a href = "/mypage/detail_message?num=${message2.message_num}" onclick="window.open(this.href, '쪽지보기', 'width=420, height=520'); return false;">${message2.message_title}</a></td>
+							<td class= "message_td cursor" ><a href = "/mypage/message_delete?num=${message2.message_num}">삭제</a></td>					
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		<input type="button" class="message2" id="message2" value="보낸쪽지함"/>
 		<a class="send_message" id="send_message" href = "/mypage/send_message" onclick="window.open(this.href, '쪽지보내기', 'width=420, height=520'); return false;">쪽지 보내기</a>
 		</div>
 		

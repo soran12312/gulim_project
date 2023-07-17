@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import project.gulim.domain.CalenderDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
@@ -45,19 +46,34 @@ public class MypageContoroller {
 	public String viewPage2() { // 페이지 이동(DB접속없는경우)
 		return "/mypage/game/my_game_list";
 	}
-	@RequestMapping("/user_info/info_modify")
-	public String viewPage3() { // 페이지 이동(DB접속없는경우)
-		return "/mypage/user_info/info_modify";
-	}
 
 //=========== START of 쪽지 ======================================================================================================	
 
 //id기준으로 쪽지목록 불러오기
 	@RequestMapping("/my_message")
 	@Transactional
-	public String my_message(Model m) {
-		String id = "ekqls1102";				//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★아이디입력
+	public String my_message(MemberDTO memberDTO,HttpServletRequest request, Model m) {
 		
+		//쿠키에서 아이디 얻어오기
+		Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+	    
+	    if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+	    
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);  	    
+	    memberDTO.setId(id);
+	    m.addAttribute("memberDTO", memberDTO);	
+		
+		
+		//받은 쪽지함========================
 		//서비스에서  MessageDTO를 List에 담아서 쪽지내용 받아오기
 		List<MessageDTO> result = mypageService.my_message(id);
 		
@@ -68,13 +84,37 @@ public class MypageContoroller {
 		
 		//보낸 아이디옆에 출력할 닉네임 불러오기
 		for(MessageDTO message : result){
-			String send_id_name = mypageService.send_id_name(message.getSend_id());
+			String nick_same_id = mypageService.nick_same_id(message.getSend_id());
 			
 			//key=id  value=nickname 으로 해쉬맵에 담기
-			nickname.put(message.getSend_id(), send_id_name);
+			nickname.put(message.getSend_id(), nick_same_id);
 		}
 		//모델 nickname에 해쉬맵담기
 		m.addAttribute("nickname",nickname);
+		
+		
+		
+		//보낸 쪽지함========================
+		//서비스에서  MessageDTO를 List에 담아서 쪽지내용 받아오기
+		List<MessageDTO> result2 = mypageService.my_message2(id);
+		
+		//모델 allmessage2에 쪽지목록 담기 
+		m.addAttribute("allmessage2",result2);
+			
+		Map nickname2 = new HashMap();
+			
+		//보낸 아이디옆에 출력할 닉네임 불러오기
+		for(MessageDTO message2 : result2){
+			String nick_same_id = mypageService.nick_same_id(message2.getReceive_id());
+		
+			//key=id  value=nickname 으로 해쉬맵에 담기
+			nickname2.put(message2.getReceive_id(), nick_same_id);
+		}
+		System.out.println(nickname2);
+		//모델 nickname에 해쉬맵담기
+		m.addAttribute("nickname2",nickname2);
+		
+		
 		return "/mypage/my_message";
 	}
 	
@@ -110,12 +150,28 @@ public class MypageContoroller {
 	
 //쪽지 보내기
 	@RequestMapping("/save_message")
-	public String save_message(@RequestParam ("message_title") String message_title, 
+	public String save_message(MemberDTO memberDTO,HttpServletRequest request,
+								@RequestParam ("message_title") String message_title, 
 								@RequestParam("receive_id") String receive_id, 
 								@RequestParam("message_content") String message_content){
 		
 		
-		String send_id ="ekqls1102";  				//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★아이디입력
+		//쿠키에서 아이디 얻어오기
+		Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+	    
+	    if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+	    
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String send_id = claims.get("id", String.class);  	    
+
 		
 		//쪽지 내용 해쉬맵에 담기
 		HashMap map = new HashMap();
@@ -128,8 +184,65 @@ public class MypageContoroller {
 		mypageService.save_message(map);
 	return "/mypage/my_message";	
 	}
+	
+	//쪽지삭제하기로 이동
+	@RequestMapping("/message_delete")
+	public String message_delete(Integer num, Model m) {
+		//글넘버 가지고 서비스단으로 이동해서 해당 메세지데이터 가져오기
+		Integer result = mypageService.message_delete(num);
+		return "redirect:/mypage/my_message";
+	}
 //=========== END of 쪽지 ========================================================================================================
 //=========== START of 캘린더 ======================================================================================================	
+	@RequestMapping("/select_evt")
+	public void select_evt(String calender_date, String calender_title,String calender_content
+							,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	System.out.println(calender_date+calender_title+calender_content);
+	
+	
+	//쿠키에서 아이디 얻어오기
+	Cookie[] cookies = request.getCookies();
+    String jwtToken = null;
+    
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("access_token")) {
+                jwtToken = cookie.getValue();
+                break;
+            }
+        }
+    }
+    
+    Claims claims = mainService.getClaims(jwtToken);
+    String id = claims.get("id", String.class);  	    
+    calenderDTO.setId(id);
+    calenderDTO.setCalender_date(calender_date);
+    calenderDTO.setCalender_title(calender_title);
+    calenderDTO.setCalender_content(calender_content);
+    
+    Integer result = mypageService.select_evt(calenderDTO);
+    
+    m.addAttribute("calenderDTO", calenderDTO);
+}
+	
+	@RequestMapping("/find_evt")
+	public void find_evt(CalenderDTO calenderDTO, Model m) {
+		String id = "ekqls1102";
+		
+		List<CalenderDTO> list = mypageService.find_evt(id);
+		HashMap map = new HashMap();
+		map.put("start", calenderDTO.getCalender_date());
+		map.put("title", calenderDTO.getCalender_title());
+		map.put("description", calenderDTO.getCalender_content());
+		
+		List<HashMap> result = new ArrayList<HashMap>();
+		result.add(map);
+		
+		
+		System.out.println(result);
+		
+	}
+	
 //=========== END of 캘린더 ========================================================================================================
 //=========== START of 게임관리 ======================================================================================================	
 //=========== END of 게임관리 ========================================================================================================
@@ -139,7 +252,30 @@ public class MypageContoroller {
 	
 	
 //=========== START of 회원정보 ======================================================================================================	
+//아디디 가져가기
+	@RequestMapping("/user_info/info_modify")
+	public String info_modify(MemberDTO memberDTO,HttpServletRequest request,Model m) {
+		
+		Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+	    
+	    if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+	    
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);  	    
+	    memberDTO.setId(id);
+	    m.addAttribute("memberDTO", memberDTO);
 
+	    
+		return "/mypage/user_info/info_modify";
+	}
 
 //마이페이지/회원정보 접속 시 패스워드 체크 
 	@RequestMapping("/user_info/mypage_password_check")
