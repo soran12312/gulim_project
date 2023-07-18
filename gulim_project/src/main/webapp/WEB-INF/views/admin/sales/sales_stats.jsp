@@ -216,6 +216,32 @@
                         </ol>
                     </div>
                 </div>
+
+                <table class="ssyTable" hidden>
+                    <tbody>
+                        <c:forEach items="${salesStatsYear}" var="ssy">
+                            <tr class="ssy-link">
+                                <td>${ssy.purchase_year}</td>
+                                <td>${ssy.total_book_price}</td>
+                                <td>${ssy.total_subscribe_price}</td>
+                                <td>${ssy.total_price}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+
+                <table class="ssysTable" hidden>
+                    <tbody>
+                        <c:forEach items="${salesStatsYear_subs}" var="ssys">
+                            <tr class="ssys-link">
+                                <td>${ssys.sub_date}</td>
+                                <td>${ssys.price}</td>
+                                <td>${ssys.total_subscribe_price}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+
                 <!-- row -->
 
                 <div class="row">

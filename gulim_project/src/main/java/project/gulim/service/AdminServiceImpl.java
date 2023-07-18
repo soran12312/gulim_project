@@ -16,6 +16,7 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.SubscribeDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -41,6 +42,14 @@ public class AdminServiceImpl implements AdminService {
 
 	public List<PlaceDTO> listPlace() {
 		return adminDAO.listPlace();
+	}
+	
+	public List<HashMap> salesStatsYear(){
+		return adminDAO.salesStatsYear();
+	}
+	
+	public List<HashMap> salesStatsYear_subs(){
+		return adminDAO.salesStatsYear_subs();
 	}
 
 	public List<HashMap> listRefund() {

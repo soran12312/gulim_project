@@ -18,6 +18,7 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.SubscribeDTO;
 import project.gulim.service.AdminService;
 
 @Controller
@@ -68,7 +69,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("/sales_stats")
-	public String viewPage_sales_stats() {
+	public String viewPage_sales_stats(Model m) {
+		List<HashMap> salesStatsYear = adminService.salesStatsYear();
+		m.addAttribute("salesStatsYear", salesStatsYear);
+		List<HashMap> salesStatsYear_subs = adminService.salesStatsYear_subs();
+		m.addAttribute("salesStatsYear_subs", salesStatsYear_subs);
+		
 		return "/admin/sales/sales_stats";
 	}
 
@@ -162,8 +168,7 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/game_stats", method = RequestMethod.POST)
 	public List<HashMap> preferredStatsByClasses(@RequestBody CharacterSheetDTO csDTO, Model m) {
-		List<HashMap> preferredStatsByClasses = adminService.preferredStatsByClasses(csDTO);
-		return preferredStatsByClasses;
+		return adminService.preferredStatsByClasses(csDTO);
 	}
 
 }

@@ -10,4 +10,5 @@ public class SubscribeDTO {
 	private String end_date;
 	private Integer price;
 	private String id;
+	private String sub_date;
 }

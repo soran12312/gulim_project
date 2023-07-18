@@ -3,145 +3,112 @@
     
     /************ Start of 연간매출 ************/
     
-    var data_year = [{
-                period: '2020',
-                smartphone: 20,
-                windows: 30,
-                mac: 50
-            }, {
-                period: '2021',
-                smartphone: 90,
-                windows: 60,
-                mac: 25
-            }, {
-                period: '2022',
-                smartphone: 40,
-                windows: 80,
-                mac: 35
-            }, {
-                period: '2023',
-                smartphone: 30,
-                windows: 47,
-                mac: 17
-            }
+    var tableRows_ssyTable = document.querySelectorAll('.ssyTable tbody tr');
+    var data_year = [];
+    var chart_year;
 
-
-        ]
-        
-        var data_year_product = [{
-                period: '2020',
-                smartphone: 50,
-                windows: 20,
-                mac: 70
-            }, {
-                period: '2021',
-                smartphone: 60,
-                windows: 20,
-                mac: 15
-            }, {
-                period: '2022',
-                smartphone: 30,
-                windows: 90,
-                mac: 37
-            }, {
-                period: '2023',
-                smartphone: 77,
-                windows: 67,
-                mac: 57
-            }
-        ]
-        
-    	var data_year_subscribe = [{
-                period: '2020',
-                smartphone: 10,
-                windows: 10,
-                mac: 40
-            }, {
-                period: '2021',
-                smartphone: 97,
-                windows: 30,
-                mac: 26
-            }, {
-                period: '2022',
-                smartphone: 40,
-                windows: 80,
-                mac: 35
-            }, {
-                period: '2023',
-                smartphone: 88,
-                windows: 82,
-                mac: 28
-            }
-        ]
-    	
-    	var data_year_book = [{
-                period: '2020',
-                smartphone: 23,
-                windows: 40,
-                mac: 80
-            }, {
-                period: '2021',
-                smartphone: 60,
-                windows: 42,
-                mac: 3
-            }, {
-                period: '2022',
-                smartphone: 21,
-                windows: 25,
-                mac: 26
-            }, {
-                period: '2023',
-                smartphone: 20,
-                windows: 67,
-                mac: 102
-            }
-        ]
-    	
-    	
-    var chart_year = Morris.Area({
-        element: 'line_chart_2',
-        data: data_year,
-        xkey: 'period',
-        ykeys: ['smartphone', 'windows', 'mac'],
-        labels: ['Phone', 'Windows', 'Mac'],
-        pointSize: 3,
-        fillOpacity: 0,
-        pointStrokeColors: ['#DCDCDC', '#34C73B', '#0000FF'],
-        behaveLikeLine: true,
-        gridLineColor: 'transparent',
-        lineWidth: 3,
-        hideHover: 'auto',
-        lineColors: ['rgb(192, 10, 39)', 'rgb(0, 171, 197)', '#75B432'],
-        resize: true
-
-    });
-    
     
 
-		// 버튼 클릭 핸들러
-		$("#btn_year").on("click", function() {
-		    chart_year.setData(data_year);
-		});
+	// 버튼 클릭 핸들러
+	$("#btn_year").on("click", function() {
+	    var tableRows_ssyTable = document.querySelectorAll('.ssyTable tbody tr');
+	    data_year = [];
+	    // SVG 요소를 담고 있는 부모 요소를 가져옵니다.
+		var lineChartParent = document.getElementById('line_chart_2');
+		// SVG 요소를 찾아서 제거합니다.
+		var svgElement = lineChartParent.querySelector('svg');
+		if (svgElement) {
+		    lineChartParent.removeChild(svgElement);
+		}
+		var divElement = lineChartParent.querySelector('div');
+		if (divElement) {
+		    lineChartParent.removeChild(divElement);
+		}
+	
+	    for (var i = 0; i < tableRows_ssyTable.length; i++) {
+	        var purchase_year = tableRows_ssyTable[i].querySelector('td:nth-child(1)').textContent;
+	        var total_book_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(2)').textContent);
+	        var total_subscribe_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(3)').textContent);
+	        var total_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(4)').textContent);
+	
+	        var rowData = {
+	            purchase_year: purchase_year,
+	            total_book_price: total_book_price,
+	            total_subscribe_price: total_subscribe_price,
+	            total_price: total_price
+	        };
+	
+	        data_year.push(rowData);
+	    }
+	    
+	    chart_year = Morris.Area({
+	        element: 'line_chart_2',
+	        data: data_year,
+	        xkey: 'purchase_year',
+	        ykeys: ['total_book_price', 'total_subscribe_price', 'total_price'],
+	        labels: ['설정집', '구독권', '총'],
+	        pointSize: 3,
+	        fillOpacity: 0,
+	        behaveLikeLine: true,
+	        gridLineColor: 'transparent',
+	        lineWidth: 3,
+	        hideHover: 'auto',
+	        resize: true
+	    });
+	});
+	
+	$("#btn_year_subscribe").on("click", function() {
+	    var tableRows_ssysTable = document.querySelectorAll('.ssysTable tbody tr');
+	    data_year = [];
+	    chart_year = null;
+	    
+	    // SVG 요소를 담고 있는 부모 요소를 가져옵니다.
+		var lineChartParent = document.getElementById('line_chart_2');
+		// SVG 요소를 찾아서 제거합니다.
+		var svgElement = lineChartParent.querySelector('svg');
+		if (svgElement) {
+		    lineChartParent.removeChild(svgElement);
+		}
+		var divElement = lineChartParent.querySelector('div');
+		if (divElement) {
+		    lineChartParent.removeChild(divElement);
+		}
+	
+	    for (var i = 0; i < tableRows_ssyTable.length; i++) {
+	        var sub_date = tableRows_ssysTable[i].querySelector('td:nth-child(1)').textContent;
+	        var price = parseInt(tableRows_ssysTable[i].querySelector('td:nth-child(2)').textContent);
+	        var total_subscribe_price = parseInt(tableRows_ssysTable[i].querySelector('td:nth-child(3)').textContent);
+	
+	        var rowData = {
+	            sub_date: sub_date,
+	            price: price,
+	            total_subscribe_price: total_subscribe_price
+	        };
+	        
+	        data_year.push(rowData);
+		}
 		
-		$("#btn_year_product").on("click", function() {
-		 chart_year.setData(data_year_product);
-		});
+		chart_year = Morris.Area({
+	        element: 'line_chart_2',
+	        data: data_year,
+	        xkey: 'sub_date',
+	        ykeys: ['price', 'total_subscribe_price'],
+	        labels: ['구독권 종류', '총'],
+	        pointSize: 3,
+	        fillOpacity: 0,
+	        behaveLikeLine: true,
+	        gridLineColor: 'transparent',
+	        lineWidth: 3,
+	        hideHover: 'auto',
+	        resize: true
+	    });
+	});
 		
-		$("#btn_year_subscribe").on("click", function() {
-		    chart_year.setData(data_year_subscribe);
-		});
-		
-		$("#btn_year_book").on("click", function() {
-		    chart_year.setData(data_year_book);
-		});
-		
-		
-				// Select 요소와 버튼 요소를 가져옵니다.
-		var btnYear = $("#btn_year");
-		var btnYearProduct = $("#btn_year_product");
-		var btnYearSubscribe = $("#btn_year_subscribe");
-		var btnYearBook = $("#btn_year_book");
-		var h6TagYear = $(".h6_year");
+	// Select 요소와 버튼 요소를 가져옵니다.
+	var btnYear = $("#btn_year");
+	var btnYearSubscribe = $("#btn_year_subscribe");
+	var btnYearBook = $("#btn_year_book");
+	var h6TagYear = $(".h6_year");
 		
 		// Select 요소와 버튼 요소의 변경 이벤트를 감지합니다.
 		btnYear.addClass("active");
@@ -149,28 +116,18 @@
 		
 		btnYear.on("click", function() {
 		  btnYear.addClass("active");
-		  btnYearProduct.removeClass("active");
-		  btnYearSubscribe.removeClass("active");
-		  btnYearBook.removeClass("active");
-		  updateH6TagYear();
-		});
-		btnYearProduct.on("click", function() {
-		  btnYear.removeClass("active");
-		  btnYearProduct.addClass("active");
 		  btnYearSubscribe.removeClass("active");
 		  btnYearBook.removeClass("active");
 		  updateH6TagYear();
 		});
 		btnYearSubscribe.on("click", function() {
 		  btnYear.removeClass("active");
-		  btnYearProduct.removeClass("active");
 		  btnYearSubscribe.addClass("active");
 		  btnYearBook.removeClass("active");
 		  updateH6TagYear();
 		});
 		btnYearBook.on("click", function() {
 		  btnYear.removeClass("active");
-		  btnYearProduct.removeClass("active");
 		  btnYearSubscribe.removeClass("active");
 		  btnYearBook.addClass("active");
 		  updateH6TagYear();
@@ -187,8 +144,6 @@
 		function getSelectedButton_Year() {
 		    if (btnYear.hasClass("active")) {
 		        return "전체";
-		    } else if (btnYearProduct.hasClass("active")) {
-		        return "상품";
 		    } else if (btnYearSubscribe.hasClass("active")) {
 		        return "구독권";
 		    } else if (btnYearBook.hasClass("active")) {

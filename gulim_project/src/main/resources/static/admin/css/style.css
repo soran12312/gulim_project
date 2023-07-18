@@ -13120,8 +13120,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   stroke: rgba(49, 58, 70, 0.1); }
 
 .ct-chart.simple-pie-chart-chartist .ct-label {
-  color: #ffffff;
-  fill: #ffffff;
+  color: #000000;
+  fill: #000000;
   font-size: 0.725rem; }
 
 .ct-chart .ct-series.ct-series-a .ct-bar,

@@ -33,6 +33,41 @@
 	    from place
 	</select>
 	
+	<!-- 판매 통계: 전체 연매출 -->
+	<select id="salesStatsYear" resultType="HashMap">
+		WITH combined_sales AS (
+		    SELECT YEAR(bk.purchase_date) AS purchase_year, 
+		           SUM(b.price) AS book_price, 
+		           0 AS subscribe_price
+		    FROM purchase p
+		    INNER JOIN book b ON p.book_num = b.book_num
+		    INNER JOIN basket bk ON p.basket_num = bk.basket_num
+		    GROUP BY YEAR(bk.purchase_date)
+		
+		    UNION ALL
+		
+		    SELECT YEAR(s.sub_date) AS purchase_year, 
+		           0 AS book_price, 
+		           SUM(s.price) AS subscribe_price
+		    FROM subscribe s
+		    GROUP BY YEAR(s.sub_date)
+		)
+		SELECT purchase_year, 
+		       SUM(book_price) AS total_book_price, 
+		       SUM(subscribe_price) AS total_subscribe_price,
+		       SUM(book_price) + SUM(subscribe_price) AS total_price
+		FROM combined_sales
+		GROUP BY purchase_year
+		ORDER BY purchase_year DESC
+	</select>
+	
+	<!-- 판매 통계: 구독권 연매출 -->
+	<select id="salesStatsYear_subs" resultType="HashMap">
+		select YEAR(sub_date) as sub_date, price, SUM(price) as total_subscribe_price
+		from subscribe
+		group by YEAR(sub_date), price
+	</select>
+	
 	<!-- 배송/환불 리스트 보기 -->
 	<select id="listRefund" resultType="HashMap">
 		SELECT bk.basket_num basket_num, bk.purchase_date purchase_date,

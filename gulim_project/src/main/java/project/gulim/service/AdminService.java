@@ -11,6 +11,7 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.SubscribeDTO;
 
 public interface AdminService {
 
@@ -23,6 +24,10 @@ public interface AdminService {
 	public void changeMemberState(MemberDTO mDTO);
 
 	public List<PlaceDTO> listPlace();
+	
+	public List<HashMap> salesStatsYear();
+	
+	public List<HashMap> salesStatsYear_subs();
 
 	public List<HashMap> listRefund();
 
