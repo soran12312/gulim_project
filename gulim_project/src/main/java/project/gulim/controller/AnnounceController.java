@@ -26,5 +26,9 @@ public class AnnounceController {
 		return "community/announce/announce_list";
 
 	}
+	
+	
+	
+	//fsdgdsgf
 
 }
