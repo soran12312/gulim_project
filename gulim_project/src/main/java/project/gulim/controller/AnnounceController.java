@@ -13,25 +13,22 @@ import project.gulim.service.CommunityService;
 @Controller
 @RequestMapping(value = "/community")
 public class AnnounceController {
-	
+
 	@Autowired
 	CommunityService communityService;
-	
+
 	// 공지사항
 	@RequestMapping("/announce_list")
-	public String Announce(Model m)
-	{
-		
+	public String Announce(Model m) {
+
 		List<PostDTO> announces = communityService.findAllAnnounce();
-        m.addAttribute("announces", announces);
+		m.addAttribute("announces", announces);
 		return "community/announce/announce_list";
-		
+
 	}
 	
 	
 	
-	
-	
-	
+	//fsdgdsgf
 
 }
