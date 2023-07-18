@@ -19,6 +19,11 @@
 		WHERE join_num = #{join_num}
 	</select>
 	
+	<select id="getSkillsBySheetNum" parameterType="Integer" resultType="HashMap">
+		SELECT skill_num, skill_name, skill_detail FROM skill
+		WHERE sheet_num = #{sheet_num}
+	</select>
+	
 	<select id="getIdByJoinNum" parameterType="Integer" resultType="String">
 		SELECT id FROM `join`
 		WHERE join_num = #{join_num}
@@ -27,6 +32,26 @@
 	<select id="getNicknameById" parameterType="String" resultType="String">
 		SELECT nickname FROM member
 		WHERE id = #{id}
+	</select>
+	
+	<select id="getInventoryByJoinNum" parameterType="Integer" resultType="HashMap">
+		SELECT inventory_num, money FROM inventory
+		WHERE join_num = #{join_num}
+	</select>
+	
+	<select id="getItemsByInvenNum" parameterType="Integer" resultType="HashMap">
+		SELECT item_num, item_name, item_amount, item_weight, item_detail, equip_state FROM item
+		WHERE inventory_num = #{inventory_num}
+	</select>
+	
+	<select id="getMasterMemos" parameterType="Integer" resultType="HashMap">
+		SELECT memo_num, memo_content FROM memo
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<select id="getMemosByJoinNum" parameterType="Integer" resultType="HashMap">
+		SELECT memo_num, memo_content FROM memo
+		WHERE join_num = #{join_num}
 	</select>
 
 </mapper>
