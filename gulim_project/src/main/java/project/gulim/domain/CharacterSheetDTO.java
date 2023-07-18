@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CharacterSheetDTO {
-	
+
 	private Integer sheet_num;
 	private Integer join_num;
 	private String char_name;

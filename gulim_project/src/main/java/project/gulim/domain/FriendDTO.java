@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class FriendDTO {
-	
+
 	private Integer friend_num;
 	private String my_id;
 	private String friend_id;

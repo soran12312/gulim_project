@@ -7,7 +7,7 @@
 	<insert id="send_question">
 		
 		insert into question(question_title,question_content,id,answer,answer_state,question_type)
-					values(#{question_title},#{question_content},#{id},"답변준비중입니다.",0,#{question_type})
+					values(#{question_title},#{question_content},#{id},0,0,#{question_type})
 	</insert>
 
 </mapper>

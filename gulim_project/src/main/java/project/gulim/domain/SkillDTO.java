@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SkillDTO {
-	
+
 	private Integer skill_num;
 	private Integer sheet_num;
 	private String skill_name;

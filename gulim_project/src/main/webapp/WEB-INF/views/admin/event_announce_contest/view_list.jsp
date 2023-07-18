@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>판매 통계</title>
+    <title>관리자 글목록</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
     <!-- Datatable -->
@@ -50,6 +50,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/admin/member_management" class="brand-logo">
+                <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -71,8 +72,10 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!-- 메뉴 소카테고리 -->
                             <div class="text-uppercase">
                                 <ul>
+                                    <!-- tab_active: 현재 선택된 메뉴를 보라색 글자로 -->
                                     <li><a href="/admin/view_list" class="tab_active">관리자 글목록</a></li>
                                     <li><a href="/admin/insert_form" class="tab_inactive">글 작성</a></li>
                                   </ul>  
@@ -173,10 +176,9 @@
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
+                <!-- 메뉴 대카테고리 -->
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Menu</li>
-                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                    </li> -->
                     <li><a href="/admin/question"><i
                         class="icon icon-single-04"></i><span class="nav-text">회원 관리</span></a>
                     </li>
@@ -187,6 +189,7 @@
                     <li><a href="/admin/sales_stats"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">판매 관리</span></a>
                     </li>
+                    <!-- 현재 선택된 대카테고리 -->
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/view_list"><i
                                 class="icon icon-form"></i><span class="nav-text">이벤트 및 공지 관리</span></a>
                     </li>
@@ -210,6 +213,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
@@ -233,6 +237,7 @@
                             <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- postTable start -->
                                         <table id="example" class="display postTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -245,35 +250,48 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listPost}" var="lpo">
                                                     <tr class="post-link">
+                                                        <%-- 글번호 --%>
                                                         <td>${lpo.post_num}</td>
+                                                        <%-- 게시판 --%>
                                                         <td>${lpo.board}</td>
+                                                        <%-- 제목 --%>
                                                         <td>${lpo.post_title}</td>
                                                         <td>
                                                             <select class="selectPost" style="border: 0px; background-color:#ffffff;">
+                                                                <%-- taglib choose start --%>
                                                                 <c:choose>
+                                                                    <%-- 등록상태가 게시중일 경우 --%>
                                                                     <c:when test="${lpo.post_state eq 0}">
                                                                         <option selected value="0">게시중</option>
                                                                         <option value="1">게시중단</option>                                                                   
                                                                     </c:when>
+                                                                    <%-- 등록상태가 게시중단일 경우 --%>
                                                                     <c:when test="${lpo.post_state eq 1}">
                                                                         <option value="0">게시중</option>
                                                                         <option selected value="1">게시중단</option>                                                               
                                                                     </c:when>
                                                                 </c:choose>
+                                                                <%-- taglib choose end --%>
                                                             </select>
                                                         </td>
+                                                        <%-- 게시일 --%>
                                                         <td>${lpo.writing_date}</td>
                                                         <td>
+                                                            <%-- taglib choose start --%>
                                                             <c:choose>
+                                                                <%-- 게시 기간이 존재할 경우 --%>
                                                                 <c:when test="${lpo.start_date ne null}">
                                                                     ${lpo.start_date} ~ ${lpo.end_date}                                                                
                                                                  </c:when>
                                                             </c:choose>
+                                                            <%-- taglib choose end --%>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                             </tbody>
                                         </table>
                                     </div>

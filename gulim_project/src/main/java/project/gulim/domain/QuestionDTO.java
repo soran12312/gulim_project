@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class QuestionDTO {
-	
+
 	private Integer question_num;
 	private String question_title;
 	private String question_content;

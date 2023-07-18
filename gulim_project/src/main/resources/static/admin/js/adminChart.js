@@ -11,6 +11,8 @@
 	category_big.textContent = selectedMenu_left.textContent;
 	category_small.textContent = selectedMenu_right.textContent;
 	
-    
+    let postForm = function() {
+		let content = $('textarea[name="content"]').html($('#summernote').code());
+	}
     
 })(jQuery);
