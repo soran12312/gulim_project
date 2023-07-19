@@ -16,7 +16,7 @@
 	<div id = header_nav class = header_nav>
 	<table><tr>
 		<td>
-			<a href="/offline/find_place">모임장소찾기</a>
+			<a href="/offline/map">모임장소찾기</a>
 		</td>
 		<td>
 			<a href="/community/free_board_list">커뮤니티</a>
