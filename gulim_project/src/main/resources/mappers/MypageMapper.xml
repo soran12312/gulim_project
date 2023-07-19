@@ -61,6 +61,11 @@
 		FROM calender
 		WHERE id=#{id}
 	</select>
+	<!-- 일정 삭제 -->
+	<select id="delete_evt" parameterType="Integer" resultType="CalenderDTO">
+		DELETE FROM calender 
+		WHERE calender_date = #{calender_date} and calender_title = #{calender_title} and calender_content = #{calender_content}
+	</select>
 <!--=========== END of 캘린더 ======================================================================================================-->
 
 <!-- =========== START of 회원정보 ======================================================================================================	 -->

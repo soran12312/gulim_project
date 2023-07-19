@@ -798,6 +798,13 @@ font-weight: bold;}
   left: 500px;
   overflow: hidden;
 }
+.fc-event-title{
+	white-space: normal;
+	font-size: 14px;
+}
+.fc-event-time{
+	font-size: 12px;
+}
 /* ================ END OF CALENDER ====================== */
 /* ================ START OF MYGAME ====================== */
 .game_back {

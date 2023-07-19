@@ -16,7 +16,7 @@
 	<div id = header_nav class = header_nav>
 	<table><tr>
 		<td>
-			<a href="/offline/map">모임장소찾기</a>
+			<a href="/offline/find_place">모임장소찾기</a>
 		</td>
 		<td>
 			<a href="/community/free_board_list">커뮤니티</a>
@@ -31,7 +31,7 @@
 			<a href="/mypage/user_info/info_modify">마이페이지</a>
 		</td>
 		<td>
-			<a href="/customer_service/main">고객센터</a>
+			<a href="/customer_service/main.jsp">고객센터</a>
 		</td>
 		<td>	
 			<a>로그아웃</a>

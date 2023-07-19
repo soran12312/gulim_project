@@ -58,6 +58,11 @@ public class MypageServiceImpl implements MypageService {
 	public List<CalenderDTO> find_evt(String id) {
 		return mypageDAO.find_evt(id);
 	}
+	
+	public Integer delete_evt(CalenderDTO calender) {
+		return mypageDAO.delete_evt(calender);
+	}
+
 //=========== END of 캘린더 ======================================================================================================	
 //=========== START of 회원정보 ======================================================================================================	
 	public Boolean mypage_password_check(MemberDTO member) {
@@ -95,6 +100,7 @@ public class MypageServiceImpl implements MypageService {
 	public List<QuestionDTO>find_question(QuestionDTO question){
 	      return mypageDAO.find_question(question);
 	   }
+
 
 
 
