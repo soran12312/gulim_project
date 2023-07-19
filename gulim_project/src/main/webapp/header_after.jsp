@@ -19,7 +19,7 @@
 			<a href="/offline/map">모임장소찾기</a>
 		</td>
 		<td>
-			<a href="/community/free_board/free_board_list">커뮤니티</a>
+			<a href="/community/free_board_list">커뮤니티</a>
 		</td>
 		<td>
 			<a href="/game/play/room_list">게임</a>
