@@ -14,22 +14,6 @@
     <script type="text/javascript">
 
        $(function() {
-        (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
-      
-        ChannelIO('boot', {
-          "pluginKey": "f6d591b7-5bfb-4290-91ae-de8e52ef2700"
-        });
-
-        
-
-
-
-
-
-
-
-
-
 
             var markers =[]
             var markerinfomation = [];
@@ -115,9 +99,8 @@
         })
 
       // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
-      $("#place_partnership, #place_allplace").click(function() {
+       $("#place_partnership, #place_allplace").click(function() {
         infowindow.close();
-
       });// end click func
     }// end if
   }); // end this func
@@ -233,7 +216,7 @@ $("#place_partnership").click(function() {
                 });      
                     infowindow.open(map, marker);
                 //전체 매장 보기 버튼을 누르면 인포 창 전부 닫기
-                $("#place_allplace").click(function() {
+                $("#place_partnership, #place_allplace").click(function() {
                 infowindow.close();
                 });                
                 }
@@ -327,7 +310,7 @@ $("#place_partnership").click(function() {
             removable : iwRemoveable
             });
             infowindow.open(map, marker);
-            $("#place_partnership").click(function() {
+            $("#place_partnership, #place_allplace").click(function() {
                 infowindow.close();
             });
             }
