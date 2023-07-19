@@ -31,7 +31,7 @@
 			<a href="/mypage/user_info/info_modify">마이페이지</a>
 		</td>
 		<td>
-			<a href="/customer_service/main.jsp">고객센터</a>
+			<a href="/customer_service/main">고객센터</a>
 		</td>
 		<td>	
 			<a>로그아웃</a>
