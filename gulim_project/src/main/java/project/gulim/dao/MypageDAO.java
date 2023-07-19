@@ -26,6 +26,7 @@ public interface MypageDAO {
 //=========== START of 캘린더 ======================================================================================================	
 	public Integer select_evt(CalenderDTO calenderDTO);
 	public List<CalenderDTO> find_evt(String id);
+	public Integer delete_evt(CalenderDTO calender);
 //=========== END of 캘린더 ======================================================================================================	
 //=========== START of 회원정보 ======================================================================================================	
 	public String mypage_password_check(MemberDTO member);
@@ -36,6 +37,7 @@ public interface MypageDAO {
 	public String find_info_img(MemberDTO member);
 //=========== END of 회원정보 ======================================================================================================	
 	public List<QuestionDTO> find_question(QuestionDTO question);
+	
 	
 
 	

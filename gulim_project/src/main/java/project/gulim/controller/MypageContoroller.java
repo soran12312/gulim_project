@@ -195,6 +195,7 @@ public class MypageContoroller {
 //=========== END of 쪽지 ========================================================================================================
 //=========== START of 캘린더 ======================================================================================================	
 	@RequestMapping("/select_evt")
+	@ResponseBody 
 	public void select_evt(String calender_date, String calender_title,String calender_content
 							,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
 	System.out.println(calender_date+calender_title+calender_content);
@@ -214,7 +215,11 @@ public class MypageContoroller {
     }
     
     Claims claims = mainService.getClaims(jwtToken);
-    String id = claims.get("id", String.class);  	    
+   // String id = claims.get("id", String.class);    ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+    
+    
+    
+    String id = "ekqls1102";
     calenderDTO.setId(id);
     calenderDTO.setCalender_date(calender_date);
     calenderDTO.setCalender_title(calender_title);
@@ -225,24 +230,60 @@ public class MypageContoroller {
     m.addAttribute("calenderDTO", calenderDTO);
 }
 	
-	@RequestMapping("/find_evt")
-	public void find_evt(CalenderDTO calenderDTO, Model m) {
+	@RequestMapping("/calender")
+	public String find_evt(CalenderDTO calenderDTO, Model m) {
 		String id = "ekqls1102";
-		
+		System.out.println(calenderDTO);
 		List<CalenderDTO> list = mypageService.find_evt(id);
-		HashMap map = new HashMap();
-		map.put("start", calenderDTO.getCalender_date());
-		map.put("title", calenderDTO.getCalender_title());
-		map.put("description", calenderDTO.getCalender_content());
-		
 		List<HashMap> result = new ArrayList<HashMap>();
-		result.add(map);
+		
+		for(CalenderDTO c : list) {
+			HashMap map = new HashMap();
+			map.put("start", c.getCalender_date());
+			map.put("title", c.getCalender_title());
+			map.put("description", c.getCalender_content());
+			result.add(map);
+		}
 		
 		
-		System.out.println(result);
+		m.addAttribute("evt", result);
 		
+		
+		
+		return "/mypage/calender";
 	}
 	
+	//마이페이지/회원정보 접속 시 패스워드 체크 
+	@RequestMapping("/mypage_password_check_calender")
+	@ResponseBody
+	public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+	    
+	    if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+	    
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);  	    
+	    memberDTO.setId(id);
+	    
+		Boolean result = mypageService.mypage_password_check(memberDTO);
+		return result;
+	}
+	
+	@RequestMapping("/delete_evt")
+	public String delete_evt(CalenderDTO calender, Model m) {
+		//글넘버 가지고 서비스단으로 이동해서 해당 메세지데이터 가져오기
+		Integer result = mypageService.delete_evt(calender);
+		return "redirect:/mypage/my_message";
+	}
+
 //=========== END of 캘린더 ========================================================================================================
 //=========== START of 게임관리 ======================================================================================================	
 //=========== END of 게임관리 ========================================================================================================
