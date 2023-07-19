@@ -24,11 +24,10 @@ public class Customer_serviceController {
 	@Autowired
 	private MainService mainService;
 	
-//	@RequestMapping("/chatBot")
-//	public String mainBot(Model m) {
-//
-//		return "/customer_service/main";
-//	}
+	@RequestMapping("/main")
+	public String main() {
+	return "/customer_service/main";
+	}
 	
 	@RequestMapping("/question")
 	public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
