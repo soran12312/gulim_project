@@ -1,9 +1,9 @@
 package project.gulim.controller;
 
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -164,38 +164,38 @@ public class CommunityController {
 	}
 
 	// 이미지 파일 저장 메서드
-	private void saveImageFile(byte[] imageData, String imagePath, String imageName) {
-	    // 이미지 파일 저장 로직 구현
-	    // 예시: 파일 시스템 경로에 이미지 파일 저장
-	    String filePath = imagePath + imageName + ".png";
-	    try (OutputStream outputStream = new FileOutputStream(filePath)) {
-	        outputStream.write(imageData);
-	    } catch (IOException e) {
-	        // 파일 저장 실패 시 예외 처리
-	        e.printStackTrace();
-	        e.getMessage();
-	    }
-	}
+//	private void saveImageFile(byte[] imageData, String imagePath, String imageName) {
+//	    // 이미지 파일 저장 로직 구현
+//	    // 예시: 파일 시스템 경로에 이미지 파일 저장
+//	    String filePath = imagePath + imageName + ".png";
+//	    try (OutputStream outputStream = new FileOutputStream(filePath)) {
+//	        outputStream.write(imageData);
+//	    } catch (IOException e) {
+//	        // 파일 저장 실패 시 예외 처리
+//	        e.printStackTrace();
+//	        e.getMessage();
+//	    }
+//	}
 	
 	
 	// 이미지 파일 저장
-//	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
-//	    try {
-//	        // 저장 경로가 없을 경우 디렉토리 생성
-//	        File directory = new File(imagePath);
-//	        if (!directory.exists()) {
-//	            directory.mkdirs();
-//	        }
-//
-//	        // 이미지 파일 생성
-//	        File imageFile = new File(imagePath + fileName +".png");
-//	        FileOutputStream fos = new FileOutputStream(imageFile);
-//	        fos.write(imageData);
-//	        fos.close();
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
-//	}
+	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
+	    try {
+	        // 저장 경로가 없을 경우 디렉토리 생성
+	        File directory = new File(imagePath);
+	        if (!directory.exists()) {
+	            directory.mkdirs();
+	        }
+
+	        // 이미지 파일 생성
+	        File imageFile = new File(imagePath + fileName +".png");
+	        FileOutputStream fos = new FileOutputStream(imageFile);
+	        fos.write(imageData);
+	        fos.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	
 	// 이미지 파일 저장
