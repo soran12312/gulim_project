@@ -285,7 +285,7 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="../../../../header_before.jsp"></jsp:include>
+		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
 	
 	<div class="container">

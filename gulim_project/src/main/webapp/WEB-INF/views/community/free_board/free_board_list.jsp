@@ -240,7 +240,7 @@ section.notice {
 
 <body class="d-flex flex-column min-vh-100">
 	<header>
-		<jsp:include page="../../../../header_before.jsp"></jsp:include>
+		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
 
 	<section class="notice">
