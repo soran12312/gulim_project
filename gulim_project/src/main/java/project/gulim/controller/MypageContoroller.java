@@ -40,11 +40,15 @@ public class MypageContoroller {
 
 	@RequestMapping("/{step}")
 	public String viewPage(@PathVariable String step) { // 페이지 이동(DB접속없는경우)
-		return "/mypage/"+step;
+		return "mypage/"+step;
 	}
 	@RequestMapping("/game/my_game_list")
 	public String viewPage2() { // 페이지 이동(DB접속없는경우)
 		return "/mypage/game/my_game_list";
+	}
+	@RequestMapping("/game/chat_room")
+	public String chat_room() { // 페이지 이동(DB접속없는경우)
+		return "/mypage/game/chat_room";
 	}
 
 //=========== START of 쪽지 ======================================================================================================	

@@ -190,7 +190,7 @@
                 <a href="#"><button class="question_btn">
                     <img src="/files/images/고객문의2.png"/>
                 </button></a>
-                <a href="https://localhost:8080/customer_service/question"><button class="question_btns">
+                <a href="https://192.168.0.68:8080/customer_service/question"><button class="question_btns">
                     <img src="/files/images/고객문의.png"/>
 
                 </button></a>

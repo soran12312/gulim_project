@@ -18,24 +18,24 @@ import project.gulim.service.MainService;
 @RequestMapping("/customer_service")
 public class Customer_serviceController {
 
-	@Autowired
-	private Customer_service customer_service;
-	
-	@Autowired
-	private MainService mainService;
-	
-	@RequestMapping("/main")
-	public String main() {
-	return "/customer_service/main";
-	}
-	
-	@RequestMapping("/question")
-	public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
-		
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
+   @Autowired
+   private Customer_service customer_service;
+   
+   @Autowired
+   private MainService mainService;
+   
+   @RequestMapping("/main")
+   public String main() {
+   return "/customer_service/main";
+   }
+   
+   @RequestMapping("/question")
+   public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
+      
+      Cookie[] cookies = request.getCookies();
+       String jwtToken = null;
+       
+       if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
                     jwtToken = cookie.getValue();
@@ -43,43 +43,43 @@ public class Customer_serviceController {
                 }
             }
         }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
-	    questionDTO.setId(id);
-	    m.addAttribute("questionDTO", questionDTO);
-			
-		return "/customer_service/detail_question_form";
-	}
-	
-	//문의 사항 보내기 버튼을 누르면 발생함
-	@RequestMapping(value = "/send_question",method = RequestMethod.POST)
-	public String send_question(QuestionDTO questionDTO,HttpServletRequest request) {
-		
-		//쿠키 배열에 요청 받은 쿠키 담음
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    // 쿠키가 null이 아니라면
-	    if (cookies != null) {
-	    	// 반복문 구동
+       
+       Claims claims = mainService.getClaims(jwtToken);
+       String id = claims.get("id", String.class);         
+       questionDTO.setId(id);
+       m.addAttribute("questionDTO", questionDTO);
+         
+      return "/customer_service/detail_question_form";
+   }
+   
+   //문의 사항 보내기 버튼을 누르면 발생함
+   @RequestMapping(value = "/send_question",method = RequestMethod.POST)
+   public String send_question(QuestionDTO questionDTO,HttpServletRequest request) {
+      
+      //쿠키 배열에 요청 받은 쿠키 담음
+      Cookie[] cookies = request.getCookies();
+       String jwtToken = null;
+       
+       // 쿠키가 null이 아니라면
+       if (cookies != null) {
+          // 반복문 구동
             for (Cookie cookie : cookies) {
-            	//쿠키 이름이 access_token이랑 같으면
+               //쿠키 이름이 access_token이랑 같으면
                 if (cookie.getName().equals("access_token")) {
-                	//토큰에 쿠키의 값 넣음
+                   //토큰에 쿠키의 값 넣음
                     jwtToken = cookie.getValue();
                     break;
                 }
             }
         }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);
-	    
-	    //questionDTO에 id 붙힘
-	    questionDTO.setId(id);
-		customer_service.send_question(questionDTO);
-		return "/mypage/my_question";
-	}
+       
+       Claims claims = mainService.getClaims(jwtToken);
+       String id = claims.get("id", String.class);
+       
+       //questionDTO에 id 붙힘
+       questionDTO.setId(id);
+      customer_service.send_question(questionDTO);
+      return "/mypage/my_question";
+   }
 
 }

@@ -2,6 +2,7 @@ package project.gulim.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import project.gulim.domain.JwtDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.SurveyDTO;
 
@@ -19,4 +20,8 @@ public interface MainDAO {
 	public MemberDTO selectById(MemberDTO member);
 
 	public void serveyInsert(SurveyDTO servey);
+	
+	public void insertJWT(JwtDTO jwt);
+	
+	public String selectRefreshByAccess(String access_token);
 }

@@ -32,9 +32,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.config.ConfigUtils;
 import project.gulim.dao.MainDAO;
 import project.gulim.domain.JwtDTO;
@@ -291,6 +293,7 @@ public class MainServiceImpl implements MainService{
 		mainDAO.regist(member);
 	}
 
+	// 로그인 시 비밀번호가 db값과 같은지 확인
 	@Override
 	public String loginCheck(MemberDTO member) {
 		
@@ -330,13 +333,14 @@ public class MainServiceImpl implements MainService{
 	public Claims getClaims(String token) {
 		
 		byte[] secret = util.getJwt_secret().getBytes();
-	    Key key = Keys.hmacShaKeyFor(secret);
-		
+		Key key = Keys.hmacShaKeyFor(secret);
+			
 		return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+	               .setSigningKey(key)
+	               .build()
+	               .parseClaimsJws(token)
+	               .getBody();
+		
 	}
 	
 	// jwt 생성
@@ -344,14 +348,19 @@ public class MainServiceImpl implements MainService{
 	public JwtDTO createJwt(MemberDTO member) {
 		Date access_token_valid = getExpireDateAccessToken();
 		Date refresh_token_valid = getExpireDateRefreshToken();
+		MemberDTO ref_tk_value = new MemberDTO();
+		ref_tk_value.setId(member.getId());
         String accessToken = createToken(member, access_token_valid);
-        String refreshToken = createToken(new MemberDTO(), refresh_token_valid);
+        String refreshToken = createToken(ref_tk_value, refresh_token_valid);
         
         JwtDTO jwt = new JwtDTO();
         jwt.setAccess_token(accessToken);
         jwt.setRefresh_token(refreshToken);
         jwt.setAccess_token_valid(access_token_valid);
         jwt.setRefresh_token_valid(refresh_token_valid);
+        jwt.setId(member.getId());
+        
+        mainDAO.insertJWT(jwt);
         
         return jwt;
     }
@@ -378,6 +387,12 @@ public class MainServiceImpl implements MainService{
 	public void serveyInsert(SurveyDTO servey) {
 		mainDAO.serveyInsert(servey);
 		
+	}
+
+	@Override
+	public String selectRefreshByAccess(String access_token) {
+		
+		return mainDAO.selectRefreshByAccess(access_token);
 	}
 	
 }
