@@ -59,8 +59,8 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.find_evt(id);
 	}
 	
-	public Integer delete_evt(CalenderDTO calender) {
-		return mypageDAO.delete_evt(calender);
+	public void delete_evt(Integer calender_num) {
+		mypageDAO.delete_evt(calender_num);
 	}
 
 //=========== END of 캘린더 ======================================================================================================	

@@ -26,7 +26,7 @@ public interface MypageDAO {
 //=========== START of 캘린더 ======================================================================================================	
 	public Integer select_evt(CalenderDTO calenderDTO);
 	public List<CalenderDTO> find_evt(String id);
-	public Integer delete_evt(CalenderDTO calender);
+	public void delete_evt(Integer calender_num);
 //=========== END of 캘린더 ======================================================================================================	
 //=========== START of 회원정보 ======================================================================================================	
 	public String mypage_password_check(MemberDTO member);

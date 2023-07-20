@@ -62,9 +62,9 @@
 		WHERE id=#{id}
 	</select>
 	<!-- 일정 삭제 -->
-	<select id="delete_evt" parameterType="Integer" resultType="CalenderDTO">
+	<select id="delete_evt" parameterType="Integer" >
 		DELETE FROM calender 
-		WHERE calender_date = #{calender_date} and calender_title = #{calender_title} and calender_content = #{calender_content}
+		WHERE calender_num = #{calender_num}
 	</select>
 <!--=========== END of 캘린더 ======================================================================================================-->
 
@@ -113,8 +113,8 @@
 	</select>
 <!-- =========== END of 회원정보 ======================================================================================================	 -->
 <!-- =========== START of 나의 문의사항 ======================================================================================================	 -->
-	<select id="find_question" resultType="QuestionDTO">
-      select * from question where id=#{id}
+   <select id="find_question" resultType="QuestionDTO">
+      select DATE_FORMAT(question_date, '%Y-%m-%d') AS question_date,question_title,answer from question where id=#{id}
    </select>
 <!-- =========== END of 나의 문의사항 ======================================================================================================	 -->
 </mapper>
