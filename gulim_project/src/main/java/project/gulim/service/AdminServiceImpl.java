@@ -51,6 +51,18 @@ public class AdminServiceImpl implements AdminService {
 	public List<HashMap> salesStatsYear_subs(){
 		return adminDAO.salesStatsYear_subs();
 	}
+	
+	public List<HashMap> salesStatsYear_book(){
+		return adminDAO.salesStatsYear_book();
+	}
+	
+	public List<HashMap> salesStatsQuarter(String purchase_year_qua){
+		return adminDAO.salesStatsQuarter(purchase_year_qua);
+	}
+	
+	public List<HashMap> salesStatsQuarter_subs(String purchase_year){
+		return adminDAO.salesStatsQuarter_subs(purchase_year);
+	}
 
 	public List<HashMap> listRefund() {
 		return adminDAO.listRefund();
