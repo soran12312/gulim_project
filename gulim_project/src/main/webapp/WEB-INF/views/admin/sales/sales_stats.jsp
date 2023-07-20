@@ -229,7 +229,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-
                 <table class="ssysTable" hidden>
                     <tbody>
                         <c:forEach items="${salesStatsYear_subs}" var="ssys">
@@ -241,20 +240,31 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <table class="ssybTable" hidden>
+                    <tbody>
+                        <c:forEach items="${salesStatsYear_book}" var="ssyb">
+                            <tr class="ssyb-link">
+                                <td>${ssyb.purchase_date}</td>
+                                <td>${ssyb.book_title}</td>
+                                <td>${ssyb.total_book_price}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+
 
                 <!-- row -->
 
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-12 col-sm-12">
+                            <div class="col-lg-7 col-sm-7">
                                 <div class="card">
                                     <div class="card-header">
                                         <button id="btn_year" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_year_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_year_book" class="btn  btn-square btn-danger">설정집</button>                                        
                                         <a style="user-select: none; cursor: not-allowed; pointer-events: none; color: rgba(0, 0, 0, 0.00);">gulim</a>
-                                        <a class="col-8"></a>
                                     </div>
                                     <div class="card-body">
                                         <div>
@@ -264,7 +274,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-sm-12">
+                            <div class="col-lg-5 col-sm-5">
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_quarter">
@@ -273,8 +283,7 @@
                                         </select>
                                         <button id="btn_quarter" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">구독권</button>
-                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger">설정집</button>                                        
-                                        <a class="col-8"></a>
+                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger">설정집</button>  
                                     </div>
                                     <div class="card-body">
                                         <div>

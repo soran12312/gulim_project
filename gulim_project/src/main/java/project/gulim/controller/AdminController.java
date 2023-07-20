@@ -74,9 +74,22 @@ public class AdminController {
 		m.addAttribute("salesStatsYear", salesStatsYear);
 		List<HashMap> salesStatsYear_subs = adminService.salesStatsYear_subs();
 		m.addAttribute("salesStatsYear_subs", salesStatsYear_subs);
+		List<HashMap> salesStatsYear_book = adminService.salesStatsYear_book();
+		m.addAttribute("salesStatsYear_book", salesStatsYear_book);
 		
 		return "/admin/sales/sales_stats";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/sales_stats", method = RequestMethod.POST)
+	public List<HashMap> salesStatsQuarter(@RequestBody String purchase_year_qua, Model m) {
+		System.out.println(purchase_year_qua);
+		String year = purchase_year_qua.substring(purchase_year_qua.length() - 4);
+	    System.out.println(year);
+	    return adminService.salesStatsQuarter(year);
+	}
+	
+	
 
 	@RequestMapping("/delivery_refund")
 	public String viewPageDeliveryRefund(Model m) {
