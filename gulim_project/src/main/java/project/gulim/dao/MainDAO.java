@@ -27,7 +27,7 @@ public interface MainDAO {
 	
 	public String selectRefreshByAccess(String access_token);
 	
-	public Date selectExpiration(String refresh_token);
+	public JwtDTO selectExpiration(String refresh_token);
 	
 	public void setJwtStateDiscard(String access_token);
 }

@@ -62,6 +62,8 @@ public class ExceptionController {
                 }
 			}
 		}
+		System.out.println("엑세스토큰 : "+ access_token);
+		System.out.println("리프레쉬토큰 : "+ refresh_token);
 		// 리프레쉬토큰이 없을 경우(엑세스코드의 탈취일 가능성 매우 높음)
 		if(refresh_token == null) {
 			// db에서 해당 엑세스토큰 사용정지
@@ -76,7 +78,7 @@ public class ExceptionController {
 	        res.addCookie(cookie);
 	        System.out.println("리프레쉬토큰이 없을 경우");
 			
-			return "잘못된 접근";
+			return "redirect:/error_page/wrong_contect";
 		}
 		
 		// 리프레쉬토큰이 유효한지 확인
@@ -84,7 +86,9 @@ public class ExceptionController {
 			System.out.println("리프레쉬토큰이 유효할 경우");
 			// 유효할 경우
 			// 엑세스토큰으로 db에 매칭되어있는 리프레쉬토큰을 찾아서 사용자에게 받아온 리프레쉬토큰과 비교
-			if(refresh_token != mainService.selectRefreshByAccess(access_token)) {
+			String dbtoken = mainService.selectRefreshByAccess(access_token);
+			System.out.println("db리프레쉬토큰 : "+ dbtoken);
+			if(!refresh_token.equals(dbtoken)) {
 				System.out.println("db와 다를 경우");
 				// 다를 경우(토큰 탈취 가능성 높음)
 				
@@ -99,9 +103,12 @@ public class ExceptionController {
 		        // 쿠키를 응답에 추가
 		        res.addCookie(cookie);
 				
-				return "잘못된 접근";
+				return "redirect:/error_page/wrong_contect";
 			}
 			System.out.println("재발급 시작");
+			// 리프레쉬토큰 유효기한 얻어와서 쿠키에 엑세스토큰 넣기
+			JwtDTO refresh_token_expiration = mainService.selectExpiration(refresh_token);
+			
 			// db에서 기존의 엑세스토큰 사용정지
 			mainService.setJwtStateDiscard(access_token);
 			
@@ -116,10 +123,10 @@ public class ExceptionController {
 			Date access_token_valid = mainService.getExpireDateAccessToken();
 			String accessToken = mainService.createToken(member, access_token_valid);
 			
-			// 리프레쉬토큰 유효기한 얻어와서 쿠키에 엑세스토큰 넣기
-			Date refresh_token_expiration = mainService.selectExpiration(refresh_token);
 			
-			long refresh_token_valid = refresh_token_expiration.getTime() - System.currentTimeMillis(); // 만료 날짜와 현재 시간의 차이를 계산
+			System.out.println(refresh_token_expiration);
+			
+			long refresh_token_valid = refresh_token_expiration.getRefresh_token_valid().getTime() - System.currentTimeMillis(); // 만료 날짜와 현재 시간의 차이를 계산
 			
 			Cookie cookie = new Cookie("access_token", accessToken);
 			
@@ -133,7 +140,7 @@ public class ExceptionController {
 	        jwt.setAccess_token(access_token);
 	        jwt.setAccess_token_valid(access_token_valid);
 	        jwt.setRefresh_token(refresh_token);
-	        jwt.setRefresh_token_valid(refresh_token_expiration);
+	        jwt.setRefresh_token_valid(refresh_token_expiration.getRefresh_token_valid());
 	        jwt.setId(id);
 	        
 	        mainService.insertJWT(jwt);
@@ -161,7 +168,7 @@ public class ExceptionController {
 	        // 쿠키를 응답에 추가
 	        res.addCookie(cookie2);
 	        
-	        return "로그아웃";
+	        return "redirect:/main/main";
 		}
 	}
 	

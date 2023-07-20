@@ -41,17 +41,17 @@
 	
 	<select id="selectRefreshByAccess" parameterType="String" resultType="String">
 		SELECT refresh_token FROM jwt
-		WHERE access_token = #{access_token} AND jwt_state = 0
-	</select>
-	
-	<select id="selectExpiration" parameterType="String" resultType="Date">
-		SELECT refresh_token_valid FROM jwt
-		WHERE refresh_token = #{refresh_token} AND jwt_state = 0
-	</select>
-	
-	<update id="setJwtStateDiscard" parameterType="String">
-		UPDATE jwt SET jwt_state = 1
 		WHERE access_token = #{access_token}
-	</update>
+	</select>
+	
+	<select id="selectExpiration" parameterType="String" resultType="JwtDTO">
+		SELECT refresh_token_valid FROM jwt
+		WHERE refresh_token = #{refresh_token}
+	</select>
+	
+	<delete id="setJwtStateDiscard" parameterType="String">
+		DELETE FROM jwt
+		WHERE access_token = #{access_token}
+	</delete>
 
 </mapper>

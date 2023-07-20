@@ -396,7 +396,7 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Date selectExpiration(String refresh_token) {
+	public JwtDTO selectExpiration(String refresh_token) {
 		
 		return mainDAO.selectExpiration(refresh_token);
 	}
