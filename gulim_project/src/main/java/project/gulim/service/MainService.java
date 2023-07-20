@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.domain.JwtDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.SurveyDTO;
@@ -31,5 +32,17 @@ public interface MainService {
 	public MemberDTO selectById(MemberDTO member);
 
 	public void serveyInsert(SurveyDTO servey);
+	
+	public String createToken(MemberDTO member, Date expireDate);
+	
+	public Date getExpireDateAccessToken();
+	
+	public String selectRefreshByAccess(String access_token);
+	
+	public JwtDTO selectExpiration(String refresh_token);
+	
+	public void setJwtStateDiscard(String access_token);
+	
+	public void insertJWT(JwtDTO jwt);
 
 }

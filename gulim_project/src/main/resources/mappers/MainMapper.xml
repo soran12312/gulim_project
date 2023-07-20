@@ -33,5 +33,25 @@
 		INSERT INTO survey(play_rull, play_genre, play_period, play_species, master, want_genre, play_class, other_site, id)
 		VALUES (#{play_rull}, #{play_genre}, #{play_period}, #{play_species}, #{master}, #{want_genre}, #{play_class}, #{other_site}, #{id})
 	</insert>
+	
+	<insert id="insertJWT" parameterType="JwtDTO">
+		INSERT INTO jwt(access_token, refresh_token, access_token_valid, refresh_token_valid, id)
+		VALUES (#{access_token}, #{refresh_token}, #{access_token_valid}, #{refresh_token_valid}, #{id})
+	</insert>
+	
+	<select id="selectRefreshByAccess" parameterType="String" resultType="String">
+		SELECT refresh_token FROM jwt
+		WHERE access_token = #{access_token}
+	</select>
+	
+	<select id="selectExpiration" parameterType="String" resultType="JwtDTO">
+		SELECT refresh_token_valid FROM jwt
+		WHERE refresh_token = #{refresh_token}
+	</select>
+	
+	<delete id="setJwtStateDiscard" parameterType="String">
+		DELETE FROM jwt
+		WHERE access_token = #{access_token}
+	</delete>
 
 </mapper>
