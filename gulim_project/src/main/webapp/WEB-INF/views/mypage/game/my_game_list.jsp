@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,27 @@ $(function(){
 	
 	$('.mygame_entry_request').on("click",".mygame_go_calendar",go_calendar);
 }); 
+
+// 입장하기 버튼 클릭 시
+const chatRoomJoin = (event,room_num) => {
+	event.preventDefault();
+
+	$.ajax({
+		type	: 'post'
+		,url	: '/mypage/game/get_id'
+		,success	: function(result){
+			//alert(result);
+			var url = "https://192.168.0.68:3000/"+room_num+"/"+result;
+			window.open(url, 'Chatting Room','width=1300,height=900');
+		}
+		,error	: function(err){
+			alert('error');
+			console.log(err);
+		}
+	}); // end of ajax
+
+} // end of func chatRoomJoin()
+
 </script>
 
 </head>
@@ -71,33 +93,33 @@ $(function(){
 			<hr class="game_line1">
 			<div class="bxslider_size">
 				<ul class="bxslider">
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-								<td class="fs15 fs_light"><p class="fs17">최애의 굴림</p>들어온 요청 <a>1건</a></td>
-							</tr>
-							<tr>
-							<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-								<td class="fs15 fs_light"><p class="fs17">최애의 굴림</p>들어온 요청 <a>1건</a></td>
-							</tr>
-							<tr>
-							<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-								<td class="fs15 fs_light"><p class="fs17">최애의 굴림</p>들어온 요청 <a>1건</a></td>
-							</tr>
-							<tr>
-							<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
+					<c:if test="${empty room_info.master}">
+						<li>
+							들어온 요청이 없습니다.
+						</li>
+					</c:if>
+					<c:forEach items="${room_info.master}" var="room">
+						<c:if test="${room.containsKey('num_of_join') && room.room_state==0}">
+							<li>
+							<table class ="mygame_entry_request">
+									<tr>
+										<td>
+										<c:if test="${room.containsKey('img_path')}">
+											<img src="${room.img_path}" />
+										</c:if>
+										<c:if test="${not room.containsKey('img_path')}">
+											<img src="/files/images/no_image.jpg" />
+										</c:if>
+										</td>
+										<td class="fs15 fs_light"><p class="fs17">${room.room_name}</p>들어온 요청 <a>${room.num_of_join}건</a></td>
+									</tr>
+									<tr>
+									<td><div class ="mygame_tag ">플레이중</div></td><!-- 여기 어차피 플레이중인 방만 뜰건데 없애도 되지않나? -->
+									</tr>
+							</table>
+							</li>
+						</c:if>
+					</c:forEach>
 				</ul>
 			</div>
 			
@@ -107,48 +129,43 @@ $(function(){
 			<hr class="game_line2">
 			<div class="bxslider_size2">
 				<ul class="bxslider mygame_master">
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
-							</tr>
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-										<li><table class ="mygame_entry_request">
-							<tr>
-								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
-							</tr>
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-										<li><table class ="mygame_entry_request">
-							<tr>
-								<td><button class="mygame_go_calendar" id = "mygame_go_calendar">다음일정잡기</button></td>
-							</tr>
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
+					<c:if test="${empty room_info.master}">
+						<li>
+							생성한 게임이 없습니다.
+						</li>
+					</c:if>
+					<c:forEach items="${room_info.master}" var="room">
+						<li>
+						<table class ="mygame_entry_request">
+								<tr>
+									<td><button id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+								</tr>
+								<tr>
+									<td>
+									<c:if test="${room.containsKey('img_path')}">
+										<img src="${room.img_path}" />
+									</c:if>
+									<c:if test="${not room.containsKey('img_path')}">
+										<img src="/files/images/no_image.jpg" />
+									</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td class="mygame_master_title"><p class="fs17 height1">${room.room_name}</p></td>
+								</tr>
+								<tr>
+									<td>
+									<c:if test="${room.room_state == 0}">
+										<div class ="mygame_tag ">플레이중</div>
+									</c:if>
+									<c:if test="${room.room_state != 0}">
+										<div class ="mygame_tag ">종료된방</div>
+									</c:if>
+									</td>
+								</tr>
+						</table>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 			
@@ -158,39 +175,36 @@ $(function(){
 			<hr class="game_line3">
 						<div class="bxslider_size3">
 				<ul class="bxslider mygame_master">
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
-					<li><table class ="mygame_entry_request">
-							<tr>
-								<td><img src="/files/images/game_imsi.jpg" /></td>
-							</tr>
-							<tr>
-								<td class="mygame_master_title"><p class="fs17 height1">최애의 굴림</p></td>
-							</tr>
-							<tr>
-								<td><div class ="mygame_tag ">플레이중</div></td>
-							</tr>
-					</table></li>
+					<c:if test="${empty room_info.player}">
+						<li>
+							참여중인 게임이 없습니다.
+						</li>
+					</c:if>
+					<c:forEach items="${room_info.player}" var="room">
+						<li>
+						<table class ="mygame_entry_request">
+								<tr>
+									<td><button id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+								</tr>
+								<tr>
+									<td>
+									<c:if test="${room.containsKey('img_path')}">
+										<img src="${room.img_path}" />
+									</c:if>
+									<c:if test="${not room.containsKey('img_path')}">
+										<img src="/files/images/no_image.jpg" />
+									</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td class="mygame_master_title"><p class="fs17 height1">${room.room_name}</p></td>
+								</tr>
+								<tr>
+									<td><div class ="mygame_tag ">플레이중</div></td>
+								</tr>
+						</table>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

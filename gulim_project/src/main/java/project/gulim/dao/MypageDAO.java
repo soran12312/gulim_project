@@ -24,10 +24,18 @@ public interface MypageDAO {
 	public Integer message_delete(Integer num);
 //=========== END of 쪽지 ======================================================================================================	
 //=========== START of 캘린더 ======================================================================================================	
-	public Integer select_evt(CalenderDTO calenderDTO);
+	public Integer insert_evt(CalenderDTO calenderDTO);
 	public List<CalenderDTO> find_evt(String id);
 	public void delete_evt(Integer calender_num);
-//=========== END of 캘린더 ======================================================================================================	
+//=========== END of 캘린더 ======================================================================================================
+//=========== START of 게임관리 ======================================================================================================	
+	public List<Map> selectRoomById(String id);
+	public Integer selectNumOfJoinByRoomNum(Integer roon_num);
+	public String selectImgPathByRoomNum(Integer roon_num);
+	public List<Integer> selectAllJoinedRoomNumById(String id);
+	public String selectRoomNameByPK(Integer roon_num);
+
+//=========== END of 게임관리 ========================================================================================================
 //=========== START of 회원정보 ======================================================================================================	
 	public String mypage_password_check(MemberDTO member);
 	public Map find_info(MemberDTO member);
