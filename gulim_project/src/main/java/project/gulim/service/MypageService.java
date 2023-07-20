@@ -23,7 +23,7 @@ public interface MypageService {
 	//=========== START of 캘린더 ======================================================================================================	
 	public Integer insert_evt(CalenderDTO calenderDTO);
 	public List<CalenderDTO> find_evt(String id);
-	public void delete_evt(Integer calender_num);
+	public Integer delete_evt(CalenderDTO calender);
 	//=========== END of 캘린더 ======================================================================================================	
 	//=========== START of 게임관리 ======================================================================================================	
 	public List<Map> selectRoomById(String id);

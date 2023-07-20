@@ -285,6 +285,7 @@
 				contentType:"application/json; charset=UTF-8",
 				// 성공할 시
 				success: function(response){
+										console.log(response)
 					names2 = [];
 					data2 = {
 						series: []

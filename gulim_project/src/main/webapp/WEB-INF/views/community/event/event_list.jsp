@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,28 +157,23 @@
 }
 
 .single_product.complete img.resized-image {
-    filter: grayscale(50%);
-
+	filter:grayscale(100%); /*썸네일 흑백 필터*/
+	filter: brightness(0.30);
 }
-	
-.row {
-  width: 100%;
-  height: 1024px;
-  background-image:url("/files/images/mypage/mypage_back.jpg");
-  background-size: cover;
-  opacity: 1;
-  overflow: hidden;
-}	
 
+.row {
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/커뮤니티.jpg");
+	background-size: cover;
+	opacity: 1;
+	overflow: hidden;
+}
 
 .product_image .resized-image {
-    width: 350px;
-    height: 350px;
+	width: 350px;
+	height: 350px;
 }
-
-
-
-	
 </style>
 
 </head>
@@ -186,96 +181,105 @@
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
-	
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="./free_board_list">자유게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./event_list">이벤트게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./contest_main">공모전게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./announce_list">공지사항</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					href="./free_board_list">자유게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="./event_list">이벤트게시판</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="./contest_main">공모전게시판</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="product_item">
 		<div class="row">
-			
-			
+
+
 			<c:forEach items="${events}" var="event">
-			    <div class="col-lg-4 col-md-4 col-sm-6 mix sale" style="display: inline-block;" data-bound="">
-			        <div class="single_product ${event.post_state == 1 ? 'complete' : ''}">
-			            <c:forEach items="${eventimages}" var="eventimage">
-			                <c:if test="${eventimage.post_num == event.post_num}">
-			                	
-			                	
-			                    <div class="product_image">
-			                        <c:choose>
-			                            <c:when test="${event.post_state == 1}">
-			                                <img class="resized-image" src="/images/gulim/${eventimage.origin_img_name}.png" onclick="return false;">
-			                                <input type="hidden" name="post_num" value="${event.post_num}">
-			                            </c:when>
-			                            
-			                            <c:otherwise>
-			                                <a href="./event_detail?post_num=${event.post_num}">
-			                                    <img class="resized-image" src="/images/gulim/${eventimage.origin_img_name}.png">
-			                                </a>
-			                            </c:otherwise>
-			                        </c:choose>
-			                        
-			                    </div>
-			                </c:if>
-			            </c:forEach>
-			            <div class="product_btm_text">
-			                <h4>
-			                    <a href="./event_detail?post_num=${event.post_num}" ${event.post_state == 1 ? 'onclick="return false;"' : ''}>${event.post_title}</a>
-			                </h4>
-			                
-			            </div>
-			        </div>
-			    </div>
+				<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
+					style="display: inline-block;" data-bound="">
+					<div class="single_product ${event.post_state == 1 ? 'complete' : ''}">
+						<c:set var="hasImage" value="false" />
+						<c:forEach items="${eventimages}" var="eventimage">
+							<c:if test="${eventimage.post_num == event.post_num}">
+								<c:set var="hasImage" value="true" />
+								<div class="product_image">
+									<c:choose>
+										<c:when test="${event.post_state == 1}">
+											<img class="resized-image"
+												src="/images/gulim/${eventimage.origin_img_name}.png"
+												onclick="return false;">
+											<input type="hidden" name="post_num"
+												value="${event.post_num}">
+										</c:when>
+										<c:otherwise>
+											<a href="./event_detail?post_num=${event.post_num}"> <img
+												class="resized-image"
+												src="/images/gulim/${eventimage.origin_img_name}.png">
+											</a>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</c:if>
+						</c:forEach>
+						<!-- Show the "noimage" placeholder if there are no images for the event -->
+						<c:if test="${not hasImage}">
+							<div class="product_image">
+								<img class="resized-image" src="/files/images/no_image.jpg"
+									onclick="return false;"> <input type="hidden"
+									name="post_num" value="${event.post_num}">
+							</div>
+						</c:if>
+						<div class="product_btm_text">
+							<h4>
+								<a href="./event_detail?post_num=${event.post_num}"
+									${event.post_state == 1 ? 'onclick="return false;"' : ''}>${event.post_title}</a>
+							</h4>
+						</div>
+					</div>
+				</div>
 			</c:forEach>
-			
-			
-			
-			
-			
+
+
+
+
+
 			<c:if test="${empty events}">
 				<%-- <c:set var="count" value="1" />
 				    <c:forEach begin="1" end="6"> --%>
-					    <div class="col-lg-4 col-md-4 col-sm-6 mix sale"style="display: inline-block;" data-bound="">
-							<div class="single_product">
-								<div class="product_image">
-									<img
-										src="https://www.karosearch.com/images/categories/medical-hospitals.jpg" alt="">
-									<div class="box-content">
-										<a href="#"><i class="fa fa-heart-o"></i></a> <a href="#"><i
-											class="fa fa-cart-plus"></i></a> <a href="#"><i
-											class="fa fa-search"></i></a>
-									</div>
-								</div>
-								<div class="product_btm_text">
-									<h4>
-										<a href="#">이벤트가 없습니다.</a>
-									</h4>
-								</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
+					style="display: inline-block;" data-bound="">
+					<div class="single_product">
+						<div class="product_image">
+							<img
+								src="https://www.karosearch.com/images/categories/medical-hospitals.jpg"
+								alt="">
+							<div class="box-content">
+								<a href="#"><i class="fa fa-heart-o"></i></a> <a href="#"><i
+									class="fa fa-cart-plus"></i></a> <a href="#"><i
+									class="fa fa-search"></i></a>
 							</div>
 						</div>
-								
-					<%-- </c:forEach> --%>
+						<div class="product_btm_text">
+							<h4>
+								<a href="#">이벤트가 없습니다.</a>
+							</h4>
+						</div>
+					</div>
+				</div>
+
+				<%-- </c:forEach> --%>
 			</c:if>
-			
-			
-			
+
+
+
 			<!-- Add more product items here -->
 			<!-- <div class="col-lg-4 col-md-4 col-sm-6 mix sale"
 				style="display: inline-block;" data-bound="">

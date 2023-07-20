@@ -28,6 +28,12 @@ public interface AdminService {
 	public List<HashMap> salesStatsYear();
 	
 	public List<HashMap> salesStatsYear_subs();
+	
+	public List<HashMap> salesStatsYear_book();
+	
+	public List<HashMap> salesStatsQuarter(String purchase_year_qua);
+	
+	public List<HashMap> salesStatsQuarter_subs(String purchase_year);
 
 	public List<HashMap> listRefund();
 
