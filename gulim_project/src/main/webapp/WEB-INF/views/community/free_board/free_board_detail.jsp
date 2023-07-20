@@ -428,6 +428,18 @@
 	line-height: 1.5;
 	color: inherit;
 }
+
+
+.row {
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/커뮤니티.jpg");
+	background-size: cover;
+	opacity: 1;
+	overflow: hidden;
+}
+
+
 </style>
 </head>
 <body>

@@ -108,7 +108,7 @@ public class CommunityController {
 				
 				Claims claims = mainService.getClaims(jwtToken);
 				
-//					System.out.println(claims);
+				//	System.out.println(claims);
 				String id = claims.get("id", String.class);      // 로그인한 사용자 id
 				params.setId(id);                                // 
 				

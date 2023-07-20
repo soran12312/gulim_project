@@ -231,6 +231,16 @@ section.notice {
   border-radius: 5px; /* 원하는 모서리의 둥글기 정도 조절 */
 }
 
+
+.row {
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/커뮤니티.jpg");
+	background-size: cover;
+	opacity: 1;
+	overflow: hidden;
+}
+
 </style>
 
 
@@ -287,18 +297,6 @@ section.notice {
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>중간파티원 모집</td>
-							<th><a href="#!">이웃집 주사위 룰을 적용하고 있습니다.</a>
-								<p>테스트</p></th>
-							<td>황윤재진</td>
-						</tr>
-
-						<tr>
-							<td>게임개설요청</td>
-							<th><a href="#!">굴림 더 락! 룰을 적용한 게임이 하고 싶습니다.</a></th>
-							<td>최다비니</td>
-						</tr> -->
 						
 						 <c:forEach items="${posts}" var="post">
 				            <tr>
