@@ -1,5 +1,7 @@
 package project.gulim.dao;
 
+import java.util.Date;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import project.gulim.domain.JwtDTO;
@@ -24,4 +26,8 @@ public interface MainDAO {
 	public void insertJWT(JwtDTO jwt);
 	
 	public String selectRefreshByAccess(String access_token);
+	
+	public Date selectExpiration(String refresh_token);
+	
+	public void setJwtStateDiscard(String access_token);
 }

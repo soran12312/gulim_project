@@ -38,5 +38,11 @@ public interface MainService {
 	public Date getExpireDateAccessToken();
 	
 	public String selectRefreshByAccess(String access_token);
+	
+	public Date selectExpiration(String refresh_token);
+	
+	public void setJwtStateDiscard(String access_token);
+	
+	public void insertJWT(JwtDTO jwt);
 
 }

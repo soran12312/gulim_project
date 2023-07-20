@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.QuestionDTO;
@@ -36,15 +37,16 @@ public class Customer_serviceController {
        String jwtToken = null;
        
        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-       
+           for (Cookie cookie : cookies) {
+               if (cookie.getName().equals("access_token")) {
+                   jwtToken = cookie.getValue();
+                   break;
+               }
+           }
+       }
        Claims claims = mainService.getClaims(jwtToken);
+       
+       
        String id = claims.get("id", String.class);         
        questionDTO.setId(id);
        m.addAttribute("questionDTO", questionDTO);

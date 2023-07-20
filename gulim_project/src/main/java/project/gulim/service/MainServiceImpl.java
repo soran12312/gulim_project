@@ -394,5 +394,23 @@ public class MainServiceImpl implements MainService{
 		
 		return mainDAO.selectRefreshByAccess(access_token);
 	}
+
+	@Override
+	public Date selectExpiration(String refresh_token) {
+		
+		return mainDAO.selectExpiration(refresh_token);
+	}
+
+	@Override
+	public void setJwtStateDiscard(String access_token) {
+		mainDAO.setJwtStateDiscard(access_token);
+		
+	}
+
+	@Override
+	public void insertJWT(JwtDTO jwt) {
+		mainDAO.insertJWT(jwt);
+		
+	}
 	
 }
