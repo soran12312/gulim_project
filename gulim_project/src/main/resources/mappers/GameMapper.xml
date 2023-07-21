@@ -4,6 +4,19 @@
 
 <mapper namespace="project.gulim.dao.GameDAO">
 
+	<insert id="room_insert" parameterType="ChatingDTO" useGeneratedKeys="true" keyProperty="room_num">
+		INSERT INTO chating(room_name, max_member, video, watching, period, plot, law, etc, id)
+		VALUES (#{room_name}, #{max_member}, #{video}, #{watching}, #{period}, #{plot}, #{law}, #{etc}, #{id})
+	</insert>
 	
+	<insert id="room_img_insert" parameterType="ImageDTO">
+		INSERT INTO image(origin_img_name, path, img_size, room_num)
+		VALUES (#{origin_img_name}, #{path}, #{img_size}, #{room_num})
+	</insert>
+	
+	<insert id="tag_insert" parameterType="TagDTO">
+		INSERT INTO tag(room_num, tag_content)
+		VALUES (#{room_num}, #{tag_content})
+	</insert>
 
 </mapper>

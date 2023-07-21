@@ -9,7 +9,7 @@ public class ImageDTO {
 	private Integer img_num;
 	private String origin_img_name;
 	private String path;
-	private Integer img_size;
+	private Long img_size;
 	private Integer book_num;
 	private String id;
 	private Integer room_num;

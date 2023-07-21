@@ -17,7 +17,6 @@ public class ChatingDTO {
 	private String law;
 	private String etc;
 	private Integer watching; // 관전허용여부(0-허용 / 1-불가)
-	private Integer voice; // 음성채팅여부(0-필수 / 1-선택)
 	private Integer video; // 화상채팅여부(0-필수 / 1-선택)
 	private Integer room_state; // 개설상태(0-기본값 / 1-삭제된 방)
 }
