@@ -89,7 +89,7 @@ const chatRoomJoin = (event,room_num) => {
 			<div class="bxslider_size">
 				<ul class="bxslider">
 					<c:if test="${empty room_info.master}">
-						<li>
+						<li class="no_respon1">
 							들어온 요청이 없습니다.
 						</li>
 					</c:if>
@@ -122,7 +122,7 @@ const chatRoomJoin = (event,room_num) => {
 			<div class="bxslider_size2">
 				<ul class="bxslider mygame_master">
 					<c:if test="${empty room_info.master}">
-						<li>
+						<li class="no_respon2">
 							생성한 게임이 없습니다.
 						</li>
 					</c:if>
@@ -130,7 +130,7 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button class="mygame_go_calendar" id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td><button class="mygame_go_game" id = "mygame_go_game" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
 								</tr>
 								<tr>
 									<td>
@@ -148,10 +148,10 @@ const chatRoomJoin = (event,room_num) => {
 								<tr>
 									<td>
 									<c:if test="${room.room_state == 0}">
-										<div class ="mygame_tag ">플레이중</div>
+										<div class ="mygame_tag backfround_blue">플레이중</div>
 									</c:if>
 									<c:if test="${room.room_state != 0}">
-										<div class ="mygame_tag ">종료된방</div>
+										<div class ="mygame_tag backfround_black color_white">종료된방</div>
 									</c:if>
 									</td>
 								</tr>
@@ -168,7 +168,7 @@ const chatRoomJoin = (event,room_num) => {
 						<div class="bxslider_size3">
 				<ul class="bxslider mygame_master">
 					<c:if test="${empty room_info.player}">
-						<li>
+						<li class="no_respon3">
 							참여중인 게임이 없습니다.
 						</li>
 					</c:if>
@@ -176,7 +176,7 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button class="mygame_go_calendar" id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td><button class="mygame_go_game" id = "mygame_go_game" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
 								</tr>
 								<tr>
 									<td>
@@ -192,7 +192,14 @@ const chatRoomJoin = (event,room_num) => {
 									<td class="mygame_master_title"><p class="fs17 height1">${room.room_name}</p></td>
 								</tr>
 								<tr>
-									<td><div class ="mygame_tag ">플레이중</div></td>
+									<td>
+										<c:if test="${room.room_state == 0}">
+											<div class ="mygame_tag backfround_blue">플레이중</div>
+										</c:if>
+										<c:if test="${room.room_state != 0}">
+											<div class ="mygame_tag backfround_black color_white">종료된방</div>
+										</c:if>
+									</td>
 								</tr>
 						</table>
 						</li>

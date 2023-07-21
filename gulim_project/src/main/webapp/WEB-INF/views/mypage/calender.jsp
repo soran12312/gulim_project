@@ -160,7 +160,7 @@
 
 								//입력받은 내용을 DB에 저장, 성공 시 새로고침
 								$.ajax({
-									url: '/mypage/select_evt',
+									url: '/mypage/insert_evt',
 									type: 'POST',
 									data: {
 										 calender_date: start_time
