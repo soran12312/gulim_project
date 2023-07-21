@@ -37,10 +37,10 @@
 	<!-- 게시글 이미지 저장 -->
 	<insert id="saveImage" parameterType="project.gulim.domain.ImageDTO">
 		INSERT INTO image
-		(post_num, origin_img_name, `path`, img_size, id)
+		(post_num, origin_img_name, `path`, img_size)
 		VALUES
 		( (SELECT MAX(post_num)FROM post)
-		, #{origin_img_name}, #{path}, #{img_size}, #{id})
+		, #{origin_img_name}, #{path}, #{img_size})
 	</insert>
 
 
@@ -75,9 +75,9 @@
 	
 	<update id="updateImage" parameterType="project.gulim.domain.ImageDTO">
 		UPDATE image
-		(post_num, origin_img_name, `path`, img_size, id)
+		(post_num, origin_img_name, `path`, img_size)
 		SET
-		#{post_num}, #{origin_img_name}, #{path}, #{img_size}, #{id}
+		#{post_num}, #{origin_img_name}, #{path}, #{img_size}
 	</update>
 
 

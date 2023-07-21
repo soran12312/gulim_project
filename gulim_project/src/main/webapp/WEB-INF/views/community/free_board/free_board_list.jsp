@@ -329,7 +329,7 @@ section.notice {
 				<!-- 페이징 번호 표시 -->
 				<div class="pagination">
 				    <c:if test="${currentPage > 1}">
-				        <a href="/community/freelist?page=${currentPage - 1}">이전</a>
+				        <a href="/community/free_board_list?page=${currentPage - 1}">이전</a>
 				    </c:if>
 				    
 				    <c:forEach begin="1" end="${totalPages}" var="pageNum">
@@ -338,13 +338,13 @@ section.notice {
 				                <strong>${pageNum}</strong>
 				            </c:when>
 				            <c:otherwise>
-				                <a href="/community/freelist?page=${pageNum}">${pageNum}</a>
+				                <a href="/community/free_board_list?page=${pageNum}">${pageNum}</a>
 				            </c:otherwise>
 				        </c:choose>
 				    </c:forEach>
 				    
 				    <c:if test="${currentPage < totalPages}">
-				        <a href="/community/freelist?page=${currentPage + 1}">다음</a>
+				        <a href="/community/free_board_list?page=${currentPage + 1}">다음</a>
 				    </c:if>
 				</div>
 					<button type="button" class="btn btn-default" id="register" class="btn">등록</button>

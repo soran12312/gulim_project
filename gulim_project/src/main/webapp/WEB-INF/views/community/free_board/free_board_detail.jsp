@@ -437,7 +437,7 @@
 	background-size: cover;
 	opacity: 1;
 	overflow: hidden;
-}
+} 
 
 
 </style>

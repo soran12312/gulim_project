@@ -1,13 +1,16 @@
 package project.gulim.service;
 
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.HashMap;
+import java.util.List;
+
+import project.gulim.domain.SubscribeDTO;
 
 
 public interface SubscriptionService {
 	
 
-	public void saveSubscription(Integer price);
+	public void saveSubscription(SubscribeDTO subscriptionData);
 
+	public List<HashMap> savePurchase(Integer sub_num, Integer basket_num);
 }

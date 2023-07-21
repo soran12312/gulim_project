@@ -1,16 +1,22 @@
 package project.gulim.controller;
 
-import java.time.LocalDate;
-import java.util.concurrent.Flow.Subscription;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import project.gulim.domain.BasketDTO;
+import project.gulim.domain.PurchaseDTO;
+import project.gulim.domain.SubscribeDTO;
+import project.gulim.service.CartService;
+import project.gulim.service.MainService;
 import project.gulim.service.SubscriptionService;
 
 @RestController
@@ -20,45 +26,63 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
     
+    @Autowired
+	private MainService mainService;
+    
+    
+    @Autowired
+	private HttpServletRequest request;
+    
+    @Autowired
+    private CartService cartService;
+    
+    
+    
+    
     
     // 카트 구독권 추가
-//    @PostMapping("/add-to-cart")
-//    public ResponseEntity<String> addToCart(@RequestBody Subscription subscription) {
-//        try {
-//            // Extract the price and num (id) from the request
-//            int price = subscription.getPrice();
-//            
-//            // Calculate the end_date based on the price and num (id)
-//            LocalDate endDate;
-//            if (price == 9900) {
-//                // Check 구독권을 한번도 가입한적이 없는 지 확인해서 2개월 추가되게
-//                endDate = LocalDate.now().plusMonths(1);
-//                
-//            } else if (price == 15000) {
-//                endDate = LocalDate.now().plusMonths(3);
-//            } else if (price == 29900) {
-//                endDate = LocalDate.now().plusMonths(7);
-//            } else if (price == 55000) {
-//                endDate = LocalDate.now().plusMonths(14);
-//            } else {
-//                // Set a default end_date if the price is not recognized
-//                endDate = LocalDate.now().plusMonths(1);
-//            }
-//
-//            // Create a Subscription object and set the necessary data
-//            Subscription subscription = new Subscription();
-//            subscription.setPrice(price);
-//            subscription.setNum(num);
-//            subscription.setEnd_date(endDate);
-//
-//            // Call the service layer to save the data to the database
-//            subscriptionService.saveSubscription(subscription);
-//
-//            return ResponseEntity.ok("Subscription added to cart successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add subscription to cart");
-//        }
-//    }
+    // 클라이언트에서 보낸 구독권 정보를 처리하는 메서드
+    @RequestMapping("/add-to-cart")
+    public ResponseEntity<String> addToCart(@RequestBody Map<String, Object> subscriptionDataMap) {
+        try {
+            // Convert the Map to a SubscribeDTO object 
+            SubscribeDTO subscriptionData = SubscribeDTO.createFromMap(subscriptionDataMap);
+
+            System.out.println(subscriptionData);
+            
+            subscriptionService.saveSubscription(subscriptionData);        // db저장
+            
+            
+            // 장바구니 테이블에 id값 저장
+            Cookie[] cookies = request.getCookies();
+            String jwtToken = null;
+
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("access_token")) {
+                        jwtToken = cookie.getValue();
+                        System.out.println(jwtToken);
+                        break;
+                    }
+                }
+            }
+
+            Claims claims = mainService.getClaims(jwtToken);
+            String id = claims.get("id", String.class); // 로그인한 사용자 id
+            System.out.println(id);
+
+            // 장바구니 정보를 구성하여 DB에 저장
+            BasketDTO basketData = new BasketDTO();
+            basketData.setId(id);
+            cartService.saveCart(basketData);
+
+
+            return ResponseEntity.ok("Subscription added to cart successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add subscription to cart");
+        }
+    }
+
     
     
     

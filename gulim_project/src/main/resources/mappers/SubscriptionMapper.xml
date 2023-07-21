@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.gulim.dao.SubscriptionDAO">
+
+	
+	<!--  선택한 구독권 가격 db저장 -->
+	<insert id="saveSubscription" parameterType="project.gulim.domain.SubscribeDTO">
+	    INSERT INTO subscribe (price) VALUES (#{price})
+	</insert>
+	
+	<!-- 유저 id db 저장-->
+	<insert id="saveCart" parameterType="project.gulim.domain.BasketDTO" >
+	    INSERT INTO basket (id) VALUES (#{id})
+	</insert>
+	
+	
+	<!-- purchase 장바구니, 구독권 번호 저장 -->
+	<insert id="savePurchase" parameterType="SubscribeDTO" useGeneratedKeys="true" keyProperty="sub_num">
+		insert into purchase basket_num
+		values #{basket_num}
+	</insert>
+	
+
+</mapper>

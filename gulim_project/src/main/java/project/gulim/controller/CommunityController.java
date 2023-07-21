@@ -20,14 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import io.jsonwebtoken.Claims;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import project.gulim.constant.Method;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.service.CommunityService;
 import project.gulim.service.MainService;
+import project.gulim.util.UiUtils;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,8 +44,7 @@ public class CommunityController {
 	@Autowired
 	private MainService mainService;
 	
-	@Autowired
-	private ServletContext servletContext;
+	private final UiUtils uiUtils = new UiUtils();
 	
 	// 자유게시판 입력페이지
 	@RequestMapping(value = "/free_board_insert")
@@ -252,6 +252,27 @@ public class CommunityController {
 	public String list(Model model,
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "10") int size) {
+		
+		
+			Cookie[] cookies = request.getCookies();
+			String jwtToken = null;
+			
+			if (cookies != null) {
+			    for (Cookie cookie : cookies) {
+			        if (cookie.getName().equals("access_token")) {
+			            jwtToken = cookie.getValue();
+			            break;
+			        }
+			    }
+			}
+			
+			// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
+			if(jwtToken == null)
+			{
+				return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, model);
+			}
+			
+				
 
 			// 전체 게시글 수 조회
 			int totalCount = communityService.countAllPosts();
