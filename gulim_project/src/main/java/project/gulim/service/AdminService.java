@@ -31,9 +31,15 @@ public interface AdminService {
 	
 	public List<HashMap> salesStatsYear_book();
 	
+	public List<HashMap> selectYear();
+	
 	public List<HashMap> salesStatsQuarter(String purchase_year_qua);
 	
-	public List<HashMap> salesStatsQuarter_subs(String purchase_year);
+	public List<HashMap> selectYear_mon();
+	
+	public List<HashMap> salesStatsMonth(String purchase_year_mon);
+	
+	public List<HashMap> salesStatsMonth_subs(String purchase_year_mon);
 
 	public List<HashMap> listRefund();
 

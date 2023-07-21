@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -258,7 +259,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-7 col-sm-7">
+                            <div class="col-lg-8 col-sm-8">
                                 <div class="card">
                                     <div class="card-header">
                                         <button id="btn_year" class="btn btn-square btn-dark">전체</button>
@@ -274,12 +275,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-sm-5">
+                            <div class="col-lg-4 col-sm-4">
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_quarter">
-                                            <option value="2023" selected>2023</option>
-                                            <option value="2022">2022</option>
+                                            <c:forEach items="${selectYear}" var="sy">
+                                                <option value="${sy.selectedYear}">${sy.selectedYear}</option>
+                                            </c:forEach>
                                         </select>
                                         <button id="btn_quarter" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">구독권</button>
@@ -297,8 +299,9 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <select class="selectYear" id="selectYear_month">
-                                            <option value="2023" selected>2023</option>
-                                            <option value="2022">2022</option>
+                                            <c:forEach items="${selectYear_mon}" var="sym">
+                                                <option value="${sym.selectedYear}">${sym.selectedYear}</option>
+                                            </c:forEach>
                                         </select>
                                         <button id="btn_month" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_month_subscribe" class="btn  btn-square btn-primary">구독권</button>
@@ -307,7 +310,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
+                                            <h6 class="h6_month" style="color:black;">2023년 월매출</h6>
                                         </div>
                                         <div id="morris_bar_2" class="morris_chart_height"></div>
                                     </div>
