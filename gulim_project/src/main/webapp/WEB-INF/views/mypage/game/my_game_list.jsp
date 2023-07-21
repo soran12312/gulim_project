@@ -27,11 +27,6 @@ $(function(){
 	
 	});
 	
-	const go_calendar = () => {
-		location.href="/mypage/calender";
-	}
-	
-	$('.mygame_entry_request').on("click",".mygame_go_calendar",go_calendar);
 }); 
 
 // 입장하기 버튼 클릭 시
@@ -113,9 +108,6 @@ const chatRoomJoin = (event,room_num) => {
 										</td>
 										<td class="fs15 fs_light"><p class="fs17">${room.room_name}</p>들어온 요청 <a>${room.num_of_join}건</a></td>
 									</tr>
-									<tr>
-									<td><div class ="mygame_tag ">플레이중</div></td><!-- 여기 어차피 플레이중인 방만 뜰건데 없애도 되지않나? -->
-									</tr>
 							</table>
 							</li>
 						</c:if>
@@ -138,7 +130,7 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td><button class="mygame_go_calendar" id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
 								</tr>
 								<tr>
 									<td>
@@ -184,7 +176,7 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td><button class="mygame_go_calendar" id = "mygame_go_calendar" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
 								</tr>
 								<tr>
 									<td>

@@ -53,19 +53,19 @@
 <!--=========== END of 쪽지 =====================================================================================================-->
 <!--=========== START of 캘린더 =====================================================================================================-->
 	<insert id="insert_evt" parameterType = "CalenderDTO">
-		INSERT INTO calender (id, calender_date, calender_title, calender_content) 
-		VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})	
-	</insert>
-	<select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
-		SELECT * 
-		FROM calender
-		WHERE id=#{id}
-	</select>
-	<!-- 일정 삭제 -->
-	<select id="delete_evt" parameterType="Integer" resultType="CalenderDTO">
-		DELETE FROM calender 
-		WHERE calender_date = #{calender_date} and calender_title = #{calender_title} and calender_content = #{calender_content}
-	</select>
+      INSERT INTO calender (id, calender_date, calender_title, calender_content) 
+      VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})   
+    </insert>
+    <select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
+      SELECT * 
+      FROM calender
+      WHERE id=#{id}
+    </select>
+    <!-- 일정 삭제 -->
+    <select id="delete_evt" parameterType="Integer" >
+      DELETE FROM calender 
+      WHERE calender_num = #{calender_num}
+    </select>
 <!--=========== END of 캘린더 ======================================================================================================-->
 <!-- =========== START of 게임관리 ======================================================================================================	 -->
 

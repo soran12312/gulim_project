@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.config.ConfigUtils;
 import project.gulim.domain.JwtDTO;
@@ -126,6 +127,22 @@ public class MainController {
 	// 로그인 jwt토큰 생성
 	@RequestMapping("/login")
 	public String login(MemberDTO id) {
+		
+		String access_token = null;
+		
+		Cookie[] cookies = req.getCookies();
+		// 이용자 request에서 쿠키 얻어옴
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if (cookie.getName().equals("access_token")) {
+					access_token = cookie.getValue();
+				}
+			}
+		}
+		
+		// db에서 해당 엑세스토큰 사용정지(기존에 로그아웃 안하고 그냥 인터넷 창 껏을 때 쿠키에 남아있는 엑세스토큰 db에서 삭제)
+		if(access_token != null) mainService.setJwtStateDiscard(access_token);
+		
 		MemberDTO member = mainService.selectById(id);
 		
 		JwtDTO jwt = mainService.createJwt(member);

@@ -198,110 +198,113 @@ public class MypageContoroller {
 
    
    
-//캘린더 페이지 진입 시 일정 리스트 받아오기
-   @RequestMapping("/calender")
-   public String find_evt(CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
-      Cookie[] cookies = request.getCookies();
-      String jwtToken = null;
-       
-      if (cookies != null) {
-         for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-       
-       Claims claims = mainService.getClaims(jwtToken);
-       String id = claims.get("id", String.class);         
 
-       List<CalenderDTO> list = mypageService.find_evt(id);
-       List<HashMap> result = new ArrayList<HashMap>();
-       //model안에 list안에 map안에 일정 정보 담기
-       for(CalenderDTO c : list) {
-            HashMap map = new HashMap();
-            map.put("num", c.getCalender_num());
-            map.put("start", c.getCalender_date());
-            map.put("title", c.getCalender_title());
-            map.put("description", c.getCalender_content());
-            result.add(map);
-         }
-       m.addAttribute("evt", result);      
-       return "/mypage/calender";
-   }
-   
-   
-   
-   
-//일정 저장하기
-   @RequestMapping("/insert_evt")
-   @ResponseBody 
-   public void insert_evt(String calender_date, String calender_title,String calender_content
-                        ,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
-      
-      
-      //쿠키에서 아이디 얻어오기
-      Cookie[] cookies = request.getCookies();
-       String jwtToken = null;
-       
-       if (cookies != null) {
-           for (Cookie cookie : cookies) {
-               if (cookie.getName().equals("access_token")) {
-                   jwtToken = cookie.getValue();
-                   break;
-               }
-           }
-       }
-       
-       Claims claims = mainService.getClaims(jwtToken);
-       String id = claims.get("id", String.class);  
-       
-       //calenderDTO에 일정정보 담아서 DB에 입력
-       calenderDTO.setId(id);
-       calenderDTO.setCalender_date(calender_date);
-       calenderDTO.setCalender_title(calender_title);
-       calenderDTO.setCalender_content(calender_content);
-       
-       Integer result = mypageService.insert_evt(calenderDTO);
-       m.addAttribute("calenderDTO", calenderDTO);
-   }
-      
-      
+	   
+	   
+	//캘린더 페이지 진입 시 일정 리스트 받아오기
+	   @RequestMapping("/calender")
+	   public String find_evt(CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	      Cookie[] cookies = request.getCookies();
+	      String jwtToken = null;
+	       
+	      if (cookies != null) {
+	         for (Cookie cookie : cookies) {
+	                if (cookie.getName().equals("access_token")) {
+	                    jwtToken = cookie.getValue();
+	                    break;
+	                }
+	            }
+	        }
+	       
+	       Claims claims = mainService.getClaims(jwtToken);
+	       String id = claims.get("id", String.class);         
 
-//캘린더 삭제 시 패스워드 체크 
-   @RequestMapping("/mypage_password_check_calender")
-   @ResponseBody
-   public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
-      //아이디 가져오기
-      Cookie[] cookies = request.getCookies();
-      String jwtToken = null;
-      
-      if (cookies != null) {
-         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("access_token")) {
-               jwtToken = cookie.getValue();
-                   break;
-               }
-           }
-      }
-          
-      Claims claims = mainService.getClaims(jwtToken);
-      String id = claims.get("id", String.class);         
-      memberDTO.setId(id);
-      
-      //비밀번호 체크 (일치 : True 불일치 False)
-      Boolean result = mypageService.mypage_password_check(memberDTO);  
-      return result;
-      }
-   
-//일정 삭제   
-   @RequestMapping("/delete_evt")
-   public String delete_evt(Integer calender_num) {
-      //일정넘버 가지고 서비스단으로 이동해서 해당 일정 삭제
-      mypageService.delete_evt(calender_num);
-      return "/mypage/calender";
-   }
+	       List<CalenderDTO> list = mypageService.find_evt(id);
+	       List<HashMap> result = new ArrayList<HashMap>();
+	       //model안에 list안에 map안에 일정 정보 담기
+	       for(CalenderDTO c : list) {
+	            HashMap map = new HashMap();
+	            map.put("num", c.getCalender_num());
+	            map.put("start", c.getCalender_date());
+	            map.put("title", c.getCalender_title());
+	            map.put("description", c.getCalender_content());
+	            result.add(map);
+	         }
+	       m.addAttribute("evt", result);      
+	       return "/mypage/calender";
+	   }
+	   
+	   
+	   
+	   
+	//일정 저장하기
+	   @RequestMapping("/insert_evt")
+	   @ResponseBody 
+	   public void insert_evt(String calender_date, String calender_title,String calender_content
+	                        ,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	      
+	      
+	      //쿠키에서 아이디 얻어오기
+	      Cookie[] cookies = request.getCookies();
+	       String jwtToken = null;
+	       
+	       if (cookies != null) {
+	           for (Cookie cookie : cookies) {
+	               if (cookie.getName().equals("access_token")) {
+	                   jwtToken = cookie.getValue();
+	                   break;
+	               }
+	           }
+	       }
+	       
+	       Claims claims = mainService.getClaims(jwtToken);
+	       String id = claims.get("id", String.class);  
+	       
+	       //calenderDTO에 일정정보 담아서 DB에 입력
+	       calenderDTO.setId(id);
+	       calenderDTO.setCalender_date(calender_date);
+	       calenderDTO.setCalender_title(calender_title);
+	       calenderDTO.setCalender_content(calender_content);
+	       
+	       Integer result = mypageService.insert_evt(calenderDTO);
+	       m.addAttribute("calenderDTO", calenderDTO);
+	   }
+	      
+	      
+
+	//캘린더 삭제 시 패스워드 체크 
+	   @RequestMapping("/mypage_password_check_calender")
+	   @ResponseBody
+	   public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
+	      //아이디 가져오기
+	      Cookie[] cookies = request.getCookies();
+	      String jwtToken = null;
+	      
+	      if (cookies != null) {
+	         for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("access_token")) {
+	               jwtToken = cookie.getValue();
+	                   break;
+	               }
+	           }
+	      }
+	          
+	      Claims claims = mainService.getClaims(jwtToken);
+	      String id = claims.get("id", String.class);         
+	      memberDTO.setId(id);
+	      
+	      //비밀번호 체크 (일치 : True 불일치 False)
+	      Boolean result = mypageService.mypage_password_check(memberDTO);  
+	      return result;
+	      }
+	   
+	//일정 삭제   
+	   @RequestMapping("/delete_evt")
+	   public String delete_evt(Integer calender_num) {
+	      //일정넘버 가지고 서비스단으로 이동해서 해당 일정 삭제
+	      mypageService.delete_evt(calender_num);
+	      return "/mypage/calender";
+	   }
 
 //=========== END of 캘린더 ========================================================================================================
 //=========== START of 게임관리 ======================================================================================================	
