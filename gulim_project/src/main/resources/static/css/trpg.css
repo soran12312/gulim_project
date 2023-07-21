@@ -45,6 +45,15 @@ font-weight: bold;}
 .display_block{
 	display: block;
 }
+.backfround_black{
+	background-color : black;
+}
+.backfround_blue{
+	background-color :  #6AB3FD;;
+}
+.backfround_pink{
+	background-color : #FD786A;
+}
 /* ================END OF ALL============================== */
 
 
@@ -933,7 +942,6 @@ font-weight: bold;}
 }
 .mygame_tag{
   width:50px;
-  background-color : #6AB3FD;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -953,7 +961,7 @@ font-weight: bold;}
 .mygame_master{
 	width: 900px;
 }
-.mygame_go_calendar{
+.mygame_go_game{
   width:90px;
   background-color : #FD786A;
   border-top-left-radius: 5px;
@@ -967,6 +975,22 @@ font-weight: bold;}
   text-align: center;
   margin: auto;
   display: block;
+}
+
+.no_respon1{
+	height: 130px;
+	font-size: 25px;
+	text-align: center;
+}
+.no_respon2{
+	height: 190px;
+	font-size: 25px;
+	text-align: center;
+}
+.no_respon3{
+	height: 150px;
+	font-size: 25px;
+	text-align: center;
 }
 /* ================ END OF MYGAME ====================== */
 /* ================ START OF MY_INFO ====================== */

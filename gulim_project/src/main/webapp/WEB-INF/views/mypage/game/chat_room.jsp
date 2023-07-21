@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var url = "https://192.168.0.68:3000/1/nahs001";
+
+	window.open(url, 'Chatting Room', 'width=1300,height=900');
+}); // end of $
+</script>
 </head>
 <body>
 
@@ -29,10 +37,6 @@
 <!-- ===================== START OF SIDE BAR =====================-->
 <jsp:include page="../../../../sidebar.jsp"></jsp:include>
 <!-- ===================== END OF SIDE BAR =====================--> --%>
-
-
-	<iframe src="https://192.168.0.68:3000/1/nahs001" width="100%" height="900px"></iframe>
-
 
 
 </body>

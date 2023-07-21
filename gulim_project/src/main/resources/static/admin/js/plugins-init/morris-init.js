@@ -6,6 +6,49 @@
     var tableRows_ssyTable = document.querySelectorAll('.ssyTable tbody tr');
     var data_year = [];
     var chart_year;
+    
+    
+    var lineChartParent = document.getElementById('line_chart_2');
+		// SVG 요소를 찾아서 제거합니다.
+		var svgElement = lineChartParent.querySelector('svg');
+		if (svgElement) {
+		    lineChartParent.removeChild(svgElement);
+		}
+		var divElement = lineChartParent.querySelector('div');
+		if (divElement) {
+		    lineChartParent.removeChild(divElement);
+		}
+	
+	    for (var i = 0; i < tableRows_ssyTable.length; i++) {
+	        var purchase_year = tableRows_ssyTable[i].querySelector('td:nth-child(1)').textContent;
+	        var total_book_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(2)').textContent);
+	        var total_subscribe_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(3)').textContent);
+	        var total_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(4)').textContent);
+	
+	        var rowData = {
+	            purchase_year: purchase_year,
+	            total_book_price: total_book_price,
+	            total_subscribe_price: total_subscribe_price,
+	            total_price: total_price
+	        };
+	
+	        data_year.push(rowData);
+	    }
+	    
+	    chart_year = Morris.Area({
+	        element: 'line_chart_2',
+	        data: data_year,
+	        xkey: 'purchase_year',
+	        ykeys: ['total_book_price', 'total_subscribe_price', 'total_price'],
+	        labels: ['설정집', '구독권', '총'],
+	        pointSize: 3,
+	        fillOpacity: 0,
+	        behaveLikeLine: true,
+	        gridLineColor: 'transparent',
+	        lineWidth: 3,
+	        hideHover: 'auto',
+	        resize: true
+	    });
 
     
 
@@ -57,43 +100,80 @@
 	    });
 	});
 	
-	$("#btn_year_subscribe").on("click", function() {
+	$("#btn_year_subscribe").on("click", function () {
 	    var tableRows_ssysTable = document.querySelectorAll('.ssysTable tbody tr');
 	    data_year = [];
 	    chart_year = null;
-	    
-	    // SVG 요소를 담고 있는 부모 요소를 가져옵니다.
-		var lineChartParent = document.getElementById('line_chart_2');
-		// SVG 요소를 찾아서 제거합니다.
-		var svgElement = lineChartParent.querySelector('svg');
-		if (svgElement) {
-		    lineChartParent.removeChild(svgElement);
-		}
-		var divElement = lineChartParent.querySelector('div');
-		if (divElement) {
-		    lineChartParent.removeChild(divElement);
-		}
 	
-	    for (var i = 0; i < tableRows_ssyTable.length; i++) {
+	    // SVG 요소를 담고 있는 부모 요소를 가져옵니다.
+	    var lineChartParent = document.getElementById('line_chart_2');
+	    // SVG 요소를 찾아서 제거합니다.
+	    var svgElement = lineChartParent.querySelector('svg');
+	    if (svgElement) {
+	        lineChartParent.removeChild(svgElement);
+	    }
+	    var divElement = lineChartParent.querySelector('div');
+	    if (divElement) {
+	        lineChartParent.removeChild(divElement);
+	    }
+	
+	    for (var i = 0; i < tableRows_ssysTable.length; i++) {
 	        var sub_date = tableRows_ssysTable[i].querySelector('td:nth-child(1)').textContent;
 	        var price = parseInt(tableRows_ssysTable[i].querySelector('td:nth-child(2)').textContent);
 	        var total_subscribe_price = parseInt(tableRows_ssysTable[i].querySelector('td:nth-child(3)').textContent);
 	
-	        var rowData = {
-	            sub_date: sub_date,
-	            price: price,
-	            total_subscribe_price: total_subscribe_price
-	        };
-	        
-	        data_year.push(rowData);
-		}
-		
-		chart_year = Morris.Area({
+	        var rowData = {};
+	
+	        if (sub_date === '2022') {
+	            rowData.sub_date = sub_date;
+	            if (price === 5000) {
+	                rowData.total_subscribe_price_5000 = total_subscribe_price;
+	            } else if (price === 9900) {
+	                rowData.total_subscribe_price_9900 = total_subscribe_price;
+	            } else if (price === 15000) {
+	                rowData.total_subscribe_price_15000 = total_subscribe_price;
+	            } else if (price === 29900) {
+	                rowData.total_subscribe_price_29900 = total_subscribe_price;
+	            } else if (price === 55000) {
+	                rowData.total_subscribe_price_55000 = total_subscribe_price;
+	            }
+	        }
+	
+	        if (sub_date === '2023') {
+	            rowData.sub_date = sub_date;
+	            if (price === 5000) {
+	                rowData.total_subscribe_price_5000 = total_subscribe_price;
+	            } else if (price === 9900) {
+	                rowData.total_subscribe_price_9900 = total_subscribe_price;
+	            } else if (price === 15000) {
+	                rowData.total_subscribe_price_15000 = total_subscribe_price;
+	            } else if (price === 29900) {
+	                rowData.total_subscribe_price_29900 = total_subscribe_price;
+	            } else if (price === 55000) {
+	                rowData.total_subscribe_price_55000 = total_subscribe_price;
+	            }
+	        }
+	
+	        // 만약 data_year 배열에 rowData의 sub_date와 같은 데이터가 없다면 추가
+	        var foundIndex = data_year.findIndex(item => item.sub_date === rowData.sub_date);
+	        if (foundIndex === -1) {
+	            data_year.push(rowData);
+	        } else {
+	            // 만약 data_year 배열에 rowData의 sub_date와 같은 데이터가 있다면 해당 데이터에 추가
+	            for (var prop in rowData) {
+	                if (rowData.hasOwnProperty(prop) && prop !== 'sub_date') {
+	                    data_year[foundIndex][prop] = rowData[prop];
+	                }
+	            }
+	        }
+	    }
+	
+	    chart_year = Morris.Area({
 	        element: 'line_chart_2',
 	        data: data_year,
 	        xkey: 'sub_date',
-	        ykeys: ['price', 'total_subscribe_price'],
-	        labels: ['구독권 종류', '총'],
+	        ykeys: ['total_subscribe_price_5000', 'total_subscribe_price_9900', 'total_subscribe_price_15000', 'total_subscribe_price_29900', 'total_subscribe_price_55000'],
+	        labels: ['일회권', '1개월권', '3개월권', '6개월권', '12개월권'],
 	        pointSize: 3,
 	        fillOpacity: 0,
 	        behaveLikeLine: true,
@@ -103,6 +183,91 @@
 	        resize: true
 	    });
 	});
+
+
+	$("#btn_year_book").on("click", function () {
+	    var tableRows_ssybTable = document.querySelectorAll('.ssybTable tbody tr');
+	    data_year = [];
+	    chart_year = null;
+	
+	    // SVG 요소를 담고 있는 부모 요소를 가져옵니다.
+	    var lineChartParent = document.getElementById('line_chart_2');
+	    // SVG 요소를 찾아서 제거합니다.
+	    var svgElement = lineChartParent.querySelector('svg');
+	    if (svgElement) {
+	        lineChartParent.removeChild(svgElement);
+	    }
+	    var divElement = lineChartParent.querySelector('div');
+	    if (divElement) {
+	        lineChartParent.removeChild(divElement);
+	    }
+	
+	    // book_title들을 저장할 배열을 생성합니다.
+	    var bookTitles = [];
+	
+	    for (var i = 0; i < tableRows_ssybTable.length; i++) {
+	        var purchase_date = tableRows_ssybTable[i].querySelector('td:nth-child(1)').textContent;
+	        var book_title = tableRows_ssybTable[i].querySelector('td:nth-child(2)').textContent;
+	        var total_book_price = parseInt(tableRows_ssybTable[i].querySelector('td:nth-child(3)').textContent);
+	
+	        var rowData = {};
+	
+	        // purchase_date가 존재하지 않는 경우 해당 데이터는 건너뜁니다.
+	        if (!purchase_date) {
+	            continue;
+	        }
+	
+	        rowData.purchase_date = purchase_date;
+	
+	        // book_title을 동적으로 추가합니다.
+	        rowData['total_book_price_' + book_title] = total_book_price;
+	
+	        // book_title을 bookTitles 배열에 추가합니다.
+	        if (!bookTitles.includes(book_title)) {
+	            bookTitles.push(book_title);
+	        }
+	
+	        // 만약 data_year 배열에 rowData의 sub_date와 같은 데이터가 없다면 추가
+	        var foundIndex = data_year.findIndex(item => item.purchase_date === rowData.purchase_date);
+	        if (foundIndex === -1) {
+	            data_year.push(rowData);
+	        } else {
+	            // 만약 data_year 배열에 rowData의 sub_date와 같은 데이터가 있다면 해당 데이터에 추가
+	            for (var prop in rowData) {
+	                if (rowData.hasOwnProperty(prop) && prop !== 'purchase_date') {
+	                    data_year[foundIndex][prop] = rowData[prop];
+	                }
+	            }
+	        }
+	    }
+	
+	    // book_title들을 기준으로 data_year 배열을 정렬합니다.
+	    data_year.sort(function(a, b) {
+	        var total_price_a = 0;
+	        var total_price_b = 0;
+	        bookTitles.forEach(function(book_title) {
+	            total_price_a += a['total_book_price_' + book_title] || 0;
+	            total_price_b += b['total_book_price_' + book_title] || 0;
+	        });
+	        return total_price_b - total_price_a;
+	    });
+	
+	    chart_year = Morris.Area({
+	        element: 'line_chart_2',
+	        data: data_year,
+	        xkey: 'purchase_date',
+	        ykeys: bookTitles.map(title => 'total_book_price_' + title),
+	        labels: bookTitles,
+	        pointSize: 3,
+	        fillOpacity: 0,
+	        behaveLikeLine: true,
+	        gridLineColor: 'transparent',
+	        lineWidth: 3,
+	        hideHover: 'auto',
+	        resize: true
+	    });
+	});
+
 		
 	// Select 요소와 버튼 요소를 가져옵니다.
 	var btnYear = $("#btn_year");
@@ -158,159 +323,171 @@
     
 
     /************ Start of 분기매출 ************/
-      var data_quarter = [{
-	    label: "\xa0 \xa0 Download Sales \xa0 \xa0",
-	    value: 12,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 30
-	  }, {
-	    label: "\xa0 \xa0 Mail-Order Sales \xa0 \xa0",
-	    value: 20
-	  }];
-	
-	  var data_quarter_product = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 25,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 18
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value: 35
-	  }];
-	  
-	  var data_quarter_subscribe = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 14,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 19
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value: 15
-	  }];
-	  
-	  var data_quarter_book = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 32,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 9
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value: 7
-	  }];
-	  
-	  var data_quarter2 = [{
-	    label: "\xa0 \xa0 Download Sales \xa0 \xa0",
-	    value: 29,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 49
-	  }, {
-	    label: "\xa0 \xa0 Mail-Order Sales \xa0 \xa0",
-	    value: 1
-	  }];
-	
-	  var data_quarter_product2 = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 4,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 18
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value:5
-	  }];
-	  
-	  var data_quarter_subscribe2 = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 67,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 15
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value: 13
-	  }];
-	  
-	  var data_quarter_book2 = [{
-	    label: "\xa0 \xa0 Online Sales \xa0 \xa0",
-	    value: 38,
-	  }, {
-	    label: "\xa0 \xa0 In-Store Sales \xa0 \xa0",
-	    value: 98
-	  }, {
-	    label: "\xa0 \xa0 Direct Sales \xa0 \xa0",
-	    value: 76
-	  }];
-	
-	  // 초기 차트
-	  var chart_quarter = Morris.Donut({
-	    element: 'morris_donught',
-	    data: data_quarter,
-	    resize: true,
-	    colors: ['#75B432', 'rgb(192, 10, 39)', '#4400eb']
-	  });
-	
-	  
-		$("#selectYear_quarter").on("change", function() {
-		  var selectedYear = $(this).val();
-		
-		  if (selectedYear === "2023") {
-		    chart_quarter.setData(data_quarter);
-		  } else if (selectedYear === "2022") {
-		    chart_quarter.setData(data_quarter2);
-		  }
-		});
+ 
+ 	// 초기화를 빈 배열로 변경
+	var data_quarter = [];
+	var purchase_year_qua = $('#selectYear_quarter').val();
 
-		// 버튼 클릭 핸들러
-		$("#btn_quarter").on("click", function() {
-		  var selectedYear = $("#selectYear_quarter").val();
-		
-		  if (selectedYear === "2023") {
-		    chart_quarter.setData(data_quarter);
-		  } else if (selectedYear === "2022") {
-		    chart_quarter.setData(data_quarter2);
-		  }
+	$.ajax({
+	    // 경로
+	    url: "/admin/sales_stats/quarter",
+	    // 전송방식: POST
+	    method: "POST",
+	    data: {purchase_year_qua: purchase_year_qua},
+	    // 성공할 시
+	    success: function(response){
+	        data_quarter = [];
+	        for (var i = 0; i < response.length; i++) {
+	            data_quarter.push({
+	                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+	                value: response[i].total_price
+	            });
+	        }
+	        var chart_quarter = Morris.Donut({
+	            element: 'morris_donught',
+	            data: data_quarter,
+	            resize: true
+	        });
+	        
+	        
+	        $("#btn_quarter_subscribe").on("click", function() {
+				data_quarter = [];
+				var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+			        donughtChartParent.removeChild(svgElement);
+			    }
+		        for (var i = 0; i < response.length; i++) {
+		            data_quarter.push({
+		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+		                value: response[i].total_subscribe_price
+		            });
+		        }
+		        var chart_quarter = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_quarter,
+		            resize: true
+		        });
+			});
+	    },
+	    error: function(xhr, status, error){
+	        alert('분기매출 실패: '+ error);
+	        console.log(xhr);
+	        console.log(status);
+	        console.log(error);
+	    }
+	});
+
+	$("#selectYear_quarter").on("change", function() {
+		purchase_year_qua = $('#selectYear_quarter').val();
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/quarter",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_year_qua: purchase_year_qua},
+		    // 성공할 시
+		    success: function(response){
+		        console.log('월매출 성공');
+		        data_quarter = [];
+		        var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+			        donughtChartParent.removeChild(svgElement);
+			    }
+		        data_quarter = [];
+		        for (var i = 0; i < response.length; i++) {
+		            data_quarter.push({
+		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+		                value: response[i].total_price
+		            });
+		        }
+		        var chart_quarter = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_quarter,
+		            resize: true
+		        });
+		        
+		        $("#btn_quarter").on("click", function() {
+					data_quarter = [];
+			        var donughtChartParent = document.getElementById('morris_donught');
+				    // SVG 요소를 찾아서 제거합니다.
+				    var svgElement = donughtChartParent.querySelector('svg');
+				    if (svgElement) {
+				        donughtChartParent.removeChild(svgElement);
+				    }
+			        data_quarter = [];
+			        for (var i = 0; i < response.length; i++) {
+			            data_quarter.push({
+			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+			                value: response[i].total_price
+			            });
+			        }
+			        var chart_quarter = Morris.Donut({
+			            element: 'morris_donught',
+			            data: data_quarter,
+			            resize: true
+			        });
+				});
+		        
+		        $("#btn_quarter_subscribe").on("click", function() {
+					data_quarter = [];
+					var donughtChartParent = document.getElementById('morris_donught');
+				    // SVG 요소를 찾아서 제거합니다.
+				    var svgElement = donughtChartParent.querySelector('svg');
+				    if (svgElement) {
+				        donughtChartParent.removeChild(svgElement);
+				    }
+			        for (var i = 0; i < response.length; i++) {
+			            data_quarter.push({
+			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+			                value: response[i].total_subscribe_price
+			            });
+			        }
+			        var chart_quarter = Morris.Donut({
+			            element: 'morris_donught',
+			            data: data_quarter,
+			            resize: true
+			        });
+				});
+				
+				$("#btn_quarter_book").on("click", function() {
+					data_quarter = [];
+					var donughtChartParent = document.getElementById('morris_donught');
+				    // SVG 요소를 찾아서 제거합니다.
+				    var svgElement = donughtChartParent.querySelector('svg');
+				    if (svgElement) {
+				        donughtChartParent.removeChild(svgElement);
+				    }
+			        for (var i = 0; i < response.length; i++) {
+			            data_quarter.push({
+			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+			                value: response[i].total_book_price
+			            });
+			        }
+			        var chart_quarter = Morris.Donut({
+			            element: 'morris_donught',
+			            data: data_quarter,
+			            resize: true
+			        });
+				});
+		        
+		        
+		    },
+		    error: function(xhr, status, error){
+		        alert('월매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
 		});
+	});
 		
-		$("#btn_quarter_product").on("click", function() {
-		  var selectedYear = $("#selectYear_quarter").val();
-		
-		  if (selectedYear === "2023") {
-		    chart_quarter.setData(data_quarter_product);
-		  } else if (selectedYear === "2022") {
-		    chart_quarter.setData(data_quarter_product2);
-		  }
-		});
-		
-		$("#btn_quarter_subscribe").on("click", function() {
-		  var selectedYear = $("#selectYear_quarter").val();
-		
-		  if (selectedYear === "2023") {
-		    chart_quarter.setData(data_quarter_subscribe);
-		  } else if (selectedYear === "2022") {
-		    chart_quarter.setData(data_quarter_subscribe2);
-		  }
-		});
-		
-		$("#btn_quarter_book").on("click", function() {
-		  var selectedYear = $("#selectYear_quarter").val();
-		
-		  if (selectedYear === "2023") {
-		    chart_quarter.setData(data_quarter_book);
-		  } else if (selectedYear === "2022") {
-		    chart_quarter.setData(data_quarter_book2);
-		  }
-		});
-		
-		
-				// Select 요소와 버튼 요소를 가져옵니다.
+		// Select 요소와 버튼 요소를 가져옵니다.
 		var selectYearQuarter = $("#selectYear_quarter");
 		var btnQuarter = $("#btn_quarter");
-		var btnQuarterProduct = $("#btn_quarter_product");
 		var btnQuarterSubscribe = $("#btn_quarter_subscribe");
 		var btnQuarterBook = $("#btn_quarter_book");
 		var h6TagQuarter = $(".h6_quarter");
@@ -322,28 +499,18 @@
 		selectYearQuarter.on("change", updateH6TagQuarter);
 		btnQuarter.on("click", function() {
 		  btnQuarter.addClass("active");
-		  btnQuarterProduct.removeClass("active");
-		  btnQuarterSubscribe.removeClass("active");
-		  btnQuarterBook.removeClass("active");
-		  updateH6TagQuarter();
-		});
-		btnQuarterProduct.on("click", function() {
-		  btnQuarter.removeClass("active");
-		  btnQuarterProduct.addClass("active");
 		  btnQuarterSubscribe.removeClass("active");
 		  btnQuarterBook.removeClass("active");
 		  updateH6TagQuarter();
 		});
 		btnQuarterSubscribe.on("click", function() {
 		  btnQuarter.removeClass("active");
-		  btnQuarterProduct.removeClass("active");
 		  btnQuarterSubscribe.addClass("active");
 		  btnQuarterBook.removeClass("active");
 		  updateH6TagQuarter();
 		});
 		btnQuarterBook.on("click", function() {
 		  btnQuarter.removeClass("active");
-		  btnQuarterProduct.removeClass("active");
 		  btnQuarterSubscribe.removeClass("active");
 		  btnQuarterBook.addClass("active");
 		  updateH6TagQuarter();
@@ -361,8 +528,6 @@
 		function getSelectedButton_Quarter() {
 		    if (btnQuarter.hasClass("active")) {
 		        return "전체";
-		    } else if (btnQuarterProduct.hasClass("active")) {
-		        return "상품";
 		    } else if (btnQuarterSubscribe.hasClass("active")) {
 		        return "구독권";
 		    } else if (btnQuarterBook.hasClass("active")) {
@@ -375,38 +540,236 @@
 
 
 	/************ Start of 월매출 ************/
+	
+	var data_month = [];
+	var purchase_year_mon = $('#selectYear_month').val();
+	
+	$.ajax({
+	    // 경로
+	    url: "/admin/sales_stats/month",
+	    // 전송방식: POST
+	    method: "POST",
+	    data: {purchase_year_mon: purchase_year_mon},
+	    // 성공할 시
+	    success: function(response){
+	        console.log(response);
+	        
+	        for (var i = 0; i < response.length; i++) {
+	            data_month.push({
+	                y: response[i].purchase_month + "월",
+	                tsp: response[i].totalscribe_price,
+	                tbp: response[i].total_book_price
+	            });
+	        }
+	        
+	        Morris.Bar({
+		        element: 'morris_bar_2',
+		        data: data_month,
+		        xkey: 'y',
+		        ykeys: ['tsp', 'tbp'],
+		        labels: ['구독권 매출', '설정집 매출'],
+		        stacked: true,
+		        gridTextSize: 11,
+		        hideHover: 'auto',
+		        resize: true
+		    });
+	        
+	    },
+	    error: function(xhr, status, error){
+	        alert('월매출 실패: '+ error);
+	        console.log(xhr);
+	        console.log(status);
+	        console.log(error);
+	    }
+	});
+	
+	$("#selectYear_month").on("change", function() {
+		
+		purchase_year_mon = $('#selectYear_month').val();
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/month",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_year_mon: purchase_year_mon},
+		    // 성공할 시
+		    success: function(response){
+				var barChartParent = document.getElementById('morris_bar_2');
+				// SVG 요소를 찾아서 제거합니다.
+				var svgElement = barChartParent.querySelector('svg');
+				if (svgElement) {
+				    barChartParent.removeChild(svgElement);
+				}
+					
+			    console.log(response);
+			    data_month = [];
+			        
+			    for (var i = 0; i < response.length; i++) {
+			        data_month.push({
+			            y: response[i].purchase_month + "월",
+			            tsp: response[i].totalscribe_price,
+			            tbp: response[i].total_book_price
+			        });
+			    }
+			        
+			    Morris.Bar({
+				    element: 'morris_bar_2',
+				    data: data_month,
+				    xkey: 'y',
+				    ykeys: ['tsp', 'tbp'],
+				    labels: ['구독권 매출', '설정집 매출'],
+				    stacked: true,
+				    gridTextSize: 11,
+				    hideHover: 'auto',
+				    resize: true
+				});
+		    },
+		    error: function(xhr, status, error){
+		        alert('월매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
+		});
+	});
+	
+	$("#btn_month_subscribe").on("click", function() {
+		$.ajax({
+			url: "/admin/sales_stats/month_sub",
+			method: "POST",
+			data: { purchase_year_mon: purchase_year_mon },
+			success: function(response) {
+				var barChartParent = document.getElementById('morris_bar_2');
+				var svgElement = barChartParent.querySelector('svg');
+				if (svgElement) {
+					barChartParent.removeChild(svgElement);
+				}
+				
+				console.log(response);
+				var data_month = []; // data_month 배열 초기화
+				
+				// 변수를 사용하여 이전 월을 기억
+				var prevMonth = null;
+				var tempObj = null;
+	
+				for (var i = 0; i < response.length; i++) {
+					if (prevMonth === null || prevMonth !== response[i].purchase_month) {
+						// 이전 월과 현재 월이 다르면 새로운 객체를 생성하고 tempObj에 할당
+						tempObj = {
+							y: response[i].purchase_month + "월",
+						};
+						data_month.push(tempObj);
+					}
+	
+					// price 값에 따라 total_subscribe_price를 분류하여 추가
+					var priceKey = getPriceKey(response[i].price);
+					if (priceKey) {
+						if (!tempObj[priceKey]) tempObj[priceKey] = 0;
+						tempObj[priceKey] += response[i].total_subscribe_price;
+					}
+	
+					// prevMonth를 현재 월로 갱신
+					prevMonth = response[i].purchase_month;
+				}
+	
+				Morris.Bar({
+					element: 'morris_bar_2',
+					data: data_month,
+					xkey: 'y',
+					ykeys: ['a', 'b', 'c', 'd', 'e'], // 필요에 따라 다른 price에 해당하는 키도 추가 가능
+					labels: ['일회권', '1개월권', '3개월권', '6개월권', '12개월권'], // 라벨에 맞게 추가 또는 수정
+					stacked: true,
+					gridTextSize: 11,
+					hideHover: 'auto',
+					resize: true
+				});
+			},
+			error: function(xhr, status, error) {
+				alert('월매출 실패: ' + error);
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			}
+		});
+	});
 
-    Morris.Bar.prototype.fillForSeries = function(i) {
-        var color;
-        return "0-#f00-#f00:20-#f00";
-    };
+	// price 값에 따라 해당하는 키를 반환하는 함수
+	function getPriceKey(price) {
+		switch (price) {
+			case 5000:
+				return 'a';
+			case 9900:
+				return 'b';
+			case 15000:
+				return 'c';
+			case 29900:
+				return 'd';
+			case 55000:
+				return 'e';
+			default:
+				return null; // 알 수 없는 price 값인 경우 null 반환
+		}
+	}
 
-    Morris.Bar({
-        element: 'morris_bar_2',
-        data: [
-          { y: '1월', a: 100, b: 90, c: 80 },
-          { y: '2월', a: 75,  b: 65, c: 75 },
-          { y: '3월', a: 75,  b: 65, c: 75 },
-          { y: '4월', a: 75,  b: 65, c: 75 },
-          { y: '5월', a: 50,  b: 40, c: 45 },
-          { y: '6월', a: 75,  b: 65, c: 85 },
-          { y: '7월', a: 79,  b: 35, c: 45 },
-          { y: '8월', a: 60,  b: 20, c: 60 },
-          { y: '9월', a: 66,  b: 30, c: 50 },
-          { y: '10월', a: 46,  b: 60, c: 90 },
-          { y: '11월', a: 35,  b: 80, c: 60 },
-          { y: '12월', a: 35,  b: 80, c: 60 },
-        ],
-        xkey: 'y',
-        ykeys: ['a', 'b', 'c'],
-        labels: ['Series A', 'Series B', 'Series C'],
-        barColors: ['rgb(0, 0, 128)', 'rgb(0, 171, 197)', '#75B432'], 
-        stacked: true,
-        gridTextSize: 11,
-        hideHover: 'auto',
-        resize: true
-    });
-    
+
+
+
+	
+	
+	// Select 요소와 버튼 요소를 가져옵니다.
+	var selectYearMonth = $("#selectYear_month");
+	var btnMonth = $("#btn_month");
+	var btnMonthSubscribe = $("#btn_month_subscribe");
+	var btnMonthBook = $("#btn_month_book");
+	var h6TagMonth = $(".h6_month");
+	
+	// Select 요소와 버튼 요소의 변경 이벤트를 감지합니다.
+	btnMonth.addClass("active");
+	updateH6TagMonthMonth();
+	
+	selectYearMonth.on("change", updateH6TagMonthMonth); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	btnMonth.on("click", function() {
+		btnMonth.addClass("active");
+		btnMonthSubscribe.removeClass("active");
+		btnMonthBook.removeClass("active");
+		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	});
+	btnMonthSubscribe.on("click", function() {
+		btnMonth.removeClass("active");
+		btnMonthSubscribe.addClass("active");
+		btnMonthBook.removeClass("active");
+		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	});
+	btnMonthBook.on("click", function() {
+		btnMonth.removeClass("active");
+		btnMonthSubscribe.removeClass("active");
+		btnMonthBook.addClass("active");
+		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	});
+	
+	// h6 태그 업데이트 함수
+	function updateH6TagMonthMonth() { // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+		var selectedYear = selectYearMonth.val();
+		var selectedButton = getSelectedButton_Month();
+	
+		h6TagMonth.text(selectedYear + "년 " + selectedButton + " 월매출");
+	}
+	
+	// 선택된 버튼을 반환하는 함수
+	function getSelectedButton_Month() {
+		if (btnMonth.hasClass("active")) {
+			return "전체";
+		} else if (btnMonthSubscribe.hasClass("active")) {
+			return "구독권";
+		} else if (btnMonthBook.hasClass("active")) {
+			return "설정집";
+		} else {
+			return "전체";
+		}
+	}
+
+	
+
 	/************ END of 월매출 ************/
 
 

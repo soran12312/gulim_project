@@ -11,7 +11,7 @@
 	
 	<select id="getJoinNumByRoomNum" parameterType="Integer" resultType="Integer">
 		SELECT join_num FROM `join`
-		WHERE room_num = #{room_num}
+		WHERE room_num = #{room_num} AND join_state = 1
 	</select>
 	
 	<select id="getSheetByJoinNum" parameterType="Integer" resultType="HashMap">

@@ -96,12 +96,20 @@ public class ExceptionController {
 				mainService.setJwtStateDiscard(access_token);
 				
 				// 쿠키에서 엑세스토큰 삭제
-		        Cookie cookie = new Cookie("access_token", null);
-		        cookie.setPath("/");
-		        cookie.setMaxAge(0);
+		        Cookie cookie1 = new Cookie("access_token", null);
+		        cookie1.setPath("/");
+		        cookie1.setMaxAge(0);
 
 		        // 쿠키를 응답에 추가
-		        res.addCookie(cookie);
+		        res.addCookie(cookie1);
+		        
+		        // 쿠키에서 리프레쉬토큰 삭제
+		        Cookie cookie2 = new Cookie("refresh_token", null);
+		        cookie2.setPath("/");
+		        cookie2.setMaxAge(0);
+
+		        // 쿠키를 응답에 추가
+		        res.addCookie(cookie2);
 				
 				return "redirect:/error_page/wrong_contect";
 			}

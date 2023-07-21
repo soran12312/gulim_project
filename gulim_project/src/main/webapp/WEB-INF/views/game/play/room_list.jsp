@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="mypagebackpage">
+<jsp:include page="../../../../header_after.jsp"></jsp:include>
 
+
+
+</div>
+<jsp:include page="../../../../footer.jsp"></jsp:include>
 </body>
 </html>

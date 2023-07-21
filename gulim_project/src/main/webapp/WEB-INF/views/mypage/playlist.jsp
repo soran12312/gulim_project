@@ -11,7 +11,7 @@
 </head>
 <body>
 
-
+<!-- 여기 친구목록에 게임플레이 리스트임 -->
 
 	<div class="send_message_backpage">
 		<div class="send_message_name_back">

@@ -10,7 +10,7 @@
 <link href="/css/trpg.css" rel="stylesheet">
 </head>
 <body>
-
+<!-- 친구관리에 친구 프로필 창 -->
 
 
 	<div class="send_message_backpage">

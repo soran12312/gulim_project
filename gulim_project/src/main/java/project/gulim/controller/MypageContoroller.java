@@ -36,15 +36,16 @@ public class MypageContoroller {
 	MypageService mypageService;
 	
 	@Autowired
-	   private MainService mainService;
+	private MainService mainService;
 
 	@RequestMapping("/{step}")
 	public String viewPage(@PathVariable String step) { // 페이지 이동(DB접속없는경우)
-		return "/mypage/"+step;
+		return "mypage/"+step;
 	}
-	@RequestMapping("/game/my_game_list")
-	public String viewPage2() { // 페이지 이동(DB접속없는경우)
-		return "/mypage/game/my_game_list";
+	
+	@RequestMapping("/game/chat_room")
+	public String chat_room() { // 페이지 이동(DB접속없는경우)
+		return "/mypage/game/chat_room";
 	}
 
 //=========== START of 쪽지 ======================================================================================================	
@@ -193,99 +194,204 @@ public class MypageContoroller {
 		return "redirect:/mypage/my_message";
 	}
 //=========== END of 쪽지 ========================================================================================================
-//=========== START of 캘린더 ======================================================================================================	
-	@RequestMapping("/select_evt")
-	@ResponseBody 
-	public void select_evt(String calender_date, String calender_title,String calender_content
-							,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
-	System.out.println(calender_date+calender_title+calender_content);
-	
-	
-	//쿠키에서 아이디 얻어오기
-	Cookie[] cookies = request.getCookies();
-    String jwtToken = null;
-    
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("access_token")) {
-                jwtToken = cookie.getValue();
-                break;
-            }
-        }
-    }
-    
-    Claims claims = mainService.getClaims(jwtToken);
-   // String id = claims.get("id", String.class);    ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-    
-    
-    
-    String id = "ekqls1102";
-    calenderDTO.setId(id);
-    calenderDTO.setCalender_date(calender_date);
-    calenderDTO.setCalender_title(calender_title);
-    calenderDTO.setCalender_content(calender_content);
-    
-    Integer result = mypageService.select_evt(calenderDTO);
-    
-    m.addAttribute("calenderDTO", calenderDTO);
-}
-	
-	@RequestMapping("/calender")
-	public String find_evt(CalenderDTO calenderDTO, Model m) {
-		String id = "ekqls1102";
-		System.out.println(calenderDTO);
-		List<CalenderDTO> list = mypageService.find_evt(id);
-		List<HashMap> result = new ArrayList<HashMap>();
-		
-		for(CalenderDTO c : list) {
-			HashMap map = new HashMap();
-			map.put("start", c.getCalender_date());
-			map.put("title", c.getCalender_title());
-			map.put("description", c.getCalender_content());
-			result.add(map);
-		}
-		
-		
-		m.addAttribute("evt", result);
-		
-		
-		
-		return "/mypage/calender";
-	}
-	
-	//마이페이지/회원정보 접속 시 패스워드 체크 
-	@RequestMapping("/mypage_password_check_calender")
-	@ResponseBody
-	public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
-	    memberDTO.setId(id);
-	    
-		Boolean result = mypageService.mypage_password_check(memberDTO);
-		return result;
-	}
-	
-	@RequestMapping("/delete_evt")
-	public String delete_evt(CalenderDTO calender, Model m) {
-		//글넘버 가지고 서비스단으로 이동해서 해당 메세지데이터 가져오기
-		Integer result = mypageService.delete_evt(calender);
-		return "redirect:/mypage/my_message";
-	}
+//=========== START of 캘린더 ======================================================================================================   
+
+   
+   
+
+	   
+	   
+	//캘린더 페이지 진입 시 일정 리스트 받아오기
+	   @RequestMapping("/calender")
+	   public String find_evt(CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	      Cookie[] cookies = request.getCookies();
+	      String jwtToken = null;
+	       
+	      if (cookies != null) {
+	         for (Cookie cookie : cookies) {
+	                if (cookie.getName().equals("access_token")) {
+	                    jwtToken = cookie.getValue();
+	                    break;
+	                }
+	            }
+	        }
+	       
+	       Claims claims = mainService.getClaims(jwtToken);
+	       String id = claims.get("id", String.class);         
+
+	       List<CalenderDTO> list = mypageService.find_evt(id);
+	       List<HashMap> result = new ArrayList<HashMap>();
+	       //model안에 list안에 map안에 일정 정보 담기
+	       for(CalenderDTO c : list) {
+	            HashMap map = new HashMap();
+	            map.put("num", c.getCalender_num());
+	            map.put("start", c.getCalender_date());
+	            map.put("title", c.getCalender_title());
+	            map.put("description", c.getCalender_content());
+	            result.add(map);
+	         }
+	       m.addAttribute("evt", result);      
+	       return "/mypage/calender";
+	   }
+	   
+	   
+	   
+	   
+	//일정 저장하기
+	   @RequestMapping("/insert_evt")
+	   @ResponseBody 
+	   public void insert_evt(String calender_date, String calender_title,String calender_content
+	                        ,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	      
+	      
+	      //쿠키에서 아이디 얻어오기
+	      Cookie[] cookies = request.getCookies();
+	       String jwtToken = null;
+	       
+	       if (cookies != null) {
+	           for (Cookie cookie : cookies) {
+	               if (cookie.getName().equals("access_token")) {
+	                   jwtToken = cookie.getValue();
+	                   break;
+	               }
+	           }
+	       }
+	       
+	       Claims claims = mainService.getClaims(jwtToken);
+	       String id = claims.get("id", String.class);  
+	       
+	       //calenderDTO에 일정정보 담아서 DB에 입력
+	       calenderDTO.setId(id);
+	       calenderDTO.setCalender_date(calender_date);
+	       calenderDTO.setCalender_title(calender_title);
+	       calenderDTO.setCalender_content(calender_content);
+	       
+	       Integer result = mypageService.insert_evt(calenderDTO);
+	       m.addAttribute("calenderDTO", calenderDTO);
+	   }
+	      
+	      
+
+	//캘린더 삭제 시 패스워드 체크 
+	   @RequestMapping("/mypage_password_check_calender")
+	   @ResponseBody
+	   public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
+	      //아이디 가져오기
+	      Cookie[] cookies = request.getCookies();
+	      String jwtToken = null;
+	      
+	      if (cookies != null) {
+	         for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("access_token")) {
+	               jwtToken = cookie.getValue();
+	                   break;
+	               }
+	           }
+	      }
+	          
+	      Claims claims = mainService.getClaims(jwtToken);
+	      String id = claims.get("id", String.class);         
+	      memberDTO.setId(id);
+	      
+	      //비밀번호 체크 (일치 : True 불일치 False)
+	      Boolean result = mypageService.mypage_password_check(memberDTO);  
+	      return result;
+	      }
+	   
+	//일정 삭제   
+	   @RequestMapping("/delete_evt")
+	   public String delete_evt(Integer calender_num) {
+	      //일정넘버 가지고 서비스단으로 이동해서 해당 일정 삭제
+	      mypageService.delete_evt(calender_num);
+	      return "/mypage/calender";
+	   }
 
 //=========== END of 캘린더 ========================================================================================================
 //=========== START of 게임관리 ======================================================================================================	
+
+	@RequestMapping("/game/my_game_list")
+	public String my_game_list(Model m, HttpServletRequest req) {
+		
+		Cookie[] cookies = req.getCookies();
+	    String jwtToken = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			jwtToken = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	        
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class); 
+		
+		// 유저의 게임 리스트를 모두 담을 map
+		Map map = new HashMap();
+		
+		// 내가 마스터인 방의 room_num, room_name, 조인 요청 갯수, 방 이미지 path 가져오기
+		List<Map> game_master_list = mypageService.selectRoomById(id);
+		for(Map room : game_master_list) {
+			Integer num_of_join = mypageService.selectNumOfJoinByRoomNum((Integer)room.get("room_num"));
+			if(num_of_join != null) {
+				room.put("num_of_join", num_of_join);
+			}
+			String img_path = mypageService.selectImgPathByRoomNum((Integer)room.get("room_num"));
+			if(img_path != null){
+				room.put("img_path", img_path);
+			}
+		}
+		map.put("master", game_master_list);
+		
+		// 내가 플레이어로 참가 허가된 방의 room_num, room_name, 방 이미지 path 가져오기
+		List<Map> player_list = new ArrayList();
+		List<Integer> room_list = mypageService.selectAllJoinedRoomNumById(id);
+		for(Integer room_num : room_list) {
+			Map player = new HashMap();
+			String room_name = mypageService.selectRoomNameByPK(room_num);
+			String img_path = mypageService.selectImgPathByRoomNum(room_num);
+			// 얻어온 room_num의 방이 개설상태가 개설중인 경우(== room_name을 얻어온 경우)
+			if(room_name != null) {
+				player.put("room_num", room_num);
+				player.put("room_name", room_name);
+				if(img_path != null) {
+					player.put("img_path", img_path);
+				}
+				player_list.add(player);
+			}
+		}
+		map.put("player", player_list);
+		
+		System.out.println(map);
+		
+		m.addAttribute("room_info", map);
+		
+		
+		return "/mypage/game/my_game_list";
+	}
+	
+	@RequestMapping("/game/get_id")
+	@ResponseBody
+	public String get_id(HttpServletRequest req) {
+
+		Cookie[] cookies = req.getCookies();
+	    String jwtToken = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			jwtToken = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	        
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);
+		
+		return id;
+	}
 //=========== END of 게임관리 ========================================================================================================
 
 	
@@ -486,8 +592,6 @@ public class MypageContoroller {
 //=========== END of 나의 문의사항 ========================================================================================================
 //=========== START of 친구관리 ======================================================================================================	
 //=========== END of 친구관리 ========================================================================================================
-//=========== START of 게임관리 ======================================================================================================	
-//=========== END of 게임관리 ========================================================================================================
 //=========== START of 결제내역 ======================================================================================================	
 //=========== END of 결제내역 ========================================================================================================
 //=========== START of 공모전 ======================================================================================================	

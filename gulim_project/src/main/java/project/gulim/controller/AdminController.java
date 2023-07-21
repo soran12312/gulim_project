@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.gulim.domain.BasketDTO;
@@ -18,7 +18,6 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
-import project.gulim.domain.SubscribeDTO;
 import project.gulim.service.AdminService;
 
 @Controller
@@ -74,16 +73,42 @@ public class AdminController {
 		m.addAttribute("salesStatsYear", salesStatsYear);
 		List<HashMap> salesStatsYear_subs = adminService.salesStatsYear_subs();
 		m.addAttribute("salesStatsYear_subs", salesStatsYear_subs);
+		List<HashMap> salesStatsYear_book = adminService.salesStatsYear_book();
+		m.addAttribute("salesStatsYear_book", salesStatsYear_book);
+		List<HashMap> selectYear = adminService.selectYear();
+		m.addAttribute("selectYear", selectYear);
+		List<HashMap> selectYear_mon = adminService.selectYear_mon();
+		m.addAttribute("selectYear_mon", selectYear_mon);
 		
 		return "/admin/sales/sales_stats";
 	}
-
+	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/quarter", method = RequestMethod.POST)
+    public List<HashMap> salesStats_quarter(@RequestBody String purchase_year_qua) {
+		String year = purchase_year_qua.substring(purchase_year_qua.length() - 4);
+		return adminService.salesStatsQuarter(year);
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/month", method = RequestMethod.POST)
+    public List<HashMap> salesStats_month(@RequestBody String purchase_year_mon) {
+		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
+		return adminService.salesStatsMonth(year);
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/month_sub", method = RequestMethod.POST)
+    public List<HashMap> salesStats_month_subs(@RequestBody String purchase_year_mon) {
+		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
+		System.out.println(year);
+		return adminService.salesStatsMonth_subs(year);
+	}
+	
 	@RequestMapping("/delivery_refund")
 	public String viewPageDeliveryRefund(Model m) {
-
 		List<HashMap> listRefund = adminService.listRefund();
 		m.addAttribute("listRefund", listRefund);
-
 		return "/admin/sales/delivery_refund";
 	}
 

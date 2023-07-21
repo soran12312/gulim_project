@@ -52,21 +52,55 @@
 	
 <!--=========== END of 쪽지 =====================================================================================================-->
 <!--=========== START of 캘린더 =====================================================================================================-->
-	<insert id="select_evt" parameterType = "CalenderDTO">
-		INSERT INTO calender (id, calender_date, calender_title, calender_content) 
-		VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})	
-	</insert>
-	<select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
-		SELECT * 
-		FROM calender
-		WHERE id=#{id}
-	</select>
-	<!-- 일정 삭제 -->
-	<select id="delete_evt" parameterType="Integer" resultType="CalenderDTO">
-		DELETE FROM calender 
-		WHERE calender_date = #{calender_date} and calender_title = #{calender_title} and calender_content = #{calender_content}
-	</select>
+	<insert id="insert_evt" parameterType = "CalenderDTO">
+      INSERT INTO calender (id, calender_date, calender_title, calender_content) 
+      VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})   
+    </insert>
+    <select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
+      SELECT * 
+      FROM calender
+      WHERE id=#{id}
+    </select>
+    <!-- 일정 삭제 -->
+    <select id="delete_evt" parameterType="Integer" >
+      DELETE FROM calender 
+      WHERE calender_num = #{calender_num}
+    </select>
 <!--=========== END of 캘린더 ======================================================================================================-->
+<!-- =========== START of 게임관리 ======================================================================================================	 -->
+
+	<!-- 내가 마스터인 방의 room_num, room_name 가져오기 -->
+	<select id="selectRoomById" parameterType="String" resultType="Map">
+		SELECT room_num, room_name, room_state FROM chating
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 내가 마스터인 방에 join 신청한 사람들 중 참여상태가 0인(참가를 허용하지 않은) 신청의 갯수를 가져오기 -->
+	<select id="selectNumOfJoinByRoomNum" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(room_num) num_of_join FROM `join`
+		WHERE room_num = #{room_num} AND join_state = 0
+		GROUP BY room_num
+	</select>
+	
+	<!-- room_num으로 해당 방의 대표이미지 path 가져오기 -->
+	<select id="selectImgPathByRoomNum" parameterType="Integer" resultType="String">
+		SELECT path FROM image
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<!-- 이용자의 아이디로 해당 이용자가 참여 신청한 room 중 참가상태가 허가중 인 room_num을 모두 가져옴 -->
+	<select id="selectAllJoinedRoomNumById" parameterType="String" resultType="Integer">
+		SELECT room_num FROM `join`
+		WHERE id = #{id} AND join_state = 1
+	</select>
+	
+	<!-- 채팅방 번호로 해당 채팅방 이름을 가져옴(개설상태가 0인 방만) -->
+	<select id="selectRoomNameByPK" parameterType="Integer" resultType="String">
+		SELECT room_name FROM chating
+		WHERE room_num = #{room_num} AND room_state = 0
+	</select>
+
+<!-- =========== END of 게임관리 ======================================================================================================	 -->
 
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
 <!-- 희원정보창들어갔을때 아이디체크 -->

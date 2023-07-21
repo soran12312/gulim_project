@@ -83,7 +83,7 @@ public class CommunityController {
 	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
 	            String originImageName = generateUniqueFileName();
 	            String imagePath = "C:/Users/"+System.getProperty("user.name")+"/Pictures/gulim/";
-	            int imageSize = imageData.length;
+	            Long imageSize = (long)imageData.length;
 	            
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/community"));
@@ -351,7 +351,7 @@ public class CommunityController {
 	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
 	            String originImageName = generateUniqueFileName();
 	            String imagePath = "/images/gulim/";
-	            int imageSize = imageData.length;
+	            Long imageSize = (long)imageData.length;
 
 	            // 이미지 파일 저장
 	            saveImageFile(imageData, imagePath, originImageName);

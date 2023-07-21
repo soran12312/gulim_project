@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.config.ConfigUtils;
 import project.gulim.domain.JwtDTO;
@@ -30,6 +31,12 @@ public class MainController {
 	
 	@Autowired
 	private ConfigUtils util;
+	
+	@Autowired
+	private HttpServletRequest req;
+	
+	@Autowired
+	private HttpServletResponse res;
 	
 	@RequestMapping("/{step}")
 	public String viewPage(@PathVariable String step) { // 페이지 이동(DB접속없는경우)
@@ -119,7 +126,23 @@ public class MainController {
 	
 	// 로그인 jwt토큰 생성
 	@RequestMapping("/login")
-	public String login(MemberDTO id, HttpServletResponse res) {
+	public String login(MemberDTO id) {
+		
+		String access_token = null;
+		
+		Cookie[] cookies = req.getCookies();
+		// 이용자 request에서 쿠키 얻어옴
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if (cookie.getName().equals("access_token")) {
+					access_token = cookie.getValue();
+				}
+			}
+		}
+		
+		// db에서 해당 엑세스토큰 사용정지(기존에 로그아웃 안하고 그냥 인터넷 창 껏을 때 쿠키에 남아있는 엑세스토큰 db에서 삭제)
+		if(access_token != null) mainService.setJwtStateDiscard(access_token);
+		
 		MemberDTO member = mainService.selectById(id);
 		
 		JwtDTO jwt = mainService.createJwt(member);
@@ -176,5 +199,46 @@ public class MainController {
 		mainService.serveyInsert(servey);
 		
 		return "/main/login_main";
+	}
+	
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout() {
+		
+		String access_token = null;
+		
+		Cookie[] cookies = req.getCookies();
+		// 이용자 request에서 쿠키 얻어옴
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if (cookie.getName().equals("access_token")) {
+					access_token = cookie.getValue();
+				}
+			}
+		}
+		
+		System.out.println("로그아웃");
+		// db에서 해당 엑세스토큰 사용정지
+		if(access_token != null) mainService.setJwtStateDiscard(access_token);
+		
+		
+		// 쿠키에서 엑세스토큰 삭제
+        Cookie cookie1 = new Cookie("access_token", null);
+        cookie1.setPath("/");
+        cookie1.setMaxAge(0);
+
+        // 쿠키를 응답에 추가
+        res.addCookie(cookie1);
+        
+        // 쿠키에서 리프레쉬토큰 삭제
+        Cookie cookie2 = new Cookie("refresh_token", null);
+        cookie2.setPath("/");
+        cookie2.setMaxAge(0);
+
+        // 쿠키를 응답에 추가
+        res.addCookie(cookie2);
+		
+        
+		return "/main/main";
 	}
 }

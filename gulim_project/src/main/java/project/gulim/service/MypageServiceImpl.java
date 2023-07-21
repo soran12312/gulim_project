@@ -50,18 +50,18 @@ public class MypageServiceImpl implements MypageService {
  
 //=========== END of 쪽지 ======================================================================================================	
 //=========== START of 캘린더 ======================================================================================================	
-	public Integer select_evt(CalenderDTO calenderDTO) {
-		Integer result = mypageDAO.select_evt(calenderDTO);
-		return result;
-	}
-	
-	public List<CalenderDTO> find_evt(String id) {
-		return mypageDAO.find_evt(id);
-	}
-	
-	public Integer delete_evt(CalenderDTO calender) {
-		return mypageDAO.delete_evt(calender);
-	}
+	   public Integer insert_evt(CalenderDTO calenderDTO) {
+	      Integer result = mypageDAO.insert_evt(calenderDTO);
+	      return result;
+	   }
+	   
+	   public List<CalenderDTO> find_evt(String id) {
+	      return mypageDAO.find_evt(id);
+	   }
+	   
+	   public void delete_evt(Integer calender_num) {
+	      mypageDAO.delete_evt(calender_num);
+	   }
 
 //=========== END of 캘린더 ======================================================================================================	
 //=========== START of 회원정보 ======================================================================================================	
@@ -100,6 +100,37 @@ public class MypageServiceImpl implements MypageService {
 	public List<QuestionDTO>find_question(QuestionDTO question){
 	      return mypageDAO.find_question(question);
 	   }
+
+	@Override
+	public List<Map> selectRoomById(String id) {
+		
+		return mypageDAO.selectRoomById(id);
+	}
+
+	@Override
+	public Integer selectNumOfJoinByRoomNum(Integer roon_num) {
+		
+		return mypageDAO.selectNumOfJoinByRoomNum(roon_num);
+	}
+
+	@Override
+	public String selectImgPathByRoomNum(Integer roon_num) {
+		
+		return mypageDAO.selectImgPathByRoomNum(roon_num);
+	}
+
+	@Override
+	public List<Integer> selectAllJoinedRoomNumById(String id) {
+		
+		return mypageDAO.selectAllJoinedRoomNumById(id);
+	}
+
+	@Override
+	public String selectRoomNameByPK(Integer roon_num) {
+		
+		return mypageDAO.selectRoomNameByPK(roon_num);
+	}
+
 
 
 
