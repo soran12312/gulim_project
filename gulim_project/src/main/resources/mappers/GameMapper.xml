@@ -18,5 +18,20 @@
 		INSERT INTO tag(room_num, tag_content)
 		VALUES (#{room_num}, #{tag_content})
 	</insert>
+	
+	<select id="select_room_list" resultType="Map">
+		SELECT * FROM chating
+		WHERE room_state = 0
+	</select>
+	
+	<select id="select_tag_by_room_num" resultType="String" parameterType="Integer">
+		SELECT tag_content FROM tag
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<select id="select_nickname_by_id" resultType="String" parameterType="String">
+		SELECT nickname FROM member
+		WHERE id = #{id}
+	</select>
 
 </mapper>

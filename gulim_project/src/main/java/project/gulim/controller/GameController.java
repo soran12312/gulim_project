@@ -2,13 +2,17 @@ package project.gulim.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
@@ -24,6 +28,7 @@ import project.gulim.domain.TagDTO;
 import project.gulim.service.GameService;
 import project.gulim.service.MainService;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/game")
 public class GameController {
@@ -51,6 +56,23 @@ public class GameController {
 	public String room_create() {
 		
 		return "/game/play/room_create";
+	}
+	
+	@RequestMapping("/play/getList")
+	@ResponseBody
+	public List<Map> getList() {
+		
+		List<Map> list = gameService.select_room_list();
+		
+		for(Map room : list) {
+			List<String> tag_contents = gameService.select_tag_by_room_num((Integer)room.get("room_num"));
+			String nickname = gameService.select_nickname_by_id((String)room.get("id"));
+			
+			room.put("tag_contents", tag_contents);
+			room.put("nickname", nickname);
+		}
+		
+		return list;
 	}
 	
 	@RequestMapping("/play/room_list")
