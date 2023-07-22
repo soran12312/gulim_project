@@ -70,6 +70,18 @@ $(document).ready(function(){
 
 
 
+//※ event title :	$('#password_check_input').keypress (패스워드확인창에서 Enter)
+//※ event info  :	확인버튼이랑 연동
+$('#password_check_input').keypress(function(keyNum){
+	if(keyNum.keyCode == 13){
+		$('#password_check_btn').trigger('click');
+	}
+});
+//※ END event title :	$('#password_check_btn').click ===============================================
+
+
+
+
 //※ event title :	$('#info_modi').click (회원정보 수정 버튼 클릭)
 //※ event info  :	1. value가 회원정보수정 일때	->	수정완료 버튼으로 변경하고 입력창을 수정가능하게 변경
 //					 2.	value가 수정완료일때		->	회원정보수정 버튼으로 변경하고 입력창의 value값을 DB저장

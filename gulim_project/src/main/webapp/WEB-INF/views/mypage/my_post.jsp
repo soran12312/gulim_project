@@ -47,10 +47,14 @@
 			<td class="my_post_td1"></td>
 			<td class="my_post_td2">
 				<select>
-					<option>전체보기</option>
-					<option>말머리1</option>
-					<option>말머리2</option>
-					<option>말머리3</option>
+					<option value="all">전체보기</option>
+					<option value="game">게임개설요청</option>
+					<option value="master">게임마스터모집</option>
+					<option value="useer">중간파티원모집</option>
+					<option value="other">잡담</option>
+					<option value="review">게임리뷰</option>
+					<option value="gameother">게임기타</option>
+					<option value="character">캐릭터설정</option>
 				</select>
 			</td>
 			<td class="my_post_td3">게시글 제목</td>

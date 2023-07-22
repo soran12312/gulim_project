@@ -20,9 +20,11 @@ import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.CalenderDTO;
+import project.gulim.domain.FriendDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
+import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.MainService;
 import project.gulim.service.MypageService;
@@ -37,6 +39,9 @@ public class MypageContoroller {
 	
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@RequestMapping("/{step}")
 	public String viewPage(@PathVariable String step) { // 페이지 이동(DB접속없는경우)
@@ -53,23 +58,9 @@ public class MypageContoroller {
 //id기준으로 쪽지목록 불러오기
 	@RequestMapping("/my_message")
 	@Transactional
-	public String my_message(MemberDTO memberDTO,HttpServletRequest request, Model m) {
+	public String my_message(MemberDTO memberDTO, Model m) {
 		
-		//쿠키에서 아이디 얻어오기
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
+		String id = myId_is_in_cookies();  	    
 	    memberDTO.setId(id);
 	    m.addAttribute("memberDTO", memberDTO);	
 		
@@ -151,28 +142,13 @@ public class MypageContoroller {
 	
 //쪽지 보내기
 	@RequestMapping("/save_message")
-	public String save_message(MemberDTO memberDTO,HttpServletRequest request,
+	public String save_message(
 								@RequestParam ("message_title") String message_title, 
 								@RequestParam("receive_id") String receive_id, 
 								@RequestParam("message_content") String message_content){
 		
 		
-		//쿠키에서 아이디 얻어오기
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String send_id = claims.get("id", String.class);  	    
-
+		String send_id = myId_is_in_cookies();
 		
 		//쪽지 내용 해쉬맵에 담기
 		HashMap map = new HashMap();
@@ -203,21 +179,8 @@ public class MypageContoroller {
 	   
 	//캘린더 페이지 진입 시 일정 리스트 받아오기
 	   @RequestMapping("/calender")
-	   public String find_evt(CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
-	      Cookie[] cookies = request.getCookies();
-	      String jwtToken = null;
-	       
-	      if (cookies != null) {
-	         for (Cookie cookie : cookies) {
-	                if (cookie.getName().equals("access_token")) {
-	                    jwtToken = cookie.getValue();
-	                    break;
-	                }
-	            }
-	        }
-	       
-	       Claims claims = mainService.getClaims(jwtToken);
-	       String id = claims.get("id", String.class);         
+	   public String find_evt(CalenderDTO calenderDTO, Model m) {
+		   String id = myId_is_in_cookies();         
 
 	       List<CalenderDTO> list = mypageService.find_evt(id);
 	       List<HashMap> result = new ArrayList<HashMap>();
@@ -241,24 +204,10 @@ public class MypageContoroller {
 	   @RequestMapping("/insert_evt")
 	   @ResponseBody 
 	   public void insert_evt(String calender_date, String calender_title,String calender_content
-	                        ,CalenderDTO calenderDTO,HttpServletRequest request, Model m) {
+	                        ,CalenderDTO calenderDTO, Model m) {
 	      
 	      
-	      //쿠키에서 아이디 얻어오기
-	      Cookie[] cookies = request.getCookies();
-	       String jwtToken = null;
-	       
-	       if (cookies != null) {
-	           for (Cookie cookie : cookies) {
-	               if (cookie.getName().equals("access_token")) {
-	                   jwtToken = cookie.getValue();
-	                   break;
-	               }
-	           }
-	       }
-	       
-	       Claims claims = mainService.getClaims(jwtToken);
-	       String id = claims.get("id", String.class);  
+		   String id = myId_is_in_cookies();  
 	       
 	       //calenderDTO에 일정정보 담아서 DB에 입력
 	       calenderDTO.setId(id);
@@ -275,22 +224,8 @@ public class MypageContoroller {
 	//캘린더 삭제 시 패스워드 체크 
 	   @RequestMapping("/mypage_password_check_calender")
 	   @ResponseBody
-	   public Boolean mypage_password_check_calender(MemberDTO memberDTO,HttpServletRequest request) {
-	      //아이디 가져오기
-	      Cookie[] cookies = request.getCookies();
-	      String jwtToken = null;
-	      
-	      if (cookies != null) {
-	         for (Cookie cookie : cookies) {
-	            if (cookie.getName().equals("access_token")) {
-	               jwtToken = cookie.getValue();
-	                   break;
-	               }
-	           }
-	      }
-	          
-	      Claims claims = mainService.getClaims(jwtToken);
-	      String id = claims.get("id", String.class);         
+	   public Boolean mypage_password_check_calender(MemberDTO memberDTO) {
+		  String id = myId_is_in_cookies();         
 	      memberDTO.setId(id);
 	      
 	      //비밀번호 체크 (일치 : True 불일치 False)
@@ -310,22 +245,9 @@ public class MypageContoroller {
 //=========== START of 게임관리 ======================================================================================================	
 
 	@RequestMapping("/game/my_game_list")
-	public String my_game_list(Model m, HttpServletRequest req) {
+	public String my_game_list(Model m) {
 		
-		Cookie[] cookies = req.getCookies();
-	    String jwtToken = null;
-	      
-	    if (cookies != null) {
-	    	for (Cookie cookie : cookies) {
-	    		if (cookie.getName().equals("access_token")) {
-	    			jwtToken = cookie.getValue();
-	                break;
-	            }
-	        }
-	    }
-	        
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class); 
+		String id = myId_is_in_cookies();
 		
 		// 유저의 게임 리스트를 모두 담을 map
 		Map map = new HashMap();
@@ -363,8 +285,6 @@ public class MypageContoroller {
 		}
 		map.put("player", player_list);
 		
-		System.out.println(map);
-		
 		m.addAttribute("room_info", map);
 		
 		
@@ -373,23 +293,8 @@ public class MypageContoroller {
 	
 	@RequestMapping("/game/get_id")
 	@ResponseBody
-	public String get_id(HttpServletRequest req) {
-
-		Cookie[] cookies = req.getCookies();
-	    String jwtToken = null;
-	      
-	    if (cookies != null) {
-	    	for (Cookie cookie : cookies) {
-	    		if (cookie.getName().equals("access_token")) {
-	    			jwtToken = cookie.getValue();
-	                break;
-	            }
-	        }
-	    }
-	        
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);
-		
+	public String get_id() {
+		String id = myId_is_in_cookies();		
 		return id;
 	}
 //=========== END of 게임관리 ========================================================================================================
@@ -401,22 +306,9 @@ public class MypageContoroller {
 //=========== START of 회원정보 ======================================================================================================	
 //아디디 가져가기
 	@RequestMapping("/user_info/info_modify")
-	public String info_modify(MemberDTO memberDTO,HttpServletRequest request,Model m) {
+	public String info_modify(MemberDTO memberDTO,Model m) {
 		
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
+		String id = myId_is_in_cookies();    
 	    memberDTO.setId(id);
 	    m.addAttribute("memberDTO", memberDTO);
 
@@ -548,49 +440,156 @@ public class MypageContoroller {
 	
 	
 //=========== END of 회원정보 ======================================================================================================	
-
-	
-	
+	@RequestMapping("/my_post")
+	public void my_post(PostDTO post, Model m, String subject){
+		String id = myId_is_in_cookies();
+		post.setId(id);
+		
+		if(subject==null) {
+			post.setSubject("all");
+		}
+		else {
+			post.setSubject(subject);
+		}
+		
+		ArrayList<HashMap> list = mypageService.my_post(post);
+		
+		m.addAttribute(list);
+	}
 	
 	
 //=========== START of 나의게시글 ======================================================================================================	
+	
+	
 //=========== END of 나의게시글 ========================================================================================================
 //=========== START of 나의 문의사항 ======================================================================================================	
 	@RequestMapping("/my_question")
-	   public String find_question(QuestionDTO question, Model m,HttpServletRequest request){
+	   public String find_question(QuestionDTO question, Model m){
 
-	      //쿠키 배열에 요청 받은 쿠키 담음
-	            Cookie[] cookies = request.getCookies();
-	             String jwtToken = null;
+		String id = myId_is_in_cookies();
 	             
-	             // 쿠키가 null이 아니라면
-	             if (cookies != null) {
-	                // 반복문 구동
-	                  for (Cookie cookie : cookies) {
-	                     //쿠키 이름이 access_token이랑 같으면
-	                      if (cookie.getName().equals("access_token")) {
-	                         //토큰에 쿠키의 값 넣음
-	                          jwtToken = cookie.getValue();
-	                          break;
-	                      }
-	                  }
-	              }
-	             
-	             Claims claims = mainService.getClaims(jwtToken);
-	             String id = claims.get("id", String.class);
-	             
-	             //questionDTO에 id 붙힘
-	             question.setId(id);
-	             
-	            List<QuestionDTO> quest = mypageService.find_question(question); 
-	             
-	             m.addAttribute("list", quest); 
-	               
-	            return "/mypage/my_question";
+		//questionDTO에 id 붙힘
+		question.setId(id);
+     
+		List<QuestionDTO> quest = mypageService.find_question(question); 
+     
+		m.addAttribute("list", quest); 
+       
+		return "/mypage/my_question";
 	   }
 
 //=========== END of 나의 문의사항 ========================================================================================================
 //=========== START of 친구관리 ======================================================================================================	
+
+//친구관리로 이동 시 친구목록 가져가기 + 내 아이디에서 검색허용여부 가지고 가기
+	@RequestMapping("/friends")
+	public void friend(Model m){
+		String id = myId_is_in_cookies();
+		List<FriendDTO> list = mypageService.friend(id);
+		MemberDTO member = mypageService.checked(id);
+		m.addAttribute("list", list);
+		m.addAttribute("member",member);
+	}
+	
+	
+	
+//id 가지고와서 아이디, 닉네임, 이름 중에 겹치는거 있는지 검색
+	@RequestMapping("/search_friend_id")
+	@ResponseBody
+	public List<MemberDTO> search_friend_id(String id){		
+		List<MemberDTO> list = mypageService.search_friend_id(id);
+		return list;
+	}
+
+	
+	
+//검색허용 바꼈을 시 DB저장
+	@RequestMapping("/dist_search0")
+	public String dist_search0(){
+		String id = myId_is_in_cookies();
+		mypageService.dist_search0(id);
+		return "redirect:/mypage/friends";
+	}
+	@RequestMapping("/dist_search1")
+	public String dist_search1() {
+		String id = myId_is_in_cookies();
+		mypageService.dist_search1(id);
+		return "redirect:/mypage/friends";
+	}
+	@RequestMapping("/name_search0")
+	public String name_search0() {
+		String id = myId_is_in_cookies();
+		mypageService.name_search0(id);
+		return "redirect:/mypage/friends";
+	}
+	@RequestMapping("/name_search1")
+	public String name_search1() {
+		String id = myId_is_in_cookies();
+		mypageService.name_search1(id);
+		return "redirect:/mypage/friends";
+	}
+	
+	
+	
+//친구 프로필정보 가져오기 + 친구 프로필 사진 가져오기
+	@RequestMapping("/friend_profile")
+	public String friend_profile(String id,Model m){
+		MemberDTO friend = mypageService.friend_profile(id);
+
+		//이미지 path값 String result에 가져오기
+		String result = mypageService.friend_img(id);
+			
+		//result가 null이면 이미지없음 이미지 result에 넣기
+		if(result == null) {
+			result = "/files/images/no_image.jpg";
+		}
+
+		//모델에 메세지 담기
+		m.addAttribute("friend", friend);
+		m.addAttribute("friend_img", result);
+		
+		return "/mypage/friend_profile";
+	}
+	
+	
+	
+//친구추가하기
+	@RequestMapping("/make_friend")
+	public void make_friend(String friend_id,FriendDTO friend){
+		String id = myId_is_in_cookies();
+		friend.setFriend_id(friend_id);
+		friend.setMy_id(id);
+		mypageService.make_friend(friend);
+	}
+	
+	
+//친구 삭제	
+	@RequestMapping("/no_friend")
+	public String no_friend(String friend_id,FriendDTO friend){
+		String id = myId_is_in_cookies();
+		friend.setFriend_id(friend_id);
+		friend.setMy_id(id);
+		mypageService.no_friend(friend);
+		return "redirect:/mypage/friends";
+	}
+	
+	
+
+//친구 플레이리스트 방넘버 가져오기 + 방넘버 기준으로 방 정보 가져오기
+	@RequestMapping("/friend_playlist")
+	public String friend_playlist(String id, Model m){
+		List<Integer> room = mypageService.friend_playlist(id);
+		
+		ArrayList<HashMap> gamelist = new ArrayList(); 
+		for(Integer num : room) {
+			HashMap gameinfo = mypageService.find_gamename(num);
+			gamelist.add(gameinfo);
+		}
+		m.addAttribute("gamelist",gamelist);
+		return "/mypage/playlist";
+	}
+	
+	
 //=========== END of 친구관리 ========================================================================================================
 //=========== START of 결제내역 ======================================================================================================	
 //=========== END of 결제내역 ========================================================================================================
@@ -598,10 +597,30 @@ public class MypageContoroller {
 //=========== END of 공모전 =======================================================================================================
 	
 	
-	
-	
-	
-	
+//쿠키기준으로 아이디값 받기
+   public String myId_is_in_cookies(){
+
+	   //쿠키 배열에 요청 받은 쿠키 담음
+       Cookie[] cookies = request.getCookies();
+       String jwtToken = null;
+         
+       // 쿠키가 null이 아니라면
+       if (cookies != null) {
+    	   // 반복문 구동
+    	   for (Cookie cookie : cookies) {
+    		   //쿠키 이름이 access_token이랑 같으면
+    		   if (cookie.getName().equals("access_token")) {
+    			   //토큰에 쿠키의 값 넣음
+    			   jwtToken = cookie.getValue();
+    			   break;
+    		   }
+    	   }
+       }
+         
+       Claims claims = mainService.getClaims(jwtToken);
+       String id = claims.get("id", String.class);
+       return id;
+   }
 	
 	
 	
