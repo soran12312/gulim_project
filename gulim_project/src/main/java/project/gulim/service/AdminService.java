@@ -40,6 +40,8 @@ public interface AdminService {
 	public List<HashMap> salesStatsMonth(String purchase_year_mon);
 	
 	public List<HashMap> salesStatsMonth_subs(String purchase_year_mon);
+	
+	public List<HashMap> salesStatsMonth_book(String purchase_year_mon);
 
 	public List<HashMap> listRefund();
 

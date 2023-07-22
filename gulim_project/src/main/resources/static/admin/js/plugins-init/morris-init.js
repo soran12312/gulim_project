@@ -600,6 +600,62 @@
 				if (svgElement) {
 				    barChartParent.removeChild(svgElement);
 				}
+				var divElement = barChartParent.querySelector('div');
+				if (divElement) {
+				    barChartParent.removeChild(divElement);
+				}
+					
+			    console.log(response);
+			    data_month = [];
+			        
+			    for (var i = 0; i < response.length; i++) {
+			        data_month.push({
+			            y: response[i].purchase_month + "월",
+			            tsp: response[i].totalscribe_price,
+			            tbp: response[i].total_book_price
+			        });
+			    }
+			        
+			    Morris.Bar({
+				    element: 'morris_bar_2',
+				    data: data_month,
+				    xkey: 'y',
+				    ykeys: ['tsp', 'tbp'],
+				    labels: ['구독권 매출', '설정집 매출'],
+				    stacked: true,
+				    gridTextSize: 11,
+				    hideHover: 'auto',
+				    resize: true
+				});
+		    },
+		    error: function(xhr, status, error){
+		        alert('월매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
+		});
+	});
+	
+	$("#btn_month").on("click", function() {
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/month",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_year_mon: purchase_year_mon},
+		    // 성공할 시
+		    success: function(response){
+				var barChartParent = document.getElementById('morris_bar_2');
+				// SVG 요소를 찾아서 제거합니다.
+				var svgElement = barChartParent.querySelector('svg');
+				if (svgElement) {
+				    barChartParent.removeChild(svgElement);
+				}
+				var divElement = barChartParent.querySelector('div');
+				if (divElement) {
+				    barChartParent.removeChild(divElement);
+				}
 					
 			    console.log(response);
 			    data_month = [];
@@ -643,6 +699,10 @@
 				var svgElement = barChartParent.querySelector('svg');
 				if (svgElement) {
 					barChartParent.removeChild(svgElement);
+				}
+				var divElement = barChartParent.querySelector('div');
+				if (divElement) {
+				    barChartParent.removeChild(divElement);
 				}
 				
 				console.log(response);
@@ -692,6 +752,80 @@
 			}
 		});
 	});
+	
+	$("#btn_month_book").on("click", function() {
+		$.ajax({
+			url: "/admin/sales_stats/month_book",
+			method: "POST",
+			data: { purchase_year_mon: purchase_year_mon },
+			success: function(response) {
+				var barChartParent = document.getElementById('morris_bar_2');
+				var svgElement = barChartParent.querySelector('svg');
+				if (svgElement) {
+					barChartParent.removeChild(svgElement);
+				}
+				var divElement = barChartParent.querySelector('div');
+				if (divElement) {
+				    barChartParent.removeChild(divElement);
+				}
+				console.log(response);
+				var data_month = []; // data_month 배열 초기화
+				
+				// 변수를 사용하여 이전 월을 기억
+				var prevMonth = null;
+				var tempObj = null;
+				
+				var ykeys = [];
+	
+				for (var i = 0; i < response.length; i++) {
+	                if (prevMonth === null || prevMonth !== response[i].purchase_month) {
+					    tempObj = {
+					        y: response[i].purchase_month + "월",
+					    };
+					    data_month.push(tempObj);
+					}
+					
+					// 월별 데이터 객체에 도서별 판매량 추가
+					var bookTitleKey = getBookTitleKey(response[i].book_title);
+					if (bookTitleKey && ykeys.indexOf(bookTitleKey) === -1) {
+					    ykeys.push(bookTitleKey);
+					}
+					
+					if (bookTitleKey) {
+					    if (!tempObj[bookTitleKey]) tempObj[bookTitleKey] = 0;
+					    tempObj[bookTitleKey] += response[i].total_book_price;
+					}
+
+			        
+	                prevMonth = response[i].purchase_month;
+	            }
+	            
+	            $('.morris-hover-point').each(function() {
+				    if ($(this).text().includes('-')) {
+				      $(this).remove();
+				    }
+				  });
+
+            Morris.Bar({
+		        element: 'morris_bar_2',
+		        data: data_month,
+		        xkey: 'y',
+		        ykeys: ykeys,
+		        labels: ykeys,
+		        stacked: true,
+		        gridTextSize: 11,
+		        hideHover: 'auto',
+		        resize: true
+		    });
+        },
+			error: function(xhr, status, error) {
+				alert('월매출 실패: ' + error);
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			}
+		});
+	});
 
 	// price 값에 따라 해당하는 키를 반환하는 함수
 	function getPriceKey(price) {
@@ -710,12 +844,13 @@
 				return null; // 알 수 없는 price 값인 경우 null 반환
 		}
 	}
-
-
-
-
 	
-	
+	// 
+	function getBookTitleKey(book_title) {
+	    return book_title; // book_title 값을 그대로 반환하여 해당 값이 키로 사용되도록 함
+	}
+
+
 	// Select 요소와 버튼 요소를 가져옵니다.
 	var selectYearMonth = $("#selectYear_month");
 	var btnMonth = $("#btn_month");
