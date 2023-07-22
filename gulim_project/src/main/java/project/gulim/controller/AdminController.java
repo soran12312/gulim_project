@@ -105,6 +105,14 @@ public class AdminController {
 		return adminService.salesStatsMonth_subs(year);
 	}
 	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/month_book", method = RequestMethod.POST)
+    public List<HashMap> salesStatsMonth_book(@RequestBody String purchase_year_mon) {
+		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
+		System.out.println(year);
+		return adminService.salesStatsMonth_book(year);
+	}
+	
 	@RequestMapping("/delivery_refund")
 	public String viewPageDeliveryRefund(Model m) {
 		List<HashMap> listRefund = adminService.listRefund();

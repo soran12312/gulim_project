@@ -390,6 +390,9 @@
     <!-- 관리자 차트 전용 js -->
     <script src="/admin/js/adminChart.js"></script>
 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    
 </body>
 
 </html>

@@ -74,7 +74,7 @@
 		SELECT 
 		    purchase_date,
 		    CASE
-		        WHEN rank &lt;= 5 THEN book_title
+		        WHEN rank &lt;= 3 THEN book_title
 		        ELSE '기타'
 		    END AS book_title,
 		    SUM(total_book_price) AS total_book_price
@@ -98,7 +98,7 @@
 		    ) AS subquery1
 		) AS final_subquery
 		GROUP BY
-		    purchase_date, CASE WHEN rank &lt;= 5 THEN book_title ELSE '기타' END
+		    purchase_date, CASE WHEN rank &lt;= 3 THEN book_title ELSE '기타' END
 		ORDER BY
 		    purchase_date, total_book_price DESC
 	</select>
@@ -209,7 +209,40 @@
 		group by MONTH(sub_date), price
 	</select>
 	
-	
+	<!-- 판매 통계: 설정집별 월매출 -->
+	<select id="salesStatsMonth_book" parameterType="String" resultType="HashMap">
+		SELECT 
+			purchase_month,
+			CASE
+			    WHEN rank &lt;= 3 THEN book_title
+			    ELSE '기타'
+			END AS book_title,
+			SUM(total_book_price) AS total_book_price
+		FROM
+			(SELECT 
+			    purchase_month,
+			    book_title,
+			    total_book_price,
+			    RANK() OVER (PARTITION BY purchase_month ORDER BY total_book_price DESC) AS rank
+			FROM (
+			        SELECT 
+			            MONTH(bk.purchase_date) AS purchase_month,
+			            b.book_title AS book_title,
+			            SUM(b.price) AS total_book_price
+			        FROM 
+			            purchase p
+			            INNER JOIN book b ON p.book_num = b.book_num
+			            INNER JOIN basket bk ON p.basket_num = bk.basket_num
+			        where year(bk.purchase_date) = #{purchase_year_mon}
+			        GROUP BY 
+			            MONTH(bk.purchase_date), b.book_title
+			    ) AS subquery1
+			) AS final_subquery
+			GROUP BY
+			    purchase_month, CASE WHEN rank &lt;= 3 THEN book_title ELSE '기타' END
+			ORDER BY
+			    purchase_month, total_book_price desc
+	</select>
 	
 
 	<!-- 배송/환불 리스트 보기 -->
