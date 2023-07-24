@@ -76,5 +76,9 @@ public interface CommunityDAO {
 	public List<ImageDTO> findEventImg();
 
 
+	// 공지사항 이미지
+	public List<ImageDTO> findAllAnnounceImg();
+
+
 	
 }

@@ -80,7 +80,9 @@ public class MypageServiceImpl implements MypageService {
 	public Map find_info(MemberDTO member) {
 		return mypageDAO.find_info(member);
 	}
-	
+	public List<Integer> my_playlist(MemberDTO member){
+		return mypageDAO.my_playlist(member);
+	}
 	
 	public void modify_info(MemberDTO member) {
 		mypageDAO.modify_info(member);
@@ -104,6 +106,14 @@ public class MypageServiceImpl implements MypageService {
 	public ArrayList<HashMap> my_post(PostDTO post){
 	return mypageDAO.my_post(post);
 	}
+	
+	public ArrayList<HashMap> my_post2(PostDTO post){
+		return mypageDAO.my_post2(post);
+	}
+	public void deletePosts(String postNums) {
+		mypageDAO.deletePosts(postNums);
+	}
+
 //=========== END of 나의 게시물 ======================================================================================================
 	
 	public List<QuestionDTO>find_question(QuestionDTO question){

@@ -14,6 +14,8 @@
 <!-- Bootstrap core JS -->
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
 <!-- Additional CSS Files -->
 
 <style>
@@ -275,51 +277,70 @@ section.notice {
 				<table class="board-table">
 					<thead>
 						<tr>
-							<th scope="col" class="th-num">[공지사항]</th>
-							<th scope="col" class="th-title">[관리자]</th>
+							<th scope="col" class="th-num">[관리자]</th>
+							<th scope="col" class="th-title">[공지사항]</th>
 						</tr>
 					</thead>
 					<tbody>
-						<!-- <tr>
-							<td>3</td>
-							<th><a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
-								<p>테스트</p></th>
-							<td>2017.07.13</td>
-						</tr>
-
-						<tr>
-							<td>2</td>
-							<th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-							<td>2017.06.15</td>
-						</tr>
-
-						<tr>
-							<td>1</td>
-							<th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-							<td>2017.06.15</td>
-						</tr> -->
-						
-						<c:forEach items="${announces}" var="announce">
-				            <tr>
-				            	<input type="hidden" name="announce_num" value="${announce.post_num}">
-				                <td><a href="">${announce.post_title}</a></td>
-				                <td>${post.id}</td>
-				            </tr>
-				        </c:forEach>
-				        
-				        
-						<c:if test="${empty announces}">
-						    <tr>
-						        <td colspan="2">공지사항이 없습니다.</td>
-						    </tr>
-						</c:if>
-						
+					    <c:forEach items="${announces}" var="announce">
+					        <tr>
+					        	<td>${post.id}</td>
+					            <td>
+					                <a href="#" class="announcement-title">${announce.post_title}</a>
+					                <div class="announcement-content" style="display: none;">
+					                    ${announce.post_content}
+					                    <c:forEach var="image" items="${announceimages}">
+	                                        	<c:if test="${not empty image}">
+						                            <div class="note-editable card-block">
+						                                <p><img src="/imagePath/${image.origin_img_name}" style="width: 168px;"></p>
+						                            </div>
+						                        </c:if>
+										</c:forEach>
+					                    
+					                </div>
+					                    
+					            </td>
+					            
+					        </tr>
+					    </c:forEach>
+					    
+					    <c:if test="${empty announces}">
+					        <tr>
+					            <td colspan="2">공지사항이 없습니다.</td>
+					        </tr>
+					    </c:if>
 					</tbody>
 				</table>
 			</div>
 		</div>
 
 	</section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<script>
+	    $(document).ready(function() {
+	        // Add a click event listener to the announcement title
+	        $('.announcement-title').click(function(e) {
+	            e.preventDefault();
+	            // Toggle the display of the content below the title
+	            $(this).next('.announcement-content').slideToggle();
+	        });
+	    });
+	</script>
+	
+	
+	
+	
+	
+	
+	
 </body>
 <footer>
 	<jsp:include page="../../../../footer.jsp"></jsp:include>

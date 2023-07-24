@@ -102,7 +102,6 @@ public class MypageContoroller {
 			//key=id  value=nickname 으로 해쉬맵에 담기
 			nickname2.put(message2.getReceive_id(), nick_same_id);
 		}
-		System.out.println(nickname2);
 		//모델 nickname에 해쉬맵담기
 		m.addAttribute("nickname2",nickname2);
 		
@@ -339,9 +338,21 @@ public class MypageContoroller {
 		
 		return result;
 	}
-
 	
-	
+	@RequestMapping("/user_info/find_playlist")
+	@ResponseBody
+	public ArrayList<HashMap> find_playlist(MemberDTO member) {
+		
+	//id기반으로 플레이 리스트 가져오기
+	List<Integer> room = mypageService.my_playlist(member);
+	ArrayList<HashMap> gamelist = new ArrayList(); 
+		for(Integer num : room) {
+			HashMap gameinfo = mypageService.find_gamename(num);
+			gamelist.add(gameinfo);
+		}
+		
+	return gamelist;
+	}		
 //프로필 이미지 불러오기
 	@RequestMapping("/user_info/find_info_img")
 	@ResponseBody
@@ -440,29 +451,47 @@ public class MypageContoroller {
 	
 	
 //=========== END of 회원정보 ======================================================================================================	
-	@RequestMapping("/my_post")
-	public void my_post(PostDTO post, Model m, String subject){
-		String id = myId_is_in_cookies();
-		post.setId(id);
-		
-		if(subject==null) {
-			post.setSubject("all");
-		}
-		else {
-			post.setSubject(subject);
-		}
-		
-		ArrayList<HashMap> list = mypageService.my_post(post);
-		
-		m.addAttribute(list);
-	}
-	
+
 	
 //=========== START of 나의게시글 ======================================================================================================	
 	
-	
+//전체 게시글 받아오기
+	@RequestMapping("/my_post")
+	public void my_post(PostDTO post, Model m, String subject){
+		String id = myId_is_in_cookies();
+
+		//postDTO에 id값 입력
+		post.setId(id);											
+		
+		//받아온 게시물 목록 모델에 담아서 보내기
+		ArrayList<HashMap> list = mypageService.my_post(post);		
+		m.addAttribute("list",list);		
+	}
+		
+//말머리기준 게시글 받아오기
+	@RequestMapping("/my_post2")
+	@ResponseBody
+	public ArrayList<HashMap> my_post(PostDTO post, String subject){
+		String id = myId_is_in_cookies();
+		post.setId(id);									
+		//리스트에 담아서 리턴
+		ArrayList<HashMap> list = mypageService.my_post2(post);
+		return list;
+	}
+
+//postnum(여러개일 수 있음)받아서 삭제하기(삭제==게시중단)
+	@RequestMapping("/delete_posts")
+	@ResponseBody
+	public String deletePosts(@RequestParam(value = "postNums[]") List<String> postNums) {
+	    // postNums 배열에 있는 post_num들을 사용하여 삭제 로직을 구현 
+		for (String i : postNums) {
+	    mypageService.deletePosts(i);
+		}
+	    return "success"; // 삭제가 성공적으로 이루어졌을 때 "success"를 반환
+	}
 //=========== END of 나의게시글 ========================================================================================================
 //=========== START of 나의 문의사항 ======================================================================================================	
+//나의 문의사항 목록 받아서 출력
 	@RequestMapping("/my_question")
 	   public String find_question(QuestionDTO question, Model m){
 

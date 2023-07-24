@@ -480,6 +480,12 @@
 									    <option value="master">게임마스터 모집</option>
 									    <option value="user">중간 파티원 모집</option>
 									  </optgroup>
+									  <optgroup label="기타">
+									    <option value="other">잡담</option>
+									    <option value="review">게임리뷰</option>
+									    <option value="gameother">게임기타</option>
+									    <option value="character">캐릭터 설정</option>
+									  </optgroup>
 									</select>
 								</div>
 		

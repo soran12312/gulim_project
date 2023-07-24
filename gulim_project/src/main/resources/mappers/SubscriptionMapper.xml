@@ -5,22 +5,54 @@
 <mapper namespace="project.gulim.dao.SubscriptionDAO">
 
 	
-	<!--  선택한 구독권 가격 db저장 -->
-	<insert id="saveSubscription" parameterType="project.gulim.domain.SubscribeDTO">
-	    INSERT INTO subscribe (price) VALUES (#{price})
+	<!--  선택한 구독권 가격 subscribe db저장 -->
+	<insert id="saveSubscription" parameterType="project.gulim.domain.SubscribeDTO" useGeneratedKeys="true" keyProperty="sub_num">
+	    INSERT INTO subscribe (price, id) VALUES (#{price}, #{id})
 	</insert>
 	
-	<!-- 유저 id db 저장-->
-	<insert id="saveCart" parameterType="project.gulim.domain.BasketDTO" >
+	<!-- 유저 id basket db 저장-->
+	<insert id="saveCart" parameterType="project.gulim.domain.BasketDTO" useGeneratedKeys="true" keyProperty="basket_num">
 	    INSERT INTO basket (id) VALUES (#{id})
 	</insert>
 	
 	
-	<!-- purchase 장바구니, 구독권 번호 저장 -->
-	<insert id="savePurchase" parameterType="SubscribeDTO" useGeneratedKeys="true" keyProperty="sub_num">
-		insert into purchase basket_num
-		values #{basket_num}
+	<!-- purchase db 장바구니, 구독권 번호 저장 -->
+	<insert id="savePurchase" parameterType="map">
+	    INSERT INTO purchase (basket_num, sub_num)
+	    VALUES (#{basket_num}, #{sub_num})
 	</insert>
+	
+	
+	<!-- 현재로그인 중인 id의 장바구니번호  -->
+	<select id="getUserBasketNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+	    SELECT basket_num
+	    FROM basket
+	    WHERE id = #{id}
+	</select>
+	
+	
+	<!-- 장바구니번호가져와서 장바구니에 담긴 구독권 가져오기 -->
+	<select id="getUserBasketSubscription" parameterType="java.lang.Integer" >
+		SELECT b.basket_num , s.price
+		FROM basket AS b
+		JOIN purchase AS p ON b.basket_num = p.basket_num
+		JOIN subscribe AS s ON p.sub_num = s.sub_num
+		WHERE b.basket_num = #{basketNum}
+	</select>
+	
+	
+	
+	<!-- 장바구니에 해당 구독권이 있는 상태에서 같은 구독권 추가 -->
+	
+	
+	
+	
+	
+	<!-- 수량 수정  -->
+	
+	
+	
+	<!-- 삭제 -->
 	
 
 </mapper>

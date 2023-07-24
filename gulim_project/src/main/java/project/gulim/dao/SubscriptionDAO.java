@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import project.gulim.domain.BasketDTO;
+import project.gulim.domain.PurchaseDTO;
 import project.gulim.domain.SubscribeDTO;
 
 
@@ -20,8 +21,12 @@ public interface SubscriptionDAO {
 
 	public void saveCart(BasketDTO basket);
 	
-	
-	public List<HashMap> savePurchase(Integer sub_num, Integer basket_num);
+
+	public List<HashMap> savePurchase(PurchaseDTO purchaseData);
+
+	public Integer getUserBasketNumber(String id);
+
+	public List<SubscribeDTO> getUserBasketSubscription(Integer basketNum);
 	
 
 }

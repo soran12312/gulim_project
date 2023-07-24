@@ -41,10 +41,13 @@ public interface MypageDAO {
 //=========== END of 게임관리 ========================================================================================================
 //=========== START of 나의 게시물 ======================================================================================================		
 	public ArrayList<HashMap> my_post(PostDTO post);
+	public ArrayList<HashMap> my_post2(PostDTO post);
+	public void deletePosts(String postNums);
 //=========== END of 나의 게시물 ========================================================================================================
 //=========== START of 회원정보 ======================================================================================================	
 	public String mypage_password_check(MemberDTO member);
 	public Map find_info(MemberDTO member);
+	public List<Integer> my_playlist(MemberDTO member);
 	public void modify_info(MemberDTO member);
 	public void modify_info_imgDelete(HashMap map);
 	public Integer modify_info_img(HashMap map);
@@ -67,6 +70,9 @@ public interface MypageDAO {
 	public List<Integer> friend_playlist(String id); 
 	public HashMap find_gamename(Integer num);
 //=========== END of 친구관리 ======================================================================================================	
+	
+	
+	
 	
 	
 	

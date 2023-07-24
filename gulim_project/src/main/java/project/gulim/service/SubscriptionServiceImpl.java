@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import project.gulim.dao.SubscriptionDAO;
+import project.gulim.domain.PurchaseDTO;
 import project.gulim.domain.SubscribeDTO;
 
 
@@ -40,9 +41,25 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
 	@Override
-	public List<HashMap> savePurchase(Integer sub_num, Integer basket_num) {
+	public List<HashMap> savePurchase(PurchaseDTO purchaseData) {
 		// TODO Auto-generated method stub
-		return subscriptionDAO.savePurchase(sub_num, basket_num);
+		return subscriptionDAO.savePurchase(purchaseData);
+	}
+
+
+
+	@Override
+	public Integer getUserBasketNumber(String id) {
+		// TODO Auto-generated method stub
+		return subscriptionDAO.getUserBasketNumber(id);
+	}
+
+
+
+	@Override
+	public List<SubscribeDTO> getUserBasketSubscription(Integer basketNum) {
+		// TODO Auto-generated method stub
+		return subscriptionDAO.getUserBasketSubscription(basketNum);
 	}
 
 

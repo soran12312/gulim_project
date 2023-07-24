@@ -30,17 +30,32 @@ font-weight: lighter;
 }
 .fs_bord{
 font-weight: bold;}
+.w5per{
+	width: 5%;
+}
+.w15per{
+	width: 15%;
+}
+.w20per{
+	width: 20%;
+}
 .w30per{
 	width: 30%;
 }
 .w40per{
 	width: 40%;
 }
+.w60per{
+	width: 60%;
+}
 .w70per{
 	width: 70%;
 }
 .h10per{
 	height: 10%;
+}
+.h30px{
+	height: 30px;
 }
 .color_white{
 	color: floralwhite;
@@ -59,6 +74,15 @@ font-weight: bold;}
 }
 .backfround_pink{
 	background-color : #FD786A;
+}
+.no_a_st a:link,/* 링크컬러블랙 */
+.no_a_st a:visited,/* 방문햇던링크컬러블랙 */
+.no_a_st a:active,
+.no_a_st{
+  text-decoration-line : none;
+  color: black;
+  text-decoration:none; /* 마우스호버없음 */
+  cursor: pointer;
 }
 /* ================END OF ALL============================== */
 
@@ -1173,16 +1197,35 @@ font-weight: bold;}
   table-layout: fixed;
 }
 .back_heiget_90per{
-	height: 90%;
+	height: 500px;
+	overflow: auto;
 }
 .my_post_table{
 	width: 100%;
+	
 	font-family: NeoDunggeunmo Code, Inter;
 	font-weight: normal;
 	font-size: 25px;
 	border-bottom: 1px solid;
+	table-layout: fixed;
 	
 }
+/*START스크롤 바*/
+.back_heiget_90per::-webkit-scrollbar {
+    width: 20px;
+  }
+.back_heiget_90per::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+.back_heiget_90per::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/*END스크롤 바*/
 .my_post_td1{
 	border-bottom: 2px solid;
 	border-right: 1px solid;
@@ -1229,6 +1272,16 @@ font-weight: bold;}
 	font-size: 20px;
 }
 .my_post_table td{
+	height: 10%;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	border-right: 1px solid;
+	padding: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.my_post_tabletd{
 	height: 10%;
 	font-size: 15px;
 	text-overflow: ellipsis;
