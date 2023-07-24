@@ -1,5 +1,6 @@
 package project.gulim.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import project.gulim.dao.MypageDAO;
 import project.gulim.domain.CalenderDTO;
+import project.gulim.domain.FriendDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
+import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 
 @Service
@@ -77,7 +80,9 @@ public class MypageServiceImpl implements MypageService {
 	public Map find_info(MemberDTO member) {
 		return mypageDAO.find_info(member);
 	}
-	
+	public List<Integer> my_playlist(MemberDTO member){
+		return mypageDAO.my_playlist(member);
+	}
 	
 	public void modify_info(MemberDTO member) {
 		mypageDAO.modify_info(member);
@@ -97,6 +102,20 @@ public class MypageServiceImpl implements MypageService {
 		return result;
 	}
 //=========== END of 회원정보 ======================================================================================================	
+	//=========== START of 나의 게시물 ======================================================================================================	
+	public ArrayList<HashMap> my_post(PostDTO post){
+	return mypageDAO.my_post(post);
+	}
+	
+	public ArrayList<HashMap> my_post2(PostDTO post){
+		return mypageDAO.my_post2(post);
+	}
+	public void deletePosts(String postNums) {
+		mypageDAO.deletePosts(postNums);
+	}
+
+//=========== END of 나의 게시물 ======================================================================================================
+	
 	public List<QuestionDTO>find_question(QuestionDTO question){
 	      return mypageDAO.find_question(question);
 	   }
@@ -131,6 +150,56 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.selectRoomNameByPK(roon_num);
 	}
 
+
+//=========== START of 친구관리 ======================================================================================================	
+	public List<FriendDTO> friend(String id) {
+		return mypageDAO.friend(id);
+	}
+	public MemberDTO checked(String id) {
+		return mypageDAO.checked(id);
+	}
+	public void dist_search0(String id) {
+		mypageDAO.dist_search0(id);
+	}
+	public void dist_search1(String id) {
+		mypageDAO.dist_search1(id);
+	}
+	public void name_search0(String id) {
+		mypageDAO.name_search0(id);
+	}
+	public void name_search1(String id) {
+		mypageDAO.name_search1(id);
+	}
+	public List<MemberDTO> search_friend_id(String id){
+		return mypageDAO.search_friend_id(id);
+	}
+	public MemberDTO friend_profile(String id) {
+		return mypageDAO.friend_profile(id);
+	}
+	public String friend_img(String id){
+		return mypageDAO.friend_img(id);
+	}
+	public void make_friend(FriendDTO friend) {
+			mypageDAO.make_friend(friend);
+	}
+	public void no_friend(FriendDTO friend) {
+		mypageDAO.no_friend(friend);
+	}
+	public List<Integer> friend_playlist(String id){
+		return mypageDAO.friend_playlist(id);
+	}
+	public HashMap find_gamename(Integer num) {
+		return mypageDAO.find_gamename(num);
+	}
+	
+//=========== END of 친구관리 ======================================================================================================	
+
+
+
+
+
+
+	
 
 
 

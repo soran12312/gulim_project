@@ -131,6 +131,16 @@
 		post.post_num DESC
 	</select>
 	
+	
+	<!-- 공지사항 이미지 조회 -->
+	<select id="findAllAnnounceImg" resultType="project.gulim.domain.ImageDTO">
+		SELECT image.origin_img_name , image.post_num
+		FROM image
+		WHERE image.post_num = #{post_num}
+	</select>
+	
+	
+	
 	<!-- 이벤트 조회 -->
 	<select id="findAllEvent" resultType="project.gulim.domain.PostDTO">
 		SELECT *

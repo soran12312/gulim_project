@@ -11,11 +11,18 @@
 <link href="/css/trpg.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+//※ event title :	windows open
+//※ event info :	보낸쪽지함 가리기
 	$(document).ready(function(){
 		$('#message_table_size2').hide();
-		// $('#message_page_name').text="받은 쪽지함"
+//※ END of event title :	windows open
 
 
+	//※ event title :	$('#message2').click
+	//※ event info :	1. value가 보낸쪽지함 일때	->	받은 쪽지함으로 바꾸고 보낸쪽지함을 출력 받은쪽지함은 숨김
+	//					 2.	value가 받은쪽지함 일때	 ->	 보낸 쪽지함으로 바꾸고 보낸쪽지함을 숨김 받은쪽지함은 받음
 		$('#message2').click(function(){
 			if(this.value === '보낸쪽지함'){
 		 		this.value = "받은쪽지함"
@@ -30,6 +37,8 @@
 		 		$('#message_page_name').text("받은쪽지함");
 		 	}
 		});
+	//※ END of event title :	$('#message2').click
+
 
 	});
 </script>

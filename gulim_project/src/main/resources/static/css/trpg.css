@@ -30,11 +30,32 @@ font-weight: lighter;
 }
 .fs_bord{
 font-weight: bold;}
+.w5per{
+	width: 5%;
+}
+.w15per{
+	width: 15%;
+}
+.w20per{
+	width: 20%;
+}
 .w30per{
 	width: 30%;
 }
+.w40per{
+	width: 40%;
+}
+.w60per{
+	width: 60%;
+}
 .w70per{
 	width: 70%;
+}
+.h10per{
+	height: 10%;
+}
+.h30px{
+	height: 30px;
 }
 .color_white{
 	color: floralwhite;
@@ -53,6 +74,15 @@ font-weight: bold;}
 }
 .backfround_pink{
 	background-color : #FD786A;
+}
+.no_a_st a:link,/* 링크컬러블랙 */
+.no_a_st a:visited,/* 방문햇던링크컬러블랙 */
+.no_a_st a:active,
+.no_a_st{
+  text-decoration-line : none;
+  color: black;
+  text-decoration:none; /* 마우스호버없음 */
+  cursor: pointer;
 }
 /* ================END OF ALL============================== */
 
@@ -1147,6 +1177,7 @@ font-weight: bold;}
 }
 .myinfo_play_list_td{
 	font-size: 20px;
+	height: 10%;
 }
 /* END플레이리스트*/
 /* ================ END OF MY_INFO ====================== */
@@ -1166,16 +1197,35 @@ font-weight: bold;}
   table-layout: fixed;
 }
 .back_heiget_90per{
-	height: 90%;
+	height: 500px;
+	overflow: auto;
 }
 .my_post_table{
 	width: 100%;
+	
 	font-family: NeoDunggeunmo Code, Inter;
 	font-weight: normal;
 	font-size: 25px;
 	border-bottom: 1px solid;
+	table-layout: fixed;
 	
 }
+/*START스크롤 바*/
+.back_heiget_90per::-webkit-scrollbar {
+    width: 20px;
+  }
+.back_heiget_90per::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+.back_heiget_90per::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/*END스크롤 바*/
 .my_post_td1{
 	border-bottom: 2px solid;
 	border-right: 1px solid;
@@ -1222,6 +1272,16 @@ font-weight: bold;}
 	font-size: 20px;
 }
 .my_post_table td{
+	height: 10%;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	border-right: 1px solid;
+	padding: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.my_post_tabletd{
 	height: 10%;
 	font-size: 15px;
 	text-overflow: ellipsis;
@@ -1451,7 +1511,7 @@ font-weight: bold;}
 	width: 98%;
 	margin-left:0%;
 	table-layout: fixed;
-	border-bottom: 1px solid;
+
 }
 .myfriend_list_table td{
 	margin-top: -5%;
@@ -1510,14 +1570,17 @@ font-weight: bold;}
 .myfriend_play_list_table{
 	opacity: 1 !important;
 	width: 350px;
+	height:350px;
 	font-size: 15px;
 	text-align: center;
 	table-layout: fixed;
 	border: 1px solid ghostwhite;
 }
+.myfriend_play_list_table tr{
+	white-space:pre-wrap;
+}
 .myfriend_play_list{
-	background-color: black;
-	opacity: 0.8;
+	background-color: rgba(0, 0, 0,0.8);
 	width: 400px;
 	align-content: center;	
 	margin-top: 10%;
@@ -1526,10 +1589,62 @@ font-weight: bold;}
 }
 /* END플레이리스트*/
 .friends_profile_img img{
-	width: 300px;
+	width: 200px;
 }
-.friends_profile_intro{
-	text-align: left;
+.friends_profile_back{
+  height: 500px;
+  background-image:url("/files/images/wallpaper/배경1.jpg");
+  background-size: cover;
+  overflow: hidden;
+}
+.myfriend_play_list_table .friends_profile_intro {
+    text-align: left;
+    white-space: pre-wrap !important;
+    width: 300px;
+}
+.friends_profile_size{
+	width: 90%;
+	margin: auto;
+}
+.friends_profile_table{	
+	color: white;
+	border: 1px solid;
+	width: 350px;
+	table-layout: fixed;
+	margin: auto;
+	text-align: center;
+	background-color: rgba(0, 0, 0,0.8);
+}
+.introduce_friend{
+	white-space: pre-wrap;
+	display: block;
+	margin-right : 10px;
+    text-align: left;
+}
+.friends_profile_table td{
+	width: 350px;
+	white-space: pre-wrap;
+	padding: 10px;
+	overflow:auto;
+	word-break: keep-all;
+    word-wrap: break-word;	
+}
+.make_friend{
+  width:90px;
+  background-color : #FD786A;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding:3px;	
+  font-family: NeoDunggeunmo Code, Inter;
+  font-weight: lighter;
+  font-size: 12px;
+  text-align: center;
+  position:absolute;
+  right : 5%;
+  bottom : 5%;
+  display: block;
 }
 /* ================ END OF MY_FRIENDS ====================== */
 /* ================ START OF MY_PURCHASE ====================== */

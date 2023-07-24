@@ -61,17 +61,19 @@
       FROM calender
       WHERE id=#{id}
     </select>
-    <!-- 일정 삭제 -->
+    <!-- 게시물 삭제 -->
     <select id="delete_evt" parameterType="Integer" >
       DELETE FROM calender 
       WHERE calender_num = #{calender_num}
     </select>
+  
 <!--=========== END of 캘린더 ======================================================================================================-->
 <!-- =========== START of 게임관리 ======================================================================================================	 -->
 
 	<!-- 내가 마스터인 방의 room_num, room_name 가져오기 -->
 	<select id="selectRoomById" parameterType="String" resultType="Map">
-		SELECT room_num, room_name, room_state FROM chating
+		SELECT room_num, room_name, room_state 
+		FROM chating
 		WHERE id = #{id}
 	</select>
 	
@@ -101,6 +103,30 @@
 	</select>
 
 <!-- =========== END of 게임관리 ======================================================================================================	 -->
+<!-- =========== START of 나의 게시물 ======================================================================================================	 -->
+	<select id="my_post" parameterType="PostDTO" resultType="java.util.HashMap">
+		SELECT * 
+		FROM post
+		WHERE id = #{id} AND post_state =0
+	</select>
+	
+	<select id="my_post2" parameterType="PostDTO" resultType="java.util.HashMap">
+		SELECT * 
+		FROM post
+		<if test="subject == 'all' ">
+		WHERE id = #{id} AND post_state =0
+		</if>
+		
+		<if test="subject != 'all' ">
+		WHERE id = #{id} AND subject = #{subject} AND post_state =0
+		</if>
+	</select>
+    <update id="deletePosts" parameterType="String">
+		UPDATE 	 post 
+		SET		 post_state		= 1
+		WHERE 	 post_num = #{postNums}
+	</update>
+<!-- =========== END of 나의 게시물 ======================================================================================================	 -->
 
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
 <!-- 희원정보창들어갔을때 아이디체크 -->
@@ -145,10 +171,93 @@
 		FROM image
 		WHERE id = #{id}
 	</select>
+	
+	<select id ="my_playlist" parameterType="MemberDTO" resultType="Integer">
+		SELECT room_num
+		FROM `join`
+		WHERE id = #{id} AND join_state != 2
+	</select>
 <!-- =========== END of 회원정보 ======================================================================================================	 -->
+<!-- =========== START of 나의 친구관리 ======================================================================================================	 -->
+	<select id="friend" parameterType="String" resultType="FriendDTO">
+		SELECT friend_id
+		FROM friend
+		WHERE my_id=#{id} AND friend_state = 0
+	</select>
+	<select id="checked" parameterType="String" resultType="MemberDTO">
+		SELECT dist_search, name_search
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<select id="search_friend_id" parameterType="String" resultType="MemberDTO">
+      SELECT id 
+      FROM member 
+      WHERE	(
+      			id  		LIKE CONCAT('%',#{id},'%') 
+      		OR 	nickname  	LIKE CONCAT('%',#{id},'%')
+      		OR 	name		LIKE CONCAT('%',#{id},'%')
+			)
+			AND name_search = 0
+   </select>
+   
+   
+   
+   <!-- 검색허용 여부 -->
+   	<update id="dist_search0" parameterType="String">
+		UPDATE 	 member SET dist_search = 0 WHERE id = #{id}
+	</update>
+	<update id="dist_search1" parameterType="String">
+		UPDATE 	 member SET dist_search = 1 WHERE id = #{id}
+	</update>
+	<update id="name_search0" parameterType="String">
+		UPDATE 	 member SET name_search = 0 WHERE id = #{id}
+	</update>
+	   	<update id="name_search1" parameterType="String">
+		UPDATE 	 member SET name_search = 1 WHERE id = #{id}
+	</update>
+	
+	
+	
+   <!-- 친구정보 가져오기 -->
+	<select id="friend_profile" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT id,name,nickname,introduce
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<!-- 친구프로필 사진 불러오기 -->
+	<select id ="friend_img" parameterType="String" resultType="String">
+		SELECT path
+		FROM image
+		WHERE id = #{id}
+	</select>
+	<!-- 친구추가 입력 -->
+	<insert id="make_friend" parameterType = "FriendDTO">
+		INSERT INTO friend (my_id, friend_id) 
+		VALUES (#{my_id}, #{friend_id})	
+	</insert>
+	
+	<!-- 친구삭제 -->
+	<update id="no_friend" parameterType = "FriendDTO">
+		UPDATE 	 friend 
+		SET friend_state = 1 
+		WHERE my_id = #{my_id} AND friend_id = #{friend_id}
+	</update>
+	
+	<select id ="friend_playlist" parameterType="String" resultType="Integer">
+		SELECT room_num
+		FROM `join`
+		WHERE id = #{id} AND join_state = 1
+	</select>
+	<select id ="find_gamename" parameterType="Integer" resultType="java.util.HashMap">
+		SELECT 	room_num, room_name, next_play_date, watching, room_state
+		FROM chating
+		WHERE room_num = #{num}
+	</select>
+<!-- =========== END of 나의 친구관리 ======================================================================================================	 -->
+
 <!-- =========== START of 나의 문의사항 ======================================================================================================	 -->
 	<select id="find_question" resultType="QuestionDTO">
-      select * from question where id=#{id}
+      SELECT * FROM question WHERE id=#{id}
    </select>
 <!-- =========== END of 나의 문의사항 ======================================================================================================	 -->
 </mapper>

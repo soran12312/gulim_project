@@ -53,5 +53,8 @@ public interface CommunityService {
 	// 이벤트 이미지 조회
 	public List<ImageDTO> findEventImg();
 
+	// 공지사항 이미지 조회
+	public List<ImageDTO> findAllAnnounceImg();
+
 	
 }

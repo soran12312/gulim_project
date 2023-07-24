@@ -11,6 +11,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+
+
+	//※ event title :	$('#send_message_submit').click
+	//※ event info :	폼으로 쪽지 보내기
 		$('#send_message_submit').click(function(){
 			 $( '#sendmessage_form' ).submit();
 			 setTimeout(function() {   

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.service.CommunityService;
 
@@ -23,6 +25,12 @@ public class AnnounceController {
 
 		List<PostDTO> announces = communityService.findAllAnnounce();
 		m.addAttribute("announces", announces);
+		
+		List<ImageDTO> announceimages = communityService.findAllAnnounceImg();
+		m.addAttribute("announceimages", announceimages);
+		System.out.println(announceimages);
+		
+		
 		return "community/announce/announce_list";
 
 	}

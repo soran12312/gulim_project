@@ -10,6 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.JoinDTO;
 import project.gulim.domain.TagDTO;
 import project.gulim.service.GameService;
 import project.gulim.service.MainService;
@@ -75,6 +77,42 @@ public class GameController {
 		return list;
 	}
 	
+	@RequestMapping("/play/char_sheet_form")
+	public String char_sheet_form(Integer room_num) {
+		
+		return "/game/play/char_sheet_form";
+	}
+	
+	@RequestMapping("/play/room_detail")
+	public String room_detail(Integer room_num, Model m) {
+		//System.out.println(room_num);
+		String id = this.getId();
+		
+		Map room = gameService.select_room_detail(room_num);
+		String path = gameService.select_room_img(room_num);
+		if(path != null) {
+			room.put("room_img", path);
+		}
+		// 유저가 해당 방에 참가 했는지
+		JoinDTO join = new JoinDTO();
+		join.setId(id);
+		join.setRoom_num(room_num);
+		
+		List<Integer> join_nums = gameService.select_join(join);
+		
+		if(id.equals((String)room.get("id"))) {
+			room.put("join", 0);
+		}
+		
+		if(join_nums.size()>0) {
+			room.put("join", 0);
+		}
+		
+		m.addAttribute("room", room);
+		
+		return "/game/play/room_detail";
+	}
+	
 	@RequestMapping("/play/room_list")
 	public String room_list() {
 		
@@ -85,20 +123,7 @@ public class GameController {
 	@Transactional
 	public String room_insert(ChatingDTO room, String hashtag, MultipartFile room_img) {
 		
-		Cookie[] cookies = req.getCookies();
-	    String jwtToken = null;
-	      
-	    if (cookies != null) {
-	    	for (Cookie cookie : cookies) {
-	    		if (cookie.getName().equals("access_token")) {
-	    			jwtToken = cookie.getValue();
-	                break;
-	            }
-	        }
-	    }
-	        
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);
+	    String id = this.getId();
 	    room.setId(id);
 		
 		System.out.println(room);
@@ -168,6 +193,25 @@ public class GameController {
             return null;
         }
     }
+	
+	public String getId() {
+		Cookie[] cookies = req.getCookies();
+	    String jwtToken = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			jwtToken = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	        
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);
+	    
+	    return id;
+	}
 	
 	
 }

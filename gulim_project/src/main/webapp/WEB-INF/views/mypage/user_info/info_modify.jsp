@@ -70,6 +70,18 @@ $(document).ready(function(){
 
 
 
+//※ event title :	$('#password_check_input').keypress (패스워드확인창에서 Enter)
+//※ event info  :	확인버튼이랑 연동
+$('#password_check_input').keypress(function(keyNum){
+	if(keyNum.keyCode == 13){
+		$('#password_check_btn').trigger('click');
+	}
+});
+//※ END event title :	$('#password_check_btn').click ===============================================
+
+
+
+
 //※ event title :	$('#info_modi').click (회원정보 수정 버튼 클릭)
 //※ event info  :	1. value가 회원정보수정 일때	->	수정완료 버튼으로 변경하고 입력창을 수정가능하게 변경
 //					 2.	value가 수정완료일때		->	회원정보수정 버튼으로 변경하고 입력창의 value값을 DB저장
@@ -199,6 +211,7 @@ function find_info(){
 						$('#email').val(result.email);
 						$('#tel').val(result.tel);
 						$('#introduce').html(result.introduce);
+						find_playlist();
 					}
 					
 		//END of success
@@ -207,6 +220,38 @@ function find_info(){
 }
 //※ END function title	:	find_info	================================================= 
 
+
+
+//※ function title	:	find_playlist 
+//※ function info	:	회원정보리스트를 result로 가져와서 회원정보란의 value에 넣는 함수
+function find_playlist(){
+	// /mypage/user_info/find_playlist id 보내기
+	$.ajax({
+			type 		: 'post'
+			,data 		: {id: my_id}                
+			,url 		: '/mypage/user_info/find_playlist'
+			//가져온 회원정보(result)값을 회원정보 input태그에 value에 입력
+			,success 	: function(result){
+							var table = $('#playlist');
+							for (var i = 0; i < result.length; i++) {
+								var room_name		= result[i].room_name
+								if (result[i].next_play_date == null){
+									var next_play_date = "다음일정이 없어요"
+								}
+								else{
+									var next_play_date	= result[i].next_play_date
+								}						
+								// 검색 결과를 테이블에 추가
+								var row = '<tr><td>' + room_name + '</td><td>'+next_play_date+'</td></tr>';
+								table.append(row);
+							
+						}
+						
+					}//END of success
+			,error 		: function(err){console.log(err);}//END of error
+		});//END of ajax
+}
+//※ END function title	:	find_info	================================================= 
 
 
 //※ function title	:	find_info_img 
@@ -370,15 +415,14 @@ function modify_info(){
 				<div class="fs20 fs_bord">플레이리스트</div>
 				<div class="myinfo_play_list_scroll">
 					<table class="myinfo_play_list_table">
+						<thead>
 						<tr>
 							<td class="myinfo_play_list_td w30per">게임명</td>
-							<td class="myinfo_play_list_td w70per">게임설명</td>
+							<td class="myinfo_play_list_td w70per">다음게임일시</td>
 						</tr>
-						<tr>
-							<td >게임이름알엉러아밍</td>
-							<td>오러오ㅓㅏㅁ리ㅗ아ㅓㅁ</td>
-						</tr>
-
+						</thead>
+					<tbody id = "playlist">
+					</tbody>
 					</table>
 				</div>
 			</div>

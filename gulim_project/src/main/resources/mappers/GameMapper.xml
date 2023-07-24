@@ -33,5 +33,20 @@
 		SELECT nickname FROM member
 		WHERE id = #{id}
 	</select>
+	
+	<select id="select_room_detail" parameterType="Integer" resultType="Map">
+		SELECT room_num, room_name, id, plot, law, max_member, curr_member FROM chating
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<select id="select_room_img" parameterType="Integer" resultType="String">
+		SELECT path FROM image
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<select id="select_join" parameterType="JoinDTO" resultType="Integer">
+		SELECT join_num FROM `join`
+		WHERE id = #{id} AND room_num = #{room_num} AND join_state != 2
+	</select>
 
 </mapper>
