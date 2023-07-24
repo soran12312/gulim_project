@@ -850,7 +850,6 @@
 	    return book_title; // book_title 값을 그대로 반환하여 해당 값이 키로 사용되도록 함
 	}
 
-
 	// Select 요소와 버튼 요소를 가져옵니다.
 	var selectYearMonth = $("#selectYear_month");
 	var btnMonth = $("#btn_month");
@@ -862,50 +861,113 @@
 	btnMonth.addClass("active");
 	updateH6TagMonthMonth();
 	
-	selectYearMonth.on("change", updateH6TagMonthMonth); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	selectYearMonth.on("change", function() {
+	    btnMonth.addClass("active");
+	    btnMonthSubscribe.removeClass("active");
+	    btnMonthBook.removeClass("active");
+	    updateH6TagMonthMonth();
+	});
+	
 	btnMonth.on("click", function() {
-		btnMonth.addClass("active");
-		btnMonthSubscribe.removeClass("active");
-		btnMonthBook.removeClass("active");
-		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	    btnMonth.addClass("active");
+	    btnMonthSubscribe.removeClass("active");
+	    btnMonthBook.removeClass("active");
+	    updateH6TagMonthMonth();
 	});
+	
 	btnMonthSubscribe.on("click", function() {
-		btnMonth.removeClass("active");
-		btnMonthSubscribe.addClass("active");
-		btnMonthBook.removeClass("active");
-		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	    btnMonth.removeClass("active");
+	    btnMonthSubscribe.addClass("active");
+	    btnMonthBook.removeClass("active");
+	    updateH6TagMonthMonth();
 	});
+	
 	btnMonthBook.on("click", function() {
-		btnMonth.removeClass("active");
-		btnMonthSubscribe.removeClass("active");
-		btnMonthBook.addClass("active");
-		updateH6TagMonthMonth(); // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
+	    btnMonth.removeClass("active");
+	    btnMonthSubscribe.removeClass("active");
+	    btnMonthBook.addClass("active");
+	    updateH6TagMonthMonth();
 	});
 	
 	// h6 태그 업데이트 함수
-	function updateH6TagMonthMonth() { // 함수 이름을 updateH6TagMonth에서 updateH6TagMonthMonth로 변경
-		var selectedYear = selectYearMonth.val();
-		var selectedButton = getSelectedButton_Month();
+	function updateH6TagMonthMonth() {
+	    var selectedYear = selectYearMonth.val();
+	    var selectedButton = getSelectedButton_Month();
 	
-		h6TagMonth.text(selectedYear + "년 " + selectedButton + " 월매출");
+	    h6TagMonth.text(selectedYear + "년 " + selectedButton + " 월매출");
 	}
 	
 	// 선택된 버튼을 반환하는 함수
 	function getSelectedButton_Month() {
-		if (btnMonth.hasClass("active")) {
-			return "전체";
-		} else if (btnMonthSubscribe.hasClass("active")) {
-			return "구독권";
-		} else if (btnMonthBook.hasClass("active")) {
-			return "설정집";
-		} else {
-			return "전체";
-		}
+	    if (btnMonth.hasClass("active")) {
+	        return "전체";
+	    } else if (btnMonthSubscribe.hasClass("active")) {
+	        return "구독권";
+	    } else if (btnMonthBook.hasClass("active")) {
+	        return "설정집";
+	    } else {
+	        return "전체";
+	    }
 	}
+	/************ END of 월매출 ************/
 
+	/*******  START of 일매출 *********/
+	var data_day = [];
+	var purchase_day = $('#selectDay').val();
+
+	$.ajax({
+	    // 경로
+	    url: "/admin/sales_stats/day",
+	    // 전송방식: POST
+	    method: "POST",
+	    data: {purchase_day: purchase_day},
+	    // 성공할 시
+	    success: function(response){
+	        data_day = [];
+	        for (var i = 0; i < response.length; i++) {
+	            data_day.push({
+	                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+	                value: response[i].total_price
+	            });
+	        }
+	        var chart_quarter = Morris.Donut({
+	            element: 'morris_donught',
+	            data: data_day,
+	            resize: true
+	        });
+	        
+	        
+	        $("#btn_quarter_subscribe").on("click", function() {
+				data_day = [];
+				var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+			        donughtChartParent.removeChild(svgElement);
+			    }
+		        for (var i = 0; i < response.length; i++) {
+		            data_day.push({
+		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+		                value: response[i].total_subscribe_price
+		            });
+		        }
+		        var chart_quarter = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_day,
+		            resize: true
+		        });
+			});
+	    },
+	    error: function(xhr, status, error){
+	        alert('분기매출 실패: '+ error);
+	        console.log(xhr);
+	        console.log(status);
+	        console.log(error);
+	    }
+	});
 	
 
-	/************ END of 월매출 ************/
+	/******* END of 일매출 *********/
 
 
 //area chart

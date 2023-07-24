@@ -45,6 +45,8 @@ public interface AdminDAO {
 	
 	public List<HashMap> salesStatsMonth_book(String purchase_year_mon);
 
+	public List<HashMap> salesStatsDay(String purchase_day);
+	
 	public List<HashMap> listRefund();
 
 	public void changeDeliveryState(BasketDTO bDTO);
@@ -55,11 +57,15 @@ public interface AdminDAO {
 
 	public List<HashMap> listProduct();
 
-	public void insert_1(ContestDTO cDTO);
+	public void insert_evt_post(PostDTO pDTO);
 
-	public void insert_2(PostDTO pDTO);
-
-	public void insert_3(ImageDTO iDTO);
+	public void insert_evt_image(ImageDTO iDTO);
+	
+	public void insert_con_post(PostDTO pDTO);
+	
+	public void insert_con_image(ImageDTO iDTO);
+	
+	public void insert_con_contest(ContestDTO cDTO);
 	
 	public List<HashMap> playedRuleBook();
 	

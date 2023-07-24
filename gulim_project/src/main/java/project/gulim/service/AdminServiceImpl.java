@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.dao.AdminDAO;
 import project.gulim.domain.BasketDTO;
 import project.gulim.domain.CharacterSheetDTO;
@@ -16,13 +17,27 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
-import project.gulim.domain.SubscribeDTO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired // 의존성 주입: QnaDAO에 사용
 	private AdminDAO adminDAO; // 변수명: 소문자로 시작, DAO 쓰기
+	
+	public String getJwtTokenFromCookies(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String jwtToken = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        return jwtToken;
+    }
 
 	public List<QuestionDTO> listQuestion() {
 		return adminDAO.listQuestion();
@@ -80,6 +95,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.salesStatsMonth_book(purchase_year_mon);
 	}
 	
+	public List<HashMap> salesStatsDay(String purchase_day){
+		return adminDAO.salesStatsDay(purchase_day);
+	}
+	
 	public List<HashMap> listRefund() {
 		return adminDAO.listRefund();
 	}
@@ -92,10 +111,15 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.listPost();
 	}
 
-	public void insertAll(ContestDTO cDTO, PostDTO pDTO, ImageDTO iDTO) {
-		adminDAO.insert_1(cDTO);
-		adminDAO.insert_2(pDTO);
-		adminDAO.insert_3(iDTO);
+	public void insertNoContest(PostDTO pDTO, ImageDTO iDTO) {
+	        adminDAO.insert_evt_post(pDTO);
+	        adminDAO.insert_evt_image(iDTO);
+	}
+	
+	public void insertYesContest(PostDTO pDTO, ImageDTO iDTO, ContestDTO cDTO) {
+		adminDAO.insert_con_post(pDTO);
+		adminDAO.insert_con_image(iDTO);
+		adminDAO.insert_con_contest(cDTO);
 	}
 
 	public void changePostState(PostDTO pDTO) {

@@ -3,6 +3,7 @@ package project.gulim.service;
 import java.util.HashMap;
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.BasketDTO;
 import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ContestDTO;
@@ -11,9 +12,10 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
-import project.gulim.domain.SubscribeDTO;
 
 public interface AdminService {
+	
+	public String getJwtTokenFromCookies(HttpServletRequest request);
 
 	public List<QuestionDTO> listQuestion();
 
@@ -42,6 +44,8 @@ public interface AdminService {
 	public List<HashMap> salesStatsMonth_subs(String purchase_year_mon);
 	
 	public List<HashMap> salesStatsMonth_book(String purchase_year_mon);
+	
+	public List<HashMap> salesStatsDay(String purchase_day);
 
 	public List<HashMap> listRefund();
 
@@ -49,11 +53,13 @@ public interface AdminService {
 
 	public List<HashMap> listPost();
 
+	public void insertNoContest(PostDTO pDTO, ImageDTO iDTO);
+	
+	public void insertYesContest(PostDTO pDTO, ImageDTO iDTO, ContestDTO cDTO);
+
 	public void changePostState(PostDTO pDTO);
 
 	public List<HashMap> listProduct();
-
-	public void insertAll(ContestDTO cDTO, PostDTO pDTO, ImageDTO iDTO);
 	
 	public List<HashMap> playedRuleBook();
 	

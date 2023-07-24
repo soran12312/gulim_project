@@ -244,6 +244,35 @@
 			    purchase_month, total_book_price desc
 	</select>
 	
+	<!-- 판매 통계: 전체 월매출 -->
+	<select id="salesStatsDay" parameterType="String" resultType="HashMap">
+		WITH combined_sales AS (
+		    SELECT bk.purchase_date as purchase_day,
+		           SUM(b.price) AS book_price, 
+		           0 AS subscribe_price
+		    FROM purchase p
+		    INNER JOIN book b ON p.book_num = b.book_num
+		    INNER JOIN basket bk ON p.basket_num = bk.basket_num
+		    GROUP BY bk.purchase_date
+		
+		    UNION ALL
+		
+		    SELECT s.sub_date as purchase_day,
+		           0 AS book_price, 
+		           SUM(s.price) AS subscribe_price
+		    FROM subscribe s
+		    GROUP BY s.sub_date
+		)
+		SELECT purchase_day,
+		       SUM(book_price) AS total_book_price, 
+		       SUM(subscribe_price) AS total_subscribe_price,
+		       SUM(book_price) + SUM(subscribe_price) AS total_price
+		FROM combined_sales
+		WHERE purchase_day = #{purchase_day}
+		GROUP BY purchase_day
+		ORDER BY purchase_day DESC
+	</select>
+	
 
 	<!-- 배송/환불 리스트 보기 -->
 	<select id="listRefund" resultType="HashMap">
@@ -275,19 +304,33 @@
 		update post set post_state=#{post_state} where post_num=#{post_num}
 	</update>
 	
-	<!-- 관리자 글 작성 1 -->
-	<insert id="insert_1" parameterType="ContestDTO">
-		insert into contest(contest_title, contest_content, start_date, end_date) VALUES(#{contest_title}, #{contest_content}, #{start_date}, #{end_date})
+	
+	<!-- 관리자 공지사항/이벤트 insert 1 -->
+	<insert id="insert_evt_post" parameterType="PostDTO">
+		insert into post(post_title, id, writing_date, post_content, board, subject, view_count, post_state) VALUES(#{post_title}, #{id}, CURDATE(), #{post_content}, #{board}, #{board}, 0, 0)
 	</insert>
 	
-	<!-- 관리자 글 작성 2 -->
-	<insert id="insert_2" parameterType="PostDTO">
-		insert into post(board, subject, contest_num) VALUES(#{board}, #{subject}, #{contest_num})
+	<!-- 관리자 공지사항/이벤트 insert 2 -->
+	<insert id="insert_evt_image" parameterType="ImageDTO">
+		insert into image(origin_img_name, path, img_size, post_num, id) VALUES(#{origin_img_name}, #{path}, #{img_size}, (SELECT MAX(post_num)FROM post), #{id})
 	</insert>
 	
-	<!-- 관리자 글 작성 3 -->
-	<insert id="insert_3" parameterType="ImageDTO">
-		insert into image(origin_img_name, path, img_size, post_num) VALUES(#{origin_img_name}, #{path}, #{img_size}, #{post_num})
+	<!-- 관리자 공모전 insert 1 -->
+	<insert id="insert_con_post" parameterType="PostDTO">
+		insert into post(id, writing_date, board, subject, view_count, post_state, contest_num) 
+		VALUES(#{id}, CURDATE(), #{board}, #{board}, 0, 0, (SELECT MAX(contest_num)FROM contest))
+	</insert>
+	
+	<!-- 관리자 공모전 insert 2 -->
+	<insert id="insert_con_image" parameterType="ImageDTO">
+		insert into image(origin_img_name, path, img_size, post_num, id) 
+		VALUES(#{origin_img_name}, #{path}, #{img_size}, (SELECT MAX(post_num)FROM post), #{id})
+	</insert>
+	
+	<!-- 관리자 공모전 insert 3 -->
+	<insert id="insert_con_contest" parameterType="ContestDTO">
+		insert into contest(contest_title, contest_content, start_date, end_date) 
+		VALUES(#{contest_title}, #{contest_content}, #{start_date}, #{end_date})
 	</insert>
 	
 	<!-- 등록된 상품 리스트 보기 -->

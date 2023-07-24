@@ -126,7 +126,7 @@
 		WHERE
 		post.post_state = 0
 		AND
-		post.board = '공지'
+		post.board = '공지사항'
 		ORDER BY
 		post.post_num DESC
 	</select>

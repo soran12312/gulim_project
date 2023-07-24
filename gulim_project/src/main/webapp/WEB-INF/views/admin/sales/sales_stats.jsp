@@ -259,7 +259,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-lg-8 col-sm-8">
+                            <div class="col-lg-7 col-sm-7">
                                 <div class="card">
                                     <div class="card-header">
                                         <button id="btn_year" class="btn btn-square btn-dark">전체</button>
@@ -275,14 +275,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4">
+                            <div class="col-lg-5 col-sm-5">
                                 <div class="card">
                                     <div class="card-header">
-                                        <select class="selectYear" id="selectYear_quarter">
-                                            <c:forEach items="${selectYear}" var="sy">
-                                                <option value="${sy.selectedYear}">${sy.selectedYear}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <input type="date" id="selectDay">
                                         <button id="btn_quarter" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary">구독권</button>
                                         <button id="btn_quarter_book" class="btn  btn-square btn-danger">설정집</button>  
@@ -319,9 +315,10 @@
                             <div class="col-lg-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <select class="selectYear" id="selectYear_day">
-                                            <option value="2023" selected>2023</option>
-                                            <option value="2022">2022</option>
+                                        <select class="selectYear" id="selectYear_quarter">
+                                            <c:forEach items="${selectYear}" var="sy">
+                                                <option value="${sy.selectedYear}">${sy.selectedYear}</option>
+                                            </c:forEach>
                                         </select>
                                         <button id="btn_day" class="btn btn-square btn-dark">전체</button>
                                         <button id="btn_day_subscribe" class="btn  btn-square btn-primary">구독권</button>

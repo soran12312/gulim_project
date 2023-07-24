@@ -14,5 +14,29 @@
     let postForm = function() {
 		let content = $('textarea[name="content"]').html($('#summernote').code());
 	}
+	
+	let postForm2 = function() {
+		let content2 = $('textarea[name="contest_content"]').html($('#summernote').code());
+	}
+	
+	$("#inputState_noContest").on("change", function() {
+	    var selectedValue = $(this).val();
+	    if (selectedValue === "공모전") {
+	        $("#announceOrEvent").prop("hidden", true);
+	        $("#justContest").prop("hidden", false);
+	    }
+	    // 동기화: 'inputState_yesContest'의 값을 변경하여 'inputState_noContest'와 동일하게 만든다.
+	    $("#inputState_yesContest").val(selectedValue);
+	});
+	
+	$("#inputState_yesContest").on("change", function() {
+	    var selectedValue = $(this).val();
+	    if (selectedValue === "공지사항" || selectedValue === "이벤트") {
+	        $("#announceOrEvent").prop("hidden", false);
+	        $("#justContest").prop("hidden", true);
+	    }
+	    // 동기화: 'inputState_noContest'의 값을 변경하여 'inputState_yesContest'와 동일하게 만든다.
+	    $("#inputState_noContest").val(selectedValue);
+	});
     
 })(jQuery);
