@@ -61,11 +61,12 @@
       FROM calender
       WHERE id=#{id}
     </select>
-    <!-- 일정 삭제 -->
+    <!-- 게시물 삭제 -->
     <select id="delete_evt" parameterType="Integer" >
       DELETE FROM calender 
       WHERE calender_num = #{calender_num}
     </select>
+  
 <!--=========== END of 캘린더 ======================================================================================================-->
 <!-- =========== START of 게임관리 ======================================================================================================	 -->
 
@@ -106,15 +107,25 @@
 	<select id="my_post" parameterType="PostDTO" resultType="java.util.HashMap">
 		SELECT * 
 		FROM post
-		<if test="#{subject} == 'all' ">
-		WHERE id = #{id}
-		</if>
-		<if test="#{subject} != 'all' ">
-		WHERE id = #{id} AND subject = #{subject}
+		WHERE id = #{id} AND post_state =0
+	</select>
+	
+	<select id="my_post2" parameterType="PostDTO" resultType="java.util.HashMap">
+		SELECT * 
+		FROM post
+		<if test="subject == 'all' ">
+		WHERE id = #{id} AND post_state =0
 		</if>
 		
+		<if test="subject != 'all' ">
+		WHERE id = #{id} AND subject = #{subject} AND post_state =0
+		</if>
 	</select>
-
+    <update id="deletePosts" parameterType="String">
+		UPDATE 	 post 
+		SET		 post_state		= 1
+		WHERE 	 post_num = #{postNums}
+	</update>
 <!-- =========== END of 나의 게시물 ======================================================================================================	 -->
 
 <!-- =========== START of 회원정보 ======================================================================================================	 -->
@@ -159,6 +170,12 @@
 		SELECT path
 		FROM image
 		WHERE id = #{id}
+	</select>
+	
+	<select id ="my_playlist" parameterType="MemberDTO" resultType="Integer">
+		SELECT room_num
+		FROM `join`
+		WHERE id = #{id} AND join_state != 2
 	</select>
 <!-- =========== END of 회원정보 ======================================================================================================	 -->
 <!-- =========== START of 나의 친구관리 ======================================================================================================	 -->
