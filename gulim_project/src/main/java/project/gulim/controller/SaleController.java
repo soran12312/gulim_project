@@ -1,10 +1,24 @@
 package project.gulim.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
-@Controller@RequestMapping("/sale")
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import project.gulim.service.SaleService;
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@Controller
+@RequestMapping("/sale")
 public class SaleController {
+	
+	@Autowired
+	private SaleService saleService;
+	
 	
 	//구독권 설정집 선택 페이지
 	@RequestMapping("/sale_main")
@@ -19,5 +33,15 @@ public class SaleController {
 	{
 		return "sale/subscribe/subscribe";
 	}
-
+	
+	//설정집판매 페이지
+	@RequestMapping("/sales")
+	@ResponseBody
+	public List<Map> sales(){
+		System.out.println(">>>>>>>>>>불림");
+		List<Map> list = saleService.sales();
+		return list;
+		
+	}
+	
 }
