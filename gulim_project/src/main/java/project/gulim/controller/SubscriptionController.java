@@ -43,17 +43,14 @@ public class SubscriptionController {
     // 카트 구독권 추가
     // 클라이언트에서 보낸 구독권 정보를 처리하는 메서드
     @RequestMapping("/add-to-cart")
-    public ResponseEntity<String> addToCart(@RequestBody Map<String, Object> subscriptionDataMap) {
+    public String addToCart(@RequestBody Map<String, Object> subscriptionDataMap) {
         try {
             // Convert the Map to a SubscribeDTO object 
             SubscribeDTO subscriptionData = SubscribeDTO.createFromMap(subscriptionDataMap);
-
-            System.out.println(subscriptionData);
-            
-            subscriptionService.saveSubscription(subscriptionData);        // db저장
             
             
-            // 장바구니 테이블에 id값 저장
+            
+         // 장바구니 테이블에 id값 저장
             Cookie[] cookies = request.getCookies();
             String jwtToken = null;
 
@@ -61,7 +58,7 @@ public class SubscriptionController {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("access_token")) {
                         jwtToken = cookie.getValue();
-                        System.out.println(jwtToken);
+//                        System.out.println(jwtToken);
                         break;
                     }
                 }
@@ -70,18 +67,49 @@ public class SubscriptionController {
             Claims claims = mainService.getClaims(jwtToken);
             String id = claims.get("id", String.class); // 로그인한 사용자 id
             System.out.println(id);
+            
+            
+            subscriptionData.setId(id);
 
-            // 장바구니 정보를 구성하여 DB에 저장
-            BasketDTO basketData = new BasketDTO();
-            basketData.setId(id);
-            cartService.saveCart(basketData);
+            System.out.println(subscriptionData);
+            
+            subscriptionService.saveSubscription(subscriptionData);        // db저장
+            
+            Integer userBasketNumber = subscriptionService.getUserBasketNumber(id);
+            
 
-
-            return ResponseEntity.ok("Subscription added to cart successfully");
+            // 
+            if (userBasketNumber == null) {
+	            // 장바구니 정보를 구성하여 DB에 저장
+	            BasketDTO basketData = new BasketDTO();
+	            basketData.setId(id);
+	            cartService.saveCart(basketData);
+            }    
+            
+            
+            // purchase sub_num, basket_num 저장
+            PurchaseDTO purchaseData = new PurchaseDTO();
+            purchaseData.setBasket_num(userBasketNumber );
+            purchaseData.setSub_num(subscriptionData.getSub_num());
+            
+            System.out.println(purchaseData);
+            
+            subscriptionService.savePurchase(purchaseData);
+            
+            System.out.println(ResponseEntity.ok("Subscription added to cart successfully"));
+            
+            
+//            return ResponseEntity.ok("Subscription added to cart successfully");
+            return "Subscription added to cart successfully";
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add subscription to cart");
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add subscription to cart");
+            return "Failed to add subscription to cart";
         }
     }
+    
+    
+    
+    
 
     
     

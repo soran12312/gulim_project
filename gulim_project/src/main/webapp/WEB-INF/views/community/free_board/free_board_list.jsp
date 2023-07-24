@@ -312,8 +312,17 @@ section.notice {
 						                <c:when test="${post.subject == 'user'}">
 						                    <a href="/community/free_board_detail?post_num=${post.post_num}">중간 파티원 모집</a>
 						                </c:when>
+						                <c:when test="${post.subject == 'other'}">
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">잡담</a>
+						                </c:when>
+						                <c:when test="${post.subject == 'review'}">
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임리뷰</a>
+						                </c:when>
+						                <c:when test="${post.subject == 'character'}">
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">캐릭터 설정</a>
+						                </c:when>
 						                <c:otherwise>
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">기타</a>
+						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임기타</a>
 						                </c:otherwise>
 						            </c:choose>
 						        </td>

@@ -49,7 +49,8 @@ public class CommunityController {
 	// 자유게시판 입력페이지
 	@RequestMapping(value = "/free_board_insert")
 	public String free(PostDTO params) {
-	    
+		
+		
 		return "community/free_board/free_board_insert";		
 	}
 	

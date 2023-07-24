@@ -159,6 +159,15 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		return communityDAO.findEventImg();
 	}
+
+
+
+	// 공지사항 이미지 조회
+	@Override
+	public List<ImageDTO> findAllAnnounceImg() {
+		// TODO Auto-generated method stub
+		return communityDAO.findAllAnnounceImg();
+	}
 	
 	
 	

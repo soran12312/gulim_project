@@ -9,4 +9,5 @@ public class PurchaseDTO {
 	private Integer basket_num;
 	private Integer book_num;
 	private Integer amount;
+	private Integer sub_num;
 }
