@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.JoinDTO;
 import project.gulim.domain.TagDTO;
 
 @Mapper
@@ -18,4 +19,7 @@ public interface GameDAO {
 	public List<Map> select_room_list();
 	public List<String> select_tag_by_room_num(Integer room_num);
 	public String select_nickname_by_id(String id);
+	public Map select_room_detail(Integer room_num);
+	public String select_room_img(Integer room_num);
+	public List<Integer> select_join(JoinDTO join);
 }
