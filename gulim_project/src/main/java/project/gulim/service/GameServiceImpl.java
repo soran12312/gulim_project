@@ -1,5 +1,6 @@
 package project.gulim.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,11 @@ public class GameServiceImpl implements GameService {
 	public List<Integer> select_join(JoinDTO join) {
 		
 		return gameDAO.select_join(join);
+	}
+
+	@Override
+	public List<HashMap> support_data() {
+		return gameDAO.support_data();
 	}
 
 }

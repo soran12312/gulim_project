@@ -48,5 +48,9 @@
 		SELECT join_num FROM `join`
 		WHERE id = #{id} AND room_num = #{room_num} AND join_state != 2
 	</select>
-
+	<select id="support_data"  resultType="java.util.HashMap">
+		SELECT s.s_img_num num, s.s_img_title title,  s.s_img_type category, i.path path
+		FROM support_img_board s INNER JOIN image i
+		ON s.s_img_num = i.s_img_num;
+	</select>
 </mapper>

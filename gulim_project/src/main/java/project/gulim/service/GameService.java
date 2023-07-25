@@ -1,5 +1,6 @@
 package project.gulim.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +20,5 @@ public interface GameService {
 	public Map select_room_detail(Integer room_num);
 	public String select_room_img(Integer room_num);
 	public List<Integer> select_join(JoinDTO join);
+	public List<HashMap> support_data();
 }

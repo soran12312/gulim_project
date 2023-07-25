@@ -2,6 +2,7 @@ package project.gulim.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -212,6 +214,24 @@ public class GameController {
 	    
 	    return id;
 	}
+	@RequestMapping("/support/map_create")
+	public String map_create() {
+		return "/game/support/map_create";
+	}
 	
 	
+	
+	@RequestMapping("/support/data")
+	@ResponseBody
+	public List<HashMap> support_data() {
+		List<HashMap> lists = gameService.support_data();
+		return lists;
+	}
+	
+	
+	
+	@RequestMapping("/support/etc")
+	public String etc() {
+		return "/game/support/etc";
+	}
 }

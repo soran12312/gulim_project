@@ -84,6 +84,15 @@ font-weight: bold;}
   text-decoration:none; /* 마우스호버없음 */
   cursor: pointer;
 }
+.no_a_st2 a:link,/* 링크컬러블랙 */
+.no_a_st2 a:visited,/* 방문햇던링크컬러블랙 */
+.no_a_st2 a:active,
+.no_a_st2{
+  text-decoration-line : none;
+  color: white;
+  text-decoration:none; /* 마우스호버없음 */
+  cursor: pointer;
+}
 /* ================END OF ALL============================== */
 
 
@@ -1794,3 +1803,50 @@ purchase_bookname{
 }
 /* ================ END OF PASSWORD_CHECK ====================== */
 /* ================ END OF MY PAGE ====================== */
+
+
+/* ================ START OF GAME ====================== */
+/* ================ START OF roomlist ====================== */
+.game_roomlist_nav{
+	margin-left:auto; 
+	margin-right: auto;
+	margin-top: 50px;
+	color: white;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 30px;
+	width: 800px;
+	text-align: center;
+}
+.game_roomlist_nav2{
+	margin-left:auto; 
+	margin-right: auto;
+	margin-bottom : 30px;
+	color: white;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-weight: normal;
+	font-size: 30px;
+	width: 800px;
+	text-align: center;
+}
+.game_roomlist_nav2 td,.game_roomlist_nav2 a { width: 100px;}
+
+.ifram_size{
+	width: 800px;
+	height: 700px;
+	background: rgba(217,217,217,0.7);
+	margin: auto;
+	box-shadow: 0px 0px 20px 20px rgba(217,217,217,0.7);
+	border: none;
+}
+.ifram_size2{
+	width: 1000px;
+	height: 600px;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+}
+/* ================ END OF roomlist ====================== */
+
+/* ================ END OF GAME ====================== */
