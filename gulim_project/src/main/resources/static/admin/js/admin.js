@@ -298,8 +298,19 @@
 	
 	//*********** 상품 등록 및 수정 start ***********//
 	$('.productTable tbody').on('click', '.product-link', function(e) {
+		e.preventDefault();
 		$('tbody tr').removeClass('selected');
+		var book_num = $(this).find('td:nth-child(1)').text();
+		
+		var url = "/admin/product_modify?book_num=" + book_num
+        $('#product_detail_button').attr('href', url);
+		
+		
 	});
+	
+	
+	
+	
     //*********** 상품 등록 및 수정 end ***********//
     
 })(jQuery);

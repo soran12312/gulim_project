@@ -229,7 +229,7 @@
                     </div>
                 </div>
                 <!-- row -->
-                <form action="/admin/insert" method="POST">
+                <form action="/admin/product_modify" method="POST">
                     <div class="row">
                         <div class="card col-sm-12 p-md-12">
                             <table>
@@ -248,43 +248,54 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="8">
                                         <div class="card-body">
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">제목</p>
-                                                    <input type="text" class="form-control input-default" placeholder="제목을 입력하시오.">
+                                                    <input name="book_title" type="text" class="form-control input-default" value="${getPost.book_title}" placeholder="제목을 입력하시오.">
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
-                                        <p class="mb-1">장르</p>
-                                        <select id="inputState" class="form-control">
-                                            <option>액션</option>
-                                            <option>공포</option>
-                                            <option>로맨스</option>
-                                        </select>
+                                            <p class="mb-1">저자</p>
+                                            <input name="writer" type="text" class="form-control input-default" value="${getPost.writer}" placeholder="저자 이름을 입력하시오.">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7">
-                                        <div style="position: relative; right: -18px; width: 550px;">
-                                            <p class="mb-1">이미지 추가</p>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -18px; width: 250px;">
+                                            <p class="mb-1">issue date</p>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <input name="issue_date" type="date" value="${outputDate}">
                                             </div>
                                         </div>
                                     </td>
                                     <td colspan="2">
+                                        <div>
+                                            <p class="mb-1">가격</p>
+                                            <div class="custom-file">
+                                                <input name="price" type="text" class="form-control input-default" value="${getPost.price}" placeholder="가격을 입력하시오.">
+                                            </div>
+                                        </div>
                                     </td>
                                     <td colspan="2">
-                                        <div class="card-body" style="width: 230px;">
-                                            <p class="mb-1">금액</p>
-                                            <input type="text" class="form-control" placeholder="금액을 입력하시오.">
+                                        <div>
+                                            <p class="mb-1">재고수량</p>
+                                            <input name="stock" type="text" class="form-control input-default" value="${getPost.stock}" placeholder="재고수량을 입력하시오.">
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">19금 설정</p>
+                                            <select>
+                                                <option value="1" ${getPost.adult == 1 ? 'selected' : ''}>O</option>
+                                                <option value="0" ${getPost.adult == 0 ? 'selected' : ''}>X</option>
+                                            </select>
+                                            <input type="text" value="${getPost.adult}" hidden>
                                         </div>
                                     </td>
                                 </tr>
@@ -294,17 +305,33 @@
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">간단 소개</p>
-                                                    <textarea style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오."></textarea>
+                                                    <textarea style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오.">${getPost.simple_info}</textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="11">
+                                    <td colspan="7">
+                                        <div style="position: relative; right: -18px; width: 550px;">
+                                            <p class="mb-1">이미지 추가</p>
+                                            <img id="adminPostPath" src="${getPost.path}">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="adminPostUpdate">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="9">
                                         <div class="card-body">
-                                            <p class="mb-1">본문 내용</p>
-                                            <div class="summernote"></div>
+                                            <div class="basic-form">
+                                                <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                    <p class="mb-1">상세 소개</p>
+                                                    <textarea style="height: 210px;" class="form-control" id="comment" placeholder="상세한 소개글을 입력하시오.">${getPost.book_detail}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -396,7 +423,7 @@
 
 
     <!-- 관리자 전용 js -->
-    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/adminChart.js"></script>
 
 
 </body>

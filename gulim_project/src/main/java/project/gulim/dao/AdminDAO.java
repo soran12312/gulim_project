@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import project.gulim.domain.BasketDTO;
+import project.gulim.domain.BookDTO;
 import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
@@ -13,7 +14,6 @@ import project.gulim.domain.MemberDTO;
 import project.gulim.domain.PlaceDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
-import project.gulim.domain.SubscribeDTO;
 
 @Mapper
 public interface AdminDAO {
@@ -56,6 +56,8 @@ public interface AdminDAO {
 	public void changePostState(PostDTO pDTO);
 
 	public List<HashMap> listProduct();
+	
+	public HashMap<String, Object> getProduct(BookDTO boDTO);
 
 	public void insert_evt_post(PostDTO pDTO);
 

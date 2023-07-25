@@ -234,7 +234,6 @@
                                     <option>공모전</option>   
                                 </select>
                             </div>
-                            <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <!-- postTable start -->
@@ -253,42 +252,53 @@
                                                 <!-- taglib forEach start -->
                                                 <c:forEach items="${listPost}" var="lpo">
                                                     <tr class="post-link">
-                                                        <%-- 글번호 --%>
-                                                        <td>${lpo.post_num}</td>
-                                                        <%-- 게시판 --%>
-                                                        <td>${lpo.board}</td>
-                                                        <%-- 제목 --%>
-                                                        <td>${lpo.post_title}</td>
-                                                        <td>
-                                                            <select class="selectPost" style="border: 0px; background-color:#ffffff;">
+                                                            <%-- 글번호 --%>
+                                                            <td name="post_num">${lpo.post_num}</td>
+                                                            <%-- 게시판 --%>
+                                                            <td>${lpo.board}</td>
+                                                            <%-- 제목 --%>
+                                                            <td>
+                                                                        <c:choose>
+                                                                            <%-- post_title이 존재할 경우 post_title을 출력 --%>
+                                                                            <c:when test="${not empty lpo.post_title}">
+                                                                                ${lpo.post_title}
+                                                                            </c:when>
+                                                                            <%-- 그 외의 경우(즉, post_title이 없고 contest_title이 존재하는 경우) contest_title을 출력 --%>
+                                                                            <c:otherwise>
+                                                                                ${lpo.contest_title}
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                            </td>
+                                                            <td>
+                                                                <select class="selectPost" style="border: 0px; background-color:#ffffff;">
+                                                                    <%-- taglib choose start --%>
+                                                                    <c:choose>
+                                                                        <%-- 등록상태가 게시중일 경우 --%>
+                                                                        <c:when test="${lpo.post_state eq 0}">
+                                                                            <option selected value="0">게시중</option>
+                                                                            <option value="1">게시중단</option>                                                                   
+                                                                        </c:when>
+                                                                        <%-- 등록상태가 게시중단일 경우 --%>
+                                                                        <c:when test="${lpo.post_state eq 1}">
+                                                                            <option value="0">게시중</option>
+                                                                            <option selected value="1">게시중단</option>                                                               
+                                                                        </c:when>
+                                                                    </c:choose>
+                                                                    <%-- taglib choose end --%>
+                                                                </select>
+                                                            </td>
+                                                            <%-- 게시일 --%>
+                                                            <td>${lpo.writing_date}</td>
+                                                            <td>
                                                                 <%-- taglib choose start --%>
                                                                 <c:choose>
-                                                                    <%-- 등록상태가 게시중일 경우 --%>
-                                                                    <c:when test="${lpo.post_state eq 0}">
-                                                                        <option selected value="0">게시중</option>
-                                                                        <option value="1">게시중단</option>                                                                   
-                                                                    </c:when>
-                                                                    <%-- 등록상태가 게시중단일 경우 --%>
-                                                                    <c:when test="${lpo.post_state eq 1}">
-                                                                        <option value="0">게시중</option>
-                                                                        <option selected value="1">게시중단</option>                                                               
+                                                                    <%-- 게시 기간이 존재할 경우 --%>
+                                                                    <c:when test="${lpo.start_date ne null}">
+                                                                        ${lpo.start_date} ~ ${lpo.end_date}                                                                
                                                                     </c:when>
                                                                 </c:choose>
                                                                 <%-- taglib choose end --%>
-                                                            </select>
-                                                        </td>
-                                                        <%-- 게시일 --%>
-                                                        <td>${lpo.writing_date}</td>
-                                                        <td>
-                                                            <%-- taglib choose start --%>
-                                                            <c:choose>
-                                                                <%-- 게시 기간이 존재할 경우 --%>
-                                                                <c:when test="${lpo.start_date ne null}">
-                                                                    ${lpo.start_date} ~ ${lpo.end_date}                                                                
-                                                                 </c:when>
-                                                            </c:choose>
-                                                            <%-- taglib choose end --%>
-                                                        </td>
+                                                            </td>
                                                     </tr>
                                                 </c:forEach>
                                                 <!-- taglib forEach end -->
@@ -296,7 +306,6 @@
                                         </table>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

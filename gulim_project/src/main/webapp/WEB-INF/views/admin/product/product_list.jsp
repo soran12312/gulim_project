@@ -226,12 +226,12 @@
                             <div class="card-header">
                                 <h4 class="card-title">LIST</h4>
                             </div>
-                            <form action="" method="POST">
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example" class="display productTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
+                                                    <th hidden></th>
                                                     <th>이미지</th>
                                                     <th>상품명</th>
                                                     <th>상태</th>
@@ -239,9 +239,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <c:forEach items="${listProduct}" var="lpr">
                                                     <tr class="product-link">
+                                                        <td hidden>${lpr.book_num}</td>
                                                         <td><img width="80" height="80" src="${lpr.path}"/></td>
                                                         <td>${lpr.book_title}</td>
                                                         <td>
@@ -263,7 +263,7 @@
                                                             <th>
                                                                 <div style="text-align: right;">
                                                                     <button class="btn btn-rounded btn-success"><a href="/admin/product_insert" style="color: white;">상품등록</a></button>
-                                                                    <button class="btn btn-rounded btn-dark"><a href="/admin/product_modify" style="color: white;">수정</a></button>
+                                                                    <button class="btn btn-rounded btn-dark"><a id="product_detail_button" href="/admin/product_modify?book_num=${lpr.book_num}" style="color: white;">수정</a></button>
                                                                 </div>
                                                             </th>
                                                         </tr>
@@ -272,7 +272,6 @@
                                         </table>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

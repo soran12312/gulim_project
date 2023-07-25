@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.BasketDTO;
+import project.gulim.domain.BookDTO;
 import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
@@ -60,6 +61,8 @@ public interface AdminService {
 	public void changePostState(PostDTO pDTO);
 
 	public List<HashMap> listProduct();
+	
+	public HashMap<String, Object> getProduct(BookDTO boDTO);
 	
 	public List<HashMap> playedRuleBook();
 	

@@ -294,7 +294,7 @@
 	
 	<!-- 관리자 글목록 리스트 보기 -->
 	<select id="listPost" resultType="HashMap">
-		select p.post_num post_num, p.board board, p.post_title post_title, p.post_state post_state, p.writing_date writing_date, c.start_date start_date, c.end_date end_date
+		select p.post_num post_num, c.contest_title contest_title, p.board board, p.post_title post_title, p.post_state post_state, p.writing_date writing_date, c.start_date start_date, c.end_date end_date
 		from post p left outer join contest c on p.contest_num = c.contest_num
 		ORDER BY p.post_num DESC
 	</select>
@@ -303,6 +303,14 @@
 	<update id="changePostState" parameterType="PostDTO">
 		update post set post_state=#{post_state} where post_num=#{post_num}
 	</update>
+	
+	<select id="getPost" parameterType="PostDTO" resultType="HashMap">
+		select p.post_num post_num, c.contest_title contest_title, c.contest_content contest_content, p.board board, p.post_title post_title, p.post_content post_content, p.post_state post_state, p.writing_date writing_date, c.start_date start_date, c.end_date end_date, i.origin_img_name origin_img_name, i.path path
+		from post p left outer join contest c on p.contest_num = c.contest_num
+					left outer join image i on p.post_num = i.post_num
+		where p.post_num = #{post_num}
+		ORDER BY p.post_num desc
+	</select>
 	
 	
 	<!-- 관리자 공지사항/이벤트 insert 1 -->
@@ -335,8 +343,15 @@
 	
 	<!-- 등록된 상품 리스트 보기 -->
 	<select id="listProduct" resultType="HashMap">
-		select i.path path, b.book_title book_title, b.sale_state sale_state, b.stock stock
+		select i.path path, b.book_num book_num, b.book_title book_title, b.sale_state sale_state, b.stock stock
 		from book b left outer join image i on b.book_num = i.book_num
+	</select>
+	
+	<!-- 상품 불러오기 -->
+	<select id="getProduct" parameterType="BookDTO" resultType="HashMap">
+		select i.path path, b.book_num book_num, b.book_title book_title, b.writer writer, b.translation translation, b.issue_date issue_date, b.price price, b.stock stock, b.simple_info simple_info, b.sale_state sale_state, b.stock stock, b.adult adult, b.book_detail book_detail
+		from book b left outer join image i on b.book_num = i.book_num
+		where b.book_num = #{book_num}
 	</select>
 	
 	<!-- 선호도 통계: 플레이해본 룰북 -->

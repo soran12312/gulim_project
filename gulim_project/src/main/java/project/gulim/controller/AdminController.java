@@ -4,8 +4,12 @@ package project.gulim.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -21,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.constant.Method;
 import project.gulim.domain.BasketDTO;
+import project.gulim.domain.BookDTO;
 import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
@@ -230,6 +234,8 @@ public class AdminController {
 	@RequestMapping(value = "/insert_form/noContest", method = RequestMethod.POST)
 	public String insertEvt(PostDTO pDTO, ImageDTO iDTO, Model m) {
 		
+		System.out.println(pDTO);
+		
 		// 이미지 등록 여부 확인
 	    String postContent = pDTO.getPost_content();
 	    
@@ -303,6 +309,8 @@ public class AdminController {
 	@RequestMapping(value = "/insert_form/yesContest", method = RequestMethod.POST)
 	public String insertCon(PostDTO pDTO, ImageDTO iDTO, ContestDTO cDTO, Model m) {
 		
+		System.out.println(cDTO);
+		
 		// 이미지 등록 여부 확인
 	    String contestContent = cDTO.getContest_content();
 	    
@@ -318,7 +326,7 @@ public class AdminController {
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
-	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/post/";
+	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/contest/";
 	            
 	            // 이미지 파일 저장 
 	            saveImageFile(imageData, imagePath, originImageName);
@@ -344,8 +352,8 @@ public class AdminController {
 				
 	            // post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
 			    String contentWithoutImages = removeImageTags(contestContent);
-			    pDTO.setPost_content(contentWithoutImages);
-			    	    
+			    cDTO.setContest_content(contentWithoutImages);
+
 			    adminService.insertYesContest(pDTO, iDTO, cDTO);
 	    	}
 	    }else {// 이미지가 포함되지 않은 경우
@@ -372,7 +380,6 @@ public class AdminController {
 		return "/admin/event_announce_contest/view_list";
 	}
 	
-	
 	// base64 인코딩된 이미지 값을 추출
 	private List<String> extractBase64Image(String content) {
 	    List<String> base64Images = new ArrayList<>();
@@ -395,7 +402,7 @@ public class AdminController {
 	    // 예시: UUID를 활용하여 파일 이름 생성
 	    return UUID.randomUUID().toString();
 	}
-	
+
 	// 이미지 파일 저장
 	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
 		try {
@@ -454,8 +461,8 @@ public class AdminController {
 		return "/admin/product/product_insert";
 	}
 
-	@RequestMapping("/product_modify")
-	public String viewPage_product_modify(Model m) {
+	@RequestMapping(value="/product_modify", method=RequestMethod.GET)
+	public String viewPage_product_modify(BookDTO boDTO, Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
@@ -464,9 +471,34 @@ public class AdminController {
 			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 		
+		HashMap<String, Object> getPost = adminService.getProduct(boDTO);
+		
+		// Convert issue_date to yyyy-MM-dd format
+		try {
+			String issue_date = (String)getPost.get("issue_date"); // assuming that the issue_date in the HashMap is a String
+			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy년 MM월");
+			Date date = inputFormat.parse(issue_date);
+			
+			// Set date to first of the month
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
+			
+			SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String outputDate = outputFormat.format(calendar.getTime());
+			
+			// Add outputDate to the model
+			m.addAttribute("outputDate", outputDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		m.addAttribute("getPost", getPost);
+		System.out.println(getPost);
+		
 		return "/admin/product/product_modify";
 	}
-
+	
 	@RequestMapping("/game_stats")
 	public String viewPage_game_stats(Model m, CharacterSheetDTO csDTO) {
 		

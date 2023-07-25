@@ -10,6 +10,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.dao.AdminDAO;
 import project.gulim.domain.BasketDTO;
+import project.gulim.domain.BookDTO;
 import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
@@ -128,6 +129,10 @@ public class AdminServiceImpl implements AdminService {
 
 	public List<HashMap> listProduct() {
 		return adminDAO.listProduct();
+	}
+	
+	public HashMap<String, Object> getProduct(BookDTO boDTO){
+		return adminDAO.getProduct(boDTO);
 	}
 	
 	public List<HashMap> playedRuleBook(){

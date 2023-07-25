@@ -38,5 +38,15 @@
 	    // 동기화: 'inputState_noContest'의 값을 변경하여 'inputState_yesContest'와 동일하게 만든다.
 	    $("#inputState_noContest").val(selectedValue);
 	});
+	
+	$('#adminPostUpdate').on('change', function() {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // The FileReader object lets web applications asynchronously read the contents of files.
+            $('#adminPostPath').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]); // start reading the file data.
+    });
     
 })(jQuery);
