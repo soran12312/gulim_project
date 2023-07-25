@@ -190,7 +190,7 @@
                 <a href="#"><button class="question_btn">
                     <img src="/files/images/고객문의2.png"/>
                 </button></a>
-                <a href="https://localhost:8080/customer_service/question"><button class="question_btns">
+                <a href="https://192.168.0.68:8080/customer_service/question"><button class="question_btns">
                     <img src="/files/images/고객문의.png"/>
 
                 </button></a>
@@ -207,8 +207,8 @@
 <div class="popup_overlay"></div>
 <div class="popup_game popup_content">
     <strong>Q.게임은 어디서 생성하나요?</strong>
-    <h2>A.게임탭에서 게임생성을 누르면 됩니다.</h2>
-    <a href="#"><span>게임 생성하러가기</span></a><br>
+    <h2>A.게임탭에서 방 만들기를 누르면 됩니다.</h2>
+    <a href="https://192.168.0.68:8080/game/play/room_create"><span>게임 생성하러가기</span></a><br>
     <button>닫기</button>
 </div>
 
@@ -216,7 +216,7 @@
 <div class="popup_content popup_book">
     <strong>Q.설정집 구매는 어디서 하나요?</strong>
     <h2>A.결제로 들어가서 원하는 설정집을 선택해서 구매하시면 됩니다.</h2>
-    <a href="#"><span>설정집 구매 하러가기</span></a><br>
+    <a href="https://192.168.0.68:8080/sale/sale_main"><span>설정집 구매 하러가기</span></a><br>
     <button>닫기</button>
 </div>
 
