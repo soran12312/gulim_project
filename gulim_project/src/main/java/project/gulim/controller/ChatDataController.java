@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.gulim.domain.InventoryDTO;
+import project.gulim.domain.ItemDTO;
 import project.gulim.service.ChatDataService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -77,4 +81,29 @@ public class ChatDataController {
 		
 		return map;
 	}
+	
+	@PostMapping("/insertItem")
+	public void insertItem(@RequestBody ItemDTO item) {
+		//System.out.println(item);
+		chatDataService.insertItem(item);
+	}
+	
+	@PostMapping("/modifyItem")
+	public void modifyItem(@RequestBody ItemDTO item) {
+		//System.out.println(item);
+		chatDataService.modifyItem(item);
+	}
+	
+	@GetMapping("/deleteItem")
+	public void deleteItem(Integer item_num) {
+		//System.out.println(item_num);
+		chatDataService.deleteItem(item_num);
+	}
+	
+	@GetMapping("/modifyMoney")
+	public void modifyMoney(InventoryDTO inven) {
+		
+		chatDataService.modifyMoney(inven);
+	}
+	
 }

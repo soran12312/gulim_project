@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import project.gulim.dao.ChatDataDAO;
 import project.gulim.dao.MypageDAO;
 import project.gulim.domain.ChatingDTO;
+import project.gulim.domain.InventoryDTO;
+import project.gulim.domain.ItemDTO;
 
 @Service
 public class ChatDataServiceImpl implements ChatDataService {
@@ -74,6 +76,30 @@ public class ChatDataServiceImpl implements ChatDataService {
 	public List<HashMap> getMemosByJoinNum(Integer join_num) {
 		
 		return chatdataDAO.getMemosByJoinNum(join_num);
+	}
+
+	@Override
+	public void insertItem(ItemDTO item) {
+		chatdataDAO.insertItem(item);
+		
+	}
+
+	@Override
+	public void modifyItem(ItemDTO item) {
+		chatdataDAO.modifyItem(item);
+		
+	}
+
+	@Override
+	public void deleteItem(Integer item_num) {
+		chatdataDAO.deleteItem(item_num);
+		
+	}
+
+	@Override
+	public void modifyMoney(InventoryDTO inven) {
+		chatdataDAO.modifyMoney(inven);
+		
 	}
 
 }
