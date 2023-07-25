@@ -1,15 +1,17 @@
 package project.gulim.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.gulim.domain.BookDTO;
 import project.gulim.service.SaleService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -18,7 +20,6 @@ public class SaleController {
 	
 	@Autowired
 	private SaleService saleService;
-	
 	
 	//구독권 설정집 선택 페이지
 	@RequestMapping("/sale_main")
@@ -38,10 +39,33 @@ public class SaleController {
 	@RequestMapping("/sales")
 	@ResponseBody
 	public List<Map> sales(){
-		System.out.println(">>>>>>>>>>불림");
+		
 		List<Map> list = saleService.sales();
 		return list;
 		
 	}
+	
+	
+	@RequestMapping("/book/book_list")
+	public String book_list() {
+		return "/sale/book/book_list";
+	}
+	
+	
+	
+	  @RequestMapping("/book/book_detail") 
+	  public String book_detail(BookDTO book,Model m){ 
+		  
+		  List<HashMap> list = saleService.product_detail(book);
+		  
+		  m.addAttribute("result", list);
+		  
+		  return "/sale/book/book_detail";
+	  }
+	 
+	
+	
+	
+
 	
 }

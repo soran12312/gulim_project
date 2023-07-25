@@ -67,7 +67,7 @@ footer {
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="item">
-						<a href="https://localhost:3000/sales">
+						<a href="./book/book_list">
 							<div class="icon">
 								<img src="assets/images/service-01.jpg" alt=""
 									style="max-width: 60px; border-radius: 50%;">
