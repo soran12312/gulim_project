@@ -6,35 +6,32 @@
 <meta charset="UTF-8">
 <link href="/css/place.css" rel="stylesheet" />
 </head>
-<body>
+    <section>
     <h1 class="book_text">많이 보는 설정집</h1>
     <div><hr/></div>
   
-    <table>
-        <tr>
-           <thead>
-                <td>제목</td>
-                <td>상세설명</td>
-                <td>간단소개</td>
-                <td>번역가</td>
-                <td>가격</td>
-                <td>장르</td>
-                <td>이미지</td>
-                <td>작가</td>
-           </thead>
-        </tr>
+    <div class="book_list">
+        <div>
         <c:forEach items="${result}" var="book">
-            <tr>
-                <td>${book.book_title}</td>
-                <td>${book.book_detail}</td>
-                <td>${book.simple_info}</td>
-                <td>${book.translation}</td>
-                <td>${book.price}</td>
-                <td>${book.genre}</td>
-                <td>${book.path}</td>
-                <td>${book.book.writer}</td>
-            </tr>
+            <div class="book_item">
+                <img src="${book.path}" class="book_image" />
+                <div class="book_title">${book.book_title}</div>
+                <div class="book_simple_info">${book.simple_info}</div>
+                    <h1>상 세 보 기</h1>
+                    <hr/>
+                    <div class="book_detail">${book.book_detail}</div>
+                    <div class="book_translation">${book.translation}</div>
+                    <div class="book_price">${book.price}</div>
+                    <div class="book_genre">${book.genre}</div>
+                    <div class="book_writer">${book.writer}</div>
+                
+            </div>
+        
         </c:forEach>
-    </table>
-</body>
+    </div>
+    </div>
+    
+    <button class="pocket">장바구니</button>
+    <button>구매하기</button>
+    </section>
 </html>
