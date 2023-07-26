@@ -7,6 +7,7 @@ import java.util.Map;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.JoinDTO;
+import project.gulim.domain.SupportImgBoardDTO;
 import project.gulim.domain.TagDTO;
 
 public interface GameService {
@@ -21,4 +22,6 @@ public interface GameService {
 	public String select_room_img(Integer room_num);
 	public List<Integer> select_join(JoinDTO join);
 	public List<HashMap> support_data();
+	public Integer etc(HashMap map);
+	public Integer etc2(SupportImgBoardDTO dto);
 }

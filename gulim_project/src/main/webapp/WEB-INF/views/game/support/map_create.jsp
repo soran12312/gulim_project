@@ -20,7 +20,7 @@ $(document).ready(function(){
 	$('#monster').click(function(){
 		$('.ifram_size2').show();
 		$('.ifram_size').hide();
-		$('#support_iframe').attr("src","https://localhost:3000/support/data/moster");
+		$('#support_iframe').attr("src","https://localhost:3000/support/data/monster");
 	});
 	$('#item').click(function(){
 		$('.ifram_size2').show();
@@ -39,7 +39,7 @@ $(document).ready(function(){
 <body>s
 <div class="mypagebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
-
+<a href = "/game/support/etc"> ㆍ</a>
 	<table class="game_roomlist_nav">
 		<tr>
 			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/support/galme_reccommend ">게임 추천</a></td>
@@ -62,7 +62,7 @@ $(document).ready(function(){
 	<iframe src="https://azgaar.github.io/Fantasy-Map-Generator/" style="width: 100%; height:700px; border: none;"></iframe>
 	</div>
 	<div class= "ifram_size2" >
-		<iframe id= "support_iframe"  style="width: 100%; height:700px; border: none;"></iframe>
+		<iframe id= "support_iframe"  style="width: 100%; height:600px; border: none;"></iframe>
 	</div>
 </div>
 <jsp:include page="../../../../footer.jsp"></jsp:include>

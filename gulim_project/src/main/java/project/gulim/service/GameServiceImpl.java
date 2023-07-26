@@ -11,6 +11,7 @@ import project.gulim.dao.GameDAO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.JoinDTO;
+import project.gulim.domain.SupportImgBoardDTO;
 import project.gulim.domain.TagDTO;
 
 @Service
@@ -77,5 +78,13 @@ public class GameServiceImpl implements GameService {
 	public List<HashMap> support_data() {
 		return gameDAO.support_data();
 	}
+	public Integer etc2(SupportImgBoardDTO dto) {
+		gameDAO.etc2(dto);
+		return dto.getS_img_num();
+	}
+	public Integer etc(HashMap map) {
+		return gameDAO.etc(map);
+	}
+
 
 }

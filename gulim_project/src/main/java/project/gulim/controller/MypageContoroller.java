@@ -413,9 +413,9 @@ public class MypageContoroller {
 				
 				//파일경로 + 파일 이미지합치기
 				String filepath = savePath + "\\" +filename;
-				String path ="https://localhost:8080/files/images/mypage/info_profile/" +filename;
+				//String path ="https://localhost:8080/files/images/mypage/info_profile/" +filename;
 //나중에 최종때 변경
-				//String filepath ="https://192.168.0.68:8080/files/images/mypage/info_profile/" +filename;
+				String path ="/files/images/mypage/info_profile/" +filename;
 				//fillpath = "기본폴더"\files\zxxxxxxxxxxxxxxxxxxxxxx.png
 				
 				//업로드된 파일을 지정된 파일 경로로 이동

@@ -53,4 +53,12 @@
 		FROM support_img_board s INNER JOIN image i
 		ON s.s_img_num = i.s_img_num;
 	</select>
+	<insert id="etc" parameterType = "java.util.HashMap">
+		INSERT INTO image (origin_img_name,path, s_img_num) 
+		VALUES (#{originFilename}, #{filepath}, #{s_img_num})	
+	</insert>
+	<insert id="etc2" parameterType = "SupportImgBoardDTO"  useGeneratedKeys="true" keyProperty="s_img_num">
+		INSERT INTO support_img_board (s_img_title, s_img_type) 
+		VALUES (#{s_img_title}, #{s_img_type})	
+	</insert>
 </mapper>
