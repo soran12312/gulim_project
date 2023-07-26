@@ -1,11 +1,11 @@
 package project.gulim.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -87,7 +87,7 @@ public class CommunityServiceImpl implements CommunityService{
 
 	// 공지
 	@Override
-	public List<PostDTO> findAllAnnounce() {
+	public List<HashMap> findAllAnnounce() {
 		// TODO Auto-generated method stub
 		return communityDAO.findAnnounce();
 	}

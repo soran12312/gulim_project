@@ -4,6 +4,8 @@ package project.gulim.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,12 +19,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +43,7 @@ import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
 import project.gulim.service.MainService;
+import project.gulim.util.MD5Generator;
 import project.gulim.util.UiUtils;
 
 @Controller
@@ -75,7 +81,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/question", method = RequestMethod.POST)
 	public void answerQuestion(@RequestBody QuestionDTO qDTO) {
-		System.out.println(qDTO);
 		adminService.answerQuestion(qDTO);
 	}
 
@@ -99,7 +104,6 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "/member_management", method = RequestMethod.POST)
 	public void changeMemberState(@RequestBody MemberDTO mDTO) {
-		System.out.println(mDTO);
 		adminService.changeMemberState(mDTO);
 	}
 
@@ -161,7 +165,6 @@ public class AdminController {
     @RequestMapping(value = "/sales_stats/month_sub", method = RequestMethod.POST)
     public List<HashMap> salesStats_month_subs(@RequestBody String purchase_year_mon) {
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
-		System.out.println(year);
 		return adminService.salesStatsMonth_subs(year);
 	}
 	
@@ -169,7 +172,6 @@ public class AdminController {
     @RequestMapping(value = "/sales_stats/month_book", method = RequestMethod.POST)
     public List<HashMap> salesStatsMonth_book(@RequestBody String purchase_year_mon) {
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
-		System.out.println(year);
 		return adminService.salesStatsMonth_book(year);
 	}
 	
@@ -177,7 +179,6 @@ public class AdminController {
     @RequestMapping(value = "/sales_stats/day", method = RequestMethod.POST)
     public List<HashMap> salesStatsDay(@RequestBody String purchase_day) {
 		String day = purchase_day;
-		System.out.println(day);
 		return adminService.salesStatsDay(day);
 	}
 	
@@ -233,8 +234,6 @@ public class AdminController {
 	
 	@RequestMapping(value = "/insert_form/noContest", method = RequestMethod.POST)
 	public String insertEvt(PostDTO pDTO, ImageDTO iDTO, Model m) {
-		
-		System.out.println(pDTO);
 		
 		// 이미지 등록 여부 확인
 	    String postContent = pDTO.getPost_content();
@@ -308,8 +307,6 @@ public class AdminController {
 	
 	@RequestMapping(value = "/insert_form/yesContest", method = RequestMethod.POST)
 	public String insertCon(PostDTO pDTO, ImageDTO iDTO, ContestDTO cDTO, Model m) {
-		
-		System.out.println(cDTO);
 		
 		// 이미지 등록 여부 확인
 	    String contestContent = cDTO.getContest_content();
@@ -475,29 +472,103 @@ public class AdminController {
 		
 		// Convert issue_date to yyyy-MM-dd format
 		try {
-			String issue_date = (String)getPost.get("issue_date"); // assuming that the issue_date in the HashMap is a String
-			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy년 MM월");
-			Date date = inputFormat.parse(issue_date);
-			
-			// Set date to first of the month
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(date);
-			calendar.set(Calendar.DAY_OF_MONTH, 1);
-			
-			SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String outputDate = outputFormat.format(calendar.getTime());
-			
-			// Add outputDate to the model
-			m.addAttribute("outputDate", outputDate);
+		    String issue_date = (String)getPost.get("issue_date"); // assuming that the issue_date in the HashMap is a String
+		    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy년 MM월");
+		    Date date = inputFormat.parse(issue_date);
+		    
+		    // Set date to first of the month
+		    Calendar calendar = Calendar.getInstance();
+		    calendar.setTime(date);
+		    calendar.set(Calendar.DAY_OF_MONTH, 1);
+		    
+		    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+		    String outputDate = outputFormat.format(calendar.getTime());
+		    
+		    // Add outputDate to the model
+		    m.addAttribute("outputDate", outputDate);
 		} catch (ParseException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 		
 		m.addAttribute("getPost", getPost);
-		System.out.println(getPost);
 		
 		return "/admin/product/product_modify";
 	}
+	
+	
+	@RequestMapping(value="/product_modify", method=RequestMethod.POST)
+	public String updateProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m){
+	    try {
+	        String issueDateString = boDTO.getIssue_date();
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd"); // This should match the format of issueDateString
+	        Date issueDate = inputFormat.parse(issueDateString); // Convert string to Date
+
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월"); // This is your desired format
+	        String formattedDate = outputFormat.format(issueDate); // Convert Date to string in the desired format
+
+	        boDTO.setIssue_date(formattedDate); // Update the issue_date
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+	    try {
+	        if(file == null || file.isEmpty()) {
+	            System.out.println("파일 첨부 실패");
+	            adminService.updateProduct(boDTO, null);
+	        }
+	        
+	        //스트링 originFilename에 파일 오리진네임 가져와서 넣기
+	        iDTO.setOrigin_img_name(file.getOriginalFilename());
+	        iDTO.setImg_size(file.getSize());
+	        
+	        System.out.println("getOriginalFilename: "+file.getOriginalFilename());
+	        System.out.println("getSize: "+file.getSize());
+	        
+	        Long time = System.currentTimeMillis();
+	        
+	        System.out.println("time: "+time);
+	        		        
+		    String path = "/admin/images/product/" + time + "_"  + iDTO.getOrigin_img_name();
+		    String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
+		    
+		    System.out.println("path: "+path);
+		    System.out.println("realPath: "+realPath);
+		    
+		    iDTO.setPath(path);
+		        
+		    File serverFile = new File(realPath);
+		    
+		    System.out.println("serverFile: "+serverFile);
+		        
+		    try {
+		    	file.transferTo(serverFile);
+		        adminService.updateProduct(boDTO, iDTO);
+		    }catch (Exception e) {
+		    	System.out.println("실패: " + e.toString());
+		    	e.printStackTrace();
+		    }
+	    } catch(Exception e) {
+	        System.out.println("실패: " + e.toString());
+
+	        adminService.updateProduct(boDTO, null);
+	    }
+	    
+	    List<HashMap> listProduct = adminService.listProduct();
+	    m.addAttribute("listProduct", listProduct);
+	    
+	    return "/admin/product/product_list";
+	}
+	
+	public static String getRealPath(String resourcePath) {
+        try {
+            ClassPathResource classPathResource = new ClassPathResource(resourcePath);
+            Path path = Paths.get(classPathResource.getURI());
+            return path.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 	
 	@RequestMapping("/game_stats")
 	public String viewPage_game_stats(Model m, CharacterSheetDTO csDTO) {

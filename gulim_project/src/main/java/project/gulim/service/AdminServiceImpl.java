@@ -135,6 +135,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getProduct(boDTO);
 	}
 	
+	public void updateProduct(BookDTO boDTO, ImageDTO iDTO) {
+		adminDAO.updateProductBook(boDTO);
+		adminDAO.updateProductImage(iDTO);
+	}
+	
 	public List<HashMap> playedRuleBook(){
 		return adminDAO.playedRuleBook();
 	}

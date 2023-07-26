@@ -1,5 +1,6 @@
 package project.gulim.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import project.gulim.domain.ImageDTO;
@@ -30,7 +31,7 @@ public interface CommunityService {
 	
 	
 	// 공지사항 리스트 조회
-	public List<PostDTO> findAllAnnounce();
+	public List<HashMap> findAllAnnounce();
 
 	/**
 	 * 게시글 리스트 조회

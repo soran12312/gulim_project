@@ -225,11 +225,13 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">수정</a></li>
                         </ol>
                     </div>
                 </div>
                 <!-- row -->
-                <form action="/admin/product_modify" method="POST">
+                <form action="/admin/product_modify" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name='book_num' value="${getPost.book_num}" readonly>
                     <div class="row">
                         <div class="card col-sm-12 p-md-12">
                             <table>
@@ -244,7 +246,6 @@
                                         </div>
                                     </td>
                                     <td colspan="10">
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -291,7 +292,7 @@
                                     <td colspan="2">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
                                             <p class="mb-1">19금 설정</p>
-                                            <select>
+                                            <select name="adult">
                                                 <option value="1" ${getPost.adult == 1 ? 'selected' : ''}>O</option>
                                                 <option value="0" ${getPost.adult == 0 ? 'selected' : ''}>X</option>
                                             </select>
@@ -305,7 +306,7 @@
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">간단 소개</p>
-                                                    <textarea style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오.">${getPost.simple_info}</textarea>
+                                                    <textarea name="simple_info" style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오.">${getPost.simple_info}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -317,8 +318,8 @@
                                             <p class="mb-1">이미지 추가</p>
                                             <img id="adminPostPath" src="${getPost.path}">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="adminPostUpdate">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <input type="file" name="file" class="custom-file-input" id="adminPostUpdate">
+                                                <label class="custom-file-label" for="customFile">JPG, PNG 파일 업로드</label>
                                             </div>
                                         </div>
                                     </td>
@@ -329,7 +330,7 @@
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">상세 소개</p>
-                                                    <textarea style="height: 210px;" class="form-control" id="comment" placeholder="상세한 소개글을 입력하시오.">${getPost.book_detail}</textarea>
+                                                    <textarea name="book_detail" style="height: 210px;" class="form-control" id="comment" placeholder="상세한 소개글을 입력하시오.">${getPost.book_detail}</textarea>
                                                 </div>
                                             </div>
                                         </div>

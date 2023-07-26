@@ -64,6 +64,8 @@ public interface AdminService {
 	
 	public HashMap<String, Object> getProduct(BookDTO boDTO);
 	
+	public void updateProduct(BookDTO boDTO, ImageDTO iDTO);
+	
 	public List<HashMap> playedRuleBook();
 	
 	public List<HashMap> playedTime();

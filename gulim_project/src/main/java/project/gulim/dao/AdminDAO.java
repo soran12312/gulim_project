@@ -58,6 +58,10 @@ public interface AdminDAO {
 	public List<HashMap> listProduct();
 	
 	public HashMap<String, Object> getProduct(BookDTO boDTO);
+	
+	public void updateProductBook(BookDTO boDTO);
+
+	public void updateProductImage(ImageDTO iDTO);
 
 	public void insert_evt_post(PostDTO pDTO);
 

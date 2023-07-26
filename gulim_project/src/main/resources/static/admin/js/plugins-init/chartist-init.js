@@ -267,12 +267,14 @@
 	});
 	
 	$('.flavorButton').on('click', '.btn-pfst', function(e){
-		names2 = ['힘', '민첩', '체력', '지능', '지혜', '매력'];
+		names2 = [];
 		data2 = {
-			series: [10, 11, 12, 6, 11, 8]
+			series: []
 		};
 		
 		$('#class-select').removeClass('hide-class-select');
+		
+		var char_class = $('#class-select option:first').val();
 		
 		$.ajax({
 				// 경로
@@ -280,7 +282,7 @@
 				// 전송방식: POST
 				method: "POST",
 				// JSON data를 string으로 변환
-				data: JSON.stringify({char_class: '가수'}),
+				data: JSON.stringify({char_class: char_class}),
 				// data 전송할 때의 타입
 				contentType:"application/json; charset=UTF-8",
 				// 성공할 시
@@ -313,7 +315,7 @@
 		
 		
 		$('.card-body').on('change', '#class-select', function(e) {
-			var char_class = $(this).val();
+			char_class = $(this).val();
 		
 			$.ajax({
 				// 경로

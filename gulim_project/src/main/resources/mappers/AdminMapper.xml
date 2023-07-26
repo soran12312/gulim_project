@@ -349,10 +349,30 @@
 	
 	<!-- 상품 불러오기 -->
 	<select id="getProduct" parameterType="BookDTO" resultType="HashMap">
-		select i.path path, b.book_num book_num, b.book_title book_title, b.writer writer, b.translation translation, b.issue_date issue_date, b.price price, b.stock stock, b.simple_info simple_info, b.sale_state sale_state, b.stock stock, b.adult adult, b.book_detail book_detail
+		select i.origin_img_name origin_img_name, i.path path, b.book_num book_num, b.book_title book_title, b.writer writer, b.translation translation, b.issue_date issue_date, b.price price, b.stock stock, b.simple_info simple_info, b.sale_state sale_state, b.adult adult, b.book_detail book_detail
 		from book b left outer join image i on b.book_num = i.book_num
 		where b.book_num = #{book_num}
 	</select>
+	
+	<!-- 상품 수정하기(설정집 정보) -->
+	<update id="updateProductBook" parameterType="BookDTO">
+		UPDATE book 
+		SET book_title=#{book_title}, writer=#{writer}, translation=#{translation}, issue_date=#{issue_date}
+						, price=#{price}, stock=#{stock}, simple_info=#{simple_info}, sale_state=#{sale_state}
+						, adult=#{adult}, book_detail=#{book_detail}
+		WHERE book_num = #{book_num}
+	</update>
+	
+	<!-- 상품 수정하기(이미지 경로) -->
+	<update id="updateProductImage" parameterType="ImageDTO">
+		UPDATE image
+		SET path=#{path}, origin_img_name=#{origin_img_name}
+		WHERE book_num=#{book_num}
+	</update>
+	
+	<insert id="insertProductBook" parameterType="BookDTO">
+		
+	</insert>
 	
 	<!-- 선호도 통계: 플레이해본 룰북 -->
 	<select id="playedRuleBook" resultType="HashMap" >
@@ -764,7 +784,7 @@
 		group by char_class
 	</select>
 
-	<!-- 종족에 따른 스탯 선호도 -->
+	<!-- 직업에 따른 스탯 선호도 -->
 	<select id="preferredStatsByClasses" parameterType="String" resultType="HashMap">
 		select avg(str) avg_str, avg(dex) avg_dex, avg(con) avg_con, avg(intelligence) avg_intelligence, avg(wis) avg_wis, avg(chr) avg_chr
 		from character_sheet

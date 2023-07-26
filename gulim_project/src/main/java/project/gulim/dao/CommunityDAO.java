@@ -1,5 +1,6 @@
 package project.gulim.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -55,7 +56,7 @@ public interface CommunityDAO {
 
 
 	// 공지사항 조회
-	public List<PostDTO> findAnnounce();
+	public List<HashMap> findAnnounce();
 	
 	// 이벤트 조회
 	public List<PostDTO> findEvent();
