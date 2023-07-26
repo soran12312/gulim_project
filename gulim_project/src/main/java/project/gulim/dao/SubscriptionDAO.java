@@ -2,6 +2,7 @@ package project.gulim.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,6 +28,23 @@ public interface SubscriptionDAO {
 	public Integer getUserBasketNumber(String id);
 
 	public List<SubscribeDTO> getUserBasketSubscription(Integer basketNum);
-	
 
+
+	public Integer getSubscriptionAmountByPrice(Integer price);
+
+	public void updateSubscription(Integer price, Integer updatedAmount);
+
+	public Integer getExistingSubscriptionAmount(Integer price, Integer basketNum);
+
+	public void updatePurchaseAmount(Map<String, Object> params);
+
+	// +, - 버튼 수량 수정
+	public Integer updateQuantity(Integer sub_num, Integer amount);
+
+	// 장바구니 삭제
+	public Integer deleteQuantity(PurchaseDTO sub_num);
+
+
+
+	
 }

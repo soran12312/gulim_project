@@ -119,7 +119,7 @@
 
 
 	<!-- 공지사항 조회 -->
-	<select id="findAnnounce" resultType="project.gulim.domain.PostDTO">
+	<select id="findAnnounce" resultType="map">
 		SELECT *
 		FROM post LEFT OUTER JOIN image
 		ON post.post_num = image.post_num
@@ -134,9 +134,9 @@
 	
 	<!-- 공지사항 이미지 조회 -->
 	<select id="findAllAnnounceImg" resultType="project.gulim.domain.ImageDTO">
-		SELECT image.origin_img_name , image.post_num
+		SELECT *
 		FROM image
-		WHERE image.post_num = #{post_num}
+		WHERE post_num = #{post_num}
 	</select>
 	
 	

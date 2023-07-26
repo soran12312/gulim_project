@@ -8,8 +8,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import project.gulim.dao.SubscriptionDAO;
 import project.gulim.domain.PurchaseDTO;
 import project.gulim.domain.SubscribeDTO;
@@ -64,6 +62,46 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
 
+	@Override
+	public Integer getExistingSubscriptionAmount(Integer price, Integer basketNum) {
+		// TODO Auto-generated method stub
+		return subscriptionDAO.getExistingSubscriptionAmount(price, basketNum);
+	}
+
+
+	// 수량 수정
+	@Override
+	public void updatePurchaseAmount(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.updatePurchaseAmount(params);
+	}
+
+
+
+	// +, - 클릭시 수량 변경
+	@Override
+	public Integer updateQuantity(Integer sub_num, Integer amount) {
+		// TODO Auto-generated method stub
+		
+		return subscriptionDAO.updateQuantity(sub_num, amount);
+		
+		
+    }
+
+
+
+	// 장바구니 삭제
+	@Override
+	public Integer deleteQuantity(PurchaseDTO sub_num) {
+		// TODO Auto-generated method stub
+		return subscriptionDAO.deleteQuantity(sub_num);
+	}
+		
+	
+
+
+
+	
 	
 	
 	

@@ -18,8 +18,8 @@
 	
 	<!-- purchase db 장바구니, 구독권 번호 저장 -->
 	<insert id="savePurchase" parameterType="map">
-	    INSERT INTO purchase (basket_num, sub_num)
-	    VALUES (#{basket_num}, #{sub_num})
+	    INSERT INTO purchase (basket_num, sub_num, amount)
+	    VALUES (#{basket_num}, #{sub_num}, #{amount})
 	</insert>
 	
 	
@@ -31,9 +31,9 @@
 	</select>
 	
 	
-	<!-- 장바구니번호가져와서 장바구니에 담긴 구독권 가져오기 -->
-	<select id="getUserBasketSubscription" parameterType="java.lang.Integer" >
-		SELECT b.basket_num , s.price
+	<!-- 장바구니번호가져와서 장바구니에 담긴 구독권 가져오기 장바구니 리스트-->
+	<select id="getUserBasketSubscription" parameterType="java.lang.Integer" resultType="map">
+		SELECT *
 		FROM basket AS b
 		JOIN purchase AS p ON b.basket_num = p.basket_num
 		JOIN subscribe AS s ON p.sub_num = s.sub_num
@@ -43,16 +43,46 @@
 	
 	
 	<!-- 장바구니에 해당 구독권이 있는 상태에서 같은 구독권 추가 -->
-	
+	<select id="getExistingSubscriptionAmount" parameterType="java.lang.Integer" resultType = "java.lang.Integer">
+		SELECT p.amount
+		FROM basket AS b
+		JOIN purchase AS p ON b.basket_num = p.basket_num
+		JOIN subscribe AS s ON p.sub_num = s.sub_num
+		WHERE b.basket_num = #{basketNum} and s.price = #{price}
+	</select>
 	
 	
 	
 	
 	<!-- 수량 수정  -->
+	<update id="updatePurchaseAmount" parameterType="map">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN subscribe s ON p.sub_num = s.sub_num
+		SET p.amount = #{updatedAmount}
+		WHERE b.basket_num = #{basketNum} AND s.price = #{price}
+	</update>
 	
 	
+	
+	<!-- +, - 버튼 수량 수정 -->
+	<update id="updateQuantity" parameterType="java.lang.Integer">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN subscribe s ON p.sub_num = s.sub_num
+		SET p.amount = #{amount}
+		WHERE p.sub_num = #{sub_num}
+	
+	</update>
 	
 	<!-- 삭제 -->
+	<delete id ="deleteQuantity" parameterType="java.lang.Integer">
+		delete p
+		from purchase p inner join subscribe s 
+		on p.sub_num = s.sub_num 
+		where s.sub_num = #{sub_num}
 	
+	
+	</delete>
 
 </mapper>

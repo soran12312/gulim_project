@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -255,7 +256,7 @@ input:focus {
 <body>
 
 	<header>
-		<jsp:include page="../../../../header_before.jsp"></jsp:include>
+		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
 
 	<div class="cart-wrap">
@@ -283,6 +284,7 @@ input:focus {
 									<c:otherwise>
 										<c:forEach items="${subscription}" var="subscription">
 											<tr>
+											
 												<td>
 													<div class="display-flex align-center">
 														<div class="img-product">
@@ -311,7 +313,9 @@ input:focus {
 															
 																
 														</div>
+													
 														<div class="name-product">
+															<input type="hidden" name="product-id" value="${subscription.sub_num}" class="product-id">
 															<c:choose>
 																<c:when test="${subscription.price == 9900}">
 							                                        1개월
@@ -335,19 +339,22 @@ input:focus {
 												</td>
 												<td class="product-count">
 													<form action="#" class="count-inlineflex">
-														<div class="qtyminus">-</div>
-														<input type="text" name="quantity" value="1" class="qty">
-														<div class="qtyplus">+</div>
+														<div class="qtyminus" >-</div>
+														
+														<input type="text" name="quantity" value="${subscription.amount}" class="qty">
+														<div class="qtyplus" >+</div>
 													</form>
 												</td>
 												<td>
 													<div class="total">
-														<div class="price">${subscription.price}</div>
+														<div class="price">${subscription.price * subscription.amount} </div>
 													</div>
 												</td>
 												<td>
-													<a href="#" title=""> 
-														<img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
+													<a href="" title="" > 
+														<span class="pull-right" id="slide-submenu" onclick="showConfirmationPopup(${subscription.sub_num})">
+												                <i class="fa fa-times"></i>
+												         </span>
 													</a>
 												</td>
 											</tr>
@@ -369,15 +376,15 @@ input:focus {
 								<tbody>
 									<tr>
 										<td>Subtotal</td>
-										<td class="subtotal">$2,589.00</td>
+										<td class="subtotal"></td>
 									</tr>
 									<tr>
-										<td>Shipping</td>
+										<td>배송비</td>
 										<td class="free-shipping">Free Shipping</td>
 									</tr>
 									<tr class="total-row">
 										<td>Total</td>
-										<td class="price-total">$1,591.00</td>
+										<td class="price-total"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -405,6 +412,99 @@ input:focus {
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+		
+		
+		
+		
+	<script type="text/javascript">
+	 $(document).ready(function () {
+	        // (minus) button
+	        $(".qtyminus").on("click", function () {
+	            const qtyInput = $(this).siblings(".qty");
+	            let currentQty = parseInt(qtyInput.val());
+	            if (currentQty > 1) {
+	                currentQty -= 1;
+	                qtyInput.val(currentQty);
+	                updateCartItem(qtyInput);
+	            }
+	        });
+
+	        // + (plus) button
+	        $(".qtyplus").on("click", function () {
+	            const qtyInput = $(this).siblings(".qty");
+	            const currentQty = parseInt(qtyInput.val());
+	            const newQty = currentQty + 1;
+	            qtyInput.val(newQty);
+	            updateCartItem(qtyInput);
+	        });
+
+	        function updateCartItem(qtyInput) {
+	        	const productId = qtyInput.closest("tr").find(".product-id").val();
+	            const newQty = parseInt(qtyInput.val());
+	            const jsonData= { sub_num: productId, amount: newQty };
+	            // console.log(jsonData);
+	            // console.log(productId);
+	            // console.log(newQty);
+
+	            $.ajax({
+	                type: "POST",
+	                url: "/api/update-quantity", 
+	                contentType: "application/json",
+	                data: JSON.stringify(jsonData), // json데이터로 변환
+	                success: function (response) {
+	                    // 성공
+						alert("수량이 업데이트되었습니다.");
+						// console.log(response);
+                    	console.log("Updated quantity in the database.");
+			             
+	                    	
+	                },
+	                error: function (xhr, status, error) {
+	                    // Handle errors here (if needed)
+	                    console.error("Error updating quantity: " + error);
+	                }
+	            });
+	        }
+	    });
+
+
+
+		// X버튼 클릭시
+	   function showConfirmationPopup(subscriptionId) {
+	        if (confirm("정말로 삭제하시겠습니까?")) {
+	            deleteCartItem(subscriptionId);
+	        } 
+	    }
+
+	    function deleteCartItem(subscriptionId) {
+
+	    	console.log("Deleting Subscription ID:"+ subscriptionId); 
+		    
+	        $.ajax({
+	            type: "POST",
+	            url: "/api/delete-subscription", // 서버의 컨트롤러 URL
+	            contentType: "application/json",
+	            data: JSON.stringify({ sub_num: subscriptionId }),     // 요청하면서 준 데이터
+	            success: function (response) {
+	                alert("삭제되었습니다.");
+	                // 삭제가 성공하면 해당 구독권의 행을 화면에서 삭제
+	                console.log(response);
+	                
+	            },
+	            error: function (xhr, status, error) {
+	                console.error("Error deleting subscription: " + error);
+	                alert('error');
+	            }
+	        });
+	    }
+
+	</script>	
+		
+		
+		
+		
+		
+		
 
 </body>
 <footer>

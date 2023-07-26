@@ -284,18 +284,18 @@ section.notice {
 					<tbody>
 					    <c:forEach items="${announces}" var="announce">
 					        <tr>
-					        	<td>${post.id}</td>
+					        	<td>${announce.id}</td>
 					            <td>
 					                <a href="#" class="announcement-title">${announce.post_title}</a>
 					                <div class="announcement-content" style="display: none;">
 					                    ${announce.post_content}
-					                    <c:forEach var="image" items="${announceimages}">
-	                                        	<c:if test="${not empty image}">
-						                            <div class="note-editable card-block">
-						                                <p><img src="/imagePath/${image.origin_img_name}" style="width: 168px;"></p>
-						                            </div>
-						                        </c:if>
-										</c:forEach>
+					                    
+                                       	<c:if test="${not empty announce.img_num}">
+				                            <div class="note-editable card-block">
+				                                <p><img src="/imagePath/${announce.origin_img_name}" style="width: 168px;"></p>
+				                            </div>
+				                        </c:if>
+										
 					                    
 					                </div>
 					                    
