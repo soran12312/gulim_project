@@ -425,13 +425,17 @@ padding: 10px;
 
 /*여기 부터는 상품 상세 보기 salesbook*/
 
-.book_text{
-	text-align: center;
+.bookpage {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경4.jpg");
+  background-size: cover;
+  overflow: hidden;
 }
 
-.book_list {
-    display: flex;
-    flex-wrap: wrap;
+.book_text {
+    text-align: center;
+    color: rgb(255, 255, 255);
 }
 
 .book_item {
@@ -440,40 +444,100 @@ padding: 10px;
 }
 
 .book_image {
-    width: 100%; 
-    height: auto;
+    left: 300px;
+    position: absolute;
+    height: 400px;
+    width: 300px;
+    top: 100px;
 }
 
 .book_title {
     font-size: 20px;
     font-weight: bold;
     position: absolute;
-    left: 400px;
+    color: rgb(255, 255, 255);
+    left: 700px;
     top: 150px;
-    
 }
 
 .book_simple_info {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
     position: absolute;
-    left: 200px;
-    top: 300px;
-
+    color: rgb(255, 255, 255);
+    left: 700px;
+    top: 250px;
+    width: 700px;
+    height: 150px;
+    overflow: auto;
 }
 
-.book_genre{
-	font-size: 20px;
+.book_writer {
+    font-size: 20px;
     font-weight: bold;
     position: absolute;
-    left: 800px;
+    color: rgb(255, 255, 255);
+    left: 1200px;
     top: 150px;
 }
 
-.book_detail{
-	font-size: 14px;
+.book_price {
+    font-size: 30px;
     font-weight: bold;
+    color: rgb(255, 255, 255); 
     position: absolute;
-    left: 200px;
+    left: 700px;
+    top: 450px;
+}
+
+.book_btn{
+   	font-size: 17px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    left: 1000px;
+    top: 450px;
+}
+
+.book_btns{
+	font-size: 17px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    left: 1100px;
+    top: 450px;
+}
+
+
+
+
+.book_detail {
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 300px;
+    top: 600px;
+    width: 1200px;
+    height: 350px;
+    overflow: auto;
+}
+
+.book_view_container {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    left: 300px;
     top: 500px;
+}
+.book_views_container {
+    position: absolute;
+    left: 300px;
+    top: 570px;
+    width: 1200px;
+}
+.book_hr{
+    position: absolute;
+    width: 1200px;
+    left: 300px;
+    top: 70px;
 }

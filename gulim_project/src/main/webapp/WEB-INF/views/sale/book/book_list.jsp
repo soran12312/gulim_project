@@ -10,11 +10,12 @@
 
 </head>
 <body>
-<div class="mypagebackpage">
+<div class="bookpage">
+    
     <jsp:include page="../../../../header_after.jsp"/>
     <jsp:include page="../../../../sidebar.jsp"/>
     <iframe src="https://localhost:3000/sales" style="height: 1052px; width: 1624px; border: none;"></iframe>
-
+    
 </div>
 </body>
 <jsp:include page="../../../../footer.jsp"/>
