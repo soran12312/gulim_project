@@ -13,26 +13,29 @@
 $(document).ready(function(){
 
 	$('#btn').click(function(){
-        modify_info_img();
+        imsi();
 	});
 
 
     //※ function title	:	modify_info_img  
 //※ function info	:	이미지 저장하는 함수
-	function modify_info_img(){
+	function imsi(){
 
 //form에 이미지넣고 form을 formData에 넣기
 var form = $("#form")[0];
 var formData = new FormData(form);
 var title = $('#title').val();
-var cate = $('#cate').val
-//이미지 & id 를 formData에 넣기
-formData.append("title", title);
-formData.append("file", $('#img_modify_real')[0].files[0])
+// var s_img_type = $('#cate').val();
+var s_img_type="etc";
 
+formData.append("s_img_title", title);
+formData.append("s_img_type", s_img_type);
+formData.append("file", $('#img')[0].files[0])
+
+console.log(formData);
 //mypage/user_info/modify_info_img로 formData보내기
  $.ajax({
-     url : '/mypage/user_info/modify_info_img'
+     url : '/game/support/etc2'
    , type : "POST"
    , processData : false
    , contentType : false
@@ -64,11 +67,11 @@ formData.append("file", $('#img_modify_real')[0].files[0])
 <option value="etc">기타</option>
 </select>
 
-<input type= "file"  name = "img">
+<input type= "file"  name = "file" id = "img">
 
 타이틀 입력
 <input type="text" id = "title">
-<button id = "btn">확인</button>
+<button type ="submit" id = "btn">확인</button>
 
 </form>
 </body>

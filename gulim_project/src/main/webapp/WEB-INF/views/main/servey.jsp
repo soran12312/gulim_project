@@ -33,13 +33,13 @@ $(function(){
 </head>
 <body>
 <jsp:include page="../../../header_before.jsp"></jsp:include>
-
+<div class="refistbackpage">
 <div>
-	<div class="fs_30 pt_30">
+	<div class="registmessage fs_30 pt_30">
 		TRPG 플레이 경험이 있으신가요?<br/>이 설문이 향후 당신에게 많은 도움이 됩니다.
 	</div>
 
-	<div class="pt_30">
+	<div class="pt_30 registcontent">
 		<!-- 설문조사 form -->
 		<form action="/main/servey_insert" class="fs_25" method="post" id="servey_form">
 		
@@ -111,7 +111,7 @@ $(function(){
 		</form>
 	</div>
 </div>
-
+</div>
 <jsp:include page="../../../footer.jsp"></jsp:include>
 </body>
 </html>

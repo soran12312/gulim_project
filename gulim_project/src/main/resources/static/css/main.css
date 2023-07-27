@@ -98,4 +98,85 @@
 	color: red;
 }
 
+.refistbackpage {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경3.jpg");
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.registmessage{
+	width : 900px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+	text-align: center;
+	background:  rgba(255,255,255,0.5);
+	padding-bottom: 30px;
+	box-shadow:0px 0px 20px 20px rgba(255,255,255,0.5);
+	font-family: NeoDunggeunmo Code, Inter;
 
+}
+.registcontent{
+	width : 1500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 7%;
+	background:  rgba(255,255,255,0.5);
+	box-shadow:0px 0px 40px 40px rgba(255,255,255,0.5);
+	font-family: NeoDunggeunmo Code, Inter;
+}
+.registcontent input{
+	height: 30px;
+	border: none;
+	margin-left: 30px;
+}
+
+.registcontent button{
+	margin-left: 20px;
+	margin-top: 20px;
+	padding: 8px;
+	background-color: #FD786A;
+	border: 1px solid grey;
+	border-top-left-radius: 10px;
+ 	border-top-right-radius: 10px;
+  	border-bottom-left-radius: 10px;
+  	border-bottom-right-radius: 10px;
+    font-family: NeoDunggeunmo Code, Inter;
+	font-size: 20px;
+}
+.registcontent .idcheck{
+	margin-left: 30px;
+	margin-bottom: 20px;
+	padding: 4px;
+	background-color: #DEA19B;
+	border: 1px solid grey;
+	border-top-left-radius: 5px;
+ 	border-top-right-radius: 5px;
+  	border-bottom-left-radius: 5px;
+  	border-bottom-right-radius: 5px;
+    font-family: NeoDunggeunmo Code, Inter;
+	font-size: 15px;	
+}
+.registcontent .postcodeSearch{
+	margin-left: 30px;
+	padding: 4px;
+	background-color: #DEA19B;
+	border: 1px solid grey;
+	border-top-left-radius: 5px;
+ 	border-top-right-radius: 5px;
+  	border-bottom-left-radius: 5px;
+  	border-bottom-right-radius: 5px;
+    font-family: NeoDunggeunmo Code, Inter;
+	font-size: 15px;	
+}
+.checkResult{
+	height: 30px;
+	margin-left: 30px;
+	font-size: 15px;
+	width: 200px;	
+}

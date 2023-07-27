@@ -1852,5 +1852,56 @@ purchase_bookname{
 
 
 /* ================ END OF roomlist ====================== */
+/* ================ START OF detail room ====================== */
+.detailroom{
+	width: 600px;
+	height: 800px;
+	background-color: rgba(217,217,217,0.5);
+	box-shadow: 0px 0px 10px 10px rgba(217,217,217,0.5);
+	font-family: NeoDunggeunmo Code, Inter;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	overflow: auto;
+	
+}
+.roomname{
+	text-align: center;
+	font-size: 30px;
+	margin: 30px;
+	padding-top: 30px;
+}
+.roomimg {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.joinRoom{
+	float: right;
+	border: 10px solid rgba(217,217,217,0.7);
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+	margin-right: 30px;
+	padding: 10px;
+	font-size: 20px;
+	font-family: NeoDunggeunmo Code, Inter;	
+}
+/*START스크롤 바*/
+.detailroom::-webkit-scrollbar {
+    width: 20px;
+  }
+.detailroom::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+.detailroom::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/* ================ END OF detail room ====================== */
 
 /* ================ END OF GAME ====================== */
