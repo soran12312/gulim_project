@@ -1,19 +1,26 @@
 package project.gulim.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import project.gulim.domain.ImageDTO;
+import project.gulim.domain.ImageDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.Customer_service;
 import project.gulim.service.MainService;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/customer_service")
 public class Customer_serviceController {
@@ -81,5 +88,40 @@ public class Customer_serviceController {
 		customer_service.send_question(questionDTO);
 		return "/mypage/my_question";
 	}
-
+	
+	@RequestMapping("/CustomerChat")
+	@ResponseBody
+	public List<Map> chating(HttpServletRequest request,ImageDTO imageDTO){
+		//쿠키 배열에 요청 받은 쿠키 담음
+				Cookie[] cookies = request.getCookies();
+			    String jwtToken = null;
+			    
+			    // 쿠키가 null이 아니라면
+			    if (cookies != null) {
+			    	// 반복문 구동
+		            for (Cookie cookie : cookies) {
+		            	//쿠키 이름이 access_token이랑 같으면
+		                if (cookie.getName().equals("access_token")) {
+		                	//토큰에 쿠키의 값 넣음
+		                    jwtToken = cookie.getValue();
+		                    break;
+		                }
+		            }
+		        }
+			    
+			    Claims claims = mainService.getClaims(jwtToken);
+			    String id = claims.get("id", String.class);
+			    
+			    //questionDTO에 id 붙힘
+			    imageDTO.setId(id);
+		
+		List<Map> list = customer_service.chat(imageDTO);
+		System.out.println(">>>>>>>>>>>>>>>list");
+		return list;
+	}
+	
+	
+	
+	
+	
 }

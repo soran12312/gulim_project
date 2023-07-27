@@ -10,5 +10,9 @@
 					values(#{question_title},#{question_content},#{id},"답변준비중입니다.",0,#{question_type})
 					
 	</insert>
-
+	
+	<select id="chat" resultType="map">
+		select path,id from image where id= #{id}
+	</select>
+	
 </mapper>

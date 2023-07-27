@@ -17,7 +17,6 @@
     <div class="book_list">
         <div>
         <c:forEach items="${result}" var="book">
-            <input type="hidden" value="${book.book_num}" class="book_number"/>
             <div class="book_item">
                 <img src="${book.path}" class="book_image" />
                 <div class="book_title">${book.book_title}</div>
@@ -43,8 +42,7 @@
 <script type="text/javascript">
 
       $(".pocket").click(function() {
-        console.log($(".book_num").val())
-        window.parent.location.href = "https://192.168.0.68:8080/sale/basket/book_num=" + $(".book_number").val();
+        window.parent.location.href = "https://192.168.0.68:8080/sale/basket"
         });
     
     </script>

@@ -187,7 +187,7 @@
                     <td>문의 사항 남기기</td>
                     </thead>
             <td>
-                <a href="#"><button class="question_btn">
+                <a href="https://localhost:3000/CustomerChat"><button class="question_btn">
                     <img src="/files/images/고객문의2.png"/>
                 </button></a>
                 <a href="https://192.168.0.68:8080/customer_service/question"><button class="question_btns">

@@ -55,10 +55,10 @@ public class CartController {
 		
 		List<SubscribeDTO> subscriptionsInBasket = subscriptionService.getUserBasketSubscription(basketNum);
 		
-		 model.addAttribute("subscription", subscriptionsInBasket);
+		model.addAttribute("subscription", subscriptionsInBasket);
 		 
-		 System.out.println(subscriptionsInBasket);
-		 
+		System.out.println(subscriptionsInBasket);
+		
 		return "sale/book/basket";
 	}
 	
