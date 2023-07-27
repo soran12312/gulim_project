@@ -45,12 +45,12 @@
 	</select>
 	
 	<select id="getMasterMemos" parameterType="Integer" resultType="HashMap">
-		SELECT memo_num, memo_content FROM memo
+		SELECT memo_num, memo_content, room_num FROM memo
 		WHERE room_num = #{room_num}
 	</select>
 	
 	<select id="getMemosByJoinNum" parameterType="Integer" resultType="HashMap">
-		SELECT memo_num, memo_content FROM memo
+		SELECT memo_num, memo_content, join_num FROM memo
 		WHERE join_num = #{join_num}
 	</select>
 	
@@ -73,5 +73,72 @@
 		UPDATE inventory SET money = #{money}
 		WHERE inventory_num = #{inventory_num}
 	</update>
+	
+	<update id="modifyStat" parameterType="CharacterSheetDTO">
+		UPDATE character_sheet 
+		SET level = #{level}, exp = #{exp}, str = #{str}, dex = #{dex}, con = #{con}, intelligence = #{intelligence}, wis = #{wis}, chr = #{chr}
+		WHERE sheet_num = #{sheet_num}
+	</update>
+	
+	<insert id="insertSkill" parameterType="SkillDTO">
+		INSERT INTO skill(skill_name, skill_detail, sheet_num)
+		VALUES (#{skill_name}, #{skill_detail}, #{sheet_num})
+	</insert>
+	
+	<update id="modifySkill" parameterType="SkillDTO">
+		UPDATE skill SET skill_name = #{skill_name}, skill_detail = #{skill_detail}
+		WHERE skill_num = #{skill_num}
+	</update>
+	
+	<delete id="deleteSkill" parameterType="Integer">
+		DELETE FROM skill
+		WHERE skill_num = #{skill_num}
+	</delete>
+	
+	<update id="charExplainModify" parameterType="CharacterSheetDTO">
+		UPDATE character_sheet 
+		SET 
+		<if test="char_explain != null">
+			char_explain = #{char_explain}
+		</if>
+		<if test="condition != null">
+			`condition` = #{condition}
+		</if>
+		<if test="char_etc != null">
+			char_etc = #{char_etc}
+		</if>
+		WHERE sheet_num = #{sheet_num}
+	</update>
+	
+	<update id="updateMemo" parameterType="MemoDTO">
+		UPDATE memo SET memo_content = #{memo_content}
+		WHERE memo_num = #{memo_num}
+	</update>
+	
+	<insert id="insertMemo" parameterType="MemoDTO">
+		INSERT INTO memo(
+		memo_content
+		<if test="room_num != null">
+			,room_num
+		</if>
+		<if test="join_num != null">
+			,join_num
+		</if>
+		)
+		VALUES (
+		#{memo_content}
+		<if test="room_num != null">
+			,#{room_num}
+		</if>
+		<if test="join_num != null">
+			,#{join_num}
+		</if>
+		)
+	</insert>
+	
+	<delete id="deleteMemo" parameterType="Integer">
+		DELETE FROM memo
+		WHERE memo_num = #{memo_num}
+	</delete>
 
 </mapper>

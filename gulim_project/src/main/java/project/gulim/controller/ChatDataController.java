@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.InventoryDTO;
 import project.gulim.domain.ItemDTO;
+import project.gulim.domain.MemoDTO;
+import project.gulim.domain.SkillDTO;
 import project.gulim.service.ChatDataService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -104,6 +107,55 @@ public class ChatDataController {
 	public void modifyMoney(InventoryDTO inven) {
 		
 		chatDataService.modifyMoney(inven);
+	}
+	
+	@PostMapping("/modifyStat")
+	public void modifyStat(@RequestBody CharacterSheetDTO sheet) {
+		//System.out.println(sheet);
+		chatDataService.modifyStat(sheet);
+	}
+	
+	@PostMapping("/insertSkill")
+	public void insertSkill(@RequestBody SkillDTO skill) {
+		//System.out.println(skill);
+		chatDataService.insertSkill(skill);
+	}
+	
+	@PostMapping("/modifySkill")
+	public void modifySkill(@RequestBody SkillDTO skill) {
+		System.out.println(skill);
+		chatDataService.modifySkill(skill);
+	}
+	
+	@GetMapping("/deleteSkill")
+	public void deleteSkill(Integer skill_num) {
+		
+		chatDataService.deleteSkill(skill_num);
+	}
+	
+	@PostMapping("/charExplainModify")
+	public void charExplainModify(@RequestBody CharacterSheetDTO sheet) {
+		//System.out.println(sheet);
+		chatDataService.charExplainModify(sheet);
+	}
+	
+	@PostMapping("/updateMemo")
+	public void updateMemo(@RequestBody MemoDTO memo) {
+		
+		chatDataService.updateMemo(memo);
+	}
+	
+	@PostMapping("/insertMemo")
+	public void insertMemo(@RequestBody MemoDTO memo) {
+		System.out.println(memo);
+		System.out.println("call");
+		chatDataService.insertMemo(memo);
+	}
+	
+	@GetMapping("/deleteMemo")
+	public void deleteMemo(Integer memo_num) {
+		
+		chatDataService.deleteMemo(memo_num);
 	}
 	
 }

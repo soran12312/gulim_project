@@ -35,7 +35,7 @@
 	</select>
 	
 	<select id="select_room_detail" parameterType="Integer" resultType="Map">
-		SELECT room_num, room_name, id, plot, law, max_member, curr_member FROM chating
+		SELECT room_num, room_name, id, plot, law, max_member, curr_member, etc FROM chating
 		WHERE room_num = #{room_num}
 	</select>
 	

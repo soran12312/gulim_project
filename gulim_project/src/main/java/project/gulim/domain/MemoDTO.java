@@ -8,4 +8,5 @@ public class MemoDTO {
 	private Integer memo_num;
 	private Integer join_num;
 	private String memo_content;
+	private Integer room_num;
 }

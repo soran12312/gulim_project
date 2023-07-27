@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import project.gulim.dao.ChatDataDAO;
 import project.gulim.dao.MypageDAO;
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.InventoryDTO;
 import project.gulim.domain.ItemDTO;
+import project.gulim.domain.MemoDTO;
+import project.gulim.domain.SkillDTO;
 
 @Service
 public class ChatDataServiceImpl implements ChatDataService {
@@ -100,6 +103,54 @@ public class ChatDataServiceImpl implements ChatDataService {
 	public void modifyMoney(InventoryDTO inven) {
 		chatdataDAO.modifyMoney(inven);
 		
+	}
+
+	@Override
+	public void modifyStat(CharacterSheetDTO sheet) {
+		chatdataDAO.modifyStat(sheet);
+		
+	}
+
+	@Override
+	public void insertSkill(SkillDTO skill) {
+		chatdataDAO.insertSkill(skill);
+		
+	}
+
+	@Override
+	public void modifySkill(SkillDTO skill) {
+		chatdataDAO.modifySkill(skill);
+		
+	}
+
+	@Override
+	public void deleteSkill(Integer skill_num) {
+		chatdataDAO.deleteSkill(skill_num);
+		
+	}
+
+	@Override
+	public void charExplainModify(CharacterSheetDTO sheet) {
+		chatdataDAO.charExplainModify(sheet);
+		
+	}
+
+	@Override
+	public void updateMemo(MemoDTO memo) {
+		chatdataDAO.updateMemo(memo);
+		
+	}
+
+	@Override
+	public void insertMemo(MemoDTO memo) {
+		
+		chatdataDAO.insertMemo(memo);
+	}
+
+	@Override
+	public void deleteMemo(Integer memo_num) {
+		
+		chatdataDAO.deleteMemo(memo_num);
 	}
 
 }

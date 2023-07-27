@@ -3,9 +3,12 @@ package project.gulim.service;
 import java.util.HashMap;
 import java.util.List;
 
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.InventoryDTO;
 import project.gulim.domain.ItemDTO;
+import project.gulim.domain.MemoDTO;
+import project.gulim.domain.SkillDTO;
 
 public interface ChatDataService {
 	
@@ -23,4 +26,12 @@ public interface ChatDataService {
 	public void modifyItem(ItemDTO item);
 	public void deleteItem(Integer item_num);
 	public void modifyMoney(InventoryDTO inven);
+	public void modifyStat(CharacterSheetDTO sheet);
+	public void insertSkill(SkillDTO skill);
+	public void modifySkill(SkillDTO skill);
+	public void deleteSkill(Integer skill_num);
+	public void charExplainModify(CharacterSheetDTO sheet);
+	public void updateMemo(MemoDTO memo);
+	public void insertMemo(MemoDTO memo);
+	public void deleteMemo(Integer memo_num);
 }
