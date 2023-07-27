@@ -1903,5 +1903,167 @@ purchase_bookname{
     box-shadow: inset 0px 0px 5px white;
 }
 /* ================ END OF detail room ====================== */
+/* ================ START OF 캐릭터 시트 ====================== */
+.char_sheet_form input{
+	border: none;
+}
+.char_sheet_form textarea{
+	border: none;
+}
+.char_sheet_form select{
+	border: none;
+	font-size: 20px;
+	font-family: NeoDunggeunmo Code, Inter;	
+}
+.char_name{
+	width: 170px;
+	height:30px;
+	position: relative;
+	top: 80px;
+	left:200px; 
+}
+.char_class{
+	width: 170px;
+	height:25px;
+	position: relative;
+	top: 50px;
+	left:280px; 
+}
+.species{
+	width: 130px;
+	height:25px;
+	position: relative;
+	top: 88px;
+	left:100px; 
+}
+.propensity_1{
+	width: 80px;
+	height:25px;
+	position: relative;
+	top: 91px;
+	left:160px;
+}
+.propensity_2{
+	width: 80px;
+	height:25px;
+	position: relative;
+	top: 91px;
+	left:160px;
+}
+.str{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 230px;
+	right:572px;
+}
+.dex{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 370px;
+	right:633px;
+}
+.con{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 500px;
+	right:697px;
+}
+.intel{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 320px;
+	left:105px;
+}
+.wis{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 458px;
+	left:42px;
+}
+.chr{
+	width: 50px;
+	height:50px;
+	position: relative;
+	top: 595px;
+	right:20px;
+}
+.char_gold{
+	width: 150px;
+	height:30px;
+	position: relative;
+	top: 660px;
+	left:120px;
+}
+.char_skill{	
+	width: 310px;
+	height:290px;
+	position: relative;
+	top: 190px;
+	right:123px;
+}
+.char_inven{
+	width: 310px;
+	height:300px;
+	position: relative;
+	top: 260px;
+	left:215px;
+}
+.etc1{
+	width: 250px;
+	height:60px;
+	position: relative;
+	bottom: 370px;
+	left:240px;
+}
+.etc2{
+	width: 250px;
+	height:40px;
+	position: relative;
+	bottom: 275px;
+	right:20px;
+}
+.etc3{
+	width: 250px;
+	height:40px;
+	position: relative;
+	bottom: 543px;
+	left:562px;
+}
+.etc4{
+	width: 250px;
+	height:60px;
+	position: relative;
+	bottom: 435px;
+	left:300px;
+}
+.explain{
+	width: 250px;
+	height:350px;
+	position: relative;
+	bottom:18px;
+	left:47px;
+}
+.charbtn{
+	width: 100px;
+	height:50px;
+	position: relative;
+	top: 40px;
+	right:40px;
+	padding: 10px;
+	font-size: 20px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	border: 7px solid rgba(217,217,217,0.7);
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #FD786A;
+}
+/* ================ END OF 캐릭터 시트 ====================== */
 
 /* ================ END OF GAME ====================== */
