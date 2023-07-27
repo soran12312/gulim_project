@@ -51,13 +51,13 @@ $(function(){
 						<label for="play_rull">플레이 해본 룰 북</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" id="input1" name="play_rull" class="fill">
+						<input type="text" id="input1" name="play_rull" class="fill" placeholder="띄어쓰기 없이, '/'로 구분 ex. 던전앤드래곤/크툴루의부름">
 					</td>
 					<td class="ta_c">
 						<label for="play_genre">플레이 해본 장르</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" id="input2" name="play_genre" class="fill">
+						<input type="text" id="input2" name="play_genre" class="fill" placeholder="띄어쓰기 없이, '/'로 구분 ex. 판타지/SF">
 					</td>
 				</tr>
 				<tr class="h_50">
@@ -65,13 +65,13 @@ $(function(){
 						<label for="play_period">플레이 기간</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" name="play_period" id="input3" class="fill">
+						<input type="text" name="play_period" id="input3" class="fill" placeholder="시간 단위, 숫자만 입력 ex. 30시간 플레이: 30">
 					</td>
 					<td class="ta_c">
 						<label for="play_species">플레이 한 종족</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" class="fill" id="input4" name="play_species">
+						<input type="text" class="fill" id="input4" name="play_species" placeholder="띄어쓰기 없이, '/'로 구분 ex. 휴먼/오크">
 					</td>
 				</tr>
 				<tr class="h_50">
@@ -79,13 +79,13 @@ $(function(){
 						<label for="master">게임 마스터 경험횟수</label>
 					</td>
 					<td class="ta_l">
-						<input type="number" min="0" class="fill" name="master" id="master" value="0" required>
+						<input type="number" min="0" class="fill" name="master" id="master" placeholder="횟수 단위, 숫자만 입력 ex. 13회 경험: 13" value="0" required>
 					</td>
 					<td class="ta_c">
 						<label for="want_genre">플레이 하고싶은 장르</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" class="fill" id="input5" name="want_genre">
+						<input type="text" class="fill" id="input5" name="want_genre" placeholder="띄어쓰기 없이, '/'로 구분 ex. 판타지/SF">
 					</td>
 				</tr>
 				<tr class="h_50">
@@ -93,13 +93,13 @@ $(function(){
 						<label for="play_class">플레이 해본 직업</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" class="fill" id="input6" name="play_class">
+						<input type="text" class="fill" id="input6" name="play_class" placeholder="띄어쓰기 없이, '/'로 구분 ex. 전사/마법사">
 					</td>
 					<td class="ta_c">
 						<label for="other_site">다른 사이트 이용 경험</label>
 					</td>
 					<td class="ta_l">
-						<input type="text" class="fill" id="input7" name="other_site">
+						<input type="text" class="fill" id="input7" name="other_site" placeholder="O/X 입력(대문자로) ex. 경험해본 적 있음: O">
 					</td>
 				</tr>
 				<tr>

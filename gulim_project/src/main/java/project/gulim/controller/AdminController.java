@@ -20,8 +20,11 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +46,6 @@ import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
 import project.gulim.service.MainService;
-import project.gulim.util.MD5Generator;
 import project.gulim.util.UiUtils;
 
 @Controller
@@ -250,14 +252,17 @@ public class AdminController {
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
-	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/post/";
+	            Long time = System.currentTimeMillis();
+	            
+	            String path = "/admin/images/post/" + time + "_" + originImageName;
+				String realPath = getRealPath("static/admin/images/post/")+"\\"+ time + "_" + originImageName;
 	            
 	            // 이미지 파일 저장 
-	            saveImageFile(imageData, imagePath, originImageName);
+	            saveImageFile(imageData, realPath, originImageName);
 	            
 	            // 이미지 정보 설정
-	            iDTO.setOrigin_img_name(originImageName + ".png");
-	            iDTO.setPath(basePath + "/imagePath"); 
+	            iDTO.setOrigin_img_name(originImageName);
+	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
@@ -323,14 +328,17 @@ public class AdminController {
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
-	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/contest/";
+	            Long time = System.currentTimeMillis();
+	            
+	            String path = "/admin/images/contest/" + time + "_" + originImageName;
+				String realPath = getRealPath("static/admin/images/contest/")+"\\"+ time + "_" + originImageName;
 	            
 	            // 이미지 파일 저장 
-	            saveImageFile(imageData, imagePath, originImageName);
+	            saveImageFile(imageData, realPath, originImageName);
 	            
 	            // 이미지 정보 설정
-	            iDTO.setOrigin_img_name(originImageName + ".png");
-	            iDTO.setPath(basePath + "/imagePath"); 
+	            iDTO.setOrigin_img_name(originImageName);
+	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
@@ -401,23 +409,20 @@ public class AdminController {
 	}
 
 	// 이미지 파일 저장
-	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
-		try {
-			// 저장 경로가 없을 경우 디렉토리 생성
-			File directory = new File(imagePath);
-			if (!directory.exists()) {
-		        directory.mkdirs();
-		    }
+	   private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
+	       try {
 
-		    // 이미지 파일 생성
-		    File imageFile = new File(imagePath + fileName +".png");
-		    FileOutputStream fos = new FileOutputStream(imageFile);
-		    fos.write(imageData);
-		    fos.close();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-	}
+	           
+	           // 이미지 파일 생성
+	           File imageFile = new File(imagePath);
+	           FileOutputStream fos = new FileOutputStream(imageFile);
+	           fos.write(imageData);
+	           fos.close();
+	       } catch (IOException e) {
+	           e.printStackTrace();
+	       }
+	   }
+
 	
 	// 썸머노트 파라미터로 넘어간 내용에서 <img> 태그 제거
 	private String removeImageTags(String content) {
