@@ -1917,34 +1917,34 @@ purchase_bookname{
 }
 .char_name{
 	width: 170px;
-	height:30px;
+	height:28px;
 	position: relative;
-	top: 80px;
+	top: 78px;
 	left:200px; 
 }
 .char_class{
 	width: 170px;
-	height:25px;
+	height:21px;
 	position: relative;
-	top: 50px;
+	top: 49px;
 	left:280px; 
 }
 .species{
 	width: 130px;
-	height:25px;
+	height:23px;
 	position: relative;
 	top: 88px;
 	left:100px; 
 }
 .propensity_1{
-	width: 80px;
+	width: 60px;
 	height:25px;
 	position: relative;
 	top: 91px;
 	left:160px;
 }
 .propensity_2{
-	width: 80px;
+	width: 60px;
 	height:25px;
 	position: relative;
 	top: 91px;
@@ -1955,56 +1955,56 @@ purchase_bookname{
 	height:50px;
 	position: relative;
 	top: 230px;
-	right:572px;
+	right:525px;
 }
 .dex{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 370px;
-	right:633px;
+	top: 367px;
+	right:585px;
 }
 .con{
 	width: 50px;
 	height:50px;
 	position: relative;
 	top: 500px;
-	right:697px;
+	right:645px;
 }
 .intel{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 320px;
-	left:105px;
+	top: 638px;
+	right:703px;
 }
 .wis{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 458px;
-	left:42px;
+	top: 460px;
+	left:105px;
 }
 .chr{
 	width: 50px;
 	height:50px;
 	position: relative;
 	top: 595px;
-	right:20px;
+	left:45px;
 }
 .char_gold{
 	width: 150px;
-	height:30px;
+	height:27px;
 	position: relative;
-	top: 660px;
-	left:120px;
+	top: 659px;
+	left:180px;
 }
 .char_skill{	
 	width: 310px;
 	height:290px;
 	position: relative;
 	top: 190px;
-	right:123px;
+	right:63px;
 }
 .char_inven{
 	width: 310px;
@@ -2017,28 +2017,28 @@ purchase_bookname{
 	width: 250px;
 	height:60px;
 	position: relative;
-	bottom: 370px;
+	bottom: 372px;
 	left:240px;
 }
 .etc2{
 	width: 250px;
 	height:40px;
 	position: relative;
-	bottom: 275px;
+	bottom: 282px;
 	right:20px;
 }
 .etc3{
 	width: 250px;
 	height:40px;
 	position: relative;
-	bottom: 543px;
+	bottom: 548px;
 	left:562px;
 }
 .etc4{
 	width: 250px;
 	height:60px;
 	position: relative;
-	bottom: 435px;
+	bottom: 440px;
 	left:300px;
 }
 .explain{
@@ -2046,7 +2046,7 @@ purchase_bookname{
 	height:350px;
 	position: relative;
 	bottom:18px;
-	left:47px;
+	left:48px;
 }
 .charbtn{
 	width: 100px;
