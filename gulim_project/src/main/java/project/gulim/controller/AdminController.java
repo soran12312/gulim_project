@@ -9,22 +9,34 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import org.apache.http.HttpHost;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,6 +74,9 @@ public class AdminController {
 	private HttpServletRequest request;
 	
 	private final UiUtils uiUtils = new UiUtils();
+	
+	private static final String ES_HOST = "localhost";
+    private static final int ES_PORT = 9200;
 	
 	// 문의사항 리스트 보기
 	@RequestMapping("/question")
@@ -612,6 +627,38 @@ public class AdminController {
 
 		return "/admin/game_stats/game_stats";
 	}
+	
+	@RequestMapping(value="/game_stats/survey", method=RequestMethod.GET)
+	public ResponseEntity<Object> getChartData() {
+	    Map<String, Object> data = new HashMap<>();
+
+	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
+
+	        SearchRequest searchRequest = new SearchRequest("survey");
+	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+	        // ElasticSearch에 적절한 쿼리를 입력하여 필요한 데이터만 가져옵니다.
+	        // 아래 코드는 모든 데이터를 가져오는 예시입니다.
+	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+
+	        searchRequest.source(searchSourceBuilder);
+	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+	        SearchHits hits = searchResponse.getHits();
+
+	        // 클라이언트가 차트를 그리기 위해 필요한 데이터 형식으로 변환합니다.
+	        // 아래 코드는 모든 document를 배열로 반환하는 예시입니다.
+	        data.put("data", Arrays.stream(hits.getHits())
+	                               .map(SearchHit::getSourceAsMap)
+	                               .collect(Collectors.toList()));
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+
+	    return ResponseEntity.ok(data);
+	}
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/game_stats", method = RequestMethod.POST)
