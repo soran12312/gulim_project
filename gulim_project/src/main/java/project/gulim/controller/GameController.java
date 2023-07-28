@@ -82,7 +82,9 @@ public class GameController {
 	}
 	
 	@RequestMapping("/play/char_sheet_form")
-	public String char_sheet_form(Integer room_num) {
+	public String char_sheet_form(Integer room_num, Model m) {
+		
+		m.addAttribute("room_num", room_num);
 		
 		return "/game/play/char_sheet_form";
 	}
