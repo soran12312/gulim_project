@@ -64,131 +64,192 @@ $(function(){
 		<input class="chr" type="text" placeholder="매력" name="chr">
 		<input class="char_gold" type="text" placeholder="소지금" name="money">
 		<!-- <textarea class="char_skill" placeholder="기술&주문" name=""></textarea> -->
-		<div>
-			<label for="skill_name">기술명 : </label><input name="skill_name">
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail">
-			<label for="skill_name">기술명 : </label><input name="skill_name">
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail">
-			<label for="skill_name">기술명 : </label><input name="skill_name">
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail">
-			<label for="skill_name">기술명 : </label><input name="skill_name">
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail">
-			<label for="skill_name">기술명 : </label><input name="skill_name">
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail">
+		<div class="skilldiv">
+			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
 		</div>
 		<!-- <textarea class="char_inven" placeholder="장비&인벤토리" name=""></textarea> -->
-		<table>
-			<thead>
-				<tr>
-					<td>이름</td>
-					<td>수량</td>
-					<td>무게</td>
-					<td>상세정보</td>
-					<td>장착상태</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						<input type="text" name="item_name">
-					</td>
-					<td>
-						<input type="number" name="item_amount">
-					</td>
-					<td>
-						<input type="number" name="item_weight">
-					</td>
-					<td>
-						<input type="text" name="item_detail">
-					</td>
-					<td>
-						<select name="equip_state">
-							<option value=1>장착중</option>
-							<option value=0>장착중이 아님</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="item_name">
-					</td>
-					<td>
-						<input type="number" name="item_amount">
-					</td>
-					<td>
-						<input type="number" name="item_weight">
-					</td>
-					<td>
-						<input type="text" name="item_detail">
-					</td>
-					<td>
-						<select name="equip_state">
-							<option value=1>장착중</option>
-							<option value=0>장착중이 아님</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="item_name">
-					</td>
-					<td>
-						<input type="number" name="item_amount">
-					</td>
-					<td>
-						<input type="number" name="item_weight">
-					</td>
-					<td>
-						<input type="text" name="item_detail">
-					</td>
-					<td>
-						<select name="equip_state">
-							<option value=1>장착중</option>
-							<option value=0>장착중이 아님</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="item_name">
-					</td>
-					<td>
-						<input type="number" name="item_amount">
-					</td>
-					<td>
-						<input type="number" name="item_weight">
-					</td>
-					<td>
-						<input type="text" name="item_detail">
-					</td>
-					<td>
-						<select name="equip_state">
-							<option value=1>장착중</option>
-							<option value=0>장착중이 아님</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="item_name">
-					</td>
-					<td>
-						<input type="number" name="item_amount">
-					</td>
-					<td>
-						<input type="number" name="item_weight">
-					</td>
-					<td>
-						<input type="text" name="item_detail">
-					</td>
-					<td>
-						<select name="equip_state">
-							<option value=1>장착중</option>
-							<option value=0>장착중이 아님</option>
-						</select>
-					</td>
-				</tr>
-			</tbody>
+		<table class= "itemtable">
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+			<table class= "itemtable">
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+			<table class= "itemtable">
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+			<table class= "itemtable" >
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+			<table class= "itemtable">
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+			<table class= "itemtable">
+			<tr>
+				<td class="tdname">이름</td>
+				<td colspan="2" class="tdname_input">
+					<input type="text" name="item_name" class= "item_name">
+				</td>
+				<td class="tdcount">수량</td>
+				<td class="tdcount_input">
+					<input type="number" name="item_amount" class= "item_amount">
+				</td>
+				<td class="tdkg">무게</td>
+				<td class="tdkg_input">
+					<input type="number" name="item_weight" class= "item_weight">
+				</td>
+				<td class="tdkg">kg</td>
+			</tr>
+			<tr>
+				<td colspan="1" class="tdinfo">상세</td>
+				<td colspan="5" class="tdinfo_input">
+					<input type="text" name="item_detail" class= "item_detail">
+				</td>
+				<td colspan="2" class="tdselect">
+					<select name="equip_state" class="tdselect_select">
+						<option value=1>장착중</option>
+						<option value=0>미장착</option>
+					</select>
+				</td>
+			</tr>
 		</table>
 		<textarea class="etc1" placeholder="인격특성" id="etc1"></textarea>
 		<textarea class="etc2" placeholder="이상" id="etc2"></textarea>

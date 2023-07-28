@@ -1937,7 +1937,7 @@ purchase_bookname{
 	left:100px; 
 }
 .propensity_1{
-	width: 60px;
+	width: 65px;
 	height:25px;
 	position: relative;
 	top: 91px;
@@ -1955,49 +1955,105 @@ purchase_bookname{
 	height:50px;
 	position: relative;
 	top: 230px;
-	right:525px;
+	right:530px;
 }
 .dex{
 	width: 50px;
 	height:50px;
 	position: relative;
 	top: 367px;
-	right:585px;
+	right:589px;
 }
 .con{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 500px;
-	right:645px;
+	top: 505px;
+	right:650px;
+}
+.skilldiv{
+	position: relative;
+	top: 130px;
+	left:220px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	
+}
+.skilldiv label{
+	font-size: 15px;
+}
+.skilldiv input{
+	width: 200px;
+	height:20px;
+}
+.skillpadding{
+	padding-bottom: 20px;
+	width: 150px;
 }
 .intel{
 	width: 50px;
 	height:50px;
 	position: relative;
 	top: 638px;
-	right:703px;
+	right:710px;
 }
 .wis{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 460px;
+	top: 725px;
 	left:105px;
 }
 .chr{
 	width: 50px;
 	height:50px;
 	position: relative;
-	top: 595px;
+	top: 860px;
 	left:45px;
+}
+.itemtable{
+	position: relative;
+	top: 208px;
+	left:230px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	margin-bottom: 5px;
+	border: 1px solid black;
+}
+
+.tdinfo{
+	width: 30px;
+	font-size: 15px;
+	text-align: center;
+}
+.tdname_input input{
+	width: 60px;
+	font-size: 15px;
+	text-align: left;
+}
+.tdinfo{
+	width: 32px;
+	font-size: 15px;
+	text-align: left;
 }
 .char_gold{
 	width: 150px;
 	height:27px;
 	position: relative;
-	top: 659px;
+	top: 923px;
 	left:180px;
+}
+
+.tdkg_input input, .tdcount_input input{
+	width: 25px;
+	font-size: 15px;
+	text-align: left;
+}
+.tdselect{
+	width: 60px;
+}
+.tdselect select{
+	width: 70px;
+	font-size: 15px;
+	text-align: right;
 }
 .char_skill{	
 	width: 310px;
@@ -2011,49 +2067,49 @@ purchase_bookname{
 	height:300px;
 	position: relative;
 	top: 260px;
-	left:215px;
+	left:215px; 
 }
 .etc1{
 	width: 250px;
 	height:60px;
 	position: relative;
-	bottom: 372px;
-	left:240px;
+	bottom: 490px;
+	left:563px;
 }
 .etc2{
 	width: 250px;
 	height:40px;
 	position: relative;
-	bottom: 282px;
-	right:20px;
+	bottom: 398px;
+	left:305px;
 }
 .etc3{
 	width: 250px;
 	height:40px;
 	position: relative;
-	bottom: 548px;
-	left:562px;
+	bottom: 305px;
+	left:45px;
 }
 .etc4{
 	width: 250px;
 	height:60px;
 	position: relative;
-	bottom: 440px;
-	left:300px;
+	bottom: 553px;
+	left:565px;
 }
 .explain{
 	width: 250px;
 	height:350px;
 	position: relative;
-	bottom:18px;
-	left:48px;
+	bottom:138px;
+	left:308px;
 }
 .charbtn{
 	width: 100px;
 	height:50px;
 	position: relative;
-	top: 40px;
-	right:40px;
+	bottom: 75px;
+	left:220px;
 	padding: 10px;
 	font-size: 20px;
 	font-family: NeoDunggeunmo Code, Inter;	
