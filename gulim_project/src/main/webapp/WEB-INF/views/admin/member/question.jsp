@@ -234,6 +234,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
+                                                    <th>문의사항</th>
                                                     <th>제목</th>
                                                     <th>문의내용</th>
                                                     <th>답변</th>
@@ -246,6 +247,7 @@
                                                     <tr class="answer-link">
                                                         
                                                         <td style="width: 110px;">${lq.id}</td>
+                                                        <td>${lq.question_type}</td>
                                                         <td style="width: 165px;height: auto;">${lq.question_title}</td>
                                                         <td style="width: 465px;display: inline-block; vertical-align: top; height: auto;">
                                                             ${lq.question_content}

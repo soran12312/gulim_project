@@ -250,7 +250,7 @@
                                                                     <span data-value="0" class="badge badge-success">판매중</span>
                                                                 </c:when>
                                                                 <c:when test="${lpr.sale_state eq 1}">
-                                                                    <span data-value="1" class="badge badge-danger">품절</span>
+                                                                    <span data-value="1" class="badge badge-danger">판매중지</span>
                                                                 </c:when>   
                                                             </c:choose>
                                                         </td>

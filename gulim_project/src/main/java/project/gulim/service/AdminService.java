@@ -66,29 +66,7 @@ public interface AdminService {
 	
 	public void updateProduct(BookDTO boDTO, ImageDTO iDTO);
 	
-	public List<HashMap> playedRuleBook();
-	
-	public List<HashMap> playedTime();
-	
-	public List<HashMap> playedGm();
-	
-	public List<HashMap> playedClass();
-	
-	public List<HashMap> playedGenre();
-	
-	public List<HashMap> playedSpecies();
-	
-	public List<HashMap> wantedGenre();
-	
-	public List<HashMap> otherSite();
-	
-	public List<HashMap> preferredPropensity();
-	
-	public List<HashMap> preferredClass();
-	
-	public List<HashMap> preferredSpecies();
+	public void insertProduct(BookDTO boDTO, ImageDTO iDTO);
 	
 	public List<CharacterSheetDTO> classForStats();
-	
-	public List<HashMap> preferredStatsByClasses(CharacterSheetDTO csDTO);
 }

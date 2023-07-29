@@ -249,7 +249,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="8">
+                                    <td colspan="5">
                                         <div class="card-body">
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
@@ -259,10 +259,16 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td colspan="3">
+                                    <td colspan="4">
+                                        <div style="position: relative; right: -19px; width: 95%; float: left;">
+                                            <p class="mb-1">장르</p>
+                                            <input name="genre" type="text" class="form-control input-default" value="${getPost.genre}" placeholder="장르를 입력하시오(ex. 판타지,SF,액션).">
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
                                             <p class="mb-1">저자</p>
-                                            <input name="writer" type="text" class="form-control input-default" value="${getPost.writer}" placeholder="저자 이름을 입력하시오.">
+                                            <input name="writer" type="text" class="form-control input-default"value="${getPost.writer}" placeholder="저자 이름을 입력하시오.">
                                         </div>
                                     </td>
                                 </tr>
@@ -297,6 +303,22 @@
                                                 <option value="0" ${getPost.adult == 0 ? 'selected' : ''}>X</option>
                                             </select>
                                             <input type="text" value="${getPost.adult}" hidden>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">판매 여부</p>
+                                            <select name="sale_state">
+                                                <option value="0" ${getPost.sale_state == 0 ? 'selected' : ''}>판매중</option>
+                                                <option value="1" ${getPost.sale_state == 1 ? 'selected' : ''}>판매 중지</option>
+                                            </select>
+                                            <input type="text" value="${getPost.sale_state}" hidden>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">역자</p>
+                                            <input name="translation" type="text" class="form-control input-default" value="${getPost.translation}" placeholder="역자 이름을 입력하시오.">
                                         </div>
                                     </td>
                                 </tr>
