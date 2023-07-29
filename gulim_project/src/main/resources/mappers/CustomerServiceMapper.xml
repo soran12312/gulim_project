@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="chat" resultType="map">
-		select path,id from image where id= #{id}
+		select `path` from image where id = #{id}
 	</select>
 	
 </mapper>
