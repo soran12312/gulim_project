@@ -132,11 +132,12 @@
             $(".popup_reco").hide();
         });
 
-        $("#question_btn").click(function(){
-        window.parent.location.href = "https://localhost:3000/customerchat"
-        })
+        // $("#question_btn").click(function(){
 
+        //     window.location.href = "https://192.168.0.68:3000/customerchat/"+id;
+        //     });
       });
+
     </script>
     <meta charset="UTF-8">
     <title>고객 센터</title>
@@ -149,8 +150,9 @@
 
     <div class="qusetion_line"><hr></div>
 
-
-
+    <c:foreach items="${id}" var="id">
+        
+    </c:foreach>
     <div class="question_question">고객 센터</div>
 
 
@@ -189,9 +191,10 @@
                     <td>문의 사항 남기기</td>
                     </thead>
             <td>
-                <button class="question_btn" id="question_btn">
+                <a href="https://localhost:3000/customerchat/${id.id}"><button class="question_btn" id="question_btn">
                     <img src="/files/images/고객문의2.png"/>
-                </button>
+                </button></a>
+
                 <a href="https://192.168.0.68:8080/customer_service/question"><button class="question_btns">
                     <img src="/files/images/고객문의.png"/>
 
