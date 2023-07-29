@@ -75,9 +75,11 @@
 	
 	<update id="updateImage" parameterType="project.gulim.domain.ImageDTO">
 		UPDATE image
-		(post_num, origin_img_name, `path`, img_size)
-		SET
-		#{post_num}, #{origin_img_name}, #{path}, #{img_size}
+	    SET post_num = #{post_num},
+	    origin_img_name = #{origin_img_name},
+	    `path` = #{path},
+	    img_size = #{img_size}
+	    WHERE id = #{img_num}
 	</update>
 
 
@@ -116,6 +118,35 @@
         AND
 			post.board = '자유'
     </select>
+    
+    
+    <!-- 이벤트 게시판 게시글 수 카운팅 -->
+    <select id="countEvent" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            post
+        WHERE
+			post.board = '이벤트'
+    </select>
+    
+    
+    
+    <!-- 이미지 조회 -->
+    <select id="getImagesByPostId" parameterType="int" resultType="project.gulim.domain.ImageDTO">
+        select *
+		from image i 
+		where post_num = #{post_num}
+    </select>
+    
+    
+    <!-- 이미지 삭제 -->
+    <delete id = "deleteImageById" parameterType="int">
+    	delete 
+    	from image
+    	where post_num = #{post_num}
+    
+    </delete>
 
 
 	<!-- 공지사항 조회 -->
@@ -162,21 +193,16 @@
 		post.post_num DESC
 	</select>
 	
-	<!-- 공모전 조회 -->
-	<!-- <select id="findAllContest" resultType="project.gulim.domain.ContestDTO">
-		select *
-		from contest c left outer join post p 
-		ON c.contest_num =  p.contest_num
+	<!-- 공모전 리스트 조회 -->
+	<select id="findAllContest" resultType="Map">
+		SELECT *
+		FROM image
+		WHERE post_num IN (
+		    SELECT post_num
+		    FROM contest c
+		    LEFT OUTER JOIN post p ON c.contest_num = p.contest_num
+		    WHERE p.board = '공모전'
+		)
 	</select>
-	
-	공모전 이미지 조회
-	<select id="findContestImg" resultType="project.gulim.domain.ImaageDTO">
-		select *
-		from contest c left outer join post p 
-		ON c.contest_num =  (select p2.contest_num 
-								from post p2 left outer join image i
-								on p2.post_num = i.post_num
-								where p2.post_state =1)    
-	</select>-->
 
 </mapper>

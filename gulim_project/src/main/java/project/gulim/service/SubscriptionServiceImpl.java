@@ -96,6 +96,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		// TODO Auto-generated method stub
 		return subscriptionDAO.deleteQuantity(sub_num);
 	}
+
+
+
+	@Override
+	public SubscribeDTO getSubscriptionById(Integer subscriptionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	
 

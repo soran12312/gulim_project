@@ -2,6 +2,7 @@ package project.gulim.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
@@ -49,7 +50,7 @@ public interface CommunityService {
 	public List<ImageDTO> updateImage(ImageDTO img);
 
 	// 이벤트 리스트 조회
-	public List<PostDTO> findAllEvent();
+	public List<PostDTO> findAllEvent(int start, int size);
 
 	// 이벤트 이미지 조회
 	public List<ImageDTO> findEventImg();
@@ -57,5 +58,16 @@ public interface CommunityService {
 	// 공지사항 이미지 조회
 	public List<ImageDTO> findAllAnnounceImg();
 
+	public void deleteImageById(Integer img_num);
+
+	public List<ImageDTO> getImagesByPostId(Integer post_num);
+
+	// 이벤트게시글 수
+	public int countAllEventPosts();
+
+	public int countAllContestPosts();
+
 	
+	// 공모전 리스트 조회
+	public List<Map> findAllContest(int start, int size);
 }

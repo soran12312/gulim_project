@@ -9,11 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
 	
  	private String connectPath = "/imagePath/**";
- 	//경로 신경쓰시오!
- 	//윈도우
     private String resourcePath = "file:///C:/Users/"+System.getProperty("user.name")+"/Pictures/gulim/";
-    //mac 사용자여 테스트가 필요하다
-    //private String resourcePath = "file:/Users/"+System.getProperty("user.name")+"/Pictures/yumyum/";
+    
 
 
 

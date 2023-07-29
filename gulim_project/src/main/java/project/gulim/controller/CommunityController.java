@@ -4,14 +4,19 @@ package project.gulim.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +49,9 @@ public class CommunityController {
 	
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+    private ServletContext servletContext;
 	
 	private final UiUtils uiUtils = new UiUtils();
 	
@@ -82,19 +91,29 @@ public class CommunityController {
 
 	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
 	            String originImageName = generateUniqueFileName();
-	            String imagePath = "C:/Users/"+System.getProperty("user.name")+"/Pictures/gulim/";
+
+//	            Long time = System.currentTimeMillis();
+	            String path = "/files/free_img/" + originImageName + ".png";
+				String realPath = getRealPath("static/files/free_img/")+"\\"+ originImageName + ".png";
+				
+				System.out.println(realPath);
+				System.out.println(path);
+	            
+	            
 	            Long imageSize = (long)imageData.length;
 	            
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/community"));
 
 	            // 이미지 파일 저장
-	            saveImageFile(imageData, imagePath, originImageName);
+//	            File serverFile = new File(realPath); // 저장할 파일의 경로를 생성
+	            saveImageFile(imageData, realPath, originImageName);
+	            
 
 	            // 이미지 정보 설정
 	            ImageDTO img = new ImageDTO();
 	            img.setOrigin_img_name(originImageName + ".png");
-	            img.setPath(basePath + "/imagePath");
+	            img.setPath(path);
 	            img.setImg_size(imageSize);
 	            
 	            if (cookies != null) {
@@ -155,6 +174,16 @@ public class CommunityController {
 	}
 	
 
+	public static String getRealPath(String resourcePath) {
+        try {
+            ClassPathResource classPathResource = new ClassPathResource(resourcePath);
+            Path path = Paths.get(classPathResource.getURI());
+            return path.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 	
 	// 파일 이름을 고유하게 생성하는 메서드
 	private String generateUniqueFileName() {
@@ -181,14 +210,10 @@ public class CommunityController {
 	// 이미지 파일 저장
 	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
 	    try {
-	        // 저장 경로가 없을 경우 디렉토리 생성
-	        File directory = new File(imagePath);
-	        if (!directory.exists()) {
-	            directory.mkdirs();
-	        }
 
+	        
 	        // 이미지 파일 생성
-	        File imageFile = new File(imagePath + fileName +".png");
+	        File imageFile = new File(imagePath);
 	        FileOutputStream fos = new FileOutputStream(imageFile);
 	        fos.write(imageData);
 	        fos.close();
@@ -326,97 +351,81 @@ public class CommunityController {
 	// 자유게시판 글 수정
 	@RequestMapping(value = "/freeupdate", method = RequestMethod.POST)
 	public String updatePost(@ModelAttribute("post") PostDTO params) {
-		
-		Cookie[] cookies = request.getCookies();
-		String jwtToken = null;
-		
-		
-		// 이미지 여부 확인
+	    Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+
+	    // 이미지 여부 확인
 	    String postContent = params.getPost_content();
-	    
-	    
+
 	    // post_content 값에서 base64 인코딩된 이미지 값을 추출
 	    List<String> imageBase64List = extractBase64Image(postContent);
 
-	    // 추출한 이미지 값을 활용하여 필요한 작업 수행
-	    if (!imageBase64List.isEmpty()) {
-	        // 이미지가 포함된 경우
-	        for (String imageBase64 : imageBase64List) {
-	            // 이미지 처리 로직
-	            // ...
-	        	System.out.println(imageBase64);
-	        	// base64 디코딩
-	            byte[] imageData = Base64.getDecoder().decode(imageBase64);
-
-	            // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
-	            String originImageName = generateUniqueFileName();
-	            String imagePath = "/images/gulim/";
-	            Long imageSize = (long)imageData.length;
-
-	            // 이미지 파일 저장
-	            saveImageFile(imageData, imagePath, originImageName);
-
-	            // 이미지 정보 설정
-	            ImageDTO img = new ImageDTO();
-	            img.setOrigin_img_name(originImageName);
-	            img.setPath(imagePath);
-	            img.setImg_size(imageSize);
-	            
-	            if (cookies != null) {
-				    for (Cookie cookie : cookies) {
-				        if (cookie.getName().equals("access_token")) {
-				            jwtToken = cookie.getValue();
-				            break;
-				        }
-				    }
-				}
-				
-				Claims claims = mainService.getClaims(jwtToken);
-				
-//				System.out.println(claims);
-				String id = claims.get("id", String.class);      // 로그인한 사용자 id
-				params.setId(id);                                // 
-				
-				// post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
-			    String contentWithoutImages = removeImageTags(postContent);
-			    params.setPost_content(contentWithoutImages);
-				
-				System.out.println(params); 
-				
-				// post  DB에 저장
-			    communityService.savePost(params);
-	            
-	            
-			    img.setId(id);
-
-	            // 이미지 DB update
-	            communityService.updateImage(img);
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("access_token")) {
+	                jwtToken = cookie.getValue();
+	                break;
+	            }
 	        }
-	    } 
-	    else {// 이미지가 포함되지 않은 경우
-	    	if (cookies != null) {
-			    for (Cookie cookie : cookies) {
-			        if (cookie.getName().equals("access_token")) {
-			            jwtToken = cookie.getValue();
-			            break;
-			        }
-			    }
-			}
-			
-			Claims claims = mainService.getClaims(jwtToken);
-			
-//			System.out.println(claims);
-			String id = claims.get("id", String.class);      // 로그인한 사용자 id
-			params.setId(id);                                // 
-			
-			System.out.println(params); 
-			
-			// db update
-		    communityService.updatePost(params);
 	    }
-	     
-		
-		 return "redirect:/community/free_board_list";
+
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class); // 로그인한 사용자 id
+	    params.setId(id);
+
+	    // post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
+	    String contentWithoutImages = removeImageTags(postContent);
+	    params.setPost_content(contentWithoutImages);
+
+	    System.out.println(params);
+
+	    // Fetch the current list of images for the post from the database
+	    List<ImageDTO> currentImages = communityService.getImagesByPostId(params.getPost_num());
+	    List<String> currentImageNames = currentImages.stream().map(ImageDTO::getOrigin_img_name).collect(Collectors.toList());
+
+	    // Remove images that were deleted from the editor
+	    for (ImageDTO image : currentImages) {
+	        if (!imageBase64List.contains(image.getOrigin_img_name())) {
+	            communityService.deleteImageById(image.getImg_num());
+	        }
+	    }
+
+	    // 이미지 DB update
+	    for (String imageBase64 : imageBase64List) {
+	        // 이미지 처리 로직
+	        // ...
+	        System.out.println(imageBase64);
+	        // base64 디코딩
+	        byte[] imageData = Base64.getDecoder().decode(imageBase64);
+
+	        // 이미지 파일의 원래 이름, 저장 경로, 크기 추출
+	        String originImageName = generateUniqueFileName();
+	        String path = "/files/free_img/" + originImageName + ".png";
+	        String realPath = getRealPath("static/files/free_img/") + "\\" + originImageName + ".png";
+
+	        System.out.println(realPath);
+	        System.out.println(path);
+
+	        Long imageSize = (long) imageData.length;
+
+	        // 이미지 파일 저장
+	        saveImageFile(imageData, realPath, originImageName);
+
+	        // 이미지 정보 설정
+	        ImageDTO img = new ImageDTO();
+	        img.setOrigin_img_name(originImageName);
+	        img.setPath(path);
+	        img.setImg_size(imageSize);
+	        img.setId(id);
+
+	        // 이미지 DB update
+	        communityService.updateImage(img);
+	    }
+
+	    // post DB에 저장
+	    communityService.updatePost(params);
+
+	    return "redirect:/community/free_board_list";
 	}
 	
 	
@@ -434,9 +443,23 @@ public class CommunityController {
 
 	// 이벤트 글 목록
 	@RequestMapping("/event_list")
-	public String eventist(Model model) {
-		List<PostDTO> events = communityService.findAllEvent();
+	public String eventist(Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "6") int size) {
+		
+		// 전체 게시글 수 조회
+		int totalCount = communityService.countAllEventPosts();
+		
+		// 페이징 처리를 위한 정보 계산
+		int totalPages = (int) Math.ceil((double) totalCount / size);
+		int start = (page - 1) * size;
+		
+		// 특정 페이지의 게시글 목록 조회
+
+		List<PostDTO> events = communityService.findAllEvent(start, size);
 		model.addAttribute("events", events);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
 
 		System.out.println(events);
 		
@@ -475,7 +498,27 @@ public class CommunityController {
 	
 	// 공모전 리스트
 	@RequestMapping("/contest_list")
-	public String contestlist() {
+	public String contestlist(Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "6") int size) {
+		
+		
+		// 전체 게시글 수 조회
+		int totalCount = communityService.countAllEventPosts();
+		
+		// 페이징 처리를 위한 정보 계산
+		int totalPages = (int) Math.ceil((double) totalCount / size);
+		int start = (page - 1) * size;
+		
+		// 특정 페이지의 게시글 목록 조회
+
+		List<Map> contests = communityService.findAllContest(start, size);
+		model.addAttribute("contests", contests);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		
+		
+		
 		return "community/contest/contest_list";
 	}
 	
@@ -485,6 +528,7 @@ public class CommunityController {
 	public String contestlistdetail() {
 		return "community/contest/contest_list";
 	}
+	
 	
 	
 	

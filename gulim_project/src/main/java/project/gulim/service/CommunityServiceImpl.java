@@ -2,6 +2,7 @@ package project.gulim.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,7 +148,7 @@ public class CommunityServiceImpl implements CommunityService{
 
 	// 이벤트 게시글 리스트
 	@Override
-	public List<PostDTO> findAllEvent() {
+	public List<PostDTO> findAllEvent(int start, int size) {
 		// TODO Auto-generated method stub
 		return communityDAO.findAllEvent();
 	}
@@ -168,8 +169,52 @@ public class CommunityServiceImpl implements CommunityService{
 		// TODO Auto-generated method stub
 		return communityDAO.findAllAnnounceImg();
 	}
+
+
+
+	// 이미지 삭제
+	@Override
+	public void deleteImageById(Integer img_num) {
+		// TODO Auto-generated method stub
+		communityDAO.deleteImageById(img_num);
+	}
+
+
+	// 이미지 
+	@Override
+	public List<ImageDTO> getImagesByPostId(Integer post_num) {
+		// TODO Auto-generated method stub
+		return communityDAO.getImagesByPostId(post_num);
+	}
+
+
+
+	// 이벤트 게시글 수
+	@Override
+	public int countAllEventPosts() {
+		// TODO Auto-generated method stub
+		return communityDAO.countEvent();
+	}
+
+
+
 	
 	
+	// 공모전 게시글 수
+	@Override
+	public int countAllContestPosts() {
+		// TODO Auto-generated method stub
+		return communityDAO.countEvent();
+	}
+
+
+
+	// 공모전 리스트 조회
+	@Override
+	public List<Map> findAllContest(int start, int size) {
+		// TODO Auto-generated method stub
+		return communityDAO.findAllContest(start, size);
+	}
 	
 	
 	

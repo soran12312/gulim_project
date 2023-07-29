@@ -246,7 +246,7 @@ section.notice {
                   </li>
                   <li class="nav-item"><a class="nav-link" href="./event_list">이벤트
                         게시판</a></li>
-                  <li class="nav-item"><a class="nav-link" href="./contest_main">공모전
+                  <li class="nav-item"><a class="nav-link" href="./contest_list">공모전
                         게시판</a></li>
                   <li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a>
                   </li>

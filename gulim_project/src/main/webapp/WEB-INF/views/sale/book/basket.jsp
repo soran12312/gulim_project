@@ -347,7 +347,9 @@ input:focus {
 												</td>
 												<td>
 													<div class="total">
-														<div class="price">${subscription.price * subscription.amount} </div>
+														<div class="price" data-price="${subscription.price * subscription.amount}">
+															${subscription.price * subscription.amount} 
+														</div>
 													</div>
 												</td>
 												<td>
@@ -389,7 +391,7 @@ input:focus {
 								</tbody>
 							</table>
 							<div class="btn-cart-totals">
-								<a href="#" class="update round-black-btn" title="">결제하기</a>
+								<a href="#" id="payment" class="update round-black-btn" title="">결제하기</a>
 								<!-- <a href="#" class="checkout round-black-btn" title="">Proceed to Checkout</a> -->
 							</div>
 							<!-- /.btn-cart-totals -->
@@ -426,6 +428,7 @@ input:focus {
 	                currentQty -= 1;
 	                qtyInput.val(currentQty);
 	                updateCartItem(qtyInput);
+	                updateTotalPrice(qtyInput);
 	            }
 	        });
 
@@ -436,6 +439,7 @@ input:focus {
 	            const newQty = currentQty + 1;
 	            qtyInput.val(newQty);
 	            updateCartItem(qtyInput);
+	            updateTotalPrice(qtyInput);
 	        });
 
 	        function updateCartItem(qtyInput) {
@@ -497,6 +501,47 @@ input:focus {
 	            }
 	        });
 	    }
+
+
+
+	    // +, -버튼 클릭시 가격변경
+	    function updateTotalPrice(qtyInput) {
+	        const priceCell = qtyInput.closest("tr").find(".price");
+	        const pricePerItem = parseInt(priceCell.attr("data-price")); // Get the price per item from the "data-price" attribute
+	        const newQty = parseInt(qtyInput.val());
+	        const totalPrice = pricePerItem * newQty;
+	        priceCell.text(totalPrice); // Update the total price in the table cell
+	    }
+
+
+	  // 결제하기 버튼 클릭 시
+	    $("#payment").on("click", function () {
+	        // Collect all subscription IDs and quantities from the cart
+	        const cartItems = [];
+	        $("tr").each(function () {
+	            const productId = $(this).find(".product-id").val();
+	            const quantity = parseInt($(this).find(".qty").val());
+	            cartItems.push({ sub_num: productId, amount: quantity });
+
+	            console.log(cartItems);
+	        });
+
+	        // Send the cart items to the server for payment and database update
+	        $.ajax({
+	            type: "POST",
+	            url: "/api/checkout",
+	            contentType: "application/json",
+	            data: JSON.stringify(cartItems),
+	            success: function (response) {
+	                alert("결제가 완료되었습니다.");
+	                location.reload(); // Reload the page to clear the cart after successful payment
+	            },
+	            error: function (xhr, status, error) {
+	                console.error("Error during payment: " + error);
+	                alert("결제 오류가 발생했습니다. 다시 시도해주세요.");
+	            },
+	        });
+	    });
 
 	</script>	
 		

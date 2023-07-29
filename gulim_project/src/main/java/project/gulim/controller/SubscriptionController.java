@@ -1,5 +1,6 @@
 package project.gulim.controller;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -184,7 +185,7 @@ public class SubscriptionController {
     
     
     
-    // 장바구니 삭제
+    // 장바구니 삭제버튼 클릭시
     @PostMapping("/delete-subscription")
     public boolean deleteQuantity(@RequestBody PurchaseDTO sub_num) {
     	try {
@@ -215,5 +216,20 @@ public class SubscriptionController {
     }
     
     
+    
+    
+    // 결제하기 버튼 클릭시
+    @PostMapping("/checkout")
+    public ResponseEntity<String> checkout(@RequestBody Map<Integer, Integer> requestData) {
+        
+
+        return ResponseEntity.ok("Checkout successful.");
+    }
+
+    
+
+    
+    
+    // sub_state가 1이되면 장바구니db 삭제
    
 }

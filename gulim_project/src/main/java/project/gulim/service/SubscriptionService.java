@@ -4,6 +4,7 @@ package project.gulim.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Flow.Subscription;
 
 import project.gulim.domain.PurchaseDTO;
 import project.gulim.domain.SubscribeDTO;
@@ -35,6 +36,12 @@ public interface SubscriptionService {
 
 	// 장바구니 삭제
 	public Integer deleteQuantity(PurchaseDTO sub_num);
+
+
+	
+	//
+	public SubscribeDTO getSubscriptionById(Integer subscriptionId);
+
 
 
 

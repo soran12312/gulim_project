@@ -20,6 +20,7 @@
 	crossorigin="anonymous" />
 
 <style>
+
 #product_area {
 	position: relative;
 	padding-top: 0;
@@ -174,6 +175,9 @@
 	width: 350px;
 	height: 350px;
 }
+
+
+
 </style>
 
 </head>
@@ -190,7 +194,7 @@
 					href="./free_board_list">자유게시판</a></li>
 				<li class="nav-item"><a class="nav-link" href="./event_list">이벤트게시판</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="./contest_main">공모전게시판</a>
+				<li class="nav-item"><a class="nav-link" href="./contest_list">공모전게시판</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a>
 				</li>
@@ -198,56 +202,61 @@
 		</div>
 	</nav>
 
-	<div class="product_item">
-		<div class="row">
+	<div class="product_item" >
+		<div class="row" style="overflow: auto; ">
+			<c:set var="eventsPerPage" value="6" />
+			<c:set var="startIndex" value="${(currentPage - 1) * eventsPerPage}" />
+			<c:set var="endIndex" value="${startIndex + eventsPerPage}" />
+			<c:forEach items="${events}" var="event" varStatus="loop">
+			  <c:if test="${loop.index >= startIndex && loop.index < endIndex}">
 
-
-			<c:forEach items="${events}" var="event">
-				<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
-					style="display: inline-block;" data-bound="">
-					<div class="single_product ${event.post_state == 1 ? 'complete' : ''}">
-						<c:set var="hasImage" value="false" />
-						<c:forEach items="${eventimages}" var="eventimage">
-							<c:if test="${eventimage.post_num == event.post_num}">
-								<c:set var="hasImage" value="true" />
-								<div class="product_image">
-									<c:choose>
-										<c:when test="${event.post_state == 1}">
-											<img class="resized-image"
-												src="/images/gulim/${eventimage.origin_img_name}.png"
-												onclick="return false;">
-											<input type="hidden" name="post_num"
-												value="${event.post_num}">
-										</c:when>
-										<c:otherwise>
-											<a href="./event_detail?post_num=${event.post_num}"> <img
-												class="resized-image"
-												src="/images/gulim/${eventimage.origin_img_name}.png">
-											</a>
-										</c:otherwise>
-									</c:choose>
+					<%-- <c:forEach items="${events}" var="event"> --%>
+						<div class="col-lg-4 col-md-4 col-sm-6 mix sale"
+							style="display: inline-block;" data-bound="">
+							<div class="single_product ${event.post_state == 1 ? 'complete' : ''}">
+								<c:set var="hasImage" value="false" />
+								<c:forEach items="${eventimages}" var="eventimage">
+									<c:if test="${eventimage.post_num == event.post_num}">
+										<c:set var="hasImage" value="true" />
+										<div class="product_image">
+											<c:choose>
+												<c:when test="${event.post_state == 1}">
+													<img class="resized-image"
+														src="/images/gulim/${eventimage.origin_img_name}.png"
+														onclick="return false;">
+													<input type="hidden" name="post_num"
+														value="${event.post_num}">
+												</c:when>
+												<c:otherwise>
+													<a href="./event_detail?post_num=${event.post_num}"> <img
+														class="resized-image"
+														src="/images/gulim/${eventimage.origin_img_name}.png">
+													</a>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</c:if>
+								</c:forEach>
+								<!-- Show the "noimage" placeholder if there are no images for the event -->
+								<c:if test="${not hasImage}">
+									<div class="product_image">
+										<img class="resized-image" src="/files/images/no_image.jpg"
+											onclick="return false;"> <input type="hidden"
+											name="post_num" value="${event.post_num}">
+									</div>
+								</c:if>
+								<div class="product_btm_text">
+									<h4>
+										<a href="./event_detail?post_num=${event.post_num}"
+											${event.post_state == 1 ? 'onclick="return false;"' : ''}>${event.post_title}</a>
+									</h4>
 								</div>
-							</c:if>
-						</c:forEach>
-						<!-- Show the "noimage" placeholder if there are no images for the event -->
-						<c:if test="${not hasImage}">
-							<div class="product_image">
-								<img class="resized-image" src="/files/images/no_image.jpg"
-									onclick="return false;"> <input type="hidden"
-									name="post_num" value="${event.post_num}">
 							</div>
-						</c:if>
-						<div class="product_btm_text">
-							<h4>
-								<a href="./event_detail?post_num=${event.post_num}"
-									${event.post_state == 1 ? 'onclick="return false;"' : ''}>${event.post_title}</a>
-							</h4>
 						</div>
-					</div>
-				</div>
-			</c:forEach>
+					<%-- </c:forEach> --%>
 
-
+					  </c:if>
+				</c:forEach>
 
 
 
@@ -279,6 +288,7 @@
 			</c:if>
 
 
+			
 
 			<!-- Add more product items here -->
 			<!-- <div class="col-lg-4 col-md-4 col-sm-6 mix sale"
@@ -383,7 +393,30 @@
 				</div>
 			</div> -->
 
+		<!-- Pagination Links -->
+		    <div class="text-center">
+		        <c:if test="${currentPage > 1}">
+		            <a class="btn btn-primary" href="./event_list?page=${currentPage - 1}">Previous</a>
+		        </c:if>
+		
+		        <c:forEach begin="1" end="${totalPages}" var="pageNum">
+		            <c:choose>
+		                <c:when test="${pageNum == currentPage}">
+		                    <span class="btn btn-primary">${pageNum}</span>
+		                </c:when>
+		                <c:otherwise>
+		                    <a class="btn btn-outline-primary" href="./event_list?page=${pageNum}">${pageNum}</a>
+		                </c:otherwise>
+		            </c:choose>
+		        </c:forEach>
+		
+		        <c:if test="${currentPage < totalPages}">
+		            <a class="btn btn-primary" href="./event_list?page=${currentPage + 1}">Next</a>
+		        </c:if>
+		    </div>
 		</div>
+		
+		
 	</div>
 
 </body>

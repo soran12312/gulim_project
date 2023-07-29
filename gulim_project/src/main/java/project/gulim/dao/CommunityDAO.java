@@ -2,6 +2,7 @@ package project.gulim.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -79,6 +80,22 @@ public interface CommunityDAO {
 
 	// 공지사항 이미지
 	public List<ImageDTO> findAllAnnounceImg();
+
+
+	// 이미지 삭제
+	public void deleteImageById(Integer img_num);
+
+
+	// 이미지 아이디값 가져오기
+	public List<ImageDTO> getImagesByPostId(Integer post_num);
+
+
+	// 이벤트 게시글 수
+	public int countEvent();
+
+
+	// 공모전 리스트
+	public List<Map> findAllContest(int start, int size);
 
 
 	
