@@ -1,9 +1,6 @@
 package project.gulim.controller;
 
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import project.gulim.domain.ImageDTO;
-import project.gulim.domain.ImageDTO;
+import project.gulim.domain.MemberDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.Customer_service;
-import project.gulim.service.Customer_serviceImpl;
 import project.gulim.service.MainService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -34,25 +29,26 @@ public class Customer_serviceController {
 	private MainService mainService;
 	
 	@RequestMapping("/main")
-	public String main(HttpServletRequest request,Model m) {
+	public String main(HttpServletRequest request,Model m,MemberDTO member) {
 		
 		
 		Cookie[] cookies = request.getCookies();
-        String id = null;
-        
-        if (cookies != null) {
+	    String jwtToken = null;
+	    
+	    if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
-                    id = cookie.getValue();
+                    jwtToken = cookie.getValue();
                     break;
                 }
             }
         }
-        if (id != null) {
-        System.out.println(id);
-        m.addAttribute("id", id);
-        }
-
+	    
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);
+	    member.setId(id);
+	    m.addAttribute("member", member);
+	    System.out.println(member);
 	return "/customer_service/main";
 	}
 	
@@ -72,7 +68,7 @@ public class Customer_serviceController {
         }
 	    
 	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
+	    String id = claims.get("id", String.class);
 	    questionDTO.setId(id);
 	    m.addAttribute("questionDTO", questionDTO);
 			

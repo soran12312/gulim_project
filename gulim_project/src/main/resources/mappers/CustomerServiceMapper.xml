@@ -15,4 +15,10 @@
 		SELECT manager FROM member WHERE id = #{id}
 	</select>
 	
+	
+	<select id="main">
+		
+		SELECT id FROM member WHERE id=#{id}
+	</select>
+	
 </mapper>

@@ -131,10 +131,10 @@
             $(".popup_overlay").hide();
             $(".popup_reco").hide();
         });
-
+      
         $(".question_btn").click(function() {
-            
-            var id = "${id}"; // 서버에서 전달한 id 값을 가져옴
+            var id = $(".member_id").val();
+            // 서버에서 전달한 id 값을 가져옴
             console.log(id);
             // id 값을 붙혀서 보낼 URL 생성
             var url = "https://192.168.0.68:3000/customerchat/" + id;
@@ -157,7 +157,7 @@
     <div class="qusetion_line"><hr></div>
     <div class="question_question">고객 센터</div>
 
-
+    <input type="hidden" value="${member.id}" name="member_id" class="member_id">
     
             <div class="question_head_first">★자주 찾는 문의 사항★</div>
             <div class="question_head_second">★다른 도움이 필요하신가요?★</div>

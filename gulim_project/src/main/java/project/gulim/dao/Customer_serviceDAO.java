@@ -1,11 +1,8 @@
 package project.gulim.dao;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 
-import project.gulim.domain.ImageDTO;
+import project.gulim.domain.MemberDTO;
 import project.gulim.domain.QuestionDTO;
 
 @Mapper
@@ -15,6 +12,6 @@ public interface Customer_serviceDAO {
 	
 	public Integer isManager(String id);
 	
-	
+	public void main(MemberDTO member);
 
 }
