@@ -36,22 +36,23 @@ public class Customer_serviceController {
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request,Model m) {
 		
+		
 		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
+        String id = null;
+        
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
+                    id = cookie.getValue();
                     break;
                 }
             }
         }
-	    
-	    Claims claims = mainService.getClaims(jwtToken);
-	    String id = claims.get("id", String.class);  	    
-	    m.addAttribute("id",id);
-		System.out.println(id);
+        if (id != null) {
+        System.out.println(id);
+        m.addAttribute("id", id);
+        }
+
 	return "/customer_service/main";
 	}
 	
@@ -111,7 +112,6 @@ public class Customer_serviceController {
 	@RequestMapping("/customer_chat")
 	@ResponseBody
 	public Integer chating(@RequestParam String id){
-		
 		
 		System.out.println(">>>>>>불림");
 		Integer manager = customer_service.isManager(id);

@@ -5,13 +5,13 @@
 <mapper namespace="project.gulim.dao.OfflineDAO">
 
 	<select id="mapMarker" resultType="PlaceDTO" parameterType="PlaceDTO">
-		select * from place		
+		SELECT * FROM place		
 	</select>
 
 
 	<select id="showPartnership" resultType="PlaceDTO" parameterType="PlaceDTO">
 		
-		select place_name,place_address,tel,latitude,longitude from place where partnership = 1;
+		SELECT place_name,place_address,tel,latitude,longitude FROM place Where partnership = 1;
 		
 	</select>
 

@@ -132,10 +132,16 @@
             $(".popup_reco").hide();
         });
 
-        // $("#question_btn").click(function(){
+        $(".question_btn").click(function() {
+            
+            var id = "${id}"; // 서버에서 전달한 id 값을 가져옴
+            console.log(id);
+            // id 값을 붙혀서 보낼 URL 생성
+            var url = "https://192.168.0.68:3000/customerchat/" + id;
 
-        //     window.location.href = "https://192.168.0.68:3000/customerchat/"+id;
-        //     });
+            // 새로운 URL로 이동
+            window.location.href = url;
+        });
       });
 
     </script>
@@ -149,10 +155,6 @@
     <div class="qusetion_lines"><hr></div>
 
     <div class="qusetion_line"><hr></div>
-
-    <c:foreach items="${id}" var="id">
-        
-    </c:foreach>
     <div class="question_question">고객 센터</div>
 
 
@@ -191,9 +193,9 @@
                     <td>문의 사항 남기기</td>
                     </thead>
             <td>
-                <a href="https://localhost:3000/customerchat/${id.id}"><button class="question_btn" id="question_btn">
+               <button class="question_btn" id="question_btn">
                     <img src="/files/images/고객문의2.png"/>
-                </button></a>
+                </button>
 
                 <a href="https://192.168.0.68:8080/customer_service/question"><button class="question_btns">
                     <img src="/files/images/고객문의.png"/>
