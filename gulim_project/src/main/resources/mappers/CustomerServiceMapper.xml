@@ -11,8 +11,8 @@
 					
 	</insert>
 	
-	<select id="chat" resultType="map">
-		select `path` from image where id = #{id}
+	<select id="isManager" resultType="Integer">
+		select manager from member where id = #{id}
 	</select>
 	
 </mapper>

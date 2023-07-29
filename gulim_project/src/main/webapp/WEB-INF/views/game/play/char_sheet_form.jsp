@@ -25,7 +25,7 @@ $(function(){
 
 		$("#char_propensity").val(char_propensity);
 
-		var char_etc = $("#etc1") +"\n"+ $("#etc2") +"\n"+ $("#etc3") +"\n"+ $("#etc4");
+		var char_etc = "인격특성 : "+$("#etc1").val() +"\n이상 : "+ $("#etc2").val() +"\n유대 : "+ $("#etc3").val() +"\n단점 : "+ $("#etc4").val();
 
 		$("#char_etc").val(char_etc);
 	});
@@ -38,7 +38,7 @@ $(function(){
 <div class="loginmain_wallpaper">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 <div class="char_sheet_form">
-	<form action="" id="char_sheet_form">
+	<form action="/game/play/insertJoin" id="char_sheet_form">
 	<input type="hidden" name="char_propensity" id="char_propensity">
 	<input type="hidden" name="char_etc" id="char_etc">
 	<input type="hidden" name="room_num" value="${room_num}">
@@ -62,44 +62,43 @@ $(function(){
 		<input class="intel" type="text" placeholder="지능" name="intelligence">
 		<input class="wis" type="text" placeholder="지혜" name="wis">
 		<input class="chr" type="text" placeholder="매력" name="chr">
-		<input class="char_gold" type="text" placeholder="소지금" name="money">
+		<input class="char_gold" type="number" placeholder="소지금" name="money">
 		<!-- <textarea class="char_skill" placeholder="기술&주문" name=""></textarea> -->
 		<div class="skilldiv">
-			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
-			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
-			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
-			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
-			<label for="skill_name">기술명 : </label><input name="skill_name"></br>
-			<label for="skill_detail">기술 상세 : </label><input name="skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skills[0].skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skills[0].skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skills[1].skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skills[1].skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skills[2].skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skills[2].skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skills[3].skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skills[3].skill_detail" class= "skillpadding"></br>
+			<label for="skill_name">기술명 : </label><input name="skills[4].skill_name"></br>
+			<label for="skill_detail">기술 상세 : </label><input name="skills[4].skill_detail" class= "skillpadding"></br>
 		</div>
 		<!-- <textarea class="char_inven" placeholder="장비&인벤토리" name=""></textarea> -->
 		<table class= "itemtable">
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[0].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[0].item_amount" class= "item_amount">
 				</td>
 				<td class="tdkg">무게</td>
-				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+				<td colspan="2" class="tdkg_input">
+					<input min="1" type="number" name="items[0].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[0].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[0].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>
@@ -110,25 +109,24 @@ $(function(){
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[1].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[1].item_amount" class= "item_amount">
 				</td>
 				<td class="tdkg">무게</td>
-				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+				<td colspan="2" class="tdkg_input">
+					<input min="1" type="number" name="items[1].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[1].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[1].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>
@@ -139,25 +137,24 @@ $(function(){
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[2].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[2].item_amount" class= "item_amount">
 				</td>
 				<td class="tdkg">무게</td>
-				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+				<td colspan="2" class="tdkg_input">
+					<input min="1" type="number" name="items[2].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[2].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[2].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>
@@ -168,25 +165,24 @@ $(function(){
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[3].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[3].item_amount" class= "item_amount">
 				</td>
 				<td class="tdkg">무게</td>
-				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+				<td colspan="2" class="tdkg_input">
+					<input min="1" type="number" name="items[3].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[3].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[3].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>
@@ -197,25 +193,24 @@ $(function(){
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[4].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[4].item_amount" class= "item_amount">
 				</td>
-				<td class="tdkg">무게</td>
+				<td colspan="2" class="tdkg">무게</td>
 				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+					<input min="1" type="number" name="items[4].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[4].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[4].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>
@@ -226,25 +221,24 @@ $(function(){
 			<tr>
 				<td class="tdname">이름</td>
 				<td colspan="2" class="tdname_input">
-					<input type="text" name="item_name" class= "item_name">
+					<input type="text" name="items[5].item_name" class= "item_name">
 				</td>
 				<td class="tdcount">수량</td>
 				<td class="tdcount_input">
-					<input type="number" name="item_amount" class= "item_amount">
+					<input min="1" type="number" name="items[5].item_amount" class= "item_amount">
 				</td>
 				<td class="tdkg">무게</td>
-				<td class="tdkg_input">
-					<input type="number" name="item_weight" class= "item_weight">
+				<td colspan="2" class="tdkg_input">
+					<input min="1" type="number" name="items[5].item_weight" class= "item_weight">
 				</td>
-				<td class="tdkg">kg</td>
 			</tr>
 			<tr>
 				<td colspan="1" class="tdinfo">상세</td>
 				<td colspan="5" class="tdinfo_input">
-					<input type="text" name="item_detail" class= "item_detail">
+					<input type="text" name="items[5].item_detail" class= "item_detail">
 				</td>
 				<td colspan="2" class="tdselect">
-					<select name="equip_state" class="tdselect_select">
+					<select name="items[5].equip_state" class="tdselect_select">
 						<option value=1>장착중</option>
 						<option value=0>미장착</option>
 					</select>

@@ -20,6 +20,7 @@ import project.gulim.domain.ImageDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.Customer_service;
+import project.gulim.service.Customer_serviceImpl;
 import project.gulim.service.MainService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
@@ -90,14 +91,15 @@ public class Customer_serviceController {
 		return "/mypage/my_question";
 	}
 	
-	@RequestMapping("/CustomerChat")
+	@RequestMapping("/customer_chat")
 	@ResponseBody
-	public List<Map> chating(HttpServletRequest request,ImageDTO imageDTO,@RequestParam String id){
-			
-		List<Map> list = customer_service.chat(imageDTO);
-		System.out.println(">>>>>>불림");
+	public Integer chating(@RequestParam String id){
+		System.out.println(id);
 		
-		return list;
+		System.out.println(">>>>>>불림");
+		Integer manager = customer_service.isManager(id);
+		
+		return manager;
 	}
 	
 	

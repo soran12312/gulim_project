@@ -2,6 +2,7 @@ package project.gulim.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,12 +24,18 @@ import io.jsonwebtoken.Claims;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.Data;
 
 import java.io.File;
 import java.io.IOException;
+
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.InventoryDTO;
+import project.gulim.domain.ItemDTO;
 import project.gulim.domain.JoinDTO;
+import project.gulim.domain.SkillDTO;
 import project.gulim.domain.SupportImgBoardDTO;
 import project.gulim.domain.TagDTO;
 import project.gulim.service.GameService;
@@ -88,6 +96,69 @@ public class GameController {
 		
 		return "/game/play/char_sheet_form";
 	}
+	
+	@RequestMapping("/play/insertJoin")
+	@Transactional
+	public String insertJoin(CharacterSheetDTO c, @ModelAttribute SkillDTOList skillListWrapper, JoinDTO j, @ModelAttribute ItemDTOList itemListWrapper, InventoryDTO i) {
+
+	    List<SkillDTO> skillList = skillListWrapper.getSkills();
+	    List<ItemDTO> itemList = itemListWrapper.getItems();
+
+	    System.out.println("CharacterSheetDTO"+c);
+	    System.out.println("SkillDTO"+skillList);
+	    System.out.println("JoinDTO"+j);
+	    System.out.println("ItemDTO"+itemList);
+	    System.out.println("InventoryDTO"+i);
+	    
+	    String id = this.getId();
+	    
+	    j.setId(id);
+	    
+	    Integer join_num = gameService.insert_join(j);
+	    
+	    c.setJoin_num(join_num);
+	    i.setJoin_num(join_num);
+	    
+	    Integer sheet_num = gameService.insert_sheet(c);
+	    Integer inventory_num = gameService.insert_inventory(i);
+	    
+	    for(SkillDTO skill : skillList) {
+	    	skill.setSheet_num(sheet_num);
+	    	
+	    	if(!(skill.getSkill_name().equals("") && skill.getSkill_detail().equals(""))) {
+	    		gameService.insert_skill(skill);
+	    	}
+	    }
+	    
+	    for(ItemDTO item : itemList) {
+	    	item.setInventory_num(inventory_num);
+	    	
+	    	if(!(item.getItem_name().equals("") && item.getItem_detail().equals(""))) {
+	    		gameService.insert_item(item);
+	    	}
+	    	
+	    }
+
+	    return "/game/play/room_list";
+	}
+	
+	@Data
+	public static class SkillDTOList {
+        private List<SkillDTO> skills;
+        
+        public SkillDTOList() {
+            this.skills = new ArrayList<>();
+        }
+    }
+
+	@Data
+    public static class ItemDTOList {
+        private List<ItemDTO> items;
+        
+        public ItemDTOList() {
+            this.items = new ArrayList<>();
+        }
+    }
 	
 	@RequestMapping("/play/room_detail")
 	public String room_detail(Integer room_num, Model m) {
@@ -175,7 +246,7 @@ public class GameController {
 			}
 		}
 		
-		if(hashtag != null) {
+		if(!hashtag.equals("")) {
 			String[] tag_contents = hashtag.split(",");
 			for(String tag_content : tag_contents) {
 				TagDTO tag = new TagDTO();

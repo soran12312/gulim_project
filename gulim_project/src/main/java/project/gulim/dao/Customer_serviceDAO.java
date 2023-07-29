@@ -13,7 +13,7 @@ public interface Customer_serviceDAO {
 	
 	public void send_question(QuestionDTO questionDTO);
 	
-	public List<Map> chat(ImageDTO imageDTO);
+	public Integer isManager(String id);
 	
 	
 

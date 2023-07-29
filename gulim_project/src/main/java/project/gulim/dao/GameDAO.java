@@ -6,9 +6,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.InventoryDTO;
+import project.gulim.domain.ItemDTO;
 import project.gulim.domain.JoinDTO;
+import project.gulim.domain.SkillDTO;
 import project.gulim.domain.SupportImgBoardDTO;
 import project.gulim.domain.TagDTO;
 
@@ -27,4 +31,9 @@ public interface GameDAO {
 	public List<HashMap> support_data();
 	public Integer etc(HashMap map);
 	public void etc2(SupportImgBoardDTO dto);
+	public void insert_join(JoinDTO join);
+	public void insert_sheet(CharacterSheetDTO cs);
+	public void insert_inventory(InventoryDTO inv);
+	public void insert_skill(SkillDTO skill);
+	public void insert_item(ItemDTO item);
 }

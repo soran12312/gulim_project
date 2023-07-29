@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.gulim.dao.GameDAO;
+import project.gulim.domain.CharacterSheetDTO;
 import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.InventoryDTO;
+import project.gulim.domain.ItemDTO;
 import project.gulim.domain.JoinDTO;
+import project.gulim.domain.SkillDTO;
 import project.gulim.domain.SupportImgBoardDTO;
 import project.gulim.domain.TagDTO;
 
@@ -84,6 +88,36 @@ public class GameServiceImpl implements GameService {
 	}
 	public Integer etc(HashMap map) {
 		return gameDAO.etc(map);
+	}
+
+	@Override
+	public Integer insert_join(JoinDTO join) {
+		gameDAO.insert_join(join);
+		return join.getJoin_num();
+	}
+
+	@Override
+	public Integer insert_sheet(CharacterSheetDTO cs) {
+		gameDAO.insert_sheet(cs);
+		return cs.getSheet_num();
+	}
+
+	@Override
+	public Integer insert_inventory(InventoryDTO inv) {
+		gameDAO.insert_inventory(inv);
+		return inv.getInventory_num();
+	}
+
+	@Override
+	public void insert_skill(SkillDTO skill) {
+		
+		gameDAO.insert_skill(skill);
+	}
+
+	@Override
+	public void insert_item(ItemDTO item) {
+		
+		gameDAO.insert_item(item);
 	}
 
 

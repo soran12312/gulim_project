@@ -44,6 +44,33 @@
 		WHERE room_num = #{room_num}
 	</select>
 	
+	<insert id="insert_join" parameterType="JoinDTO" useGeneratedKeys="true" keyProperty="join_num">
+		INSERT INTO `join`(room_num, id)
+		VALUES (#{room_num}, #{id})
+	</insert>
+	
+	<insert id="insert_sheet" parameterType="CharacterSheetDTO" useGeneratedKeys="true" keyProperty="sheet_num">
+		INSERT INTO character_sheet(join_num, char_name, char_propensity, char_class, species, str, dex, con, intelligence, wis, chr, char_explain, char_etc)
+		VALUES (#{join_num}, #{char_name}, #{char_propensity}
+		, #{char_class}, #{species}, #{str}, #{dex}, #{con}
+		, #{intelligence}, #{wis}, #{chr}, #{char_explain}, #{char_etc})
+	</insert>
+	
+	<insert id="insert_inventory" parameterType="InventoryDTO" useGeneratedKeys="true" keyProperty="inventory_num">
+		INSERT INTO inventory(join_num, money)
+		VALUES (#{join_num}, #{money})
+	</insert>
+	
+	<insert id="insert_skill" parameterType="SkillDTO">
+		INSERT INTO skill(sheet_num, skill_name, skill_detail)
+		VALUES (#{sheet_num}, #{skill_name}, #{skill_detail})
+	</insert>
+	
+	<insert id="insert_item" parameterType="ItemDTO">
+		INSERT INTO item(inventory_num, item_name, item_amount, item_weight, item_detail, equip_state)
+		VALUES (#{inventory_num}, #{item_name}, #{item_amount}, #{item_weight}, #{item_detail}, #{equip_state})
+	</insert>
+	
 	<select id="select_join" parameterType="JoinDTO" resultType="Integer">
 		SELECT join_num FROM `join`
 		WHERE id = #{id} AND room_num = #{room_num} AND join_state != 2
