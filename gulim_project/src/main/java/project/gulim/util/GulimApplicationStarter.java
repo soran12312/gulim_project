@@ -4,7 +4,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class PollingMariaDB {
+import project.gulim.GulimProjectApplication;
+
+public class GulimApplicationStarter {
 	private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public static void startPolling() {
@@ -12,7 +14,9 @@ public class PollingMariaDB {
             public void run() {
                 // 데이터베이스에서 데이터를 읽고 ElasticSearch에 색인하는 코드
                 MariaDBToElasticSearch_Survey indexer = new MariaDBToElasticSearch_Survey();
+                MariaDBToElasticSearch_CharacterSheet indexer2 = new MariaDBToElasticSearch_CharacterSheet();
                 indexer.indexDataFromMariaDB();
+                indexer2.indexDataFromMariaDB();
             }
         };
 
@@ -22,5 +26,8 @@ public class PollingMariaDB {
 
     public static void main(String[] args) {
         startPolling();
+        
+        // 다른 패키지의 main 메소드를 실행
+        GulimProjectApplication.main(args);
     }
 }

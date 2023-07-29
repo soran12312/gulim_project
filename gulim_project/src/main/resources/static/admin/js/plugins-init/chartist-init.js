@@ -454,121 +454,226 @@
 	    },responsiveOptions);
 	}
 
-	var names2 = [];
-	var data2 = {
-		series: []
-	};
-
-	var tableRows_preferredPropensitye = document.querySelectorAll(".pfsTable tbody tr");
-		for (var i = 0; i < tableRows_preferredPropensitye.length; i++) {
-			var char_propensity = tableRows_preferredPropensitye[i].querySelector("td:nth-child(1)").textContent;
-			var count_char_propensity = parseInt(tableRows_preferredPropensitye[i].querySelector("td:nth-child(2)").textContent);
-			names2.push(char_propensity);
-	     	data2.series.push(count_char_propensity);
-		}
-	createChart2();
+	fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	    .then(response => response.json())
+	    .then(data => {
+	        // 'data' is an array of documents
+	        const frequencyMap = {};
+	
+	        // Assuming that the server response has a 'data' key that contains the actual data
+	        data.data_cs.forEach(item => {
+	            let rull = item.char_propensity; // No need for a loop if other_site is a string
+			    // If the 'rull' is not in the map, add it with a count of 1
+			    if (!(rull in frequencyMap)) {
+			        frequencyMap[rull] = 1;
+			    }
+			    // Otherwise, increment the count
+			    else {
+			        frequencyMap[rull]++;
+			    }
+	        });
+	
+	        // Now create the labels and series arrays
+	        let labels = Object.keys(frequencyMap);
+	        let series = labels.map(label => frequencyMap[label]);
+	
+	        // Sort by frequency, in descending order
+	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
+	        labels = sortedIndices.map(index => labels[index]);
+	        series = sortedIndices.map(index => series[index]);
+	
+	        // Keep only top 5 and group the rest into 'others'
+	        if (labels.length > 5) {
+	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
+	            labels = labels.slice(0, 5);
+	            series = series.slice(0, 5);
+	            labels.push('기타');
+	            series.push(otherCount);
+	        }
+	
+	        // Make sure the chart is created only after the data processing is complete
+	        createChart2(labels, series);
+	    });
 
 
 	$('.flavorButton').on('click', '.btn-pfs', function(e) {
-		names2 = [];
-		data2 = {
-			series: []
-		};
-		
-		$('#class-select').addClass('hide-class-select');
-
-		var tableRows_preferredPropensitye = document.querySelectorAll(".pfsTable tbody tr");
-		for (var i = 0; i < tableRows_preferredPropensitye.length; i++) {
-			var char_propensity = tableRows_preferredPropensitye[i].querySelector("td:nth-child(1)").textContent;
-			var count_char_propensity = parseInt(tableRows_preferredPropensitye[i].querySelector("td:nth-child(2)").textContent);
-			names2.push(char_propensity);
-	     	data2.series.push(count_char_propensity);
-		}
-		createChart2();
+		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	    .then(response => response.json())
+	    .then(data => {
+	        // 'data' is an array of documents
+	        const frequencyMap = {};
+	
+	        // Assuming that the server response has a 'data' key that contains the actual data
+	        data.data_cs.forEach(item => {
+	            let rull = item.char_propensity; // No need for a loop if other_site is a string
+			    // If the 'rull' is not in the map, add it with a count of 1
+			    if (!(rull in frequencyMap)) {
+			        frequencyMap[rull] = 1;
+			    }
+			    // Otherwise, increment the count
+			    else {
+			        frequencyMap[rull]++;
+			    }
+	        });
+	
+	        // Now create the labels and series arrays
+	        let labels = Object.keys(frequencyMap);
+	        let series = labels.map(label => frequencyMap[label]);
+	
+	        // Sort by frequency, in descending order
+	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
+	        labels = sortedIndices.map(index => labels[index]);
+	        series = sortedIndices.map(index => series[index]);
+	
+	        // Keep only top 5 and group the rest into 'others'
+	        if (labels.length > 5) {
+	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
+	            labels = labels.slice(0, 5);
+	            series = series.slice(0, 5);
+	            labels.push('기타');
+	            series.push(otherCount);
+	        }
+	
+	        // Make sure the chart is created only after the data processing is complete
+	        createChart2(labels, series);
+	    });
 	});
-
+	
 	$('.flavorButton').on('click', '.btn-pfc', function(e) {
-		names2 = [];
-		data2 = {
-			series: []
-		};
-		
-		$('#class-select').addClass('hide-class-select');
-
-		var tableRows_preferredClass = document.querySelectorAll(".pfcTable tbody tr");
-		for (var i = 0; i < tableRows_preferredClass.length; i++) {
-			var char_class = tableRows_preferredClass[i].querySelector("td:nth-child(1)").textContent;
-			var count_char_class = parseInt(tableRows_preferredClass[i].querySelector("td:nth-child(2)").textContent);
-			names2.push(char_class);
-	     	data2.series.push(count_char_class);
-		}
-		createChart2();
+		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	    .then(response => response.json())
+	    .then(data => {
+	        // 'data' is an array of documents
+	        const frequencyMap = {};
+	
+	        // Assuming that the server response has a 'data' key that contains the actual data
+	        data.data_cs.forEach(item => {
+	            let rull = item.char_class; // No need for a loop if other_site is a string
+			    // If the 'rull' is not in the map, add it with a count of 1
+			    if (!(rull in frequencyMap)) {
+			        frequencyMap[rull] = 1;
+			    }
+			    // Otherwise, increment the count
+			    else {
+			        frequencyMap[rull]++;
+			    }
+	        });
+	
+	        // Now create the labels and series arrays
+	        let labels = Object.keys(frequencyMap);
+	        let series = labels.map(label => frequencyMap[label]);
+	
+	        // Sort by frequency, in descending order
+	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
+	        labels = sortedIndices.map(index => labels[index]);
+	        series = sortedIndices.map(index => series[index]);
+	
+	        // Keep only top 5 and group the rest into 'others'
+	        if (labels.length > 5) {
+	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
+	            labels = labels.slice(0, 5);
+	            series = series.slice(0, 5);
+	            labels.push('기타');
+	            series.push(otherCount);
+	        }
+	
+	        // Make sure the chart is created only after the data processing is complete
+	        createChart2(labels, series);
+	    });
 	});
 
 	$('.flavorButton').on('click', '.btn-pfsp', function(e) {
-		names2 = [];
-		data2 = {
-			series: []
-		};
-		
-		$('#class-select').addClass('hide-class-select');
-
-		var tableRows_preferredSpecies = document.querySelectorAll(".pfspTable tbody tr");
-		for (var i = 0; i < tableRows_preferredSpecies.length; i++) {
-			var species = tableRows_preferredSpecies[i].querySelector("td:nth-child(1)").textContent;
-			var count_species = parseInt(tableRows_preferredSpecies[i].querySelector("td:nth-child(2)").textContent);
-			names2.push(species);
-	     	data2.series.push(count_species);
-		}
-		createChart2();
+		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	    .then(response => response.json())
+	    .then(data => {
+	        // 'data' is an array of documents
+	        const frequencyMap = {};
+	
+	        // Assuming that the server response has a 'data' key that contains the actual data
+	        data.data_cs.forEach(item => {
+	            let rull = item.species; // No need for a loop if other_site is a string
+			    // If the 'rull' is not in the map, add it with a count of 1
+			    if (!(rull in frequencyMap)) {
+			        frequencyMap[rull] = 1;
+			    }
+			    // Otherwise, increment the count
+			    else {
+			        frequencyMap[rull]++;
+			    }
+	        });
+	
+	        // Now create the labels and series arrays
+	        let labels = Object.keys(frequencyMap);
+	        let series = labels.map(label => frequencyMap[label]);
+	
+	        // Sort by frequency, in descending order
+	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
+	        labels = sortedIndices.map(index => labels[index]);
+	        series = sortedIndices.map(index => series[index]);
+	
+	        // Keep only top 5 and group the rest into 'others'
+	        if (labels.length > 5) {
+	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
+	            labels = labels.slice(0, 5);
+	            series = series.slice(0, 5);
+	            labels.push('기타');
+	            series.push(otherCount);
+	        }
+	
+	        // Make sure the chart is created only after the data processing is complete
+	        createChart2(labels, series);
+	    });
 	});
 	
 	$('.flavorButton').on('click', '.btn-pfst', function(e){
-		names2 = [];
-		data2 = {
-			series: []
-		};
 		
 		$('#class-select').removeClass('hide-class-select');
 		
 		var char_class = $('#class-select option:first').val();
 		
-		$.ajax({
-				// 경로
-				url: "/admin/game_stats",
-				// 전송방식: POST
-				method: "POST",
-				// JSON data를 string으로 변환
-				data: JSON.stringify({char_class: char_class}),
-				// data 전송할 때의 타입
-				contentType:"application/json; charset=UTF-8",
-				// 성공할 시
-				success: function(response){
-										console.log(response)
-					names2 = [];
-					data2 = {
-						series: []
-					};
-					console.log(response);
-					names2.push('힘');
-					data2.series.push(response[0].avg_str);
-					names2.push('민첩');
-					data2.series.push(response[0].avg_dex);
-					names2.push('체력');
-					data2.series.push(response[0].avg_con);
-					names2.push('지능');
-					data2.series.push(response[0].avg_intelligence);
-					names2.push('지혜');
-					data2.series.push(response[0].avg_wis);
-					names2.push('매력');
-				    data2.series.push(response[0].avg_chr);
-					createChart2();
-
-				},
-				error: function(xhr, status, error){
-					alert('실패'+ error);
+		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	    .then(response => response.json())
+	    .then(data => {
+	        // 'data' is an array of documents
+	        const frequencyMap = {};
+	
+	        // Assuming that the server response has a 'data' key that contains the actual data
+	        data.data_cs.forEach(item => {
+	            let charClass = item.char_class; // No need for a loop if other_site is a string
+	            
+	            if(charClass == char_class){
+					// charClass와 char_class의 값이 같을 경우 해당 특성을 가져옵니다.
+	                let str = item.str;
+	                let dex = item.dex;
+	                let con = item.con;
+	                let intelligence = item.intelligence;
+	                let wis = item.wis;
+	                let chr = item.chr;
+					
 				}
-			});
+	        });
+	
+	        // Now create the labels and series arrays
+	        let labels = Object.keys(frequencyMap);
+	        let series = labels.map(label => frequencyMap[label]);
+	
+	        // Sort by frequency, in descending order
+	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
+	        labels = sortedIndices.map(index => labels[index]);
+	        series = sortedIndices.map(index => series[index]);
+	
+	        // Keep only top 5 and group the rest into 'others'
+	        if (labels.length > 5) {
+	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
+	            labels = labels.slice(0, 5);
+	            series = series.slice(0, 5);
+	            labels.push('기타');
+	            series.push(otherCount);
+	        }
+	
+	        // Make sure the chart is created only after the data processing is complete
+	        createChart2(labels, series);
+	    });
 		
 		
 		$('.card-body').on('change', '#class-select', function(e) {
@@ -617,17 +722,25 @@
 	
 	
 
-	function createChart2() {
-		var sum = function(a, b) {
-			return a + b;
-		};
-
-		new Chartist.Pie('#simple-pie2', data2, {
-			labelInterpolationFnc: function(value, idx) {
-				var percentage = ((value / data2.series.reduce(sum)) * 100).toFixed(1) + '%';
-				return names2[idx] + '\n' + percentage;
-			}
-		}, responsiveOptions);
+	function createChart2(labels, series) {
+	    var sum = function(a, b) {
+	        return a + b;
+	    };
+	
+	    var data = {
+	        labels: labels,
+	        series: series
+	    };
+	    
+	    console.log(data);
+	
+	    new Chartist.Pie('#simple-pie2', data, {
+	        labelInterpolationFnc: function(value, idx) {
+				console.log(value);
+	            var percentage = ((data.series[idx] / data.series.reduce(sum)) * 100).toFixed(1) + '%';
+	            return data.labels[idx] + '\n' + percentage;
+	        }
+	    },responsiveOptions);
 	}
 
 

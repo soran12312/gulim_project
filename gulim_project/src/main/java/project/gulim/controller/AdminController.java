@@ -629,7 +629,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/game_stats/survey", method=RequestMethod.GET)
-	public ResponseEntity<Object> getChartData() {
+	public ResponseEntity<Object> getChartData_survey() {
 	    Map<String, Object> data = new HashMap<>();
 
 	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
@@ -648,6 +648,37 @@ public class AdminController {
 	        // 클라이언트가 차트를 그리기 위해 필요한 데이터 형식으로 변환합니다.
 	        // 아래 코드는 모든 document를 배열로 반환하는 예시입니다.
 	        data.put("data", Arrays.stream(hits.getHits())
+	                               .map(SearchHit::getSourceAsMap)
+	                               .collect(Collectors.toList()));
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+
+	    return ResponseEntity.ok(data);
+	}
+	
+	@RequestMapping(value="/game_stats/character_sheet", method=RequestMethod.GET)
+	public ResponseEntity<Object> getChartData_characterSheet() {
+	    Map<String, Object> data = new HashMap<>();
+
+	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
+
+	        SearchRequest searchRequest = new SearchRequest("character_sheet");
+	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+	        // ElasticSearch에 적절한 쿼리를 입력하여 필요한 데이터만 가져옵니다.
+	        // 아래 코드는 모든 데이터를 가져오는 예시입니다.
+	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+
+	        searchRequest.source(searchSourceBuilder);
+	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+	        SearchHits hits = searchResponse.getHits();
+
+	        // 클라이언트가 차트를 그리기 위해 필요한 데이터 형식으로 변환합니다.
+	        // 아래 코드는 모든 document를 배열로 반환하는 예시입니다.
+	        data.put("data_cs", Arrays.stream(hits.getHits())
 	                               .map(SearchHit::getSourceAsMap)
 	                               .collect(Collectors.toList()));
 
