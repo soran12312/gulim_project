@@ -664,8 +664,6 @@ public class AdminController {
 			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 		
-		List<HashMap> playedRuleBook = adminService.playedRuleBook();
-		m.addAttribute("playedTime", playedTime);
 		List<CharacterSheetDTO> classForStats = adminService.classForStats();
 		m.addAttribute("classForStats", classForStats);
 
@@ -734,13 +732,7 @@ public class AdminController {
 	    return ResponseEntity.ok(data);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/game_stats", method = RequestMethod.POST)
-	public List<HashMap> preferredStatsByClasses(@RequestBody CharacterSheetDTO csDTO, Model m) {
-		return adminService.preferredStatsByClasses(csDTO);
-	}
-	
-	
+
 	
 	
 	
