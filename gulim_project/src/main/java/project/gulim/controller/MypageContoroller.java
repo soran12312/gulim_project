@@ -296,6 +296,7 @@ public class MypageContoroller {
 		String id = myId_is_in_cookies();		
 		return id;
 	}
+		
 //=========== END of 게임관리 ========================================================================================================
 
 	
@@ -652,8 +653,14 @@ public class MypageContoroller {
    }
 	
 	
-	
-	
+
+ //=========== START of 캐릭터시트리스트 ======================================================================================================	
+	@RequestMapping("/game/char_sheet_list")
+	public String char_sheet_list() {
+		String id = myId_is_in_cookies();		
+		return "mypage/game/char_sheet_list";
+	}
+ //=========== END of 캐릭터시트리스트 =======================================================================================================	
 	
 	
 	

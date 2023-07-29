@@ -2070,51 +2070,51 @@ purchase_bookname{
 	left:215px; 
 }
 .etc1{
-	width: 250px;
-	height:60px;
-	position: relative;
-	bottom: 490px;
-	left:563px;
+   width: 250px;
+   height:60px;
+   position: relative;
+   bottom: 500px;
+   left:563px;
 }
 .etc2{
-	width: 250px;
-	height:40px;
-	position: relative;
-	bottom: 398px;
-	left:305px;
+   width: 250px;
+   height:40px;
+   position: relative;
+   bottom: 408px;
+   left:305px;
 }
 .etc3{
-	width: 250px;
-	height:40px;
-	position: relative;
-	bottom: 305px;
-	left:45px;
+   width: 250px;
+   height:40px;
+   position: relative;
+   bottom: 315px;
+   left:45px;
 }
 .etc4{
-	width: 250px;
-	height:60px;
-	position: relative;
-	bottom: 553px;
-	left:565px;
+   width: 250px;
+   height:60px;
+   position: relative;
+   bottom: 563px;
+   left:565px;
 }
 .explain{
-	width: 250px;
-	height:350px;
-	position: relative;
-	bottom:138px;
-	left:308px;
+   width: 250px;
+   height:350px;
+   position: relative;
+   bottom:143px;
+   left:308px;
 }
 .charbtn{
-	width: 100px;
-	height:50px;
-	position: relative;
-	bottom: 75px;
-	left:220px;
-	padding: 10px;
-	font-size: 20px;
-	font-family: NeoDunggeunmo Code, Inter;	
-	border: 7px solid rgba(217,217,217,0.7);
-	border-top-left-radius: 20px;
+   width: 100px;
+   height:50px;
+   position: relative;
+   bottom: 85px;
+   left:220px;
+   padding: 10px;
+   font-size: 20px;
+   font-family: NeoDunggeunmo Code, Inter;   
+   border: 7px solid rgba(217,217,217,0.7);
+   border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -2193,4 +2193,39 @@ purchase_bookname{
     background-color: #FD786A;
 }
 /* ================ END OF DREATE ROOM ====================== */
+/* ================ START OF CHAR_SHEET LIST ====================== */
+.sheet_list{
+	width:500px;
+	height: 600px;
+	overflow: auto;
+}
+/*START스크롤 바*/
+.sheet_list::-webkit-scrollbar {
+    width: 20px;
+  }
+.sheet_list::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 5px solid transparent;
+}
+.sheet_list::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+.sheet_list table{
+	margin: auto;
+	margin-top: 50px;
+	width: 400px;
+	height: 500px;
+	table-layout: fixed;
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+	text-align: center;
+	font-size: 20px;
+	font-family: NeoDunggeunmo Code, Inter;	
+}
+
+/* ================ END OF CHAR_SHEET LIST ====================== */
 /* ================ END OF GAME ====================== */
