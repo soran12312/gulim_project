@@ -292,7 +292,7 @@ section.notice {
                                    
                                           <c:if test="${not empty announce.img_num}">
                                         <div class="note-editable card-block">
-                                            <p><img src="/imagePath/${announce.origin_img_name}" style="width: 168px;"></p>
+                                            <p><img src="${announce.path}" style="width: 168px;"></p>
                                         </div>
                                     </c:if>
                               
