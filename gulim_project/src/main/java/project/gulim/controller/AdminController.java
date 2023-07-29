@@ -515,6 +515,70 @@ public class AdminController {
 		return "/admin/product/product_modify";
 	}
 	
+	@RequestMapping(value="/product_insert", method=RequestMethod.POST)
+	public String insertProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m) {
+		try {
+	        String issueDateString = boDTO.getIssue_date();
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd"); // This should match the format of issueDateString
+	        Date issueDate = inputFormat.parse(issueDateString); // Convert string to Date
+
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월"); // This is your desired format
+	        String formattedDate = outputFormat.format(issueDate); // Convert Date to string in the desired format
+
+	        boDTO.setIssue_date(formattedDate); // Update the issue_date
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		
+		try {
+			if(file == null || file.isEmpty()) {
+	            System.out.println("파일 첨부 실패");
+	            adminService.insertProduct(boDTO, null);
+	        }
+	        
+	        //스트링 originFilename에 파일 오리진네임 가져와서 넣기
+	        iDTO.setOrigin_img_name(file.getOriginalFilename());
+	        iDTO.setImg_size(file.getSize());
+	        
+	        System.out.println("getOriginalFilename: "+file.getOriginalFilename());
+	        System.out.println("getSize: "+file.getSize());
+	        
+	        Long time = System.currentTimeMillis();
+	        
+	        System.out.println("time: "+time);
+	        		        
+		    String path = "/admin/images/product/" + time + "_"  + iDTO.getOrigin_img_name();
+		    String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
+		    
+		    System.out.println("path: "+path);
+		    System.out.println("realPath: "+realPath);
+		    
+		    iDTO.setPath(path);
+		        
+		    File serverFile = new File(realPath);
+		    
+		    System.out.println("serverFile: "+serverFile);
+		        
+		    try {
+		    	file.transferTo(serverFile);
+		        adminService.insertProduct(boDTO, iDTO);
+		    }catch (Exception e) {
+		    	System.out.println("실패: " + e.toString());
+		    	e.printStackTrace();
+		    }
+		}catch(Exception e){
+			System.out.println("실패: " + e.toString());
+
+	        adminService.insertProduct(boDTO, null);
+		}
+		
+		
+		List<HashMap> listProduct = adminService.listProduct();
+	    m.addAttribute("listProduct", listProduct);
+	    
+	    return "/admin/product/product_list";
+	}
+	
 	
 	@RequestMapping(value="/product_modify", method=RequestMethod.POST)
 	public String updateProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m){
@@ -601,27 +665,7 @@ public class AdminController {
 		}
 		
 		List<HashMap> playedRuleBook = adminService.playedRuleBook();
-		m.addAttribute("playedRuleBook", playedRuleBook);
-		List<HashMap> playedTime = adminService.playedTime();
 		m.addAttribute("playedTime", playedTime);
-		List<HashMap> playedGm = adminService.playedGm();
-		m.addAttribute("playedGm", playedGm);
-		List<HashMap> playedClass = adminService.playedClass();
-		m.addAttribute("playedClass", playedClass);
-		List<HashMap> playedGenre = adminService.playedGenre();
-		m.addAttribute("playedGenre", playedGenre);
-		List<HashMap> playedSpecies = adminService.playedSpecies();
-		m.addAttribute("playedSpecies", playedSpecies);
-		List<HashMap> wantedGenre = adminService.wantedGenre();
-		m.addAttribute("wantedGenre", wantedGenre);	
-		List<HashMap> otherSite = adminService.otherSite();
-		m.addAttribute("otherSite", otherSite);
-		List<HashMap> preferredPropensity = adminService.preferredPropensity();
-		m.addAttribute("preferredPropensity", preferredPropensity);
-		List<HashMap> preferredClass = adminService.preferredClass();
-		m.addAttribute("preferredClass", preferredClass);
-		List<HashMap> preferredSpecies = adminService.preferredSpecies();
-		m.addAttribute("preferredSpecies", preferredSpecies);
 		List<CharacterSheetDTO> classForStats = adminService.classForStats();
 		m.addAttribute("classForStats", classForStats);
 
@@ -689,7 +733,6 @@ public class AdminController {
 
 	    return ResponseEntity.ok(data);
 	}
-
 	
 	@ResponseBody
 	@RequestMapping(value = "/game_stats", method = RequestMethod.POST)

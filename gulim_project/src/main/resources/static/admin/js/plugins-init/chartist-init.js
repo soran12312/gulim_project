@@ -636,40 +636,79 @@
 	    .then(data => {
 	        // 'data' is an array of documents
 	        const frequencyMap = {};
+	        let str = '힘';
+	        let dex = '민첩';
+			let con = '체력';
+			let intelligence = '지능';
+			let wis = '지혜';
+			let chr = '매력';
 	
 	        // Assuming that the server response has a 'data' key that contains the actual data
 	        data.data_cs.forEach(item => {
-	            let charClass = item.char_class; // No need for a loop if other_site is a string
-	            
-	            if(charClass == char_class){
-					// charClass와 char_class의 값이 같을 경우 해당 특성을 가져옵니다.
-	                let str = item.str;
-	                let dex = item.dex;
-	                let con = item.con;
-	                let intelligence = item.intelligence;
-	                let wis = item.wis;
-	                let chr = item.chr;
-					
+			    let charClass = item.char_class;
+			    if(charClass == char_class) {
+			    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(str in frequencyMap)) {
+				        frequencyMap[str] = item.str;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[str]++;
+				    }
+				    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(dex in frequencyMap)) {
+				        frequencyMap[dex] = item.dex;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[dex]++;
+				    }
+				    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(con in frequencyMap)) {
+				        frequencyMap[con] = item.con;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[con]++;
+				    }
+				    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(intelligence in frequencyMap)) {
+				        frequencyMap[intelligence] = item.intelligence;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[intelligence]++;
+				    }
+				    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(wis in frequencyMap)) {
+				        frequencyMap[wis] = item.wis;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[wis]++;
+				    }
+				    
+				    // If the 'rull' is not in the map, add it with a count of 1
+				    if (!(chr in frequencyMap)) {
+				        frequencyMap[chr] = item.chr;
+				    }
+				    // Otherwise, increment the count
+				    else {
+				        frequencyMap[chr]++;
+				    }
 				}
-	        });
-	
+			    
+			});
+			
 	        // Now create the labels and series arrays
 	        let labels = Object.keys(frequencyMap);
 	        let series = labels.map(label => frequencyMap[label]);
 	
-	        // Sort by frequency, in descending order
-	        let sortedIndices = series.map((value, index) => index).sort((a, b) => series[b] - series[a]);
-	        labels = sortedIndices.map(index => labels[index]);
-	        series = sortedIndices.map(index => series[index]);
-	
-	        // Keep only top 5 and group the rest into 'others'
-	        if (labels.length > 5) {
-	            let otherCount = series.slice(5).reduce((a, b) => a + b, 0);
-	            labels = labels.slice(0, 5);
-	            series = series.slice(0, 5);
-	            labels.push('기타');
-	            series.push(otherCount);
-	        }
 	
 	        // Make sure the chart is created only after the data processing is complete
 	        createChart2(labels, series);
@@ -678,46 +717,89 @@
 		
 		$('.card-body').on('change', '#class-select', function(e) {
 			char_class = $(this).val();
+			
+			fetch('https://localhost:8080/admin/game_stats/character_sheet')
+		    .then(response => response.json())
+		    .then(data => {
+		        // 'data' is an array of documents
+		        const frequencyMap = {};
+		        let str = '힘';
+		        let dex = '민첩';
+				let con = '체력';
+				let intelligence = '지능';
+				let wis = '지혜';
+				let chr = '매력';
 		
-			$.ajax({
-				// 경로
-				url: "/admin/game_stats",
-				// 전송방식: POST
-				method: "POST",
-				// JSON data를 string으로 변환
-				data: JSON.stringify({char_class: char_class}),
-				// data 전송할 때의 타입
-				contentType:"application/json; charset=UTF-8",
-				// 성공할 시
-				success: function(response){
-					names2 = [];
-					data2 = {
-						series: []
-					};
-					console.log(response);
-					names2.push('힘');
-					data2.series.push(response[0].avg_str);
-					names2.push('민첩');
-					data2.series.push(response[0].avg_dex);
-					names2.push('체력');
-					data2.series.push(response[0].avg_con);
-					names2.push('지능');
-					data2.series.push(response[0].avg_intelligence);
-					names2.push('지혜');
-					data2.series.push(response[0].avg_wis);
-					names2.push('매력');
-				    data2.series.push(response[0].avg_chr);
-					createChart2();
-
-				},
-				error: function(xhr, status, error){
-					alert('실패'+ error);
-				}
-			});
+		        // Assuming that the server response has a 'data' key that contains the actual data
+		        data.data_cs.forEach(item => {
+				    let charClass = item.char_class;
+				    if(charClass == char_class) {
+				    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(str in frequencyMap)) {
+					        frequencyMap[str] = item.str;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[str]++;
+					    }
+					    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(dex in frequencyMap)) {
+					        frequencyMap[dex] = item.dex;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[dex]++;
+					    }
+					    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(con in frequencyMap)) {
+					        frequencyMap[con] = item.con;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[con]++;
+					    }
+					    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(intelligence in frequencyMap)) {
+					        frequencyMap[intelligence] = item.intelligence;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[intelligence]++;
+					    }
+					    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(wis in frequencyMap)) {
+					        frequencyMap[wis] = item.wis;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[wis]++;
+					    }
+					    
+					    // If the 'rull' is not in the map, add it with a count of 1
+					    if (!(chr in frequencyMap)) {
+					        frequencyMap[chr] = item.chr;
+					    }
+					    // Otherwise, increment the count
+					    else {
+					        frequencyMap[chr]++;
+					    }
+					}
+				});
+				
+		        // Now create the labels and series arrays
+		        let labels = Object.keys(frequencyMap);
+		        let series = labels.map(label => frequencyMap[label]);
+		
+		        // Make sure the chart is created only after the data processing is complete
+		        createChart2(labels, series);
+		    });
 		});
-		
         createChart2();
-
 	});
 	
 	
