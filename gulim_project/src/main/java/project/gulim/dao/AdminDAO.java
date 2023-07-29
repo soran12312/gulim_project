@@ -62,6 +62,10 @@ public interface AdminDAO {
 	public void updateProductBook(BookDTO boDTO);
 
 	public void updateProductImage(ImageDTO iDTO);
+	
+	public void insertProductBook(BookDTO boDTO);
+	
+	public void insertProductImage(ImageDTO iDTO);
 
 	public void insert_evt_post(PostDTO pDTO);
 
@@ -73,30 +77,6 @@ public interface AdminDAO {
 	
 	public void insert_con_contest(ContestDTO cDTO);
 	
-	public List<HashMap> playedRuleBook();
-	
-	public List<HashMap> playedTime();
-	
-	public List<HashMap> playedGm();
-	
-	public List<HashMap> playedClass();
-	
-	public List<HashMap> playedGenre();
-	
-	public List<HashMap> playedSpecies();
-	
-	public List<HashMap> wantedGenre();
-	
-	public List<HashMap> otherSite();
-	
-	public List<HashMap> preferredPropensity();
-	
-	public List<HashMap> preferredClass();
-	
-	public List<HashMap> preferredSpecies();
-	
 	public List<CharacterSheetDTO> classForStats();
-	
-	public List<HashMap> preferredStatsByClasses(CharacterSheetDTO csDTO);
 	
 }

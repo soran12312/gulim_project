@@ -9,17 +9,32 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import org.apache.http.HttpHost;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +58,6 @@ import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.AdminService;
 import project.gulim.service.MainService;
-import project.gulim.util.MD5Generator;
 import project.gulim.util.UiUtils;
 
 @Controller
@@ -60,6 +74,9 @@ public class AdminController {
 	private HttpServletRequest request;
 	
 	private final UiUtils uiUtils = new UiUtils();
+	
+	private static final String ES_HOST = "localhost";
+    private static final int ES_PORT = 9200;
 	
 	// 문의사항 리스트 보기
 	@RequestMapping("/question")
@@ -250,14 +267,17 @@ public class AdminController {
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
-	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/post/";
+	            Long time = System.currentTimeMillis();
+	            
+	            String path = "/admin/images/post/" + time + "_" + originImageName;
+				String realPath = getRealPath("static/admin/images/post/")+"\\"+ time + "_" + originImageName;
 	            
 	            // 이미지 파일 저장 
-	            saveImageFile(imageData, imagePath, originImageName);
+	            saveImageFile(imageData, realPath, originImageName);
 	            
 	            // 이미지 정보 설정
-	            iDTO.setOrigin_img_name(originImageName + ".png");
-	            iDTO.setPath(basePath + "/imagePath"); 
+	            iDTO.setOrigin_img_name(originImageName);
+	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
@@ -323,14 +343,17 @@ public class AdminController {
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
-	            String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/admin/images/contest/";
+	            Long time = System.currentTimeMillis();
+	            
+	            String path = "/admin/images/contest/" + time + "_" + originImageName;
+				String realPath = getRealPath("static/admin/images/contest/")+"\\"+ time + "_" + originImageName;
 	            
 	            // 이미지 파일 저장 
-	            saveImageFile(imageData, imagePath, originImageName);
+	            saveImageFile(imageData, realPath, originImageName);
 	            
 	            // 이미지 정보 설정
-	            iDTO.setOrigin_img_name(originImageName + ".png");
-	            iDTO.setPath(basePath + "/imagePath"); 
+	            iDTO.setOrigin_img_name(originImageName);
+	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
@@ -401,23 +424,20 @@ public class AdminController {
 	}
 
 	// 이미지 파일 저장
-	private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
-		try {
-			// 저장 경로가 없을 경우 디렉토리 생성
-			File directory = new File(imagePath);
-			if (!directory.exists()) {
-		        directory.mkdirs();
-		    }
+	   private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
+	       try {
 
-		    // 이미지 파일 생성
-		    File imageFile = new File(imagePath + fileName +".png");
-		    FileOutputStream fos = new FileOutputStream(imageFile);
-		    fos.write(imageData);
-		    fos.close();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-	}
+	           
+	           // 이미지 파일 생성
+	           File imageFile = new File(imagePath);
+	           FileOutputStream fos = new FileOutputStream(imageFile);
+	           fos.write(imageData);
+	           fos.close();
+	       } catch (IOException e) {
+	           e.printStackTrace();
+	       }
+	   }
+
 	
 	// 썸머노트 파라미터로 넘어간 내용에서 <img> 태그 제거
 	private String removeImageTags(String content) {
@@ -493,6 +513,70 @@ public class AdminController {
 		m.addAttribute("getPost", getPost);
 		
 		return "/admin/product/product_modify";
+	}
+	
+	@RequestMapping(value="/product_insert", method=RequestMethod.POST)
+	public String insertProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m) {
+		try {
+	        String issueDateString = boDTO.getIssue_date();
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd"); // This should match the format of issueDateString
+	        Date issueDate = inputFormat.parse(issueDateString); // Convert string to Date
+
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월"); // This is your desired format
+	        String formattedDate = outputFormat.format(issueDate); // Convert Date to string in the desired format
+
+	        boDTO.setIssue_date(formattedDate); // Update the issue_date
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		
+		try {
+			if(file == null || file.isEmpty()) {
+	            System.out.println("파일 첨부 실패");
+	            adminService.insertProduct(boDTO, null);
+	        }
+	        
+	        //스트링 originFilename에 파일 오리진네임 가져와서 넣기
+	        iDTO.setOrigin_img_name(file.getOriginalFilename());
+	        iDTO.setImg_size(file.getSize());
+	        
+	        System.out.println("getOriginalFilename: "+file.getOriginalFilename());
+	        System.out.println("getSize: "+file.getSize());
+	        
+	        Long time = System.currentTimeMillis();
+	        
+	        System.out.println("time: "+time);
+	        		        
+		    String path = "/admin/images/product/" + time + "_"  + iDTO.getOrigin_img_name();
+		    String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
+		    
+		    System.out.println("path: "+path);
+		    System.out.println("realPath: "+realPath);
+		    
+		    iDTO.setPath(path);
+		        
+		    File serverFile = new File(realPath);
+		    
+		    System.out.println("serverFile: "+serverFile);
+		        
+		    try {
+		    	file.transferTo(serverFile);
+		        adminService.insertProduct(boDTO, iDTO);
+		    }catch (Exception e) {
+		    	System.out.println("실패: " + e.toString());
+		    	e.printStackTrace();
+		    }
+		}catch(Exception e){
+			System.out.println("실패: " + e.toString());
+
+	        adminService.insertProduct(boDTO, null);
+		}
+		
+		
+		List<HashMap> listProduct = adminService.listProduct();
+	    m.addAttribute("listProduct", listProduct);
+	    
+	    return "/admin/product/product_list";
 	}
 	
 	
@@ -580,38 +664,178 @@ public class AdminController {
 			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 		
-		List<HashMap> playedRuleBook = adminService.playedRuleBook();
-		m.addAttribute("playedRuleBook", playedRuleBook);
-		List<HashMap> playedTime = adminService.playedTime();
-		m.addAttribute("playedTime", playedTime);
-		List<HashMap> playedGm = adminService.playedGm();
-		m.addAttribute("playedGm", playedGm);
-		List<HashMap> playedClass = adminService.playedClass();
-		m.addAttribute("playedClass", playedClass);
-		List<HashMap> playedGenre = adminService.playedGenre();
-		m.addAttribute("playedGenre", playedGenre);
-		List<HashMap> playedSpecies = adminService.playedSpecies();
-		m.addAttribute("playedSpecies", playedSpecies);
-		List<HashMap> wantedGenre = adminService.wantedGenre();
-		m.addAttribute("wantedGenre", wantedGenre);	
-		List<HashMap> otherSite = adminService.otherSite();
-		m.addAttribute("otherSite", otherSite);
-		List<HashMap> preferredPropensity = adminService.preferredPropensity();
-		m.addAttribute("preferredPropensity", preferredPropensity);
-		List<HashMap> preferredClass = adminService.preferredClass();
-		m.addAttribute("preferredClass", preferredClass);
-		List<HashMap> preferredSpecies = adminService.preferredSpecies();
-		m.addAttribute("preferredSpecies", preferredSpecies);
 		List<CharacterSheetDTO> classForStats = adminService.classForStats();
 		m.addAttribute("classForStats", classForStats);
 
 		return "/admin/game_stats/game_stats";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/game_stats", method = RequestMethod.POST)
-	public List<HashMap> preferredStatsByClasses(@RequestBody CharacterSheetDTO csDTO, Model m) {
-		return adminService.preferredStatsByClasses(csDTO);
+	@RequestMapping(value="/game_stats/survey", method=RequestMethod.GET)
+	public ResponseEntity<Object> getChartData_survey() {
+	    Map<String, Object> data = new HashMap<>();
+
+	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
+
+	        SearchRequest searchRequest = new SearchRequest("survey");
+	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+	        // ElasticSearch에 적절한 쿼리를 입력하여 필요한 데이터만 가져옵니다.
+	        // 아래 코드는 모든 데이터를 가져오는 예시입니다.
+	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+
+	        searchRequest.source(searchSourceBuilder);
+	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+	        SearchHits hits = searchResponse.getHits();
+
+	        // 클라이언트가 차트를 그리기 위해 필요한 데이터 형식으로 변환합니다.
+	        // 아래 코드는 모든 document를 배열로 반환하는 예시입니다.
+	        data.put("data", Arrays.stream(hits.getHits())
+	                               .map(SearchHit::getSourceAsMap)
+	                               .collect(Collectors.toList()));
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+
+	    return ResponseEntity.ok(data);
 	}
+	
+	@RequestMapping(value="/game_stats/character_sheet", method=RequestMethod.GET)
+	public ResponseEntity<Object> getChartData_characterSheet() {
+	    Map<String, Object> data = new HashMap<>();
+
+	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
+
+	        SearchRequest searchRequest = new SearchRequest("character_sheet");
+	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+	        // ElasticSearch에 적절한 쿼리를 입력하여 필요한 데이터만 가져옵니다.
+	        // 아래 코드는 모든 데이터를 가져오는 예시입니다.
+	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+
+	        searchRequest.source(searchSourceBuilder);
+	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+	        SearchHits hits = searchResponse.getHits();
+
+	        // 클라이언트가 차트를 그리기 위해 필요한 데이터 형식으로 변환합니다.
+	        // 아래 코드는 모든 document를 배열로 반환하는 예시입니다.
+	        data.put("data_cs", Arrays.stream(hits.getHits())
+	                               .map(SearchHit::getSourceAsMap)
+	                               .collect(Collectors.toList()));
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+
+	    return ResponseEntity.ok(data);
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/live_question")
+	public String live_question() {
+		return "/admin/admin_question/admin_question";
+	}
+	
+
 
 }

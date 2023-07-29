@@ -18,11 +18,11 @@
 
 
 	<select id="product_detail" resultType="HashMap" parameterType="BookDTO">
-	select *
-	from book b
-	inner join image i 
-	on b.book_num =i.book_num
-	where b.book_num = #{book_num}
+	SELECT *
+	FROM book b
+	INNER join image i 
+	ON b.book_num =i.book_num
+	WHRER b.book_num = #{book_num}
 	
 	</select>
 

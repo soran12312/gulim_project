@@ -35,18 +35,18 @@
 		// hidden으로 생겨놓은 answer td 영역
 		var answerField = $(this).find('td:nth-child(5)')
 		// answer td 영역의 text값
-		var answer = answerField.text();
+		var answer = answerField.text().trim();
 		// 이전에 했던 답변을 textarea에 가져오기 위해 생성한 변수
 		var textArea_answer = '<textarea name="answer" class="text_answer">' 
 		    + answer 
 		    +'</textarea></td>'
 		// 테이블의 한 행을 클릭했을 때 나오는 새 행, textArea_answer 포함
 	    var inputRow1 = $(
-		'<tr class="input-row tr1"><td height="200px" colspan="4" style="position: relative;">'
+		'<tr class="input-row tr1"><td height="200px" colspan="5" style="position: relative;">'
 		    + textArea_answer
 	    +'</tr>'
 	    +'<tr class="input-row tr2">'
-		    +'<td colspan="3"></td>'
+		    +'<td colspan="4"></td>'
 		    +'<td>'
 		    +'<button type="submit" id="answerQuestion" class="btn btn-outline-success">답변</button>'
 		    +'<button id="cancelAnswer" class="btn btn-outline-danger">취소</button>'

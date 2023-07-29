@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import project.gulim.dao.Customer_serviceDAO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.MemberDTO;
 import project.gulim.domain.QuestionDTO;
 
 @Service
@@ -24,6 +25,11 @@ public class Customer_serviceImpl implements Customer_service{
 	public Integer isManager(String id) {
 		
 		return customer_serviceDAO.isManager(id);
+	}
+
+	@Override
+	public void main(MemberDTO member){
+		customer_serviceDAO.main(member);
 	}
 	
 	

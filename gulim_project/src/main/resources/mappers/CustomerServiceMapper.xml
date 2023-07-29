@@ -6,13 +6,19 @@
 
 	<insert id="send_question">
 		
-		insert into question(question_title,question_content,id,answer,answer_state,question_type)
-					values(#{question_title},#{question_content},#{id},"답변준비중입니다.",0,#{question_type})
+		INSERT INTO question(question_title,question_content,id,answer,answer_state,question_type)
+					VALUES(#{question_title},#{question_content},#{id},"답변준비중입니다.",0,#{question_type})
 					
 	</insert>
 	
 	<select id="isManager" resultType="Integer">
-		select manager from member where id = #{id}
+		SELECT manager FROM member WHERE id = #{id}
+	</select>
+	
+	
+	<select id="main">
+		
+		SELECT id FROM member WHERE id=#{id}
 	</select>
 	
 </mapper>

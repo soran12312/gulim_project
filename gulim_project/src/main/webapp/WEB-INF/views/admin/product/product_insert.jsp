@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>상품등록</title>
+    <title>수정</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/admin/images/favicon.png">
     <!-- Daterange picker -->
@@ -208,7 +208,6 @@
                     <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
@@ -226,11 +225,12 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">상품 등록</a></li>
                         </ol>
                     </div>
                 </div>
                 <!-- row -->
-                <form action="/admin/insert" method="POST">
+                <form action="/admin/product_insert" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="card col-sm-12 p-md-12">
                             <table>
@@ -245,47 +245,79 @@
                                         </div>
                                     </td>
                                     <td colspan="10">
-
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="5">
                                         <div class="card-body">
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">제목</p>
-                                                    <input type="text" class="form-control input-default" placeholder="제목을 입력하시오.">
+                                                    <input name="book_title" type="text" class="form-control input-default" placeholder="제목을 입력하시오.">
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
+                                    <td colspan="4">
+                                        <div style="position: relative; right: -19px; width: 95%; float: left;">
+                                            <p class="mb-1">장르</p>
+                                            <input name="genre" type="text" class="form-control input-default" placeholder="장르를 입력하시오(ex. 판타지,SF,액션).">
+                                        </div>
+                                    </td>
                                     <td colspan="2">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
-                                        <p class="mb-1">장르</p>
-                                        <select id="inputState" class="form-control">
-                                            <option>액션</option>
-                                            <option>공포</option>
-                                            <option>로맨스</option>
-                                        </select>
+                                            <p class="mb-1">저자</p>
+                                            <input name="writer" type="text" class="form-control input-default" placeholder="저자 이름을 입력하시오.">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7">
-                                        <div style="position: relative; right: -18px; width: 550px;">
-                                            <p class="mb-1">이미지 추가</p>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -18px; width: 250px;">
+                                            <p class="mb-1">issue date</p>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <input name="issue_date" type="date">
                                             </div>
                                         </div>
                                     </td>
                                     <td colspan="2">
+                                        <div>
+                                            <p class="mb-1">가격</p>
+                                            <div class="custom-file">
+                                                <input name="price" type="text" class="form-control input-default" placeholder="가격을 입력하시오.">
+                                            </div>
+                                        </div>
                                     </td>
                                     <td colspan="2">
-                                        <div class="card-body" style="width: 230px;">
-                                            <p class="mb-1">금액</p>
-                                            <input type="text" class="form-control" placeholder="금액을 입력하시오.">
+                                        <div>
+                                            <p class="mb-1">재고수량</p>
+                                            <input name="stock" type="text" class="form-control input-default" placeholder="재고수량을 입력하시오.">
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">19금 설정</p>
+                                            <select name="adult">
+                                                <option value="1">O</option>
+                                                <option value="0">X</option>
+                                            </select>
+                                            <input type="text"" hidden>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">판매 여부</p>
+                                            <select name="sale_state">
+                                                <option value="0">판매중</option>
+                                                <option value="1">판매 중지</option>
+                                            </select>
+                                            <input type="text" hidden>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                            <p class="mb-1">역자</p>
+                                            <input name="translation" type="text" class="form-control input-default" placeholder="역자 이름을 입력하시오.">
                                         </div>
                                     </td>
                                 </tr>
@@ -295,23 +327,39 @@
                                             <div class="basic-form">
                                                 <div class="form-group" style="width: 95%; position: relative; top: 7px;">
                                                     <p class="mb-1">간단 소개</p>
-                                                    <textarea style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오."></textarea>
+                                                    <textarea name="simple_info" style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오."></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="11">
+                                    <td colspan="7">
+                                        <div style="position: relative; right: -18px; width: 550px;">
+                                            <p class="mb-1">이미지 추가</p>
+                                            <img id="adminPostPath">
+                                            <div class="custom-file">
+                                                <input type="file" name="file" class="custom-file-input" id="adminPostUpdate">
+                                                <label class="custom-file-label" for="customFile">JPG, PNG 파일 업로드</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="9">
                                         <div class="card-body">
-                                            <p class="mb-1">본문 내용</p>
-                                            <div class="summernote"></div>
+                                            <div class="basic-form">
+                                                <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                    <p class="mb-1">상세 소개</p>
+                                                    <textarea name="book_detail" style="height: 210px;" class="form-control" id="comment" placeholder="상세한 소개글을 입력하시오."></textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
                             <div style="margin-bottom: 20px; text-align:right; position: relative; right: 19px;">
-                                <button type="submit" class="btn btn-outline-success">상품 등록</button>
+                                <button type="submit" class="btn btn-outline-success">등록</button>
                             </div>
                         </div>
                     </div>
@@ -397,7 +445,7 @@
 
 
     <!-- 관리자 전용 js -->
-    <script src="/admin/js/admin.js"></script>
+    <script src="/admin/js/adminChart.js"></script>
 
 
 </body>
