@@ -140,56 +140,14 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.updateProductImage(iDTO);
 	}
 	
-	public List<HashMap> playedRuleBook(){
-		return adminDAO.playedRuleBook();
+	public void insertProduct(BookDTO boDTO, ImageDTO iDTO) {
+		adminDAO.insertProductBook(boDTO);
+		adminDAO.insertProductImage(iDTO);
 	}
-
-	public List<HashMap> playedTime(){
-		return adminDAO.playedTime();
-	}
-
-	public List<HashMap> playedGm(){
-		return adminDAO.playedGm();
-	}
-
-	public List<HashMap> playedClass(){
-		return adminDAO.playedClass();
-	}
-
-	public List<HashMap> playedGenre(){
-		return adminDAO.playedGenre();
-	}
-
-	public List<HashMap> playedSpecies(){
-		return adminDAO.playedSpecies();
-	}
-
-	public List<HashMap> wantedGenre(){
-		return adminDAO.wantedGenre();
-	}
-
-	public List<HashMap> otherSite(){
-		return adminDAO.otherSite();
-	}
-
-	public List<HashMap> preferredPropensity(){
-		return adminDAO.preferredPropensity();
-	}
-
-	public List<HashMap> preferredClass(){
-		return adminDAO.preferredClass();
-	}
-
-	public List<HashMap> preferredSpecies(){
-		return adminDAO.preferredSpecies();
-	}
-
+	
 	public List<CharacterSheetDTO> classForStats(){
 		return adminDAO.classForStats();
 	}
 	
-	public List<HashMap> preferredStatsByClasses(CharacterSheetDTO csDTO){
-		return adminDAO.preferredStatsByClasses(csDTO);
-	}
 
 }
