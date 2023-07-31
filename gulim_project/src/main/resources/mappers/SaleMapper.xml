@@ -22,7 +22,7 @@
 	FROM book b
 	INNER join image i 
 	ON b.book_num =i.book_num
-	WHRER b.book_num = #{book_num}
+	WHERE b.book_num = #{book_num}
 	
 	</select>
 
