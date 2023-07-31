@@ -43,9 +43,9 @@ $(function(){
 	<input type="hidden" name="char_etc" id="char_etc">
 	<input type="hidden" name="room_num" value="${room_num}">
 	
-		<input class= "char_name" type="text" placeholder="캐릭터 이름" name="char_name">
-		<input class="char_class" type="text" placeholder="클래스" name="char_class">
-		<input class="species" type="text" placeholder="종족" name="species">
+		<input class= "char_name" type="text" placeholder="캐릭터 이름" name="char_name" required>
+		<input class="char_class" type="text" placeholder="클래스" name="char_class" required>
+		<input class="species" type="text" placeholder="종족" name="species" required>
 		<select class="propensity_1" id="propensity_1">
 			<option>질서</option>
 			<option>중립</option>
@@ -56,14 +56,13 @@ $(function(){
 			<option>중립</option>
 			<option>악</option>
 		</select>
-		<input class="str" type="text" placeholder="근력" name="str">
-		<input class="dex" type="text" placeholder="민첩" name="dex">
-		<input class="con" type="text" placeholder="건강" name="con">
-		<input class="intel" type="text" placeholder="지능" name="intelligence">
-		<input class="wis" type="text" placeholder="지혜" name="wis">
-		<input class="chr" type="text" placeholder="매력" name="chr">
-		<input class="char_gold" type="number" placeholder="소지금" name="money">
-		<!-- <textarea class="char_skill" placeholder="기술&주문" name=""></textarea> -->
+		<input class="str" type="number" placeholder="근력" name="str" required>
+		<input class="dex" type="number" placeholder="민첩" name="dex" required>
+		<input class="con" type="number" placeholder="건강" name="con" required>
+		<input class="intel" type="number" placeholder="지능" name="intelligence" required>
+		<input class="wis" type="number" placeholder="지혜" name="wis" required>
+		<input class="chr" type="number" placeholder="매력" name="chr" required>
+		<input class="char_gold" type="number" placeholder="소지금" name="money" required>
 		<div class="skilldiv">
 			<label for="skill_name">기술명 : </label><input name="skills[0].skill_name"></br>
 			<label for="skill_detail">기술 상세 : </label><input name="skills[0].skill_detail" class= "skillpadding"></br>
@@ -76,7 +75,6 @@ $(function(){
 			<label for="skill_name">기술명 : </label><input name="skills[4].skill_name"></br>
 			<label for="skill_detail">기술 상세 : </label><input name="skills[4].skill_detail" class= "skillpadding"></br>
 		</div>
-		<!-- <textarea class="char_inven" placeholder="장비&인벤토리" name=""></textarea> -->
 		<table class= "itemtable">
 			<tr>
 				<td class="tdname">이름</td>
