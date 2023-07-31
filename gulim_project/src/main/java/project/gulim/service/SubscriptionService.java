@@ -1,6 +1,7 @@
 package project.gulim.service;
 
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public interface SubscriptionService {
 
 	public void saveSubscription(SubscribeDTO subscriptionData);
 
-	public List<HashMap> savePurchase(PurchaseDTO purchaseData);
+	public void savePurchase(PurchaseDTO purchaseData);
 
 	// 현재 로그인 중인 아이디의 장바구니 번호
 	public Integer getUserBasketNumber(String id);
@@ -34,13 +35,24 @@ public interface SubscriptionService {
 	// 장바구니 +, - 버튼 
 	public Integer updateQuantity(Integer sub_num, Integer amount);
 
-	// 장바구니 삭제
-	public Integer deleteQuantity(PurchaseDTO sub_num);
 
 
 	
-	//
-	public SubscribeDTO getSubscriptionById(Integer subscriptionId);
+	// 구독권 번호로 가격 
+	public Integer getSubscriptionById(Integer sub_num);
+	
+	
+	// 장바구니 삭제
+	public Integer deleteQuantity(PurchaseDTO sub_num);
+
+	public void deleteSubscription(PurchaseDTO sub_num);
+
+	
+	// 결제되면 start_date, end_date, sub_state = 1로 변경
+	public void updateSubscriptionById(Integer sub_num, LocalDate endDate);
+
+	// 결제 완료면 장바구니 데이터 전부 삭제
+	public void deleteAllQuantities(Map<String, Integer> cartItem);
 
 
 

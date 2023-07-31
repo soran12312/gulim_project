@@ -1,8 +1,10 @@
 package project.gulim.client;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,24 +16,27 @@ import java.util.Map;
 public class Client {
 	
 	
-	public List<Map<String, Object>> generate_recommendations(String logged_in_user_id) {
+	public List<Map<String, Object>> generate_recommendations(String loggedInUserId) {
         List<Map<String, Object>> recommendations = new ArrayList<>();
 
         try {
         	
         	 // 서버 정보 설정
-            String host = "localhost";
-            int port = 8888;
+            String host = "192.168.0.41";
+            int port = 5555;
 
         	
         	
             // 소켓 연결
             Socket socket = new Socket(host, port);
+            
+            
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            // 현재 로그인 중인 id전송
-            
-            
-            
+            // 현재 로그인 중인 id 전송
+            writer.write(loggedInUserId);
+            writer.newLine();
+            writer.flush();
             
     
 

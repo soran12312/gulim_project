@@ -1,6 +1,7 @@
 package project.gulim.service;
 
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +40,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
 	@Override
-	public List<HashMap> savePurchase(PurchaseDTO purchaseData) {
+	public void savePurchase(PurchaseDTO purchaseData) {
 		// TODO Auto-generated method stub
-		return subscriptionDAO.savePurchase(purchaseData);
+		subscriptionDAO.savePurchase(purchaseData);
 	}
 
 
@@ -96,14 +97,41 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		// TODO Auto-generated method stub
 		return subscriptionDAO.deleteQuantity(sub_num);
 	}
-
+	
+	
+	@Override
+	public void deleteSubscription(PurchaseDTO sub_num) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.deleteSubscription(sub_num);
+	}
 
 
 	@Override
-	public SubscribeDTO getSubscriptionById(Integer subscriptionId) {
+	public Integer getSubscriptionById(Integer sub_num) {
 		// TODO Auto-generated method stub
-		return null;
+		return subscriptionDAO.getSubscriptionById(sub_num);
 	}
+
+
+
+	
+	@Override
+	public void updateSubscriptionById(Integer sub_num, LocalDate endDate) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.updateSubscriptionById(sub_num, endDate);
+	}
+
+	
+	// 결제 완료 후 장바구니데이터 삭제
+	@Override
+	public void deleteAllQuantities(Map<String, Integer> cartItem) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.deleteAllQuantities(cartItem);
+	}
+
+
+
+	
 		
 	
 

@@ -62,4 +62,17 @@ public class CartController {
 		return "sale/book/basket";
 	}
 	
+	
+	
+	// 구독권 친구에게 보내기
+	@RequestMapping("/send_subscribe")
+	public String send_message(String send_id, Model m) {
+		//보낸사람이 null일경우 빈공간으로(바로 쪽지보내기눌렀을 경우)
+		if(send_id == null) {
+			send_id="";
+		}
+
+		return "/sale/subscribe/send_subscribe";
+	}
+	
 }

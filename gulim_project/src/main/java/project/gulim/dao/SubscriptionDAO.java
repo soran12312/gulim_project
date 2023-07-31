@@ -1,5 +1,6 @@
 package project.gulim.dao;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public interface SubscriptionDAO {
 	public void saveCart(BasketDTO basket);
 	
 
-	public List<HashMap> savePurchase(PurchaseDTO purchaseData);
+	public void savePurchase(PurchaseDTO purchaseData);
 
 	public Integer getUserBasketNumber(String id);
 
@@ -43,6 +44,17 @@ public interface SubscriptionDAO {
 
 	// 장바구니 삭제
 	public Integer deleteQuantity(PurchaseDTO sub_num);
+
+	public Integer deleteSubscription(PurchaseDTO sub_num);
+
+	// 장바구니에서 가져온 구독권 번호로 가격 가져옴
+	public Integer getSubscriptionById(Integer sub_num);
+
+	// 결제 완료 구독권정보 업데이트
+	public void updateSubscriptionById(Integer sub_num,  LocalDate endDate);
+
+	// 결제 완료 후 장바구니 삭제
+	public void deleteAllQuantities(Map<String, Integer> cartItem);
 
 
 

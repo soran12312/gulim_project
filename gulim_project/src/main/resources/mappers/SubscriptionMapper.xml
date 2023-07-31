@@ -77,12 +77,59 @@
 	
 	<!-- 삭제 -->
 	<delete id ="deleteQuantity" parameterType="java.lang.Integer">
-		delete p
-		from purchase p inner join subscribe s 
-		on p.sub_num = s.sub_num 
-		where s.sub_num = #{sub_num}
+		DELETE p
+		FROM purchase p INNER JOIN subscribe s 
+		ON p.sub_num = s.sub_num 
+		WHERE s.sub_num = #{sub_num}
+	</delete>
 	
+	<!-- 해당 구독권 삭제-->
+	<delete id ="deleteSubscription" parameterType="java.lang.Integer">
+		DELETE 
+		FROM subscribe
+		WHERE sub_num = #{sub_num}
+	</delete>
+	
+	
+	
+	<!-- 장바구니 번호로 구독권 가격 -->
+	<select id="getSubscriptionById" parameterType="java.lang.Integer" resultType = "java.lang.Integer">
+	
+		SELECT price
+		FROM subscribe
+		WHERE sub_num = #{sub_num}
+	
+	</select>
+	
+	
+	
+	<!-- 결제 완료 구독권 정보 업데이트 -->
+	<update id="updateSubscriptionById" parameterType="map">
+		UPDATE subscribe
+    	SET
+        start_date = now(),
+        end_date = #{endDate},
+        sub_state = 1
+    	WHERE sub_num = #{sub_num}
+	</update>
+	
+	
+	
+	<!-- 결제 완료 후 장바구니 삭제 -->
+	<delete id="deleteAllQuantities" parameterType="map">
+		
+		DELETE p
+		FROM purchase p inner join subscribe s
+		on p.sub_num = s.sub_num
+		where s.sub_state = 1
 	
 	</delete>
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

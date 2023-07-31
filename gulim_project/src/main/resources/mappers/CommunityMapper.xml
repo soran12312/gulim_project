@@ -149,6 +149,17 @@
     </delete>
 
 
+	 <!-- 이벤트 게시판 게시글 수 카운팅 -->
+    <select id="countAnnounce" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            post
+        WHERE
+			post.board = '공지사항'
+    </select>
+
+
 	<!-- 공지사항 조회 -->
 	<select id="findAnnounce" resultType="HashMap">
 		SELECT *
@@ -160,6 +171,7 @@
 		post.board = '공지사항'
 		ORDER BY
 		post.post_num DESC
+		LIMIT #{start}, #{size}
 	</select>
 	
 	

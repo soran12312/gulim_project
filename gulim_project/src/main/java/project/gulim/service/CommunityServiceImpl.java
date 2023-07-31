@@ -88,11 +88,10 @@ public class CommunityServiceImpl implements CommunityService{
 
 	// 공지
 	@Override
-	public List<HashMap> findAllAnnounce() {
+	public List<HashMap> findAllAnnounce(int start, int size) {
 		// TODO Auto-generated method stub
-		return communityDAO.findAnnounce();
+		return communityDAO.findAnnounce(start, size);
 	}
-
 
 
 	/**
@@ -214,6 +213,14 @@ public class CommunityServiceImpl implements CommunityService{
 	public List<Map> findAllContest(int start, int size) {
 		// TODO Auto-generated method stub
 		return communityDAO.findAllContest(start, size);
+	}
+
+
+
+	@Override
+	public int countAllAnnounce() {
+		// TODO Auto-generated method stub
+		return communityDAO.countAnnounce();
 	}
 	
 	

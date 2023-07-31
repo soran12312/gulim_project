@@ -81,8 +81,9 @@ section.notice {
 	border-bottom: 1px solid #ccc;
 }
 
-.board-table a {
-	color: #333;
+.board-table a
+{
+	color: #fff;
 	display: inline-block;
 	line-height: 1.4;
 	word-break: break-all;
@@ -94,6 +95,7 @@ section.notice {
 }
 
 .board-table th {
+	color: #fff;
 	text-align: center;
 }
 
@@ -103,6 +105,7 @@ section.notice {
 }
 
 .board-table .th-date {
+	color: #fff;
 	width: 200px;
 }
 
@@ -226,6 +229,7 @@ section.notice {
 
 
 #register {
+  color: #fff;
   float: right;
   border: 1px solid black;
   border-radius: 5px; /* 원하는 모서리의 둥글기 정도 조절 */
@@ -236,6 +240,7 @@ section.notice {
 	width: 100%;
 	height: 1024px;
 	background-image: url("/files/images/커뮤니티.jpg");
+	opacity: 0.8;
 	background-size: cover;
 	opacity: 1;
 	overflow: hidden;
@@ -254,6 +259,10 @@ section.notice {
 	</header>
 
 	<section class="notice">
+	
+	
+	<div class = "row">
+	
 		<div class="page-title">
 			<nav class="navbar">
 				<div class="container">
@@ -268,95 +277,84 @@ section.notice {
 				</div>
 			</nav>
 		</div>
-
-		<!-- board seach area -->
-		<div id="board-search">
-			<div class="container">
-				<div class="search-window">
-					<form action="">
-						<!-- <div class="search-wrap">
-							<label for="search" class="blind">공지사항 내용 검색</label> <input
-								id="search" type="search" name="" placeholder="검색어를 입력해주세요."
-								value="">
-							<button type="submit" class="btn btn-dark">검색</button>
-						</div> -->
-					</form>
-				</div>
-			</div>
-		</div>
+		
+			
 
 		<!-- board list area -->
 		<div id="board-list">
-			<div class="container">
-				<table class="board-table">
-					<thead>
-						<tr>
-							<th scope="col" class="th-num">카테고리</th>
-							<th scope="col" class="th-title">게시글</th>
-							<th scope="col" class="th-date">아이디</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-						 <c:forEach items="${posts}" var="post">
-				            <tr>
-				            	<input type="hidden" name="post_num" value="${post.post_num}">
-				                <td>
-						            <c:choose>
-						                <c:when test="${post.subject == 'game'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임 개설 요청</a>
-						                </c:when>
-						                <c:when test="${post.subject == 'master'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임마스터 모집</a>
-						                </c:when>
-						                <c:when test="${post.subject == 'user'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">중간 파티원 모집</a>
-						                </c:when>
-						                <c:when test="${post.subject == 'other'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">잡담</a>
-						                </c:when>
-						                <c:when test="${post.subject == 'review'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임리뷰</a>
-						                </c:when>
-						                <c:when test="${post.subject == 'character'}">
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">캐릭터 설정</a>
-						                </c:when>
-						                <c:otherwise>
-						                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임기타</a>
-						                </c:otherwise>
-						            </c:choose>
-						        </td>
-				                <td><a href="/community/free_board_detail?post_num=${post.post_num}">${post.post_title}</a></td>
-				                <td>${post.id}</td>
-				            </tr>
-				        </c:forEach>
-
-						
-					</tbody>
-				</table>
-				
-				<!-- 페이징 번호 표시 -->
-				<div class="pagination">
-				    <c:if test="${currentPage > 1}">
-				        <a href="/community/free_board_list?page=${currentPage - 1}">이전</a>
-				    </c:if>
-				    
-				    <c:forEach begin="1" end="${totalPages}" var="pageNum">
-				        <c:choose>
-				            <c:when test="${pageNum == currentPage}">
-				                <strong>${pageNum}</strong>
-				            </c:when>
-				            <c:otherwise>
-				                <a href="/community/free_board_list?page=${pageNum}">${pageNum}</a>
-				            </c:otherwise>
-				        </c:choose>
-				    </c:forEach>
-				    
-				    <c:if test="${currentPage < totalPages}">
-				        <a href="/community/free_board_list?page=${currentPage + 1}">다음</a>
-				    </c:if>
+		
+			
+				<div class="container">
+					<table class="board-table">
+						<thead>
+							<tr>
+								<th scope="col" class="th-num">카테고리</th>
+								<th scope="col" class="th-title">게시글</th>
+								<th scope="col" class="th-date">아이디</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							 <c:forEach items="${posts}" var="post">
+					            <tr>
+					            	<input type="hidden" name="post_num" value="${post.post_num}">
+					                <td>
+							            <c:choose>
+							                <c:when test="${post.subject == 'game'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임 개설 요청</a>
+							                </c:when>
+							                <c:when test="${post.subject == 'master'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임마스터 모집</a>
+							                </c:when>
+							                <c:when test="${post.subject == 'user'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">중간 파티원 모집</a>
+							                </c:when>
+							                <c:when test="${post.subject == 'other'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">잡담</a>
+							                </c:when>
+							                <c:when test="${post.subject == 'review'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임리뷰</a>
+							                </c:when>
+							                <c:when test="${post.subject == 'character'}">
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">캐릭터 설정</a>
+							                </c:when>
+							                <c:otherwise>
+							                    <a href="/community/free_board_detail?post_num=${post.post_num}">게임기타</a>
+							                </c:otherwise>
+							            </c:choose>
+							        </td>
+					                <td><a href="/community/free_board_detail?post_num=${post.post_num}">${post.post_title}</a></td>
+					                <td>${post.id}</td>
+					            </tr>
+					        </c:forEach>
+	
+							
+						</tbody>
+					</table>
+					
+					<!-- 페이징 번호 표시 -->
+					<div class="pagination">
+					    <c:if test="${currentPage > 1}">
+					        <a href="/community/free_board_list?page=${currentPage - 1}">이전</a>
+					    </c:if>
+					    
+					    <c:forEach begin="1" end="${totalPages}" var="pageNum">
+					        <c:choose>
+					            <c:when test="${pageNum == currentPage}">
+					                <strong>${pageNum}</strong>
+					            </c:when>
+					            <c:otherwise>
+					                <a href="/community/free_board_list?page=${pageNum}">${pageNum}</a>
+					            </c:otherwise>
+					        </c:choose>
+					    </c:forEach>
+					    
+					    <c:if test="${currentPage < totalPages}">
+					        <a href="/community/free_board_list?page=${currentPage + 1}">다음</a>
+					    </c:if>
+					</div>
+						<button type="button" class="btn-dark" id="register" class="btn">등록</button>
 				</div>
-					<button type="button" class="btn btn-default" id="register" class="btn">등록</button>
 			</div>
 		</div>
 		

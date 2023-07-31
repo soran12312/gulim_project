@@ -168,13 +168,16 @@ body {
 		</div>
 	
 		
-		<div id="selected-image-container" class="image-container"
-			style="display: none;">
+		<div id="selected-image-container" class="image-container" style="display: none;">
 			<img id="selected-image" />
 			<p id="image-month" class="image-month"></p>
 			<p id="image-price" class="image-price"></p>
 			<button class="btn btn-danger" id="cart">장바구니</button>
-			<button class="btn btn-danger" id="share">친구에게 보내기</button>
+			<button class="btn btn-danger" id="share" onclick="sendToFriend()">친구에게 보내기</button>
+			<div id="friend-id-container" style="display: none;">
+		        <input type="text" id="friend-id" placeholder="친구 아이디 입력">
+		        <button class="btn btn-primary" id="send-to-friend">보내기</button>
+		    </div>
 		</div>
 
 		<div class="row">
@@ -474,13 +477,37 @@ body {
 		// 모달 장바구니페이지 이동
 		function redirectToCart() {
 		    // Redirect the user to the cart page
-		    window.location.href = './basket'; // Replace '/cart' with the actual URL of your cart page
+		    window.location.href = './basket'; 
 		}
 
 
 		// 장바구니페이지 이동
 		function redirectToCartPage() {
 		  window.location.href = "./basket"; 
+		}
+
+
+		// 친구에게 보내기 버튼 클릭시
+		function sendToFriend() {
+		    const month = $('#image-month').text();
+			console.log(month);
+		    
+		    const price = $('#image-price').text();
+			console.log(price);
+		    
+		    const subscriptionData = {
+		        month: month,
+		        price: price
+		    }; 
+
+			console.log(subscriptionData);
+		   
+		    
+		    const jsonSubscriptionData = encodeURIComponent(JSON.stringify(subscriptionData));
+		    const url = `/sale/send_subscribe?data=${jsonSubscriptionData}`;
+		    const windowFeatures = 'width=420,height=520';
+		
+		    window.open(url, '친구에게 보내기', windowFeatures);
 		}
 		
 	</script>

@@ -11,10 +11,12 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 
 <title>장바구니</title>
@@ -382,10 +384,10 @@ input:focus {
 									</tr>
 									<tr>
 										<td>배송비</td>
-										<td class="free-shipping">Free Shipping</td>
+										<td class="free-shipping">2500원</td>
 									</tr>
 									<tr class="total-row">
-										<td>Total</td>
+										<td>총금액</td>
 										<td class="price-total"></td>
 									</tr>
 								</tbody>
@@ -457,7 +459,7 @@ input:focus {
 	                data: JSON.stringify(jsonData), // json데이터로 변환
 	                success: function (response) {
 	                    // 성공
-						alert("수량이 업데이트되었습니다.");
+						// alert("수량이 업데이트되었습니다.");
 						// console.log(response);
                     	console.log("Updated quantity in the database.");
 			             
@@ -472,6 +474,7 @@ input:focus {
 	    });
 
 
+	 
 
 		// X버튼 클릭시
 	   function showConfirmationPopup(subscriptionId) {
@@ -480,6 +483,7 @@ input:focus {
 	        } 
 	    }
 
+		// 장바구니 삭제
 	    function deleteCartItem(subscriptionId) {
 
 	    	console.log("Deleting Subscription ID:"+ subscriptionId); 
@@ -497,51 +501,77 @@ input:focus {
 	            },
 	            error: function (xhr, status, error) {
 	                console.error("Error deleting subscription: " + error);
-	                alert('error');
+	                //alert('error');
 	            }
 	        });
 	    }
 
 
 
-	    // +, -버튼 클릭시 가격변경
-	    function updateTotalPrice(qtyInput) {
-	        const priceCell = qtyInput.closest("tr").find(".price");
-	        const pricePerItem = parseInt(priceCell.attr("data-price")); // Get the price per item from the "data-price" attribute
-	        const newQty = parseInt(qtyInput.val());
-	        const totalPrice = pricePerItem * newQty;
-	        priceCell.text(totalPrice); // Update the total price in the table cell
-	    }
+	     // +, - 클릭시 가격 변경
+		 function updateTotalPrice(qtyInput) {
+	         const priceCell = qtyInput.closest("tr").find(".price");
+	         const pricePerItem = parseInt(priceCell.attr("data-price")); // "데이터 가격" 속성에서 품목당 가격 가져오기
+	         const newQty = parseInt(qtyInput.val());
+	         const totalPrice = pricePerItem * newQty;
+	         priceCell.text(totalPrice); // 총 가격 업데이트
+
+	         updateCartTotal();
+	     }
+
+		 // 배송비 포함된 가격
+	     function updateCartTotal() {
+	         let cartTotal = 0;
+	         $(".price").each(function () {
+	             cartTotal += parseInt($(this).text());
+	         });
+
+	         const shippingCost = 2500; // 배송비 2500원
+	         const subTotal = cartTotal;
+	         const total = cartTotal + shippingCost;
+
+	         $(".subtotal").text(subTotal);
+	         $(".price-total").text(total);
+	     }
+
+	     // 페이지 로드 시 카트 합계
+	     updateCartTotal();
+		    
+
+
 
 
 	  // 결제하기 버튼 클릭 시
 	    $("#payment").on("click", function () {
-	        // Collect all subscription IDs and quantities from the cart
-	        const cartItems = [];
+		    // 카트에서 모든 구독 ID 및 수량 수집
+		    const cartItems = [];
+		    
 	        $("tr").each(function () {
 	            const productId = $(this).find(".product-id").val();
 	            const quantity = parseInt($(this).find(".qty").val());
-	            cartItems.push({ sub_num: productId, amount: quantity });
-
-	            console.log(cartItems);
+	            const cartItem = {
+	                sub_num: productId, // sub_num 속성 추가
+	                amount: quantity    // amount 속성은 이미 정의되어 있음
+	            };
+	            cartItems.push(cartItem);
 	        });
-
-	        // Send the cart items to the server for payment and database update
-	        $.ajax({
-	            type: "POST",
-	            url: "/api/checkout",
-	            contentType: "application/json",
-	            data: JSON.stringify(cartItems),
-	            success: function (response) {
-	                alert("결제가 완료되었습니다.");
-	                location.reload(); // Reload the page to clear the cart after successful payment
-	            },
-	            error: function (xhr, status, error) {
-	                console.error("Error during payment: " + error);
-	                alert("결제 오류가 발생했습니다. 다시 시도해주세요.");
-	            },
-	        });
-	    });
+		
+		    // 결제 및 데이터베이스 업데이트를 위해 카트 항목을 서버로 보냄
+		    $.ajax({
+		        type: "POST",
+		        url: "/api/checkout",
+		        contentType: "application/json",
+		        data: JSON.stringify(cartItems),
+		        success: function (response) {
+		            alert("결제가 완료되었습니다."); //성공
+		            // 장바구니 삭제
+		           location.reload(); // 결제 후 카트를 삭제하기 위해 페이지 다시 로드
+		        },
+		        error: function (xhr, status, error) {
+		            alert("결제 오류가 발생했습니다. 다시 시도해주세요.");
+		        },
+		    });
+		});
 
 	</script>	
 		

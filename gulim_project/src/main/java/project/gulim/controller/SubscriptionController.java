@@ -1,11 +1,14 @@
 package project.gulim.controller;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -166,7 +169,7 @@ public class SubscriptionController {
 
             // Update the quantity in the database using the subscriptionService
             
-            Integer result =subscriptionService.updateQuantity(sub_num, amount);
+            Integer result = subscriptionService.updateQuantity(sub_num, amount);
             if(result == 1)
             {
             	return true;
@@ -187,28 +190,22 @@ public class SubscriptionController {
     
     // 장바구니 삭제버튼 클릭시
     @PostMapping("/delete-subscription")
-    public boolean deleteQuantity(@RequestBody PurchaseDTO sub_num) {
+    @Transactional
+    public ResponseEntity deleteQuantity(@RequestBody PurchaseDTO sub_num) {
     	try {
     		
     		
             System.out.println("sub_num:" + sub_num);
     		
     		
-            Integer result = subscriptionService.deleteQuantity(sub_num);
+            subscriptionService.deleteQuantity(sub_num);
+            subscriptionService.deleteSubscription(sub_num);
             
-            if(result == 1)
-            {
-            	return true;
-            }
-            else
-            {            	
-            	return false;
-            }
-//            return ResponseEntity.ok("Quantity updated successfully");
+         
+            return ResponseEntity.ok("Quantity updated successfully");
         } catch (Exception e) {
         	System.out.println(e.getMessage());
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update quantity");
-            return false;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update quantity");
         }
     	
     	
@@ -220,16 +217,51 @@ public class SubscriptionController {
     
     // 결제하기 버튼 클릭시
     @PostMapping("/checkout")
-    public ResponseEntity<String> checkout(@RequestBody Map<Integer, Integer> requestData) {
-        
-
-        return ResponseEntity.ok("Checkout successful.");
+    public ResponseEntity<String> handleCheckout(@RequestBody List<Map<String, Integer>> cartItems) {
+        System.out.println(cartItems);
+    	
+        try {
+        	
+        	for (Map<String, Integer>cartItem : cartItems) {
+             
+                Integer sub_num = (Integer) cartItem.get("sub_num");
+                Integer amount = (Integer) cartItem.get("amount");
+                
+                if (sub_num != null && amount != null && amount > 0) {
+                    
+                    LocalDate startDate = LocalDate.now();
+                    
+                    //  sub_num으로 구독권 가격 가져와서 금액별 end_date 추가
+                    Integer price = subscriptionService.getSubscriptionById(sub_num);
+                    
+                    if (price == 9900) {
+                    	LocalDate endDate = startDate.plusMonths(amount);
+                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+                    } else if (price == 15000) {
+                    	LocalDate endDate = startDate.plusMonths(amount * 3);
+                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+                    } else if (price == 29900) {
+                    	LocalDate endDate = startDate.plusMonths(amount * 7);
+                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+                    } else if (price == 55000) {
+                    	LocalDate endDate = startDate.plusMonths(amount * 14);
+                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+                    }
+                    
+                }
+                
+                // sub_state가 1이되면 장바구니db 삭제
+                // 상품 구매가 완료되었으므로 장바구니에서 상품을 삭제
+                subscriptionService.deleteAllQuantities(cartItem);
+            }
+    
+            
+            return new ResponseEntity<>("Payment successful", HttpStatus.OK);
+        } catch (Exception e) {
+        	e.printStackTrace();
+           return new ResponseEntity<>("Payment error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    
-
-    
-    
-    // sub_state가 1이되면 장바구니db 삭제
    
 }

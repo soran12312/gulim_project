@@ -57,7 +57,7 @@ public interface CommunityDAO {
 
 
 	// 공지사항 조회
-	public List<HashMap> findAnnounce();
+	public List<HashMap> findAnnounce(int start, int size);
 	
 	// 이벤트 조회
 	public List<PostDTO> findEvent();
@@ -92,6 +92,10 @@ public interface CommunityDAO {
 
 	// 이벤트 게시글 수
 	public int countEvent();
+	
+	
+	// 공지사항 게시글 수
+	public int countAnnounce();
 
 
 	// 공모전 리스트

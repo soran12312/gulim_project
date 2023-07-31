@@ -32,7 +32,7 @@ public interface CommunityService {
 	
 	
 	// 공지사항 리스트 조회
-	public List<HashMap> findAllAnnounce();
+	public List<HashMap> findAllAnnounce(int start, int size);
 
 	/**
 	 * 게시글 리스트 조회
@@ -70,4 +70,8 @@ public interface CommunityService {
 	
 	// 공모전 리스트 조회
 	public List<Map> findAllContest(int start, int size);
+
+	
+	// 공지사항 게시글 수
+	public int countAllAnnounce();
 }

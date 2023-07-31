@@ -225,6 +225,19 @@ section.notice {
 .navbar li a {
    text-decoration: none;
 }
+
+
+.row {
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/wallpaper/배경3.jpg");
+	background-size: cover;
+	opacity: 1;
+	opacity: 0.8;
+	overflow: hidden;
+}
+
+
 </style>
 
 
@@ -238,6 +251,9 @@ section.notice {
    </header>
 
    <section class="notice">
+   
+   
+   <div class= "row">
       <div class="page-title">
          <nav class="navbar">
             <div class="container">
@@ -255,21 +271,7 @@ section.notice {
          </nav>
       </div>
 
-      <!-- board seach area -->
-      <div id="board-search">
-         <div class="container">
-            <div class="search-window">
-               <form action="">
-                  <!-- <div class="search-wrap">
-                     <label for="search" class="blind">공지사항 내용 검색</label> <input
-                        id="search" type="search" name="" placeholder="검색어를 입력해주세요."
-                        value="">
-                     <button type="submit" class="btn btn-dark">검색</button>
-                  </div> -->
-               </form>
-            </div>
-         </div>
-      </div>
+      
 
       <!-- board list area -->
       <div id="board-list">
@@ -311,9 +313,37 @@ section.notice {
                    </c:if>
                </tbody>
             </table>
+            
+            
+            <!-- 페이징 번호 표시 -->
+			<div class="pagination">
+			    <c:if test="${currentPage > 1}">
+			        <a href="/community/announce_list?page=${currentPage - 1}">이전</a>
+			    </c:if>
+			    
+			    <c:forEach begin="1" end="${totalPages}" var="pageNum">
+			        <c:choose>
+			            <c:when test="${pageNum == currentPage}">
+			                <strong>${pageNum}</strong>
+			            </c:when>
+			            <c:otherwise>
+			                <a href="/community/announce_list?page=${pageNum}">${pageNum}</a>
+			            </c:otherwise>
+			        </c:choose>
+			    </c:forEach>
+			    
+			    <c:if test="${currentPage < totalPages}">
+			        <a href="/community/announce_list?page=${currentPage + 1}">다음</a>
+			    </c:if>
+			</div>
+            
+            
+            
          </div>
       </div>
 
+
+	</div>
    </section>
    
    
