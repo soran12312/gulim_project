@@ -277,8 +277,8 @@
  transform: translate(-50%, -50%);
  background-image: url("/files/images/간판.png");
  background-size: contain;;
- width: 315px;
- height: 150px;
+ width: 595px;
+ height: 300px;
  padding: 20px;
  text-align: center;
  display: none;
@@ -422,30 +422,40 @@ padding: 10px;
 
 /* 팝업 닫기 버튼 */
 .pop_btn{
+	position: relative;
+	top:130px;
 	width: 50px;
 	height: 30px;
 	font-family: 'NeoDunggeunmo Code';
-	font-size: 10px;
+	font-size: 15px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin-top: 5px;
     background-color: #C7813C;
     border: 3px solid #7B4E23;
 }
 /* pop내용 */
 .popstrong{
+	margin-top: 200px;
 	font-family: 'NeoDunggeunmo Code';
 	position: relative;
 	top: 10px;
 	color: white;
+	position: relative;
+	top: 50px;
 }
 .popH2{
+	position: relative;
+	top:80px;
+	width: 400px;
 	font-family: 'NeoDunggeunmo Code';
-	
 	color: white;
+	margin: auto;
 }
+.popa{
+	position: relative;
+	top:100px;}
 /*선*/
 .qusetion_line{
 	position: absolute;
