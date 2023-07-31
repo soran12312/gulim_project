@@ -213,61 +213,61 @@
 <!-- 팝업 -->
 <div class="popup_overlay"></div>
 <div class="popup_game popup_content">
-    <strong>Q.게임은 어디서 생성하나요?</strong>
-    <h2>A.게임탭에서 방 만들기를 누르면 됩니다.</h2>
-    <a href="https://192.168.0.68:8080/game/play/room_create"><span>게임 생성하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.게임은 어디서 생성하나요?</strong>
+    <h2 class = "popH2" >A.게임탭에서 방 만들기를 누르면 됩니다.</h2>
+    <a  class="no_a_st2" href="https://192.168.0.68:8080/game/play/room_create"><span>게임 생성하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 
 <div class="popup_content popup_book">
-    <strong>Q.설정집 구매는 어디서 하나요?</strong>
-    <h2>A.결제로 들어가서 원하는 설정집을 선택해서 구매하시면 됩니다.</h2>
-    <a href="https://192.168.0.68:8080/sale/sale_main"><span>설정집 구매 하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.설정집 구매는 어디서 하나요?</strong>
+    <h2 class = "popH2" >A.결제로 들어가서 원하는 설정집을 선택해서 구매하시면 됩니다.</h2>
+    <a  class="no_a_st2" href="https://192.168.0.68:8080/sale/sale_main"><span>설정집 구매 하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 
 <div class="popup_content popup_map">
-    <strong>Q.장소를 찾고 싶어요</strong>
-    <h2>A.모임장소 찾기를 눌러서 근처에 있는 장소를 확인하세요.</h2>
-    <a href="https://192.168.0.68:8080/offline/map"><span>장소 보러 하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.장소를 찾고 싶어요</strong>
+    <h2 class = "popH2" >A.모임장소 찾기를 눌러서 근처에 있는 장소를 확인하세요.</h2>
+    <a  class="no_a_st2" href="https://192.168.0.68:8080/offline/map"><span>장소 보러 하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <div class="popup_content popup_pass">
-    <strong>Q.비밀번호를 분실했어요</strong>
-    <h2>A.어쩌라고요.</h2>
-    <a href="#"><span>비밀번호 찾으러 하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.비밀번호를 분실했어요</strong>
+    <h2 class = "popH2" >A.어쩌라고요.</h2>
+    <a  class="no_a_st2" href="#"><span>비밀번호 찾으러 하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <div class="popup_content popup_id">
-    <strong>Q.아이디를 분실했어요</strong>
-    <h2>A.어쩌라고요.</h2>
-    <a href="#"><span>아이디 찾으러 하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.아이디를 분실했어요</strong>
+    <h2 class = "popH2" >A.어쩌라고요.</h2>
+    <a  class="no_a_st2" href="#"><span>아이디 찾으러 하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <div class="popup_content popup_char">
-    <strong>Q.캐릭터 시트가 뭐예요?</strong>
-    <h2>A.나도 모르겠네요.</h2>
-    <a href="#"><span>캐릭터 시트 작성 하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.캐릭터 시트가 뭐예요?</strong>
+    <h2 class = "popH2" >A.나도 모르겠네요.</h2>
+    <a  class="no_a_st2" href="#"><span>캐릭터 시트 작성 하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <div class="popup_content popup_master">
-    <strong>Q.게임마스터가 너무 어려워요</strong>
-    <h2>A.네</h2>
-    <a href="#"><span>하러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.게임마스터가 너무 어려워요</strong>
+    <h2 class = "popH2" >A.네</h2>
+    <a class="no_a_st2" href="#"><span>하러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <div class="popup_content popup_reco">
-    <strong>Q.게임 추천해주세요</strong>
-    <h2>A.싫어요</h2>
-    <a href="#"><span>게임추천 받으러가기</span></a><br>
-    <button>닫기</button>
+    <strong class ="popstrong" >Q.게임 추천해주세요</strong>
+    <h2 class = "popH2" >A.싫어요</h2>
+    <a class="no_a_st2" href="#"><span>게임추천 받으러가기</span></a><br>
+    <button class="pop_btn">닫기</button>
 </div>
 
 <jsp:include page="../../../footer.jsp"></jsp:include>

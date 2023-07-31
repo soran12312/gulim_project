@@ -106,7 +106,7 @@
 	<select id="char_sheet_list" parameterType="Integer" resultType="Integer">
 		SELECT join_num 
 		FROM `join`
-		WHERE room_num = #{room_num}
+		WHERE room_num = #{room_num} AND join_state = 0
 	</select>
 	
 	<!-- 참가번호로 캐릭터 시트 내용 가져옴 -->

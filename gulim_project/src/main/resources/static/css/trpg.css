@@ -952,19 +952,23 @@ font-weight: bold;}
 	width: 300px;
 }
 .bxslider_size{
-	padding-top: 70px;
-	padding-left: 50px;
+	position: relative;
+	top:80px;
+	left:50px;
 	width: 930px;
+	height: 250px;
 }
 .bxslider_size2{
-	padding-top: 35px;
-	padding-left: 50px;
+	position: relative;
+	top:80px;
+	left:50px;
 	width: 930px;
 	text-align: center;
 }
 .bxslider_size3{
-	padding-top: 70px;
-	padding-left: 50px;
+	position: relative;
+	top:110px;
+	left:50px;
 	width: 930px;
 	text-align: center;
 }
