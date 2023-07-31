@@ -19,6 +19,9 @@ font-size: 17px;
 .fs20{
 font-size: 20px;
 }
+.fs30{
+font-size: 30px;
+}
 .l_margin20{
 margin-left:  20px;
 }
@@ -1906,6 +1909,7 @@ purchase_bookname{
 /* ================ START OF 캐릭터 시트 ====================== */
 .char_sheet_form input{
 	border: none;
+	font-family: NeoDunggeunmo Code, Inter;	
 }
 .char_sheet_form textarea{
 	border: none;
@@ -1956,6 +1960,7 @@ purchase_bookname{
 	position: relative;
 	top: 230px;
 	right:530px;
+	text-align: center;
 }
 .dex{
 	width: 50px;
@@ -1963,9 +1968,11 @@ purchase_bookname{
 	position: relative;
 	top: 367px;
 	right:589px;
+	text-align: center;
 }
 .con{
 	width: 50px;
+	text-align: center;
 	height:50px;
 	position: relative;
 	top: 505px;
@@ -1991,6 +1998,7 @@ purchase_bookname{
 }
 .intel{
 	width: 50px;
+	text-align: center;
 	height:50px;
 	position: relative;
 	top: 638px;
@@ -1998,6 +2006,7 @@ purchase_bookname{
 }
 .wis{
 	width: 50px;
+	text-align: center;
 	height:50px;
 	position: relative;
 	top: 725px;
@@ -2005,6 +2014,7 @@ purchase_bookname{
 }
 .chr{
 	width: 50px;
+	text-align: center;
 	height:50px;
 	position: relative;
 	top: 860px;
@@ -2040,10 +2050,11 @@ purchase_bookname{
 	position: relative;
 	top: 923px;
 	left:180px;
+	text-align: right;
 }
 
 .tdkg_input input, .tdcount_input input{
-	width: 25px;
+	width: 40px;
 	font-size: 15px;
 	text-align: left;
 }
@@ -2120,7 +2131,38 @@ purchase_bookname{
     border-bottom-right-radius: 20px;
     background-color: #FD786A;
 }
-
+.charbtn2{
+   width: 100px;
+   height:50px;
+   position: relative;
+   bottom: 65px;
+   left:150px;
+   padding: 10px;
+   font-size: 15px;
+   font-family: NeoDunggeunmo Code, Inter;   
+   border: 7px solid rgba(217,217,217,0.7);
+   border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #FD786A;
+}
+.charbtn3{
+   width: 100px;
+   height:50px;
+   position: relative;
+   bottom: 65px;
+   left:150px;
+   padding: 10px;
+   font-size: 15px;
+   font-family: NeoDunggeunmo Code, Inter;   
+   border: 7px solid rgba(217,217,217,0.7);
+   border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: grey;
+}
 /* ================ END OF 캐릭터 시트 ====================== */
 /* ================ START OF CREATE ROOM ====================== */
 .createRoomdiv{

@@ -655,11 +655,92 @@ public class MypageContoroller {
 	
 
  //=========== START of 캐릭터시트리스트 ======================================================================================================	
-	@RequestMapping("/game/char_sheet_list")
-	public String char_sheet_list() {
-		String id = myId_is_in_cookies();		
+
+ //받아온 게임방번호로 참가요청한 캐릭터 시트정보를 리스트로 띄우기
+   @RequestMapping("/game/char_sheet_list")
+	public String char_sheet_list(@RequestParam Integer room_num, Model m) {	
+		//채팅방 번호로 참가번호가져옴 
+		ArrayList<Integer> join_num_list= mypageService.char_sheet_list(room_num);
+		
+		//참가번호(여러개)를 보내서 해당 참가번호의 정보를 map(캐릭터 아이디 성향 직업 종족 아이디)에 담고 
+		ArrayList<HashMap> joinlist = new ArrayList(); 
+		for(Integer list : join_num_list) {
+			HashMap joininfo = mypageService.find_joininfo(list);
+			//받아서 해시맵 리스트(joinlist)에 추가하고 모델에 담아줌 
+			joinlist.add(joininfo);
+		}
+		m.addAttribute("join",joinlist);
 		return "mypage/game/char_sheet_list";
 	}
+   
+   
+   
+   
+   //받아온 게임방번호로 참가요청한 캐릭터 시트정보를 리스트로 띄우기
+   @RequestMapping("/game/char_sheet_confirm")
+	public String char_sheet_confirm(@RequestParam Integer join_num, Model m) {	
+	   	//참가번호로 캐릭터 시트 내용 가져오기
+	   	HashMap sheet = mypageService.char_sheet_confirm(join_num);
+		m.addAttribute("sheet",sheet);
+		
+		//보낼PK값들을 Interger로 변환해서 변수에 넣고 보냄
+		Integer sheet_num = (Integer) sheet.get("sheet_num");
+		Integer inventory_num = (Integer) sheet.get("inventory_num");
+		
+		//시트넘버로 스킬리스트 가져옴
+		ArrayList<HashMap> skills = mypageService.skills(sheet_num);
+		m.addAttribute("skills",skills);
+	
+		//인벤토리넘버로 아이템 리스트 가져옴
+		ArrayList<HashMap> items = mypageService.items(inventory_num);
+		m.addAttribute("items",items);
+		//etc 분할
+		String str = (String)sheet.get("char_etc");
+		
+		//etc 별 쪼개기
+		String[] word = str.split("\n");
+		String word1 = word[0]; //인격특성 : ---
+		String word2 = word[1]; //이상 : ---
+		String word3 = word[2]; //유대 : ---
+		String word4 = word[3]; //단점 : ---
+		
+		//필요없는부분 분리
+		String[] etc1_1 = word1.split(" : ");
+		String[] etc2_1 = word2.split(" : ");
+		String[] etc3_1 = word3.split(" : ");
+		String[] etc4_1 = word4.split(" : ");
+
+		//내용만 남음
+		String etc1_2 = etc1_1[1];
+		String etc2_2 = etc2_1[1];
+		String etc3_2 = etc3_1[1];
+		String etc4_2 = etc4_1[1];
+
+		
+		//개행 삭제
+		String etc1 = etc1_2.replace("\r", "");
+		String etc2 = etc2_2.replace("\r", "");
+		String etc3 = etc3_2.replace("\r", "");
+		String etc4 = etc4_2.replace("\r", "");
+
+		
+		HashMap etc = new HashMap();
+		etc.put("etc1", etc1);
+		etc.put("etc2", etc2);
+		etc.put("etc3", etc3);
+		etc.put("etc4", etc4);
+		
+		m.addAttribute("etc" ,etc);
+		
+	return "mypage/game/char_sheet_confirm";
+	}
+   
+//동료영입
+   @RequestMapping("/game/agree_brother")
+   public String agree_brother(Integer join_num){
+	    mypageService.agree_brother(join_num);
+	   return "redirect:/mypage/game/my_game_list";
+   }
  //=========== END of 캐릭터시트리스트 =======================================================================================================	
 	
 	

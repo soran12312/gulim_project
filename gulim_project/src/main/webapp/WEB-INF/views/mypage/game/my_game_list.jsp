@@ -106,7 +106,7 @@ const chatRoomJoin = (event,room_num) => {
 											<img src="/files/images/no_image.jpg" />
 										</c:if>
 										</td>
-										<td class="fs15 fs_light"><p class="fs17">${room.room_name}</p>들어온 요청 <a>${room.num_of_join}건</a></td>
+										<td class="fs15 fs_light"><p class="fs17">${room.room_name}</p>들어온 요청 <a href="/mypage/game/char_sheet_list?room_num=${room.room_num}">${room.num_of_join}건</a></td>
 									</tr>
 							</table>
 							</li>

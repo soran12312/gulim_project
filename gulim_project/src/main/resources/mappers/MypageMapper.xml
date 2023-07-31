@@ -101,7 +101,83 @@
 		SELECT room_name FROM chating
 		WHERE room_num = #{room_num} AND room_state = 0
 	</select>
-
+	
+	<!-- 채팅방 번호로 참가번호가져옴 -->
+	<select id="char_sheet_list" parameterType="Integer" resultType="Integer">
+		SELECT join_num 
+		FROM `join`
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<!-- 참가번호로 캐릭터 시트 내용 가져옴 -->
+	<select id="find_joininfo" parameterType="Integer" resultType="java.util.HashMap">
+		SELECT 
+				c.char_propensity char_propensity
+				,c.species species
+				,c.char_class char_class
+				,c.char_name char_name
+				,j.id id
+				,j.join_num join_num
+		FROM character_sheet c 
+		LEFT OUTER JOIN `join` j
+		ON j.join_num = c.join_num
+		WHERE j.join_num = #{list}
+	</select>
+	
+	<!-- 참가번호로 캐릭터 시트 가져옴 -->
+	<select id="char_sheet_confirm" parameterType="Integer" resultType="java.util.HashMap">
+		SELECT 
+				j.id id
+				,j.join_num join_num
+				,chat.room_name room_name
+				,v.inventory_num inventory_num
+				,v.money money
+				,c.sheet_num sheet_num
+				,c.char_name char_name
+				,c.char_propensity char_propensity
+				,c.char_class char_class
+				,c.species species
+				,c.str str
+				,c.dex dex
+				,c.con con
+				,c.intelligence intelligence
+				,c.wis wis
+				,c.chr chr
+				,c.char_explain char_explain
+				,c.char_etc char_etc
+		FROM character_sheet c 
+		LEFT OUTER JOIN `join` j 		ON j.join_num = c.join_num
+		LEFT OUTER JOIN chating chat 	ON j.room_num = chat.room_num
+		LEFT OUTER JOIN inventory v 	ON j.join_num = v.join_num
+		WHERE j.join_num = #{join_num}
+	</select>
+	
+	<!-- 시트넘버로 스킬 여러개 가져옴 -->
+	<select id="skills" parameterType="Integer" resultType="java.util.HashMap">
+		SELECT s.skill_name skill_name, s.skill_detail skill_detail
+		FROM character_sheet c 
+		LEFT OUTER JOIN skill s 		ON c.sheet_num = s.sheet_num
+		WHERE c.sheet_num = #{sheet_num}
+	</select>
+	
+	<!-- 인벤토리넘버로 아이템 여러개 가져옴 -->
+	<select id="items" parameterType="Integer" resultType="java.util.HashMap">
+			SELECT 
+				 i.item_name  		item_name
+				,i.item_amount 		item_amount
+				,i.item_weight 		item_weight
+				,i.item_detail  	item_detail
+				,i.equip_state  	equip_state
+		FROM item i
+		LEFT OUTER JOIN inventory v		ON v.inventory_num  = i.inventory_num
+		WHERE v.inventory_num = #{inventory_num}
+	</select>
+	<!-- 해당 넘버의 참가번호를 찾아 상태를 참가로 변경  -->
+	 <update id="agree_brother" parameterType="Integer">
+		UPDATE 	 `join` 
+		SET		 join_state		= 1
+		WHERE 	 join_num = #{join_num}
+	</update>
 <!-- =========== END of 게임관리 ======================================================================================================	 -->
 <!-- =========== START of 나의 게시물 ======================================================================================================	 -->
 	<select id="my_post" parameterType="PostDTO" resultType="java.util.HashMap">

@@ -150,7 +150,21 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.selectRoomNameByPK(roon_num);
 	}
 
-
+	public ArrayList<Integer> char_sheet_list(Integer room_num){
+		return mypageDAO.char_sheet_list(room_num);
+	}
+	public HashMap find_joininfo(Integer list) {
+		return mypageDAO.find_joininfo(list);
+	}
+	public HashMap char_sheet_confirm(Integer join_num) {
+		return mypageDAO.char_sheet_confirm(join_num);
+	}
+	public ArrayList<HashMap> skills(Integer sheet_num){
+		return mypageDAO.skills(sheet_num);
+	}
+	public ArrayList<HashMap> items(Integer inventory_num){
+		return mypageDAO.items(inventory_num);
+	}
 //=========== START of 친구관리 ======================================================================================================	
 	public List<FriendDTO> friend(String id) {
 		return mypageDAO.friend(id);
@@ -191,7 +205,9 @@ public class MypageServiceImpl implements MypageService {
 	public HashMap find_gamename(Integer num) {
 		return mypageDAO.find_gamename(num);
 	}
-	
+	public void agree_brother(Integer join_num) {
+		mypageDAO.agree_brother(join_num);
+	}
 //=========== END of 친구관리 ======================================================================================================	
 
 

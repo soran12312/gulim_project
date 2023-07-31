@@ -37,7 +37,12 @@ public interface MypageDAO {
 	public String selectImgPathByRoomNum(Integer roon_num);
 	public List<Integer> selectAllJoinedRoomNumById(String id);
 	public String selectRoomNameByPK(Integer roon_num);
-
+	public ArrayList<Integer> char_sheet_list(Integer room_num);
+	public HashMap find_joininfo(Integer list);
+	public HashMap char_sheet_confirm(Integer join_num);
+	public ArrayList<HashMap> skills(Integer sheet_num);
+	public ArrayList<HashMap> items(Integer inventory_num);
+	public void agree_brother(Integer join_num);
 //=========== END of 게임관리 ========================================================================================================
 //=========== START of 나의 게시물 ======================================================================================================		
 	public ArrayList<HashMap> my_post(PostDTO post);
@@ -70,6 +75,10 @@ public interface MypageDAO {
 	public List<Integer> friend_playlist(String id); 
 	public HashMap find_gamename(Integer num);
 //=========== END of 친구관리 ======================================================================================================	
+	
+	
+	
+	
 	
 	
 	
