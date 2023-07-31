@@ -304,7 +304,7 @@ public class MypageContoroller {
 	
 	
 //=========== START of 회원정보 ======================================================================================================	
-//아디디 가져가기
+//아이디 가져가기
 	@RequestMapping("/user_info/info_modify")
 	public String info_modify(MemberDTO memberDTO,Model m) {
 		

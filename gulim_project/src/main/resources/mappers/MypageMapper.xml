@@ -52,15 +52,19 @@
 	
 <!--=========== END of 쪽지 =====================================================================================================-->
 <!--=========== START of 캘린더 =====================================================================================================-->
+	<!-- 일정 저장 -->
 	<insert id="insert_evt" parameterType = "CalenderDTO">
       INSERT INTO calender (id, calender_date, calender_title, calender_content) 
       VALUES (#{id}, #{calender_date}, #{calender_title},#{calender_content})   
     </insert>
+    
+    <!-- 일정리스트 가져오기 -->
     <select id="find_evt" parameterType="CalenderDTO" resultType="CalenderDTO">
       SELECT * 
       FROM calender
       WHERE id=#{id}
     </select>
+    
     <!-- 게시물 삭제 -->
     <select id="delete_evt" parameterType="Integer" >
       DELETE FROM calender 
