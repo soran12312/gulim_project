@@ -23,7 +23,6 @@
         // 부모 창에서 특정 페이지인지 확인
         if (window.opener && window.opener.location.href.includes('/mypage/game/char_sheet_confirm')) {
             console.log(window.opener.location.href);
-            alert('이 페이지는 특정 페이지입니다.');
             window.opener.location.href = '/mypage/game/my_game_list';
         } else {
             // 부모 창이 없거나 특정 페이지가 아닌 경우, 부모 창 새로고침
