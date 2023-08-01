@@ -2,6 +2,7 @@ package project.gulim.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import project.gulim.domain.MessageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.domain.TagDTO;
+import project.gulim.service.GameService;
 import project.gulim.service.MainService;
 import project.gulim.service.MypageService;
 import project.gulim.util.MD5Generator;
@@ -43,6 +45,9 @@ public class MypageContoroller {
 	
 	@Autowired
 	private HttpServletRequest req;
+	
+	@Autowired
+	private GameService gameService;
 	
 	@Autowired
 	MypageService mypageService;
@@ -313,8 +318,15 @@ public class MypageContoroller {
 		return id;
 	}
 	
+	// 참가취소
 	@RequestMapping("/game/join_cancle")
-	public String join_cancle(Integer join_num) {
+	public String join_cancle(Integer join_num, Integer room_num) {
+		
+		Integer join_state = mypageService.selectJoinStateByJoinNum(join_num);
+		
+		if(join_state == 1) {
+			mypageService.dec_curr_member(room_num);
+		}
 		
 		mypageService.join_cancle(join_num);
 		
@@ -333,7 +345,7 @@ public class MypageContoroller {
 		return "/mypage/game/my_game_modify";
 	}
 	
-	@RequestMapping("/room_delete")
+	@RequestMapping("/game/room_delete")
 	public String room_delete(Integer room_num) {
 		
 		mypageService.room_delete(room_num);
@@ -373,7 +385,7 @@ public class MypageContoroller {
 	
 	@RequestMapping("/game/room_modify")
 	@Transactional
-	public String room_insert(ChatingDTO room, String hashtag, MultipartFile room_img) {
+	public String room_modify(ChatingDTO room, String hashtag, MultipartFile room_img) {
 		
 	    String id = this.getId();
 	    room.setId(id);
@@ -387,7 +399,17 @@ public class MypageContoroller {
 			room.setWatching(1);
 		}
 		
-		Integer room_num = mypageService.room_insert(room);
+		Integer room_num = room.getRoom_num();
+		
+		mypageService.room_modify(room);
+		
+		// 기존 이미지 경로 얻어오기
+		String pre_img_path = mypageService.selectImgPathByRoomNum(room_num);
+		
+		System.out.println(room_num);
+		System.out.println(pre_img_path);
+		// 기존 이미지 db에서 제거
+		mypageService.delete_room_img(room_num);
 		
 		if(!room_img.isEmpty()) {
 			ImageDTO img = new ImageDTO();
@@ -410,6 +432,10 @@ public class MypageContoroller {
 			File serverFile = new File(realPath); // 저장할 파일의 경로를 생성합니다.
 
 			try {
+				// 기존 이미지 삭제
+				Path absolutePath = Paths.get(pre_img_path).toAbsolutePath();
+				Files.deleteIfExists(absolutePath);
+				
 				// MultipartFile의 transferTo 메서드를 이용하여 파일을 저장.
 				room_img.transferTo(serverFile);
 				
@@ -420,6 +446,9 @@ public class MypageContoroller {
 				e.printStackTrace();
 			}
 		}
+		
+		// 기존의 태그 db에서 삭제
+		mypageService.delete_room_tag(room_num);
 		
 		if(!hashtag.equals("")) {
 			String[] tag_contents = hashtag.split(",");
@@ -432,7 +461,7 @@ public class MypageContoroller {
 			}
 		}
 		
-		return "/game/play/room_list";
+		return "redirect:/mypage/game/my_game_list";
 	}
 	
 		
@@ -876,8 +905,11 @@ public class MypageContoroller {
    
 //동료영입
    @RequestMapping("/game/agree_brother")
-   public String agree_brother(Integer join_num){
+   public String agree_brother(Integer join_num, Integer room_num){
+	   
 	    mypageService.agree_brother(join_num);
+	    mypageService.inc_curr_member(room_num);
+	    
 	   return "redirect:/mypage/game/my_game_list";
    }
  //=========== END of 캐릭터시트리스트 =======================================================================================================	

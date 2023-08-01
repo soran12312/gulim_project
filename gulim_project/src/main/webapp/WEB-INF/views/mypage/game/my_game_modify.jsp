@@ -63,6 +63,7 @@ function previewImage(event) {
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 	<div class = "createRoomdiv">
 		<form action="/mypage/game/room_modify" method="post" enctype="multipart/form-data">
+		<input type="hidden" value="${room.room_num}" name="room_num">
 			<input type="text" placeholder="게임이름" name="room_name" class="room_name" value="${room.room_name}">
 			<table class = "createRoomtable">
 				<tr>
@@ -73,7 +74,7 @@ function previewImage(event) {
 					<td class="room_human">
 						<span>최대 방 인원수</span>
 						<select name="max_member">
-							<c:forEach begin="1" end="5" var="i">
+							<c:forEach begin="${room.curr_member}" end="5" var="i">
 								<c:if test="${i == room.max_member}">
 									<option value="${i}" selected="selected">${i}</option>
 								</c:if>
@@ -103,7 +104,7 @@ function previewImage(event) {
 				<tr>
 					<td rowspan="1" class = "show_room">
 						<c:if test="${room.watching == 0}">
-							관전허가 <input type="checkbox" name="watching" onclick="watchingValue()" id="watching" checked="checked">
+							관전허가 <input type="checkbox" name="watching" onclick="watchingValue()" id="watching" checked="checked" value=0>
 						</c:if>
 						<c:if test="${room.watching != 0}">
 							관전허가 <input type="checkbox" name="watching" onclick="watchingValue()" id="watching">

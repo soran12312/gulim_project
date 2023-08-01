@@ -113,6 +113,12 @@
 		WHERE 	 join_num = #{join_num} 
 	</update>
 	
+	<update id="dec_curr_member" parameterType="Integer">
+		UPDATE chating
+		SET curr_member = (SELECT curr_member-1 FROM chating WHERE room_num = #{room_num})
+		WHERE room_num = #{room_num}
+	</update>
+	
 	<!-- 방 삭제 -->
 	<update id="room_delete" parameterType="Integer">
 		UPDATE 	 chating 
@@ -130,6 +136,22 @@
 		SELECT tag_content FROM tag
 		WHERE room_num = #{room_num}
 	</select>
+	
+	<update id="room_modify" parameterType="ChatingDTO">
+		UPDATE chating
+		SET room_name=#{room_name}, max_member=#{max_member}, period=#{period}, plot=#{plot}, law=#{law}, etc=#{etc}, watching=#{watching}, video=#{video}
+		WHERE room_num = #{room_num}
+	</update>
+	
+	<delete id="delete_room_img" parameterType="Integer">
+		DELETE FROM image
+		WHERE room_num = #{room_num}
+	</delete>
+	
+	<delete id="delete_room_tag" parameterType="Integer">
+		DELETE FROM tag
+		WHERE room_num = #{room_num}
+	</delete>
 	
 	<!-- 채팅방 번호로 해당 채팅방 이름을 가져옴(개설상태가 0인 방만) -->
 	<select id="selectRoomNameByPK" parameterType="Integer" resultType="String">
@@ -212,6 +234,12 @@
 		UPDATE 	 `join` 
 		SET		 join_state		= 1
 		WHERE 	 join_num = #{join_num}
+	</update>
+	
+	<update id="inc_curr_member" parameterType="Integer">
+		UPDATE chating
+		SET curr_member = (SELECT curr_member+1 FROM chating WHERE room_num = #{room_num})
+		WHERE room_num = #{room_num}
 	</update>
 <!-- =========== END of 게임관리 ======================================================================================================	 -->
 <!-- =========== START of 나의 게시물 ======================================================================================================	 -->

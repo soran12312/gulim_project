@@ -51,6 +51,11 @@ public interface MypageDAO {
 	public void room_delete(Integer roon_num);
 	public ChatingDTO select_room_detail(Integer roon_num);
 	public List<String> select_tag_by_room_num(Integer roon_num);
+	public void room_modify(ChatingDTO room);
+	public void delete_room_img(Integer roon_num);
+	public void delete_room_tag(Integer roon_num);
+	public void inc_curr_member(Integer roon_num);
+	public void dec_curr_member(Integer roon_num);
 //=========== END of 게임관리 ========================================================================================================
 //=========== START of 나의 게시물 ======================================================================================================		
 	public ArrayList<HashMap> my_post(PostDTO post);

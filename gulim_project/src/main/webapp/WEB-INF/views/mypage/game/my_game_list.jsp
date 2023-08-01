@@ -50,10 +50,10 @@ const chatRoomJoin = (event,room_num) => {
 } // end of func chatRoomJoin()
 
 // 참가취소 버튼 클릭 시
-const joinCancle = (event,join_num) => {
+const joinCancle = (event, join_num, room_num) => {
 	event.preventDefault();
 
-	location.href = "/mypage/game/join_cancle?join_num="+join_num;
+	location.href = "/mypage/game/join_cancle?join_num="+join_num+"&room_num="+room_num;
 }
 
 // 방 수정하기 버튼 클릭 시
@@ -230,7 +230,7 @@ const roomDelete = (event,room_num) => {
 								</tr>
 								<tr>
 									<td>
-										<button class="mygame_go_game cursor" onclick="joinCancle(event,${room.join_num})">참가 취소</button>
+										<button class="mygame_go_game cursor" onclick="joinCancle(event,${room.join_num},${room.room_num})">참가 취소</button>
 									</td>
 								</tr>
 						</table>

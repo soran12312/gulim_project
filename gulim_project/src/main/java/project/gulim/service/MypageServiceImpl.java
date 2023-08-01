@@ -182,6 +182,36 @@ public class MypageServiceImpl implements MypageService {
 		
 		return mypageDAO.select_tag_by_room_num(roon_num);
 	}
+	
+	@Override
+	public void room_modify(ChatingDTO room) {
+		
+		mypageDAO.room_modify(room);
+	}
+	
+	@Override
+	public void delete_room_img(Integer roon_num) {
+		
+		mypageDAO.delete_room_img(roon_num);
+	}
+	
+	@Override
+	public void delete_room_tag(Integer roon_num) {
+		
+		mypageDAO.delete_room_tag(roon_num);
+	}
+	
+	@Override
+	public void inc_curr_member(Integer roon_num) {
+		
+		mypageDAO.inc_curr_member(roon_num);
+	}
+	
+	@Override
+	public void dec_curr_member(Integer roon_num) {
+		
+		mypageDAO.dec_curr_member(roon_num);
+	}
 
 	public ArrayList<Integer> char_sheet_list(Integer room_num){
 		return mypageDAO.char_sheet_list(room_num);
@@ -242,6 +272,16 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.agree_brother(join_num);
 	}
 //=========== END of 친구관리 ======================================================================================================	
+
+	
+
+	
+
+	
+
+	
+
+	
 
 	
 
