@@ -91,84 +91,11 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-bell"></i>
-                                    <div class="pulse-css"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="danger"><i class="ti-bookmark"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-heart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-image"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                    </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
-                                            class="ti-arrow-right"></i></a>
-                                </div>
-                            </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
-                                        <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
-                                    </a>
-                                    <a href="./email-inbox.html" class="dropdown-item">
-                                        <i class="icon-envelope-open"></i>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="/main/logout" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>
-                                </div>
                             </li>
                         </ul>
                     </div>
@@ -208,6 +135,9 @@
                     <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
+                    <li ><a href="/admin/live_question" class="live_question"><i 
+                        class="icon icon-single-copy-06"></i><span class="nav-text">실시간 문의사항</span></a>
+    </li>
                 </ul>
             </div>
         </div>
@@ -248,84 +178,88 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="6">
                                         <div class="card-body">
                                             <div class="basic-form">
-                                                <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                <div class="form-group" style="width: 95%; position: relative; top: 8px;">
                                                     <p class="mb-1">제목</p>
                                                     <input name="book_title" type="text" class="form-control input-default" placeholder="제목을 입력하시오.">
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td colspan="4">
+                                    <td colspan="6">
                                         <div style="position: relative; right: -19px; width: 95%; float: left;">
                                             <p class="mb-1">장르</p>
                                             <input name="genre" type="text" class="form-control input-default" placeholder="장르를 입력하시오(ex. 판타지,SF,액션).">
                                         </div>
                                     </td>
-                                    <td colspan="2">
-                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div style="position: relative; right: -19px; width: 200px; float: left;">
                                             <p class="mb-1">저자</p>
                                             <input name="writer" type="text" class="form-control input-default" placeholder="저자 이름을 입력하시오.">
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div style="position: relative; right: -18px; width: 250px;">
-                                            <p class="mb-1">issue date</p>
-                                            <div class="custom-file">
-                                                <input name="issue_date" type="date">
-                                            </div>
+                                    
+                                    <td colspan="3">
+                                        <div style="position: relative; right: -19px; width: 200px; float: left;">
+                                            <p class="mb-1">역자</p>
+                                            <input name="translation" type="text" class="form-control input-default" placeholder="역자 이름을 입력하시오.">
                                         </div>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <div>
                                             <p class="mb-1">가격</p>
-                                            <div class="custom-file">
+                                            <div class="custom-file" style="width:170px;">
                                                 <input name="price" type="text" class="form-control input-default" placeholder="가격을 입력하시오.">
                                             </div>
                                         </div>
                                     </td>
-                                    <td colspan="2">
-                                        <div>
+                                    <td colspan="3">
+                                        <div style="width: 200px;">
                                             <p class="mb-1">재고수량</p>
                                             <input name="stock" type="text" class="form-control input-default" placeholder="재고수량을 입력하시오.">
                                         </div>
                                     </td>
-                                    <td colspan="2">
-                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
-                                            <p class="mb-1">19금 설정</p>
-                                            <select name="adult">
-                                                <option value="1">O</option>
-                                                <option value="0">X</option>
-                                            </select>
-                                            <input type="text"" hidden>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <div style="position: relative; right: -18px; width: 150px;">
+                                            <p class="mb-1">상품등록일</p>
+                                            <div class="custom-file">
+                                                <input style="border:none; background-color: #F5F5F5;" name="issue_date" type="date">
+                                            </div>
                                         </div>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <div style="position: relative; right: -19px; width: 192px; float: left;">
                                             <p class="mb-1">판매 여부</p>
-                                            <select name="sale_state">
+                                            <select style="border:none; background-color: #F5F5F5;" name="sale_state">
                                                 <option value="0">판매중</option>
                                                 <option value="1">판매 중지</option>
                                             </select>
                                             <input type="text" hidden>
                                         </div>
                                     </td>
-                                    <td colspan="2">
-                                        <div style="position: relative; right: -19px; width: 192px; float: left;">
-                                            <p class="mb-1">역자</p>
-                                            <input name="translation" type="text" class="form-control input-default" placeholder="역자 이름을 입력하시오.">
+                                    <td colspan="3">
+                                        <div style="position: relative; width: 192px; float: left;">
+                                            <p class="mb-1">19금 설정</p>
+                                            <select style="border:none; background-color: #F5F5F5;" name="adult">
+                                                <option value="1">O</option>
+                                                <option value="0" selected>X</option>
+                                            </select>
+                                            <input type="text" hidden>
                                         </div>
                                     </td>
+                                    <td colspan="3"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="12">
                                         <div class="card-body">
                                             <div class="basic-form">
-                                                <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                <div class="form-group" style="width: 75%; position: relative; top: 7px;">
                                                     <p class="mb-1">간단 소개</p>
                                                     <textarea name="simple_info" style="height: 110px;" class="form-control" id="comment" placeholder="간단한 소개글을 입력하시오."></textarea>
                                                 </div>
@@ -334,8 +268,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7">
-                                        <div style="position: relative; right: -18px; width: 550px;">
+                                    <td colspan="12">
+                                        <div style="position: relative; right: -18px; width: 60%;">
                                             <p class="mb-1">이미지 추가</p>
                                             <img id="adminPostPath">
                                             <div class="custom-file">
@@ -346,10 +280,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="12">
                                         <div class="card-body">
                                             <div class="basic-form">
-                                                <div class="form-group" style="width: 95%; position: relative; top: 7px;">
+                                                <div class="form-group" style="width: 75%; position: relative; top: 7px;">
                                                     <p class="mb-1">상세 소개</p>
                                                     <textarea name="book_detail" style="height: 210px;" class="form-control" id="comment" placeholder="상세한 소개글을 입력하시오."></textarea>
                                                 </div>

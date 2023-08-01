@@ -50,6 +50,7 @@
 		           0 AS book_price, 
 		           SUM(s.price) AS subscribe_price
 		    FROM subscribe s
+		    WHERE s.sub_state=1
 		    GROUP BY YEAR(s.sub_date)
 		)
 		SELECT purchase_year, 
@@ -65,6 +66,7 @@
 	<select id="salesStatsYear_subs" resultType="HashMap">
 		select YEAR(sub_date) as sub_date, price, SUM(price) as total_subscribe_price
 		from subscribe
+		WHERE sub_state=1
 		group by YEAR(sub_date), price
 	</select>
 	
@@ -244,7 +246,7 @@
 			    purchase_month, total_book_price desc
 	</select>
 	
-	<!-- 판매 통계: 전체 월매출 -->
+	<!-- 판매 통계: 전체 일매출 -->
 	<select id="salesStatsDay" parameterType="String" resultType="HashMap">
 		WITH combined_sales AS (
 		    SELECT bk.purchase_date as purchase_day,
@@ -253,7 +255,6 @@
 		    FROM purchase p
 		    INNER JOIN book b ON p.book_num = b.book_num
 		    INNER JOIN basket bk ON p.basket_num = bk.basket_num
-		    GROUP BY bk.purchase_date
 		
 		    UNION ALL
 		
@@ -261,18 +262,28 @@
 		           0 AS book_price, 
 		           SUM(s.price) AS subscribe_price
 		    FROM subscribe s
-		    GROUP BY s.sub_date
 		)
 		SELECT purchase_day,
 		       SUM(book_price) AS total_book_price, 
-		       SUM(subscribe_price) AS total_subscribe_price,
+		       SUM(subscribe_price) AS totalscribe_price,
 		       SUM(book_price) + SUM(subscribe_price) AS total_price
 		FROM combined_sales
 		WHERE purchase_day = #{purchase_day}
 		GROUP BY purchase_day
-		ORDER BY purchase_day DESC
+		ORDER BY purchase_day asc	
 	</select>
 	
+	<!-- 판매 통계: 구독권별 일매출 -->
+	<select id="salesStatsDay_subs" parameterType="String" resultType="HashMap">
+		select price, sub_date as purchase_month, SUM(price) as total_subscribe_price
+		from subscribe
+		where sub_date = #{sub_date}
+		group by price
+	</select>
+	
+	<select id="salesStatsDay_book" parameterType="String" resultType="HashMap">
+		
+	</select>
 
 	<!-- 배송/환불 리스트 보기 -->
 	<select id="listRefund" resultType="HashMap">

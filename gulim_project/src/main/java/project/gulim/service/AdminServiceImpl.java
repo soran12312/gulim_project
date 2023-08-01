@@ -97,7 +97,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	public List<HashMap> salesStatsDay(String purchase_day){
+		System.out.println(purchase_day);
 		return adminDAO.salesStatsDay(purchase_day);
+	}
+	
+	public List<HashMap> salesStatsDay_subs(String purchase_day){
+		System.out.println(purchase_day);
+		return adminDAO.salesStatsDay_subs(purchase_day);
 	}
 	
 	public List<HashMap> listRefund() {

@@ -47,6 +47,8 @@ public interface AdminService {
 	public List<HashMap> salesStatsMonth_book(String purchase_year_mon);
 	
 	public List<HashMap> salesStatsDay(String purchase_day);
+	
+	public List<HashMap> salesStatsDay_subs(String purchase_day);
 
 	public List<HashMap> listRefund();
 

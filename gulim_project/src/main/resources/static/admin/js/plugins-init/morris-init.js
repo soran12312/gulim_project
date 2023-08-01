@@ -322,159 +322,129 @@
     /************ End of 연간매출 ************/
     
 
-    /************ Start of 분기매출 ************/
+    /************ Start of 일매출 ************/
+    
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $("#selectDay").val(today);
  
  	// 초기화를 빈 배열로 변경
-	var data_quarter = [];
-	var purchase_year_qua = $('#selectYear_quarter').val();
+	var data_day = [];
+	var purchase_day = $('#selectDay').val();
+	console.log(purchase_day);
 
 	$.ajax({
 	    // 경로
-	    url: "/admin/sales_stats/quarter",
+	    url: "/admin/sales_stats/day",
 	    // 전송방식: POST
 	    method: "POST",
-	    data: {purchase_year_qua: purchase_year_qua},
+	    data: {purchase_day: purchase_day},
 	    // 성공할 시
 	    success: function(response){
-	        data_quarter = [];
+			console.log(response);
+		    data_day = [];
+	        var donughtChartParent = document.getElementById('morris_donught');
+		    // SVG 요소를 찾아서 제거합니다.
+		    var svgElement = donughtChartParent.querySelector('svg');
+		    if (svgElement) {
+			    donughtChartParent.removeChild(svgElement);
+		    }
+	        data_day = [];
 	        for (var i = 0; i < response.length; i++) {
-	            data_quarter.push({
-	                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+	            data_day.push({
+	                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
 	                value: response[i].total_price
 	            });
 	        }
-	        var chart_quarter = Morris.Donut({
+	        var chart_day = Morris.Donut({
 	            element: 'morris_donught',
-	            data: data_quarter,
+	            data: data_day,
 	            resize: true
 	        });
-	        
-	        
-	        $("#btn_quarter_subscribe").on("click", function() {
-				data_quarter = [];
-				var donughtChartParent = document.getElementById('morris_donught');
-			    // SVG 요소를 찾아서 제거합니다.
-			    var svgElement = donughtChartParent.querySelector('svg');
-			    if (svgElement) {
-			        donughtChartParent.removeChild(svgElement);
-			    }
-		        for (var i = 0; i < response.length; i++) {
-		            data_quarter.push({
-		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-		                value: response[i].total_subscribe_price
-		            });
-		        }
-		        var chart_quarter = Morris.Donut({
-		            element: 'morris_donught',
-		            data: data_quarter,
-		            resize: true
-		        });
-			});
 	    },
 	    error: function(xhr, status, error){
-	        alert('분기매출 실패: '+ error);
+	        alert('일매출 실패: '+ error);
 	        console.log(xhr);
 	        console.log(status);
 	        console.log(error);
 	    }
 	});
-
-	$("#selectYear_quarter").on("change", function() {
-		purchase_year_qua = $('#selectYear_quarter').val();
+	
+	$("#selectDay").on("change", function() {
+		purchase_day = $('#selectDay').val();
 		$.ajax({
 		    // 경로
-		    url: "/admin/sales_stats/quarter",
+		    url: "/admin/sales_stats/day",
 		    // 전송방식: POST
 		    method: "POST",
-		    data: {purchase_year_qua: purchase_year_qua},
+		    data: {purchase_day: purchase_day},
 		    // 성공할 시
 		    success: function(response){
-		        console.log('월매출 성공');
-		        data_quarter = [];
+				console.log(response);
+			    data_day = [];
+		        var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+				    donughtChartParent.removeChild(svgElement);
+			    }
+		        data_day = [];
+		        for (var i = 0; i < response.length; i++) {
+		            data_day.push({
+		                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
+		                value: response[i].total_price
+		            });
+		        }
+		        var chart_day = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_day,
+		            resize: true
+		        });
+		        
+		    },
+		    error: function(xhr, status, error){
+		        alert('일매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
+		});
+	});
+	
+	$("#btn_day").on("click", function() {
+		purchase_day = $('#selectDay').val();
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/day",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_day: purchase_day},
+		    // 성공할 시
+		    success: function(response){
+		        console.log(response);
+		        data_day = [];
 		        var donughtChartParent = document.getElementById('morris_donught');
 			    // SVG 요소를 찾아서 제거합니다.
 			    var svgElement = donughtChartParent.querySelector('svg');
 			    if (svgElement) {
 			        donughtChartParent.removeChild(svgElement);
 			    }
-		        data_quarter = [];
+		        data_day = [];
 		        for (var i = 0; i < response.length; i++) {
-		            data_quarter.push({
-		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
+					data_day.push({
+		                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
 		                value: response[i].total_price
 		            });
 		        }
-		        var chart_quarter = Morris.Donut({
+		        var chart_day = Morris.Donut({
 		            element: 'morris_donught',
-		            data: data_quarter,
+		            data: data_day,
 		            resize: true
 		        });
-		        
-		        $("#btn_quarter").on("click", function() {
-					data_quarter = [];
-			        var donughtChartParent = document.getElementById('morris_donught');
-				    // SVG 요소를 찾아서 제거합니다.
-				    var svgElement = donughtChartParent.querySelector('svg');
-				    if (svgElement) {
-				        donughtChartParent.removeChild(svgElement);
-				    }
-			        data_quarter = [];
-			        for (var i = 0; i < response.length; i++) {
-			            data_quarter.push({
-			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-			                value: response[i].total_price
-			            });
-			        }
-			        var chart_quarter = Morris.Donut({
-			            element: 'morris_donught',
-			            data: data_quarter,
-			            resize: true
-			        });
-				});
-		        
-		        $("#btn_quarter_subscribe").on("click", function() {
-					data_quarter = [];
-					var donughtChartParent = document.getElementById('morris_donught');
-				    // SVG 요소를 찾아서 제거합니다.
-				    var svgElement = donughtChartParent.querySelector('svg');
-				    if (svgElement) {
-				        donughtChartParent.removeChild(svgElement);
-				    }
-			        for (var i = 0; i < response.length; i++) {
-			            data_quarter.push({
-			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-			                value: response[i].total_subscribe_price
-			            });
-			        }
-			        var chart_quarter = Morris.Donut({
-			            element: 'morris_donught',
-			            data: data_quarter,
-			            resize: true
-			        });
-				});
-				
-				$("#btn_quarter_book").on("click", function() {
-					data_quarter = [];
-					var donughtChartParent = document.getElementById('morris_donught');
-				    // SVG 요소를 찾아서 제거합니다.
-				    var svgElement = donughtChartParent.querySelector('svg');
-				    if (svgElement) {
-				        donughtChartParent.removeChild(svgElement);
-				    }
-			        for (var i = 0; i < response.length; i++) {
-			            data_quarter.push({
-			                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-			                value: response[i].total_book_price
-			            });
-			        }
-			        var chart_quarter = Morris.Donut({
-			            element: 'morris_donught',
-			            data: data_quarter,
-			            resize: true
-			        });
-				});
-		        
-		        
 		    },
 		    error: function(xhr, status, error){
 		        alert('월매출 실패: '+ error);
@@ -484,13 +454,73 @@
 		    }
 		});
 	});
+	
+	
+	$("#btn_day_subscribe").on("click", function() {
+		purchase_day = $('#selectDay').val();
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/day_subs",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_day: purchase_day},
+		    // 성공할 시
+		    success: function(response){
+		        console.log(response);
+		        data_day = [];
+		        var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+			        donughtChartParent.removeChild(svgElement);
+			    }
+		        data_day = [];
+		        for (var i = 0; i < response.length; i++) {
+					if(response[i].price==9900){
+						data_day.push({
+			                label: "\xa0 \xa0 1개월권 \xa0 \xa0",
+			                value: response[i].total_subscribe_price
+			            });
+					} else if(response[i].price==15000){
+						data_day.push({
+			                label: "\xa0 \xa0 3개월권 \xa0 \xa0",
+			                value: response[i].total_subscribe_price
+			            });
+					} else if(response[i].price==29900){
+						data_day.push({
+			                label: "\xa0 \xa0 6개월권 \xa0 \xa0",
+			                value: response[i].total_subscribe_price
+			            });
+					} else if(response[i].price==55000){
+						data_day.push({
+			                label: "\xa0 \xa0 12개월권 \xa0 \xa0",
+			                value: response[i].total_subscribe_price
+			            });
+					}
+		        }
+		        var chart_day = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_day,
+		            resize: true
+		        });
+		    },
+		    error: function(xhr, status, error){
+		        alert('월매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
+		});
+	});
+	
+	
 		
 		// Select 요소와 버튼 요소를 가져옵니다.
-		var selectYearQuarter = $("#selectYear_quarter");
-		var btnQuarter = $("#btn_quarter");
-		var btnQuarterSubscribe = $("#btn_quarter_subscribe");
-		var btnQuarterBook = $("#btn_quarter_book");
-		var h6TagQuarter = $(".h6_quarter");
+		var selectYearQuarter = $("#selectDay");
+		var btnQuarter = $("#btn_day");
+		var btnQuarterSubscribe = $("#btn_day_subscribe");
+		var btnQuarterBook = $("#btn_day_book");
+		var h6TagQuarter = $(".h6_day");
 		
 		// Select 요소와 버튼 요소의 변경 이벤트를 감지합니다.
 		btnQuarter.addClass("active");
@@ -521,7 +551,7 @@
 		    var selectedYear = selectYearQuarter.val();
 		    var selectedButton = getSelectedButton_Quarter();
 		
-		    h6TagQuarter.text(selectedYear + "년 " + selectedButton + " 분기매출");
+		    h6TagQuarter.text(selectedYear.substring(0,4) + "년 " + selectedYear.substring(5,7) + "월 " + selectedYear.substring(8, 10) + "일 " + selectedButton + " 매출");
 		}
 		
 		// 선택된 버튼을 반환하는 함수
@@ -536,7 +566,7 @@
 		        return "전체";
 		    }
 		}
-    /************ End of 분기매출 ************/
+    /************ End of 일매출 ************/
 
 
 	/************ Start of 월매출 ************/
@@ -552,7 +582,6 @@
 	    data: {purchase_year_mon: purchase_year_mon},
 	    // 성공할 시
 	    success: function(response){
-	        console.log(response);
 	        
 	        for (var i = 0; i < response.length; i++) {
 	            data_month.push({
@@ -910,209 +939,6 @@
 	    }
 	}
 	/************ END of 월매출 ************/
-
-	/*******  START of 일매출 *********/
-	var data_day = [];
-	var purchase_day = $('#selectDay').val();
-
-	$.ajax({
-	    // 경로
-	    url: "/admin/sales_stats/day",
-	    // 전송방식: POST
-	    method: "POST",
-	    data: {purchase_day: purchase_day},
-	    // 성공할 시
-	    success: function(response){
-	        data_day = [];
-	        for (var i = 0; i < response.length; i++) {
-	            data_day.push({
-	                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-	                value: response[i].total_price
-	            });
-	        }
-	        var chart_quarter = Morris.Donut({
-	            element: 'morris_donught',
-	            data: data_day,
-	            resize: true
-	        });
-	        
-	        
-	        $("#btn_quarter_subscribe").on("click", function() {
-				data_day = [];
-				var donughtChartParent = document.getElementById('morris_donught');
-			    // SVG 요소를 찾아서 제거합니다.
-			    var svgElement = donughtChartParent.querySelector('svg');
-			    if (svgElement) {
-			        donughtChartParent.removeChild(svgElement);
-			    }
-		        for (var i = 0; i < response.length; i++) {
-		            data_day.push({
-		                label: "\xa0 \xa0 " + response[i].purchase_quarter + "분기 \xa0 \xa0",
-		                value: response[i].total_subscribe_price
-		            });
-		        }
-		        var chart_quarter = Morris.Donut({
-		            element: 'morris_donught',
-		            data: data_day,
-		            resize: true
-		        });
-			});
-	    },
-	    error: function(xhr, status, error){
-	        alert('분기매출 실패: '+ error);
-	        console.log(xhr);
-	        console.log(status);
-	        console.log(error);
-	    }
-	});
-	
-
-	/******* END of 일매출 *********/
-
-
-//area chart
-    Morris.Area({
-        element: 'morris_area_2',
-        data: [{
-                period: '1',
-                SiteA: 0,
-                SiteB: 0,
-
-            }, {
-                period: '2',
-                SiteA: 130,
-                SiteB: 100,
-
-            }, {
-                period: '3',
-                SiteA: 80,
-                SiteB: 60,
-
-            }, {
-                period: '4',
-                SiteA: 70,
-                SiteB: 200,
-
-            }, {
-                period: '5',
-                SiteA: 180,
-                SiteB: 150,
-
-            }, {
-                period: '6',
-                SiteA: 105,
-                SiteB: 90,
-
-            },
-            {
-                period: '7',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '8',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '9',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '10',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '11',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '12',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '13',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '14',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '15',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '16',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '17',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '18',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '19',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '20',
-                SiteA: 250,
-                SiteB: 150,
-
-            },
-            {
-                period: '21',
-                SiteA: 250,
-                SiteB: 150,
-
-            }
-        ],
-        xkey: 'period',
-        ykeys: ['SiteA', 'SiteB'],
-        labels: ['Site A', 'Site B'],
-        pointSize: 0,
-        fillOpacity: 0.6,
-        pointStrokeColors: ['#b4becb', '#00A2FF'], //here
-        behaveLikeLine: true,
-        gridLineColor: 'transparent',
-        lineWidth: 0,
-        smooth: false,
-        hideHover: 'auto',
-        lineColors: ['rgb(0, 171, 197)', 'rgb(0, 0, 128)'],
-        resize: true
-
-    });
-    
-    
-
 
 
 })(jQuery);

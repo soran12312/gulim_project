@@ -77,16 +77,31 @@ public class AdminController {
 	
 	private static final String ES_HOST = "localhost";
     private static final int ES_PORT = 9200;
-	
+    
 	// 문의사항 리스트 보기
 	@RequestMapping("/question")
 	public String viewPage_question(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<QuestionDTO> listQuestion = adminService.listQuestion();
@@ -106,10 +121,25 @@ public class AdminController {
 	public String viewPage_member_management(Model m) { // 페이지 이동(DB접속없는경우)
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<MemberDTO> listMember = adminService.listMember();
@@ -129,10 +159,25 @@ public class AdminController {
 	public String viewPage_place_list(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<PlaceDTO> listPlace = adminService.listPlace();
@@ -144,10 +189,25 @@ public class AdminController {
 	public String viewPage_sales_stats(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<HashMap> salesStatsYear = adminService.salesStatsYear();
@@ -160,7 +220,7 @@ public class AdminController {
 		m.addAttribute("selectYear", selectYear);
 		List<HashMap> selectYear_mon = adminService.selectYear_mon();
 		m.addAttribute("selectYear_mon", selectYear_mon);
-		
+	
 		return "/admin/sales/sales_stats";
 	}
 	
@@ -195,18 +255,40 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/day", method = RequestMethod.POST)
     public List<HashMap> salesStatsDay(@RequestBody String purchase_day) {
-		String day = purchase_day;
+		String day = purchase_day.substring(purchase_day.length() - 10);
 		return adminService.salesStatsDay(day);
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/day_subs", method = RequestMethod.POST)
+    public List<HashMap> salesStatsDay_subs(@RequestBody String purchase_day) {
+		String day = purchase_day.substring(purchase_day.length() - 10);
+		return adminService.salesStatsDay_subs(day);
 	}
 	
 	@RequestMapping("/delivery_refund")
 	public String viewPageDeliveryRefund(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<HashMap> listRefund = adminService.listRefund();
@@ -224,10 +306,25 @@ public class AdminController {
 	public String viewPage_view_list(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 
 		List<HashMap> listPost = adminService.listPost();
@@ -240,10 +337,25 @@ public class AdminController {
 	public String viewPage_insert_form(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		return "/admin/event_announce_contest/insert_form";
@@ -281,18 +393,30 @@ public class AdminController {
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
+
 	    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
-	    		if(jwtToken == null)
-	    		{
-	    			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+	    		if(jwtToken == null) {
+	    		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+	    		}
+
+	    		Claims claims = mainService.getClaims(jwtToken);
+
+	    		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+	    		String userId = claims.get("id", String.class);
+	    		MemberDTO memberDTO = new MemberDTO();
+	    		memberDTO.setId(userId);
+
+	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+	    		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+	    		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+	    		if(ifManager.getManager() != 1) {
+	    		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 	    		}
 	            
-	            Claims claims = mainService.getClaims(jwtToken);
-	            
 	            // post  DB에 저장
-				String id = claims.get("id", String.class);      // 로그인한 사용자 id
-				pDTO.setId(id);
-			    iDTO.setId(id);		
+				pDTO.setId(userId);
+			    iDTO.setId(userId);		
 				
 	            // post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
 			    String contentWithoutImages = removeImageTags(postContent);
@@ -302,17 +426,28 @@ public class AdminController {
 	    	}
 	    }else {// 이미지가 포함되지 않은 경우
 	    	String jwtToken = adminService.getJwtTokenFromCookies(request);
-    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-    		if(jwtToken == null)
-    		{
-    			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
-    		}
-			
+
+			// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+			if(jwtToken == null) {
+			    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+			}
+
 			Claims claims = mainService.getClaims(jwtToken);
-			
-			String id = claims.get("id", String.class);      // 로그인한 사용자 id
-			pDTO.setId(id);
-			iDTO.setId(id);              
+
+			// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+			String userId = claims.get("id", String.class);
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setId(userId);
+
+			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+			MemberDTO ifManager = mainService.selectById(memberDTO);
+
+			// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+			if(ifManager.getManager() != 1) {
+			    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
+			}
+			pDTO.setId(userId);
+			iDTO.setId(userId);              
 			
 			// db저장
 			adminService.insertNoContest(pDTO, iDTO);
@@ -357,18 +492,29 @@ public class AdminController {
 	            iDTO.setImg_size(imageSize);
 	            
 	            String jwtToken = adminService.getJwtTokenFromCookies(request);
+
 	    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
-	    		if(jwtToken == null)
-	    		{
-	    			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+	    		if(jwtToken == null) {
+	    		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+	    		}
+
+	    		Claims claims = mainService.getClaims(jwtToken);
+
+	    		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+	    		String userId = claims.get("id", String.class);
+	    		MemberDTO memberDTO = new MemberDTO();
+	    		memberDTO.setId(userId);
+
+	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+	    		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+	    		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+	    		if(ifManager.getManager() != 1) {
+	    		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 	    		}
 	            
-	            Claims claims = mainService.getClaims(jwtToken);
-	            
-	            // post  DB에 저장
-				String id = claims.get("id", String.class);      // 로그인한 사용자 id
-				pDTO.setId(id);
-			    iDTO.setId(id);		
+				pDTO.setId(userId);
+			    iDTO.setId(userId);		
 				
 	            // post_content에서 이미지 태그를 제거하여 나머지 내용만 저장
 			    String contentWithoutImages = removeImageTags(contestContent);
@@ -378,17 +524,28 @@ public class AdminController {
 	    	}
 	    }else {// 이미지가 포함되지 않은 경우
 	    	String jwtToken = adminService.getJwtTokenFromCookies(request);
-    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-    		if(jwtToken == null)
-    		{
-    			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
-    		}
-			
+
+			// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+			if(jwtToken == null) {
+			    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+			}
+
 			Claims claims = mainService.getClaims(jwtToken);
-			
-			String id = claims.get("id", String.class);      // 로그인한 사용자 id
-			pDTO.setId(id);
-			iDTO.setId(id);              
+
+			// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+			String userId = claims.get("id", String.class);
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setId(userId);
+
+			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+			MemberDTO ifManager = mainService.selectById(memberDTO);
+
+			// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+			if(ifManager.getManager() != 1) {
+			    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
+			}
+			pDTO.setId(userId);
+			iDTO.setId(userId);              
 			
 			// db저장
 			adminService.insertYesContest(pDTO, iDTO, cDTO);
@@ -454,10 +611,25 @@ public class AdminController {
 	public String viewPage_product_list(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<HashMap> listProduct = adminService.listProduct();
@@ -469,10 +641,25 @@ public class AdminController {
 	public String viewPage_product_insert(Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		return "/admin/product/product_insert";
@@ -482,10 +669,25 @@ public class AdminController {
 	public String viewPage_product_modify(BookDTO boDTO, Model m) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		HashMap<String, Object> getPost = adminService.getProduct(boDTO);
@@ -658,10 +860,25 @@ public class AdminController {
 	public String viewPage_game_stats(Model m, CharacterSheetDTO csDTO) {
 		
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
-		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트
-		if(jwtToken == null)
-		{
-			return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
 		}
 		
 		List<CharacterSheetDTO> classForStats = adminService.classForStats();
@@ -732,110 +949,30 @@ public class AdminController {
 	    return ResponseEntity.ok(data);
 	}
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/live_question")
-	public String live_question() {
+	public String live_question(Model m) {
+		String jwtToken = adminService.getJwtTokenFromCookies(request);
+
+		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
+		if(jwtToken == null) {
+		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
+		}
+
+		Claims claims = mainService.getClaims(jwtToken);
+
+		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
+		String userId = claims.get("id", String.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(userId);
+
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		MemberDTO ifManager = mainService.selectById(memberDTO);
+
+		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
+		if(ifManager.getManager() != 1) {
+		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
+		}
 		return "/admin/admin_question/admin_question";
 	}
-	
-
 
 }
