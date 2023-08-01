@@ -94,10 +94,41 @@
 		WHERE room_num = #{room_num}
 	</select>
 	
-	<!-- 이용자의 아이디로 해당 이용자가 참여 신청한 room 중 참가상태가 허가중 인 room_num을 모두 가져옴 -->
-	<select id="selectAllJoinedRoomNumById" parameterType="String" resultType="Integer">
-		SELECT room_num FROM `join`
-		WHERE id = #{id} AND join_state = 1
+	<!-- 이용자의 아이디로 해당 이용자가 참여 신청한 room의 room_num을 모두 가져옴 -->
+	<select id="selectAllJoinedRoomNumById" parameterType="String" resultType="JoinDTO">
+		SELECT join_num, room_num, join_state FROM `join`
+		WHERE id = #{id} AND join_state != 2
+	</select>
+	
+	<!-- join_num으로 join_state를 가져옴 -->
+	<select id="selectJoinStateByJoinNum" parameterType="Integer" resultType="Integer">
+		SELECT join_state FROM `join`
+		WHERE join_num = #{join_num}
+	</select>
+	
+	<!-- 참가 취소 -->
+	<update id="join_cancle" parameterType="Integer">
+		UPDATE 	 `join` 
+		SET		 join_state	= 2
+		WHERE 	 join_num = #{join_num} 
+	</update>
+	
+	<!-- 방 삭제 -->
+	<update id="room_delete" parameterType="Integer">
+		UPDATE 	 chating 
+		SET		 room_state	= 1
+		WHERE 	 room_num = #{room_num} 
+	</update>
+	
+	<!-- 방 수정 폼으로 이동할 때 방정보 가져오기 -->
+	<select id="select_room_detail" parameterType="Integer" resultType="ChatingDTO">
+		SELECT * FROM chating
+		WHERE room_num = #{room_num}
+	</select>
+	
+	<select id="select_tag_by_room_num" parameterType="Integer" resultType="String">
+		SELECT tag_content FROM tag
+		WHERE room_num = #{room_num}
 	</select>
 	
 	<!-- 채팅방 번호로 해당 채팅방 이름을 가져옴(개설상태가 0인 방만) -->

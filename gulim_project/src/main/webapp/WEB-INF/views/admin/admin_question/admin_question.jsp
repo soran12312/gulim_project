@@ -15,23 +15,21 @@
                   console.log("Received message: ", event.data);
                   console.log(event);
                   
-                  if(event.data === "user_connect"){
+                  if(event.data.message === "user_connect"){
                         var iframe=document.createElement("iframe");
+                        $("#live_chat").children().last().attr('id', event.data.userId);
                         
                         iframe.src = "https://192.168.0.68:3000/customerchat/123";
                         iframe.style.height = "300px";
                         iframe.style.width = "300px";
-                        iframe.className = "second_iframe"
+                        
                         document.getElementById("live_chat").appendChild(iframe);
                         console.log("second_iframe"+"불림")
 
-                    }else if (event.data === "leave_chatting") {
+                    }else if (event.data.message === "leave_chatting") {
                    
-                   var iframeRemove = document.querySelector(".second_iframe");
-                   if (iframeRemove) {
-                   iframeRemove.parentNode.removeChild(iframeRemove);
-                   }
-               }
+                    	$("#"+event.data.userId).remove();
+               		}
                     
                 },true)
 

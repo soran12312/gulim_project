@@ -1,12 +1,16 @@
 package project.gulim.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,12 +24,15 @@ import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.CalenderDTO;
+import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.FriendDTO;
 import project.gulim.domain.ImageDTO;
+import project.gulim.domain.JoinDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.TagDTO;
 import project.gulim.service.MainService;
 import project.gulim.service.MypageService;
 import project.gulim.util.MD5Generator;
@@ -33,6 +40,9 @@ import project.gulim.util.MD5Generator;
 @Controller
 @RequestMapping("/mypage")
 public class MypageContoroller {
+	
+	@Autowired
+	private HttpServletRequest req;
 	
 	@Autowired
 	MypageService mypageService;
@@ -267,15 +277,19 @@ public class MypageContoroller {
 		
 		// 내가 플레이어로 참가 허가된 방의 room_num, room_name, 방 이미지 path 가져오기
 		List<Map> player_list = new ArrayList();
-		List<Integer> room_list = mypageService.selectAllJoinedRoomNumById(id);
-		for(Integer room_num : room_list) {
+		List<JoinDTO> room_list = mypageService.selectAllJoinedRoomNumById(id);
+		
+		for(JoinDTO room : room_list) {
 			Map player = new HashMap();
-			String room_name = mypageService.selectRoomNameByPK(room_num);
-			String img_path = mypageService.selectImgPathByRoomNum(room_num);
+			String room_name = mypageService.selectRoomNameByPK(room.getRoom_num());
+			String img_path = mypageService.selectImgPathByRoomNum(room.getRoom_num());
+			
 			// 얻어온 room_num의 방이 개설상태가 개설중인 경우(== room_name을 얻어온 경우)
 			if(room_name != null) {
-				player.put("room_num", room_num);
+				player.put("room_num", room.getRoom_num());
 				player.put("room_name", room_name);
+				player.put("join_state", room.getJoin_state());
+				player.put("join_num", room.getJoin_num());
 				if(img_path != null) {
 					player.put("img_path", img_path);
 				}
@@ -283,6 +297,8 @@ public class MypageContoroller {
 			}
 		}
 		map.put("player", player_list);
+		
+		System.out.println(map);
 		
 		m.addAttribute("room_info", map);
 		
@@ -296,6 +312,129 @@ public class MypageContoroller {
 		String id = myId_is_in_cookies();		
 		return id;
 	}
+	
+	@RequestMapping("/game/join_cancle")
+	public String join_cancle(Integer join_num) {
+		
+		mypageService.join_cancle(join_num);
+		
+		return "redirect:/mypage/game/my_game_list";
+	}
+	
+	@RequestMapping("/game/my_game_modify")
+	public String my_game_modify(Integer room_num, Model m) {
+		
+		ChatingDTO room = mypageService.select_room_detail(room_num);
+		List<String> tagList = mypageService.select_tag_by_room_num(room_num);
+		
+		m.addAttribute("room", room);
+		m.addAttribute("tagList", tagList);
+		
+		return "/mypage/game/my_game_modify";
+	}
+	
+	@RequestMapping("/room_delete")
+	public String room_delete(Integer room_num) {
+		
+		mypageService.room_delete(room_num);
+		
+		return "redirect:/mypage/game/my_game_list";
+	}
+	
+	public String getId() {
+		Cookie[] cookies = req.getCookies();
+	    String jwtToken = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			jwtToken = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	        
+	    Claims claims = mainService.getClaims(jwtToken);
+	    String id = claims.get("id", String.class);
+	    
+	    return id;
+	}
+	
+	public static String getRealPath(String resourcePath) {
+        try {
+            ClassPathResource classPathResource = new ClassPathResource(resourcePath);
+            Path path = Paths.get(classPathResource.getURI());
+            return path.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
+	@RequestMapping("/game/room_modify")
+	@Transactional
+	public String room_insert(ChatingDTO room, String hashtag, MultipartFile room_img) {
+		
+	    String id = this.getId();
+	    room.setId(id);
+		
+		System.out.println(room);
+		System.out.println(hashtag);
+		System.out.println(room_img);
+		
+		// 관전허용이 null로 넘어올 경우(체크박스를 건들지않고 submit 한 경우)
+		if(room.getWatching()==null) {
+			room.setWatching(1);
+		}
+		
+		Integer room_num = mypageService.room_insert(room);
+		
+		if(!room_img.isEmpty()) {
+			ImageDTO img = new ImageDTO();
+			
+			img.setRoom_num(room_num);
+			
+			img.setOrigin_img_name(room_img.getOriginalFilename());
+			img.setImg_size(room_img.getSize());
+			
+			Long time = System.currentTimeMillis();
+			
+			String path = "/files/room_img/" + time + "_" + img.getOrigin_img_name();
+			String realPath = getRealPath("static/files/room_img/")+"\\"+ time + "_" + img.getOrigin_img_name();
+			
+			img.setPath(path);
+			
+	        System.out.println(realPath);
+			System.out.println(path);
+			
+			File serverFile = new File(realPath); // 저장할 파일의 경로를 생성합니다.
+
+			try {
+				// MultipartFile의 transferTo 메서드를 이용하여 파일을 저장.
+				room_img.transferTo(serverFile);
+				
+				// 저장된 파일정보를 DB에 저장
+				gameService.room_img_insert(img);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!hashtag.equals("")) {
+			String[] tag_contents = hashtag.split(",");
+			for(String tag_content : tag_contents) {
+				TagDTO tag = new TagDTO();
+				tag.setTag_content(tag_content);
+				tag.setRoom_num(room_num);
+				
+				gameService.tag_insert(tag);
+			}
+		}
+		
+		return "/game/play/room_list";
+	}
+	
 		
 //=========== END of 게임관리 ========================================================================================================
 

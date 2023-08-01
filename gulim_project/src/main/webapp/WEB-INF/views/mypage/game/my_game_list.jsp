@@ -26,10 +26,10 @@ $(function(){
 	slideWidth : 300
 	
 	});
-	
-}); 
 
-// 입장하기 버튼 클릭 시
+});
+
+//입장하기 버튼 클릭 시
 const chatRoomJoin = (event,room_num) => {
 	event.preventDefault();
 
@@ -48,6 +48,23 @@ const chatRoomJoin = (event,room_num) => {
 	}); // end of ajax
 
 } // end of func chatRoomJoin()
+
+// 참가취소 버튼 클릭 시
+const joinCancle = (event,join_num) => {
+	event.preventDefault();
+
+	location.href = "/mypage/game/join_cancle?join_num="+join_num;
+}
+
+// 방 수정하기 버튼 클릭 시
+const roomModify = (event,room_num) => {
+	location.href = "/mypage/game/my_game_modify?room_num="+room_num;
+}
+
+// 방 삭제하기 버튼 클릭 시
+const roomDelete = (event,room_num) => {
+	location.href = "/mypage/game/room_delete?room_num="+room_num;
+}
 
 </script>
 
@@ -130,12 +147,12 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button class="mygame_go_game" id = "mygame_go_game" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td colspan="2"><button class="mygame_go_game cursor" id = "mygame_go_game" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
 								</tr>
 								<tr>
-									<td>
+									<td colspan="2">
 									<c:if test="${room.containsKey('img_path')}">
-										<img src="${room.img_path}" />
+										<img src="https://192.168.0.68:8080${room.img_path}" />
 									</c:if>
 									<c:if test="${not room.containsKey('img_path')}">
 										<img src="/files/images/no_image.jpg" />
@@ -143,10 +160,10 @@ const chatRoomJoin = (event,room_num) => {
 									</td>
 								</tr>
 								<tr>
-									<td class="mygame_master_title"><p class="fs17 height1">${room.room_name}</p></td>
+									<td colspan="2" class="mygame_master_title"><p class="fs17 height1">${room.room_name}</p></td>
 								</tr>
 								<tr>
-									<td>
+									<td colspan="2">
 									<c:if test="${room.room_state == 0}">
 										<div class ="mygame_tag backfround_blue">플레이중</div>
 									</c:if>
@@ -154,6 +171,12 @@ const chatRoomJoin = (event,room_num) => {
 										<div class ="mygame_tag backfround_black color_white">종료된방</div>
 									</c:if>
 									</td>
+								</tr>
+								<tr>
+									<td>
+										<button class="mygame_go_game cursor" id = "mygame_go_game" onclick="roomModify(event,${room.room_num})">수정하기</button>
+									</td>
+									<td><button class="mygame_go_game cursor" id = "mygame_go_game" onclick="roomDelete(event,${room.room_num})">삭제하기</button></td>
 								</tr>
 						</table>
 						</li>
@@ -176,7 +199,11 @@ const chatRoomJoin = (event,room_num) => {
 						<li>
 						<table class ="mygame_entry_request">
 								<tr>
-									<td><button class="mygame_go_game" id = "mygame_go_game" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button></td>
+									<td>
+										<c:if test="${room.join_state == 1}">
+											<button class="mygame_go_game" id = "mygame_go_game cursor" onclick="chatRoomJoin(event,${room.room_num})">입장하기</button>
+										</c:if>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -193,12 +220,17 @@ const chatRoomJoin = (event,room_num) => {
 								</tr>
 								<tr>
 									<td>
-										<c:if test="${room.room_state == 0}">
-											<div class ="mygame_tag backfround_blue">플레이중</div>
+										<c:if test="${room.join_state == 1}">
+											<div class ="mygame_tag backfround_blue">참가완료</div>
 										</c:if>
-										<c:if test="${room.room_state != 0}">
-											<div class ="mygame_tag backfround_black color_white">종료된방</div>
+										<c:if test="${room.join_state == 0}">
+											<div class ="mygame_tag backfround_black color_white">참가대기중</div>
 										</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<button class="mygame_go_game cursor" onclick="joinCancle(event,${room.join_num})">참가 취소</button>
 									</td>
 								</tr>
 						</table>
