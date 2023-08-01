@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 
@@ -74,4 +75,7 @@ public interface CommunityService {
 	
 	// 공지사항 게시글 수
 	public int countAllAnnounce();
+
+
+	public ContestDTO findContest(Integer post_num);
 }

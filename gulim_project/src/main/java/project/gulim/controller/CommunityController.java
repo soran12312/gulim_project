@@ -30,6 +30,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import project.gulim.constant.Method;
+import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.service.CommunityService;
@@ -504,7 +505,7 @@ public class CommunityController {
 		
 		
 		// 전체 게시글 수 조회
-		int totalCount = communityService.countAllEventPosts();
+		int totalCount = communityService.countAllContestPosts();
 		
 		// 페이징 처리를 위한 정보 계산
 		int totalPages = (int) Math.ceil((double) totalCount / size);
@@ -512,10 +513,12 @@ public class CommunityController {
 		
 		// 특정 페이지의 게시글 목록 조회
 
+
 		List<Map> contests = communityService.findAllContest(start, size);
 		model.addAttribute("contests", contests);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
+		
 		
 		
 		
@@ -525,8 +528,14 @@ public class CommunityController {
 	
 	// 공모전 상세
 	@RequestMapping("/contest_detail")
-	public String contestlistdetail() {
-		return "community/contest/contest_list";
+	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer post_num) {
+		
+		
+		ContestDTO contests = communityService.findContest(post_num);
+		
+		model.addAttribute("contests", contests);
+		
+		return "community/contest/contest_detail";
 	}
 	
 	

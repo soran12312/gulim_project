@@ -54,9 +54,26 @@ public interface SubscriptionDAO {
 	public void updateSubscriptionById(Integer sub_num,  LocalDate endDate);
 
 	// 결제 완료 후 장바구니 삭제
-	public void deleteAllQuantities(Map<String, Integer> cartItem);
+	public void updatePurchaseState(Map<String, Integer> cartItem);
+
+	// 구독권 userid로 구매내역 가져오기
+	public SubscribeDTO getSubscriptionByUserId(String id);
+
+	// 구독권이 있으면 기간 연장
+	public void updateSubscriptionEndDate(Integer sub_num, String id, LocalDate endDate, LocalDate start_date);
+	
+	
+
+	// 친구id가 구독권이  없음 추가
+	public void updateSubscriptionId(String id, LocalDate startDate, LocalDate endDate ,Integer price);
+
+	// 친구 id가 구독권이있으면 연장
+	public void updateSubscriptionDate(String id, LocalDate start_date, LocalDate endDate,Integer price);
+
+	public void insertPurchase();
 
 
 
+	
 	
 }

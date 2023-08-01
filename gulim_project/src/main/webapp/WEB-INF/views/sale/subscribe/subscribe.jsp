@@ -493,22 +493,15 @@ body {
 		    const month = $('#image-month').text();
 			console.log(month);
 		    
-		    const price = $('#image-price').text();
+			const price = $('#image-price').text().replace('원', '');
 			console.log(price);
 		    
-		    const subscriptionData = {
-		        month: month,
-		        price: price
-		    }; 
-
-			console.log(subscriptionData);
-		   
 		    
-		    const jsonSubscriptionData = encodeURIComponent(JSON.stringify(subscriptionData));
-		    const url = `/sale/send_subscribe?data=${jsonSubscriptionData}`;
+		    const url = '/sale/send_subscribe?price='+  price;
 		    const windowFeatures = 'width=420,height=520';
 		
 		    window.open(url, '친구에게 보내기', windowFeatures);
+		    
 		}
 		
 	</script>

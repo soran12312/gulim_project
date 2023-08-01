@@ -10,4 +10,6 @@ public class PurchaseDTO {
 	private Integer book_num;
 	private Integer amount;
 	private Integer sub_num;
+	
+	private Integer purchase_state;   // 결제 상태
 }
