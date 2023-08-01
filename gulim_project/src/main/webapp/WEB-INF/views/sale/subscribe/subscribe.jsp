@@ -154,15 +154,15 @@ body {
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
-
+<div class="mainbackpage">
 	<div class="cartbtn">
-		<button class="btn" id = "moveCart"  onclick="redirectToCartPage()">장바구니</button>
+		<button class="suvscribeBtn" id = "moveCart"  onclick="redirectToCartPage()">장바구니</button>
 	</div>
 	
 	
 	<div class="container">
 
-		<div class="text">
+		<div class="subscribepagename">
 			<h3>구독권</h3>
 			<hr />
 		</div>
@@ -182,7 +182,7 @@ body {
 
 		<div class="row">
 			<div class="col-md-12 d-flex justify-content-center">
-				<div id="Carousel" class="carousel slide" data-ride="carousel">
+				<div id="Carousel" class="carousel slide suvxcribe_back" data-ride="carousel">
 
 					<ol class="carousel-indicators">
 						<li data-target="#Carousel" data-slide-to="0" class="active"></li>
@@ -352,7 +352,8 @@ body {
 
 			</div>
 		</div>
-	</div>
+	</div>	
+</div>
 	<!--.container-->
 
 

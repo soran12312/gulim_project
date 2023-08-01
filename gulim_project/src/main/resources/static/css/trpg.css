@@ -8,7 +8,7 @@
 
 /* ================START OF ALL============================== */
 .cursor{
-cursor: pointer;
+cursor: pointer !important;
 }
 .fs15{
 font-size: 15px;
@@ -2268,6 +2268,116 @@ purchase_bookname{
 	font-size: 20px;
 	font-family: NeoDunggeunmo Code, Inter;	
 }
-
+/* ================ START OF SALE ====================== */
+.salemainBook{
+	width: 400px;
+	height: 600px;
+	position: relative;
+	top: 150px;
+	margin-right: 100px;
+	font-size: 40px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	text-align: center;
+	background: rgba(255,255,255,0.7);
+	border: rgba(255,255,255,0.7);
+	box-shadow: 0px 0px 30px 30px  rgba(255,255,255,0.7);
+	border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.salemaincoupon{
+	width: 400px;
+	height: 600px;
+	position: relative;
+	top: 150px;
+	margin-left: 10px;
+	margin: auto;
+	font-size: 40px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	text-align: center;
+	background: rgba(255,255,255,0.7);
+	border: rgba(255,255,255,0.7);
+	box-shadow: 0px 0px 30px 30px  rgba(255,255,255,0.7);
+	border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.salemaindiv{
+	width: 1000px;
+	height: 800px;
+	position: relative;
+	left: 400px;
+	margin-left: 400px;
+}
+.subscribepagename{
+	color: white;
+	margin: auto;
+	width: 300px;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-size: 40px;	
+	text-align: center;
+}
+.subscribepagename h3{
+	color: white;
+	margin: auto;
+	width: 300px;
+	font-family: NeoDunggeunmo Code, Inter;
+	font-size: 40px;	
+	text-align: center;
+}
+.suvxcribe_back{
+	width: 1000px;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150px;
+	padding: 30px;
+	font-size: 15px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	text-align: center;
+	background: rgba(255,255,255,0.7);
+	border: rgba(255,255,255,0.7);
+	box-shadow: 0px 0px 30px 30px  rgba(255,255,255,0.7);
+	border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.suvscribeBtn{
+	width: 120px;
+	height:50px;
+	position: relative;
+	top: 700px;
+	right: 0px;
+	padding: 10px;
+	font-size: 23px;
+	font-family: NeoDunggeunmo Code, Inter;	
+	text-align: center;
+	background: black;
+	color: white;
+	border: 3px solid white;
+	border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.margindiv{
+	margin-top: 200px;
+	background: rgba(255,255,255,0.7);
+	border: rgba(255,255,255,0.7);
+	box-shadow: 0px 0px 10px 10px  rgba(255,255,255,0.7);
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+	width: 1200px;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: NeoDunggeunmo Code, Inter;	
+}
+/* ================  END OF SALE ====================== */
 /* ================ END OF CHAR_SHEET LIST ====================== */
 /* ================ END OF GAME ====================== */
