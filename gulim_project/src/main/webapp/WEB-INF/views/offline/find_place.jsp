@@ -45,66 +45,61 @@
 
     // 처음 웹에 들어오면 데이터 베이스 값을 받아다가 마커를 만든다
     for (var i = 0; i < locals.length; i++) {
-    var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
-    //마커 클릭했을 때 정보 표시
-    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
-   
-    var infowindow = new kakao.maps.InfoWindow({
+        var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
+       
+        //마커 클릭했을 때 정보 표시 
+        var infoContent = '<div style="margin:20px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
+        var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
-        
-    });
-    
-    //마커 안에 들어갈 정보
-    var marker = new kakao.maps.Marker({
+        }); // end infowindow
+
+        //마커 안에 들어갈 정보
+        var marker = new kakao.maps.Marker({
         position: markerPosition,
         map: map,
         place_name: locals[i].place_name,
         tel: locals[i].tel,
-        place_address: locals[i].place_address
-    });
+        address: locals[i].place_address
+        });// end marker
+        
+        markers.push(marker);
 
-    markers.push(marker);
-
-    // 마커 정보 객체에 담기
-    markerinfomation.push({
+        // 마커 정보 객체에 담기
+        markerinfomation.push({
         marker: marker,
         infowindow: infowindow
-    });
-    
+        }); // end markerinfomation
 
-    $('.place_name_css').each(function(event) {
-    $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
-
-    // this 클릭시
-    $(this).click(function() {
-       
-    var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
-    var marker = markers[markerIndex];
-    if (marker) {
-        //지도 이동
-      map.panTo(marker.getPosition());
-      //마커 생성
-      var infowindowContent = '<div style="padding:15px;"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
-      // 생성된 마커의 정보 저장
-       var iwRemoveable = true;
-        var infowindow = new kakao.maps.InfoWindow({
-        content: infowindowContent,
-        removable : iwRemoveable
-        });      
-      // 맵에 마커 생성
-        infowindow.open(map, marker);
+        $('.place_name_css').each(function(event) {
+        $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
+        // this 클릭시
+        $(this).click(function() {
         
-        removable.click(function(){
-        infowindow.close();
-        })
+        var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
+        var marker = markers[markerIndex];
+        if (marker) {
+            //지도 이동
+        map.panTo(marker.getPosition());
+        //마커 생성
+        var infowindowContent = '<div style="padding:15px;" class="div_info"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
+        // 생성된 마커의 정보 저장
+        var iwRemoveable = true;
+            var infowindow = new kakao.maps.InfoWindow({
+            content: infowindowContent,
+            removable : iwRemoveable
+            });      
+        // 맵에 마커 생성
+            infowindow.open(map, marker);
+            removable.click(function(){
+            })
 
-      // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
-       $("#place_partnership, #place_allplace").click(function() {
-        infowindow.close();
-      });// end click func
-    }// end if
-  }); // end this func
-}); // end place_name_css func
+        // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
+        $("#place_partnership").click(function() {
+            infowindow.close();;
+            });// end click func
+            }// end if
+        }); // end this func
+        }); // end place_name_css func
  
     }// end for
 
@@ -114,18 +109,18 @@
     // 지도에 있는 마커에 정보 담기
     for (var i = 0; i < markerinfomation.length; i++) {
     var markerInfo = markerinfomation[i];
-    
-    function addClickListener(markerInfo) {
-        //마커에 마우스 올리면 발생하는 이벤트
-        kakao.maps.event.addListener(markerInfo.marker, 'mouseover', function() {           
-        markerInfo.infowindow.open(map, markerInfo.marker);
-        });
-        kakao.maps.event.addListener(markerInfo.marker, 'mouseout', function() {
-        markerInfo.infowindow.close();
-        });
-    }
-    addClickListener(markerInfo);
-    }
+        
+        function addClickListener(markerInfo) {
+            //마커에 마우스 올리면 발생하는 이벤트
+            kakao.maps.event.addListener(markerInfo.marker, 'mouseover', function() {           
+            markerInfo.infowindow.open(map, markerInfo.marker);
+            });
+            kakao.maps.event.addListener(markerInfo.marker, 'mouseout', function() {
+            markerInfo.infowindow.close();
+            });
+        }
+        addClickListener(markerInfo);
+        }
 
 
         //기존에 존재하는 마커를 지우기 위한 함수
@@ -370,7 +365,7 @@ $("#place_partnership").click(function() {
 
         for (var i = 1; i <= totalPages; i++) {
             //a 태그 생성 그 안에 숫자 1개씩 찍어줌
-            var pageLink = $("<a href='#'></a>").text(i);
+            var pageLink = $("<a href='#'></a>").text(" " + i);
 
             if (i == page) {
                 pageLink.addClass("active");
@@ -413,7 +408,7 @@ $("#place_partnership").click(function() {
     <title>모임 장소 찾기</title>
 </head>
 <body>
-<div class="mypagebackpage">
+<div class="mapbackpage">
     <!-- 헤더 -->
     <jsp:include page="../../../header_after.jsp"></jsp:include>
     <jsp:include page="../../../sidebar.jsp"></jsp:include>
@@ -465,7 +460,7 @@ $("#place_partnership").click(function() {
     </div>
 
     <div class="place_partnership_box"></div>
-    <span class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시고 결제 하실 때 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</span>
+<span class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시면 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</span>
 
 </div>
 </body>

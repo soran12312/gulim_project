@@ -80,84 +80,11 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-bell"></i>
-                                    <div class="pulse-css"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="danger"><i class="ti-bookmark"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-heart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-image"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                    </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
-                                            class="ti-arrow-right"></i></a>
-                                </div>
-                            </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
-                                        <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
-                                    </a>
-                                    <a href="./email-inbox.html" class="dropdown-item">
-                                        <i class="icon-envelope-open"></i>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="/main/logout" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>
-                                </div>
                             </li>
                         </ul>
                     </div>
@@ -356,18 +283,42 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="card">
                                     <div class="card-header surveyButton">
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-prb">플레이해본 룰북</button>
-                                        <button id="btn_quarter_product" class="btn  btn-square btn-success btn-pt">플레이해본 시간</button>
-                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary btn-pg">마스터 플레이 횟수</button>
-                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger btn-pc">플레이해본 직업</button>     
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-pgen">플레이해본 장르</button>
-                                        <button id="btn_quarter_product" class="btn  btn-square btn-success btn-ps">플레이해본 종족</button>
-                                        <button id="btn_quarter_subscribe" class="btn  btn-square btn-primary btn-wgen">플레이해보고 싶은 장르</button>
-                                        <button id="btn_quarter_book" class="btn  btn-square btn-danger btn-os">다른 사이트 이용 경험</button> 
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter" class="btn btn-outline-dark btn-prb">플레이해본 룰북</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_product" class="btn btn-outline-dark btn-pt">플레이해본 시간</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_subscribe" class="btn btn-outline-dark btn-pg">마스터 플레이 횟수</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_book" class="btn btn-outline-dark btn-pc">플레이해본 직업</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter" class="btn btn-outline-dark btn-pgen">플레이해본 장르</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_product" class="btn btn-outline-dark btn-ps">플레이해본 종족</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_subscribe" class="btn btn-outline-dark btn-wgen">플레이해보고 싶은 장르</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_book" class="btn btn-outline-dark btn-os">다른 사이트 이용 경험</button>
+                                                    </td> 
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="card-body">
                                         <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
+                                            <h6 id="textSurvey" style="color:black;"></h6>
                                         </div>
                                         <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
                                     </div>
@@ -376,21 +327,35 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="card">
                                     <div class="card-header flavorButton">
-                                        <button id="btn_quarter" class="btn btn-square btn-dark btn-pfs">플레이어 선호</button>
-                                        <button id="btn_quarter_product" class="btn btn-square btn-success btn-pfc">직업 선호</button>
-                                        <button id="btn_quarter_subscribe" class="btn btn-square btn-primary btn-pfsp">종족 선호</button>
-                                        <button id="btn_quarter_book" class="btn btn-square btn-danger btn-pfst">직업에 따른 스탯 선호</button>
+                                        <table>
+                                            <tbody>
+                                                <tr>   
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter" class="btn btn-outline-dark btn-pfs">플레이어 선호</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_product" class="btn btn-outline-dark btn-pfc">직업 선호</button>
+                                                    </td>
+                                                    <td colspan="3">    
+                                                        <button id="btn_quarter_subscribe" class="btn btn-outline-dark btn-pfsp">종족 선호</button>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <button id="btn_quarter_book" class="btn btn-outline-dark btn-pfst">직업에 따른 스탯 선호</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>    
                                     </div>
                                     <div class="card-body">
+                                        <div>
+                                            <h6 id="textFlavor" style="color:black;"></h6>
+                                        </div>
                                         <div>
                                             <select name="char_class" id="class-select" class="hide-class-select" style="border:0px; background-color:#00000000;">
                                                 <c:forEach items="${classForStats}" var="cfs">
                                                     <option value="${cfs.char_class}">${cfs.char_class}</option>
                                                 </c:forEach>
                                             </select>
-                                        </div>
-                                        <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
                                         </div>
                                         <div id="simple-pie2" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
                                     </div>

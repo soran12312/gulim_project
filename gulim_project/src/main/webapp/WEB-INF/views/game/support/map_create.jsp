@@ -37,7 +37,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>s
-<div class="mypagebackpage">
+<div class="gamebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 <a href = "/game/support/etc"> ㆍ</a>
 	<table class="game_roomlist_nav">

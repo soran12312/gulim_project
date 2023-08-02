@@ -36,8 +36,6 @@ public interface AdminService {
 	
 	public List<HashMap> selectYear();
 	
-	public List<HashMap> salesStatsQuarter(String purchase_year_qua);
-	
 	public List<HashMap> selectYear_mon();
 	
 	public List<HashMap> salesStatsMonth(String purchase_year_mon);
@@ -47,6 +45,10 @@ public interface AdminService {
 	public List<HashMap> salesStatsMonth_book(String purchase_year_mon);
 	
 	public List<HashMap> salesStatsDay(String purchase_day);
+	
+	public List<HashMap> salesStatsDay_subs(String purchase_day);
+	
+	public List<HashMap> salesStatsDay_book(String purchase_day);
 
 	public List<HashMap> listRefund();
 

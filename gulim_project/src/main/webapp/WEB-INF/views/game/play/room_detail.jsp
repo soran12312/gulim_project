@@ -17,7 +17,7 @@ const joinRoom = (room_num) => {
 <body>
 
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
-<div class="mypagebackpage">
+<div class="gamebackpage">
 	<div class="detailroom">
 		<div class="roomname">${room.room_name}</div>
 		<div class="roomimg">

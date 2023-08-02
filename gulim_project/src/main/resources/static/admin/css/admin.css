@@ -179,8 +179,8 @@ button.showAffiliateOnly {
   font-size: 36px;
 }
 
-.hide-class-select{
-	display: none;
+#class-select{
+	display:none;
 }
 
 /* ================END OF game_stats============================== */

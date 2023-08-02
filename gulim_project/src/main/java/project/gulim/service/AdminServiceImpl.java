@@ -76,10 +76,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectYear();
 	}
 	
-	public List<HashMap> salesStatsQuarter(String purchase_year_qua){
-		return adminDAO.salesStatsQuarter(purchase_year_qua);
-	}
-	
 	public List<HashMap> selectYear_mon(){
 		return adminDAO.selectYear_mon();
 	}
@@ -97,7 +93,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	public List<HashMap> salesStatsDay(String purchase_day){
+		System.out.println(purchase_day);
 		return adminDAO.salesStatsDay(purchase_day);
+	}
+	
+	public List<HashMap> salesStatsDay_subs(String purchase_day){
+		System.out.println(purchase_day);
+		return adminDAO.salesStatsDay_subs(purchase_day);
+	}
+	
+	public List<HashMap> salesStatsDay_book(String purchase_day){
+		return adminDAO.salesStatsDay_book(purchase_day);
 	}
 	
 	public List<HashMap> listRefund() {

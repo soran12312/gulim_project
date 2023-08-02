@@ -14,7 +14,7 @@
     
     <jsp:include page="../../../../header_after.jsp"/>
     <jsp:include page="../../../../sidebar.jsp"/>
-    <iframe src="https://192.168.0.68:3000/sales" style="height: 1052px; width: 1624px; border: none;"></iframe>
+    <iframe src="https://localhost:3000/sales" style="height: 1052px; width: 1624px; border: none;"></iframe>
     
 </div>
 </body>

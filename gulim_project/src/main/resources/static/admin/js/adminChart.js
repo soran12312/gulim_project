@@ -19,6 +19,7 @@
 		let content2 = $('textarea[name="contest_content"]').html($('#summernote').code());
 	}
 	
+	
 	$("#inputState_noContest").on("change", function() {
 	    var selectedValue = $(this).val();
 	    if (selectedValue === "공모전") {
@@ -47,6 +48,22 @@
         }
 
         reader.readAsDataURL(this.files[0]); // start reading the file data.
+    });
+    
+    $(".btn-pfs").click(function() {
+        $("#class-select").hide();
+    });
+    
+    $(".btn-pfc").click(function() {
+        $("#class-select").hide();
+    });
+    
+    $(".btn-pfsp").click(function() {
+        $("#class-select").hide();
+    });
+    
+    $(".btn-pfst").click(function() {
+        $("#class-select").show();
     });
     
 })(jQuery);

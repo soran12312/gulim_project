@@ -22,7 +22,7 @@
 <body>
     <jsp:include page="../../../header_after.jsp"></jsp:include>
     <jsp:include page="../../../sidebar.jsp"></jsp:include>
-    <div class="mybotpage">
+    <div class="mybotpages">
         <span class="place_recommend">1:1 문의 사항</span>
 
         <div class="place_lines"><hr></div>

@@ -15,10 +15,11 @@
 /* 제휴매장보기 버튼*/
 .place_partnership {
   width: 100px;
-  color: rgba(0,0,0,1);
+  color: rgba(255, 255, 255, 1); 
+  background-color: rgb(255, 0, 0);
   position: absolute;
   left: 150px;
-  bottom: 700px;
+  bottom: 690px;
  
 }
 
@@ -28,7 +29,7 @@
   color: rgba(0,0,0,1);
   position: absolute;
   left: 280px;
-  bottom: 700px;
+  bottom: 690px;
  
 }
 
@@ -116,24 +117,25 @@
 
 /*제휴 글씨 박스*/
 .place_partnership_box {
-  width: 418px;
-  height: 158px;
-  background: rgba(217,217,217,1);
-  opacity: 1;
+  width: 700px;
+  height: 100px;
+  background: white;
+  opacity: 0.7;
   position: absolute;
-  top: 804px;
+  top: 830px;
   left: 1000px;
+  background-image:url("/files/images/wallpaper/제휴 매장 박스.png");
   overflow: hidden;
 }
 /*제휴 글씨*/
 .place_partnership_benefit {
-  width: 378px;
+  width: 700px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 813px;
-  left: 1020px;
+  top: 860px;
+  left: 1000px;
   font-family: Inter;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: Regular;
   opacity: 1;
   text-align:center;
@@ -143,14 +145,15 @@
 /*다음 버튼*/
 .place_next{
 	position: absolute;
-	left: 650px;
+	left: 660px;
 	bottom: 1px;
-	
+	font-size: 20px;
 }
 /*이전 버튼*/
 .place_prev{
 	position: absolute;
 	bottom: 1px;
+	font-size: 20px;
 }
 
 
@@ -161,10 +164,11 @@
 
 /* 페이지 숫자*/
 .pagination{
+	
 	position: absolute;
 	bottom: 1px;
-	left: 300px;
-	right: 300px;
+	left: 280px;
+	white-space: nowrap;
 }
 
 
@@ -177,7 +181,7 @@
 .mybotpage {
   width: 100%;
   height: 1024px;
-  background-image:url("/files/images/wallpaper/배경4.jpg");
+  background-image:url("/files/images/wallpaper/배경7.jpg");
   background-size: cover;
   opacity: 1;
   overflow: hidden;
@@ -473,13 +477,21 @@ padding: 10px;
 	left: 690px;
 }
 
+/*지도 배경*/
+.mapbackpage{
+	width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경5.png");
+  background-size: cover;
+  overflow: hidden;
+}
+
 
 /*여기 부터는 상품 상세 보기 salesbook*/
-
 .bookpage {
   width: 100%;
   height: 1024px;
-  background-image:url("/files/images/wallpaper/배경4.jpg");
+  background-image:url("/files/images/wallpaper/배경6.png");
   background-size: cover;
   overflow: hidden;
 }
