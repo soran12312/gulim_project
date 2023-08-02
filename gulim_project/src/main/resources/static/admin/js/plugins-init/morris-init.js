@@ -355,11 +355,19 @@
 		    }
 	        data_day = [];
 	        for (var i = 0; i < response.length; i++) {
-	            data_day.push({
-	                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
-	                value: response[i].total_price
-	            });
-	        }
+					if(response[i].total_book_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "설정집 매출" + " \xa0 \xa0",
+			                value: response[i].total_book_price
+			            });
+			        } 
+			        if(response[i].totalscribe_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "구독권 매출" +" \xa0 \xa0",
+			                value: response[i].totalscribe_price
+			            });
+					}
+		        }
 	        var chart_day = Morris.Donut({
 	            element: 'morris_donught',
 	            data: data_day,
@@ -375,6 +383,10 @@
 	});
 	
 	$("#selectDay").on("change", function() {
+		btnQuarter.addClass("active");
+		btnQuarterSubscribe.removeClass("active");
+		btnQuarterBook.removeClass("active");
+		
 		purchase_day = $('#selectDay').val();
 		$.ajax({
 		    // 경로
@@ -394,16 +406,26 @@
 			    }
 		        data_day = [];
 		        for (var i = 0; i < response.length; i++) {
-		            data_day.push({
-		                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
-		                value: response[i].total_price
-		            });
+					if(response[i].total_book_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "설정집 매출" + " \xa0 \xa0",
+			                value: response[i].total_book_price
+			            });
+			        }
+			        if(response[i].totalscribe_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "구독권 매출" +" \xa0 \xa0",
+			                value: response[i].totalscribe_price
+			            });
+					}
 		        }
 		        var chart_day = Morris.Donut({
 		            element: 'morris_donught',
 		            data: data_day,
 		            resize: true
 		        });
+		        
+		        
 		        
 		    },
 		    error: function(xhr, status, error){
@@ -435,10 +457,18 @@
 			    }
 		        data_day = [];
 		        for (var i = 0; i < response.length; i++) {
-					data_day.push({
-		                label: "\xa0 \xa0 " + response[i].purchase_day.substring(0,4)+ "년 " + response[i].purchase_day.substring(5,7) + "월 " + response[i].purchase_day.substring(8,10) + "일 \xa0 \xa0",
-		                value: response[i].total_price
-		            });
+					if(response[i].totalscribe_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "구독권 매출" +" \xa0 \xa0",
+			                value: response[i].totalscribe_price
+			            });
+					}
+					if(response[i].total_book_price){
+						data_day.push({
+			                label: "\xa0 \xa0 " + "설정집 매출" + " \xa0 \xa0",
+			                value: response[i].total_book_price
+			            });
+			        }
 		        }
 		        var chart_day = Morris.Donut({
 		            element: 'morris_donught',
@@ -497,6 +527,46 @@
 			                value: response[i].total_subscribe_price
 			            });
 					}
+		        }
+		        var chart_day = Morris.Donut({
+		            element: 'morris_donught',
+		            data: data_day,
+		            resize: true
+		        });
+		    },
+		    error: function(xhr, status, error){
+		        alert('월매출 실패: '+ error);
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(error);
+		    }
+		});
+	});
+	
+	$("#btn_day_book").on("click", function() {
+		purchase_day = $('#selectDay').val();
+		$.ajax({
+		    // 경로
+		    url: "/admin/sales_stats/day_book",
+		    // 전송방식: POST
+		    method: "POST",
+		    data: {purchase_day: purchase_day},
+		    // 성공할 시
+		    success: function(response){
+		        console.log(response);
+		        data_day = [];
+		        var donughtChartParent = document.getElementById('morris_donught');
+			    // SVG 요소를 찾아서 제거합니다.
+			    var svgElement = donughtChartParent.querySelector('svg');
+			    if (svgElement) {
+			        donughtChartParent.removeChild(svgElement);
+			    }
+		        data_day = [];
+		        for (var i = 0; i < response.length; i++) {
+					data_day.push({
+			                label: "\xa0 \xa0 " + response[i].book_title + " \xa0 \xa0",
+			                value: response[i].total_book_price
+			        });
 		        }
 		        var chart_day = Morris.Donut({
 		            element: 'morris_donught',

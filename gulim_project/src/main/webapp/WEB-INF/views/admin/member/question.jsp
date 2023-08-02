@@ -128,7 +128,7 @@
                     <li ><a href="/admin/live_question" class="live_question"><i 
                         class="icon icon-single-copy-06"></i><span class="nav-text">실시간 문의사항</span></a>
     </li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -143,6 +143,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
+                        <!-- 대카테고리 > 소카테고리 -->
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a id="category_big" href="javascript:void(0)"></a></li>
                             <li class="breadcrumb-item active"><a id="category_small" href="javascript:void(0)"></a></li>
@@ -160,6 +161,7 @@
                             </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        <!-- questionTable start -->
                                         <table id="example" class="display questionTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
@@ -173,15 +175,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <!-- taglib forEach start -->
                                                 <c:forEach items="${listQuestion}" var="lq">
                                                     <tr class="answer-link">
-                                                        
+                                                        <%-- ID --%>
                                                         <td style="width: 110px;">${lq.id}</td>
+                                                        <%-- 문의사항 --%>
                                                         <td>${lq.question_type}</td>
+                                                        <%-- 제목 --%>
                                                         <td style="width: 165px;height: auto;">${lq.question_title}</td>
+                                                        <%-- 문의내용 --%>
                                                         <td style="width: 465px;display: inline-block; vertical-align: top; height: auto;">
                                                             ${lq.question_content}
                                                         </td>
+                                                        <%-- 답변 --%>
                                                         <td style="width: 140px;">
                                                             <c:choose>
                                                                 <c:when test="${lq.answer_state eq 0}">
@@ -196,8 +203,10 @@
                                                         <td id="question_num" hidden>${lq.question_num}</td>
                                                     </tr>
                                                 </c:forEach>
+                                                <!-- taglib forEach end -->
                                             </tbody>
                                         </table>
+                                        <!-- questionTable end -->
                                     </div>
                                 </div>
                             
@@ -256,12 +265,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(function(){
-
-        }); // end of $
-    </script>
 
 </body>
 

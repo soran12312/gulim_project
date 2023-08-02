@@ -225,13 +225,6 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "/sales_stats/quarter", method = RequestMethod.POST)
-    public List<HashMap> salesStats_quarter(@RequestBody String purchase_year_qua) {
-		String year = purchase_year_qua.substring(purchase_year_qua.length() - 4);
-		return adminService.salesStatsQuarter(year);
-	}
-	
-	@ResponseBody
     @RequestMapping(value = "/sales_stats/month", method = RequestMethod.POST)
     public List<HashMap> salesStats_month(@RequestBody String purchase_year_mon) {
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
@@ -264,6 +257,13 @@ public class AdminController {
     public List<HashMap> salesStatsDay_subs(@RequestBody String purchase_day) {
 		String day = purchase_day.substring(purchase_day.length() - 10);
 		return adminService.salesStatsDay_subs(day);
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "/sales_stats/day_book", method = RequestMethod.POST)
+    public List<HashMap> salesStatsDay_book(@RequestBody String purchase_day) {
+		String day = purchase_day.substring(purchase_day.length() - 10);
+		return adminService.salesStatsDay_book(day);
 	}
 	
 	@RequestMapping("/delivery_refund")

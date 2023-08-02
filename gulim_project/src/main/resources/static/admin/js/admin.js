@@ -33,7 +33,7 @@
 	        return;
 	    }
 		// hidden으로 생겨놓은 answer td 영역
-		var answerField = $(this).find('td:nth-child(5)')
+		var answerField = $(this).find('td:nth-child(6)')
 		// answer td 영역의 text값
 		var answer = answerField.text().trim();
 		// 이전에 했던 답변을 textarea에 가져오기 위해 생성한 변수

@@ -179,6 +179,10 @@ button.showAffiliateOnly {
   font-size: 36px;
 }
 
+#class-select{
+	display:none;
+}
+
 /* ================END OF game_stats============================== */
 
 /* ================START OF FOOTER============================== */

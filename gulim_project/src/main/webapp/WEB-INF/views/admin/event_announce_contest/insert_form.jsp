@@ -189,7 +189,7 @@
                                                                 style="width: 95%; position: relative; top: 7px;">
                                                                 <!-- 게시글 제목 입력 -->
                                                                 <p class="mb-1">제목</p>
-                                                                <input type="text" name="post_title" class="form-control input-default" placeholder="da제목을 입력하시오.">
+                                                                <input type="text" name="post_title" class="form-control input-default" placeholder="제목을 입력하시오.">
                                                             </div>
                                                         </div>
                                                     </div>

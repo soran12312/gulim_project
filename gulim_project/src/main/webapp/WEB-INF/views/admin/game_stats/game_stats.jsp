@@ -318,7 +318,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
+                                            <h6 id="textSurvey" style="color:black;"></h6>
                                         </div>
                                         <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist"></div>
                                     </div>
@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div>
-                                            <h6 style="color:black;">2023년 월매출</h6>
+                                            <h6 id="textFlavor" style="color:black;"></h6>
                                         </div>
                                         <div>
                                             <select name="char_class" id="class-select" class="hide-class-select" style="border:0px; background-color:#00000000;">

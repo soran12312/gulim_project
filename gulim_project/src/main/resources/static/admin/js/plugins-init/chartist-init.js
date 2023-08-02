@@ -3,6 +3,7 @@
     
   //Simple pie chart
   
+  
   var names = [];
 	var data = {
 		series: []
@@ -19,6 +20,8 @@
 	      chartPadding: 20
 	    }]
 	  ];
+	  
+	$('#textSurvey').text($('.btn-prb').text());
 	  
 	 fetch('https://localhost:8080/admin/game_stats/survey')
     .then(response => response.json())
@@ -65,6 +68,10 @@
 
 	// 플레이해본 룰북 버튼
 	$('.surveyButton').on('click', '.btn-prb', function(e) {
+		
+		$('#textSurvey').text($('.btn-prb').text());
+		
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -111,6 +118,9 @@
 	
 	// 플레이해본 시간
 	$('.surveyButton').on('click', '.btn-pt', function(e) {
+		
+		$('#textSurvey').text($('.btn-pt').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -160,6 +170,9 @@
 
 	// 마스터 플레이 횟수 버튼	
 	$('.surveyButton').on('click', '.btn-pg', function(e) {
+		
+		$('#textSurvey').text($('.btn-pg').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -206,6 +219,9 @@
 
 	// 플레이해본 직업 버튼
 	$('.surveyButton').on('click', '.btn-pc', function(e) {
+		
+		$('#textSurvey').text($('.btn-pc').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -252,6 +268,9 @@
 
 	// 플레이해본 장르 버튼
 	$('.surveyButton').on('click', '.btn-pgen', function(e) {
+		
+		$('#textSurvey').text($('.btn-pgen').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -298,6 +317,9 @@
 
 	// 플레이해본 종족 버튼
 	$('.surveyButton').on('click', '.btn-ps', function(e) {
+		
+		$('#textSurvey').text($('.btn-ps').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -344,6 +366,9 @@
 
 	// 플레이해보고 싶은 장르 버튼
 	$('.surveyButton').on('click', '.btn-wgen', function(e) {
+		
+		$('#textSurvey').text($('.btn-wgen').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -390,6 +415,9 @@
 	
 	// 다른사이트 이용 경험
 	$('.surveyButton').on('click', '.btn-os', function(e) {
+		
+		$('#textSurvey').text($('.btn-os').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
@@ -453,6 +481,10 @@
 	        }
 	    },responsiveOptions);
 	}
+	
+	
+	
+	$('#textFlavor').text($('.btn-pfs').text());
 
 	fetch('https://localhost:8080/admin/game_stats/character_sheet')
 	    .then(response => response.json())
@@ -497,6 +529,9 @@
 
 
 	$('.flavorButton').on('click', '.btn-pfs', function(e) {
+		
+		$('#textFlavor').text($('.btn-pfs').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/character_sheet')
 	    .then(response => response.json())
 	    .then(data => {
@@ -540,6 +575,9 @@
 	});
 	
 	$('.flavorButton').on('click', '.btn-pfc', function(e) {
+		
+		$('#textFlavor').text($('.btn-pfc').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/character_sheet')
 	    .then(response => response.json())
 	    .then(data => {
@@ -583,6 +621,9 @@
 	});
 
 	$('.flavorButton').on('click', '.btn-pfsp', function(e) {
+		
+		$('#textFlavor').text($('.btn-pfsp').text());
+		
 		fetch('https://localhost:8080/admin/game_stats/character_sheet')
 	    .then(response => response.json())
 	    .then(data => {
@@ -626,6 +667,9 @@
 	});
 	
 	$('.flavorButton').on('click', '.btn-pfst', function(e){
+		
+		
+		$('#textFlavor').text($('.btn-pfst').text());
 		
 		$('#class-select').removeClass('hide-class-select');
 		
