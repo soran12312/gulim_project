@@ -23,7 +23,8 @@ $(function(){
 	touchEnabled : (navigator.maxTouchPoints > 0),
 	minSlides : 1,
 	maxSlides : 3,
-	slideWidth : 300
+	slideWidth : 300,
+	pager:false
 	
 	});
 

@@ -202,6 +202,17 @@ font-weight: bold;}
   left: 0px;
   overflow: hidden;
 }
+.gamebackpage{
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/게임배경.png");
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
 .all_marketing_message_back{
 	width: 400px;
 	height: 130px;
@@ -957,14 +968,14 @@ font-weight: bold;}
 }
 .bxslider_size2{
 	position: relative;
-	top:80px;
+	top:50px;
 	left:50px;
 	width: 930px;
 	text-align: center;
 }
 .bxslider_size3{
 	position: relative;
-	top:110px;
+	top:80px;
 	left:50px;
 	width: 930px;
 	text-align: center;
@@ -2406,5 +2417,6 @@ purchase_bookname{
 	font-family: NeoDunggeunmo Code, Inter;	
 	padding-top: 50px;
 }
+
 /* ================ END OF 커뮤 ====================== */
 /* ================ END OF GAME ====================== */

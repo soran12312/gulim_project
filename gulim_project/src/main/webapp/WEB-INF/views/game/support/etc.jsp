@@ -58,7 +58,8 @@ console.log(formData);
 </script>
 </head>
 <body>
-임시 이미지 입력 페이지 입니다.
+<div class="gamebackpage"> 
+이미지 입력 페이지 입니다.
 </br>
 <form id = "form">
 <select id = "cate">
@@ -74,5 +75,6 @@ console.log(formData);
 <button type ="submit" id = "btn">확인</button>
 
 </form>
+</div>
 </body>
 </html>

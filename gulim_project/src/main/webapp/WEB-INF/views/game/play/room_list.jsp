@@ -10,7 +10,7 @@
 <link href="/css/trpg.css" rel="stylesheet">
 </head>
 <body>
-<div class="mypagebackpage">
+<div class="gamebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 
 	<table class="game_roomlist_nav">
