@@ -37,16 +37,28 @@ public class MariaDBToElasticSearch_Survey {
     private static final String INDEX_NAME = "survey";
 
     public void indexDataFromMariaDB() {
+    		 // MariaDB 연결 설정
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        	 // SQL문 실행을 위한 객체
              Statement statement = connection.createStatement();
+        	 // ElasticSearch 클라이언트 설정
+        		// 1. Elasticsearch 클러스트와 통신할 호스트의 세부 정보
+        		// 2. RestClient.builder 메소드 호출 - 호스트의 세부 정보 받아서 클라이언트 세부 설정 구성함
+        		// 3. RestHighLevelClient 객체 생성 - Elasticsearch와 상호작용할 수 있는 클라이언트 객체, 엘라스틱서치 사용 가능해짐
              RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
 
+        	// SQL 쿼리
             String sql = "SELECT survey_num, play_rull, play_genre, play_period, play_species, master, want_genre, play_class, other_site FROM survey";
+            // 쿼리 실행
             ResultSet resultSet = statement.executeQuery(sql);
 
+            // JSON 매핑을 위한 ObjectMapper 객체 생성
+            	// 즉, Java객체를 JSON 문자열로 변환하는 직렬화 or JSON 문자열을 Java 객체로 변환하는 역직렬화
             ObjectMapper objectMapper = new ObjectMapper();
 
+            // 결과 집합 반복
             while (resultSet.next()) {
+            	// 결과 집합에서 필드 값을 가져오기
                 Integer surveyNum = resultSet.getInt("survey_num");
                 String playRull = resultSet.getString("play_rull");
                 String playGenre = resultSet.getString("play_genre");
@@ -57,6 +69,7 @@ public class MariaDBToElasticSearch_Survey {
                 String playClass = resultSet.getString("play_class");
                 String otherSite = resultSet.getString("other_site");
 
+                // 필드 값 분할: 던앤던/크툴룬을 던앤던 크툴룬 이렇게 분리
                 String[] playRullTokens = playRull.split("/");
                 String[] playGenreTokens = playGenre.split("/");
                 String[] playSpeciesTokens = playSpecies.split("/");
@@ -69,8 +82,10 @@ public class MariaDBToElasticSearch_Survey {
                 jsonObject.put("master", master);
                 jsonObject.put("other_site", otherSite);
                 
+                // 배열 노드 추가: ["던전앤드래곤","다크소울"] 이런 거
                 ArrayNode playRullArray = jsonObject.putArray("play_rull");
                 for (String token : playRullTokens) {
+                	// 배열 노드에 값 추가
                     playRullArray.add(token);
                 }
 
@@ -101,7 +116,6 @@ public class MariaDBToElasticSearch_Survey {
                 IndexRequest request = new IndexRequest(INDEX_NAME).id(Integer.toString(surveyNum)).source(jsonBody, XContentType.JSON);
                 IndexResponse response = client.index(request, RequestOptions.DEFAULT);
                 
-                System.out.println(jsonBody);
             }
 
         } catch (SQLException | IOException e) {
@@ -112,6 +126,7 @@ public class MariaDBToElasticSearch_Survey {
 
     public static void main(String[] args) {
         MariaDBToElasticSearch_Survey indexer = new MariaDBToElasticSearch_Survey();
+        // 실행
         indexer.indexDataFromMariaDB();
     }
 	

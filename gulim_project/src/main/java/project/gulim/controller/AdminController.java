@@ -96,7 +96,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -134,7 +134,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -172,7 +172,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -202,7 +202,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -283,7 +283,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -319,7 +319,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -350,7 +350,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -406,7 +406,7 @@ public class AdminController {
 	    		MemberDTO memberDTO = new MemberDTO();
 	    		memberDTO.setId(userId);
 
-	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 	    		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 	    		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -439,7 +439,7 @@ public class AdminController {
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setId(userId);
 
-			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 			MemberDTO ifManager = mainService.selectById(memberDTO);
 
 			// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -505,7 +505,7 @@ public class AdminController {
 	    		MemberDTO memberDTO = new MemberDTO();
 	    		memberDTO.setId(userId);
 
-	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+	    		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 	    		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 	    		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -537,7 +537,7 @@ public class AdminController {
 			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setId(userId);
 
-			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+			// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 			MemberDTO ifManager = mainService.selectById(memberDTO);
 
 			// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -624,7 +624,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -654,7 +654,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -682,7 +682,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -873,7 +873,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
@@ -965,7 +965,7 @@ public class AdminController {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(userId);
 
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'getUserById'는 실제 사용자 정보를 가져오는 메서드로, 실제 환경에 맞게 변경해야 합니다.
+		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
 		MemberDTO ifManager = mainService.selectById(memberDTO);
 
 		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
