@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import project.gulim.dao.CommunityDAO;
+import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 
@@ -203,7 +204,7 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public int countAllContestPosts() {
 		// TODO Auto-generated method stub
-		return communityDAO.countEvent();
+		return communityDAO.countContest();
 	}
 
 
@@ -221,6 +222,14 @@ public class CommunityServiceImpl implements CommunityService{
 	public int countAllAnnounce() {
 		// TODO Auto-generated method stub
 		return communityDAO.countAnnounce();
+	}
+
+
+
+	@Override
+	public ContestDTO findContest(Integer post_num) {
+		// TODO Auto-generated method stub
+		return communityDAO.findContest(post_num);
 	}
 	
 	

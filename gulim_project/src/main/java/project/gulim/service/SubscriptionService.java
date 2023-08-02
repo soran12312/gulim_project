@@ -51,8 +51,24 @@ public interface SubscriptionService {
 	// 결제되면 start_date, end_date, sub_state = 1로 변경
 	public void updateSubscriptionById(Integer sub_num, LocalDate endDate);
 
-	// 결제 완료면 장바구니 데이터 전부 삭제
-	public void deleteAllQuantities(Map<String, Integer> cartItem);
+	// 결제 완료면 장바구니 데이터 purchase 1로 update
+	public void updatePurchaseState(Map<String, Integer> cartItem);
+
+	
+	// 구독권 useid로 구매내역 가져오기
+	public SubscribeDTO getSubscriptionByUserId(String id);
+
+	// 구독권이 있으면 기간 연장
+	public void updateSubscriptionEndDate(Integer sub_num, String id, LocalDate endDate, LocalDate start_date);
+
+	
+	// 입력한 친구id가 구독권이 있으면 연장
+	public void updateSubscriptionDate(String id, LocalDate start_date, LocalDate endDate,Integer price);
+
+	// 입력한 친구id가 구독권이 없음 추가
+	public void updateSubscriptionId(String id, LocalDate startDate, LocalDate endDate,Integer price);
+
+	public void insertPurchase();
 
 
 

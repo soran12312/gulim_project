@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Claims;
@@ -217,6 +218,7 @@ public class SubscriptionController {
     
     // 결제하기 버튼 클릭시
     @PostMapping("/checkout")
+    @Transactional
     public ResponseEntity<String> handleCheckout(@RequestBody List<Map<String, Integer>> cartItems) {
         System.out.println(cartItems);
     	
@@ -227,6 +229,24 @@ public class SubscriptionController {
                 Integer sub_num = (Integer) cartItem.get("sub_num");
                 Integer amount = (Integer) cartItem.get("amount");
                 
+                
+                Cookie[] cookies = request.getCookies();
+                String jwtToken = null;
+
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("access_token")) {
+                            jwtToken = cookie.getValue();
+//                            System.out.println(jwtToken);
+                            break;
+                        }
+                    }
+                }
+
+                Claims claims = mainService.getClaims(jwtToken);
+                String id = claims.get("id", String.class); // 로그인한 사용자 id
+                System.out.println(id);
+                
                 if (sub_num != null && amount != null && amount > 0) {
                     
                     LocalDate startDate = LocalDate.now();
@@ -234,25 +254,58 @@ public class SubscriptionController {
                     //  sub_num으로 구독권 가격 가져와서 금액별 end_date 추가
                     Integer price = subscriptionService.getSubscriptionById(sub_num);
                     
-                    if (price == 9900) {
-                    	LocalDate endDate = startDate.plusMonths(amount);
-                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
-                    } else if (price == 15000) {
-                    	LocalDate endDate = startDate.plusMonths(amount * 3);
-                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
-                    } else if (price == 29900) {
-                    	LocalDate endDate = startDate.plusMonths(amount * 7);
-                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
-                    } else if (price == 55000) {
-                    	LocalDate endDate = startDate.plusMonths(amount * 14);
-                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+                    
+                    SubscribeDTO currentSubscription = subscriptionService.getSubscriptionByUserId(id);
+                    
+                    // 현재 로그인중인 유저의 구독권이 있으면 end_date+ amount * 개월수
+                    if (currentSubscription != null && LocalDate.parse(currentSubscription.getEnd_date()).isAfter(LocalDate.now())) {
+                        int monthsToAdd = 0;
+                        LocalDate endDate = LocalDate.parse(currentSubscription.getEnd_date());
+                        LocalDate start_date = endDate.plusDays(1);
+                        
+                        if (price == 9900) {       // 1개월권
+                            endDate = endDate.plusMonths(amount);
+                        } else if (price == 15000) {   // 3개월
+                            monthsToAdd = amount * 3;
+                            endDate = endDate.plusMonths(monthsToAdd);
+                        } else if (price == 29900) {        // 6개월
+                            monthsToAdd = amount * 7;        // 6+1
+                            endDate = endDate.plusMonths(monthsToAdd);
+                        } else if (price == 55000) {        // 12개월
+                            monthsToAdd = amount * 14;      // 12+2
+                            endDate = endDate.plusMonths(monthsToAdd);
+                        }
+                        
+                        
+                       
+                        
+                        subscriptionService.updateSubscriptionEndDate(sub_num, currentSubscription.getId(), start_date, endDate);
+                    } 
+                    
+                    else 
+                    {
+                    
+	                    if (price == 9900) {             // 1개월권
+	                    	LocalDate endDate = startDate.plusMonths(amount + 1);   //첫가입시 한달 무료 +1
+	                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+	                    } else if (price == 15000) {        // 3개월
+	                    	LocalDate endDate = startDate.plusMonths(amount * 3);
+	                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+	                    } else if (price == 29900) {       // 6개월
+	                    	LocalDate endDate = startDate.plusMonths(amount * 7);   // 6+1
+	                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+	                    } else if (price == 55000) {          // 12개월
+	                    	LocalDate endDate = startDate.plusMonths(amount * 14);   // 12 +2
+	                    	subscriptionService.updateSubscriptionById(sub_num, endDate);
+	                    }
+                    
                     }
                     
                 }
                 
-                // sub_state가 1이되면 장바구니db 삭제
-                // 상품 구매가 완료되었으므로 장바구니에서 상품을 삭제
-                subscriptionService.deleteAllQuantities(cartItem);
+                // sub_state가 1 업데이트
+                // purchase_state 1 업데이트
+                subscriptionService.updatePurchaseState(cartItem);
             }
     
             
@@ -261,6 +314,76 @@ public class SubscriptionController {
         	e.printStackTrace();
            return new ResponseEntity<>("Payment error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    
+    
+    // 친구에게 보내기 버튼 클릭시
+    @PostMapping("/send")
+    @Transactional
+    public ResponseEntity<String> send(@RequestParam("price") Integer price, @RequestParam("id") String id) {
+    	
+    	
+    	System.out.println("id: " + id);
+    	System.out.println("price:" + price);
+    	
+    	
+    	try {
+    	
+	         // 보내는 친구에게 구독권이 있으면 연장 
+	         SubscribeDTO currentSubscription = subscriptionService.getSubscriptionByUserId(id);
+
+	         System.out.println("currentSubscription :" + currentSubscription);
+	         
+	         if (currentSubscription != null && LocalDate.parse(currentSubscription.getEnd_date()).isAfter(LocalDate.now())) {
+	             int monthsToAdd = 0;
+	             LocalDate endDate = LocalDate.parse(currentSubscription.getEnd_date());
+	             LocalDate start_date = endDate.plusDays(1);
+	             
+	             if (price == 9900) {       // 1개월권
+	                 endDate = endDate.plusMonths(1);
+	             } else if (price == 15000) {   // 3개월
+	                 monthsToAdd = 3;
+	                 endDate = endDate.plusMonths(monthsToAdd);
+	             } else if (price == 29900) {        // 6개월
+	                 monthsToAdd = 7;        // 6+1
+	                 endDate = endDate.plusMonths(monthsToAdd);
+	             } else if (price == 55000) {        // 12개월
+	                 monthsToAdd = 14;      // 12+2
+	                 endDate = endDate.plusMonths(monthsToAdd);
+	             }
+	             
+	            subscriptionService.updateSubscriptionDate(id, start_date, endDate, price);
+	         } 
+	         
+	         
+	         // 보내는 친구에게 구독권이 없으면 추가
+	         else 
+	         {
+	         
+	        	 LocalDate startDate = LocalDate.now();
+	             if (price == 9900) {             // 1개월권
+	             	LocalDate endDate = startDate.plusMonths(2);   //첫가입시 한달 무료 1+1
+	             	subscriptionService.updateSubscriptionId(id,startDate, endDate, price);
+	             } else if (price == 15000) {        // 3개월
+	             	LocalDate endDate = startDate.plusMonths(3);
+	             	subscriptionService.updateSubscriptionId(id,startDate, endDate, price);
+	             } else if (price == 29900) {       // 6개월
+	             	LocalDate endDate = startDate.plusMonths(7);   // 6+1
+	             	subscriptionService.updateSubscriptionId(id,startDate, endDate, price);
+	             } else if (price == 55000) {          // 12개월
+	             	LocalDate endDate = startDate.plusMonths(14);   // 12 +2
+	             	subscriptionService.updateSubscriptionId(id,startDate, endDate, price);
+	             }
+	         
+	         }
+	         
+	         return new ResponseEntity<>("Payment successful", HttpStatus.OK);
+
+    	} catch (Exception e) {
+        	e.printStackTrace();
+           return new ResponseEntity<>("Payment error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
    

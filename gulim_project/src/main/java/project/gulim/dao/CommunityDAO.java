@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import project.gulim.domain.ContestDTO;
 import project.gulim.domain.ImageDTO;
 import project.gulim.domain.PostDTO;
 
@@ -100,6 +101,15 @@ public interface CommunityDAO {
 
 	// 공모전 리스트
 	public List<Map> findAllContest(int start, int size);
+
+
+	// 공모전 리스트
+	public int countContest();
+
+
+
+
+	public ContestDTO findContest(Integer post_num);
 
 
 	

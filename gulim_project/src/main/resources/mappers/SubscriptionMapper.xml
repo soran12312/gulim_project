@@ -37,7 +37,7 @@
 		FROM basket AS b
 		JOIN purchase AS p ON b.basket_num = p.basket_num
 		JOIN subscribe AS s ON p.sub_num = s.sub_num
-		WHERE b.basket_num = #{basketNum}
+		WHERE b.basket_num = #{basketNum} and p.purchase_state = 0
 	</select>
 	
 	
@@ -48,7 +48,7 @@
 		FROM basket AS b
 		JOIN purchase AS p ON b.basket_num = p.basket_num
 		JOIN subscribe AS s ON p.sub_num = s.sub_num
-		WHERE b.basket_num = #{basketNum} and s.price = #{price}
+		WHERE b.basket_num = #{basketNum} and s.price = #{price} and p.purchase_state = 0
 	</select>
 	
 	
@@ -92,7 +92,7 @@
 	
 	
 	
-	<!-- 장바구니 번호로 구독권 가격 -->
+	<!-- 번호로 구독권 가격 -->
 	<select id="getSubscriptionById" parameterType="java.lang.Integer" resultType = "java.lang.Integer">
 	
 		SELECT price
@@ -102,6 +102,27 @@
 	</select>
 	
 	
+	<!-- 로그인중인 user의 구독권 데이터 확인  -->
+	<select id="getSubscriptionByUserId" parameterType="java.lang.String" resultType = "project.gulim.domain.SubscribeDTO">
+	
+		SELECT *
+		FROM subscribe s
+		WHERE id = #{id} AND sub_state = 1
+		ORDER BY end_date DESC
+		LIMIT 1
+	</select>
+	
+	
+	<!-- 구독권 존재하면 end_date 연장 -->
+	<update id="updateSubscriptionEndDate" parameterType="map">
+		UPDATE subscribe
+    	SET
+        start_date = #{endDate},
+        end_date = #{start_date},
+        sub_state = 1
+    	WHERE sub_num = #{sub_num}
+	</update>
+	
 	
 	<!-- 결제 완료 구독권 정보 업데이트 -->
 	<update id="updateSubscriptionById" parameterType="map">
@@ -110,26 +131,36 @@
         start_date = now(),
         end_date = #{endDate},
         sub_state = 1
-    	WHERE sub_num = #{sub_num}
+    	WHERE sub_num = #{sub_num} 
 	</update>
 	
 	
 	
-	<!-- 결제 완료 후 장바구니 삭제 -->
-	<delete id="deleteAllQuantities" parameterType="map">
-		
-		DELETE p
-		FROM purchase p inner join subscribe s
-		on p.sub_num = s.sub_num
-		where s.sub_state = 1
-	
-	</delete>
-	
+	<!-- 결제 완료 후 purchase 업데이트 -->
+	<update id="updatePurchaseState" parameterType="map">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN subscribe s ON p.sub_num = s.sub_num
+		SET p.purchase_state = 1
+		WHERE p.sub_num = #{sub_num}
+	</update>
 	
 	
 	
+	<!-- 친구id가 구독권이  없음 추가 -->
+	<insert id="updateSubscriptionId" parameterType="map">
+		INSERT INTO subscribe (start_date, end_date, id, sub_state, price)
+        VALUES (now(), #{endDate}, #{id}, 1, #{price})
+	
+	</insert>
 	
 	
+	<!-- 친구 id가 구독권이있으면 연장 -->
+	<insert id="updateSubscriptionDate" parameterType="map">
+	    INSERT INTO subscribe (start_date, end_date, id, sub_state, price)
+	    VALUES (#{start_date}, #{endDate}, #{id}, 1, #{price})
+	</insert>
 	
 
+	
 </mapper>

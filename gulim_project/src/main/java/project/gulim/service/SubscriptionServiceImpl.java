@@ -122,11 +122,53 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	
-	// 결제 완료 후 장바구니데이터 삭제
+	// 결제 완료 후 장바구니
 	@Override
-	public void deleteAllQuantities(Map<String, Integer> cartItem) {
+	public void updatePurchaseState(Map<String, Integer> cartItem) {
 		// TODO Auto-generated method stub
-		subscriptionDAO.deleteAllQuantities(cartItem);
+		subscriptionDAO.updatePurchaseState(cartItem);
+	}
+
+
+
+	// 구독권 useid로 구매내역 가져오기
+	@Override
+	public SubscribeDTO getSubscriptionByUserId(String id) {
+		// TODO Auto-generated method stub
+		return subscriptionDAO.getSubscriptionByUserId(id);
+	}
+
+
+
+	@Override
+	public void updateSubscriptionEndDate(Integer sub_num, String id, LocalDate endDate, LocalDate start_date) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.updateSubscriptionEndDate(sub_num, id, endDate, start_date);
+	}
+
+
+
+	// // 입력한 친구id가 구독권이 있으면 연장
+	@Override
+	public void updateSubscriptionDate(String id, LocalDate start_date, LocalDate endDate,Integer price) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.updateSubscriptionDate(id, start_date, endDate, price);
+	}
+
+
+	// 입력한 친구id가 구독권이 없음 추가
+	@Override
+	public void updateSubscriptionId(String id, LocalDate startDate, LocalDate endDate,Integer price) {
+		// TODO Auto-generated method stub
+		subscriptionDAO.updateSubscriptionId(id, startDate, endDate, price);
+	}
+
+
+
+	@Override
+	public void insertPurchase() {
+		// TODO Auto-generated method stub
+		subscriptionDAO.insertPurchase();
 	}
 
 

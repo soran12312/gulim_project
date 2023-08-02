@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -82,48 +85,75 @@ footer {
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
 	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					href="./free_board_list">자유게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="./event_list">이벤트게시판</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="./contest_list">공모전게시판</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="./announce_list">공지사항</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 
 	<div class="container">
-		<div class="row">
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(https://cdn.beam.usnews.com/dims4/USNEWS/59f1d50/2147483647/thumbnail/970x647/quality/90/?url=http%3A%2F%2Fcom-usnews-beam-media.s3.amazonaws.com%2F28%2F21%2F37a23a5f40048594e7e1209a842d%2F150427-networking-stock.jpg	);" class="image-grid-cover">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Etkinlikler</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(https://cdn.bolgegundem.com/d/news/333778.jpg	);" class="entry-cover image-grid-cover has-image">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Düğünler</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(https://www.trthaber.com/resimler/218000/218798.jpg	);" class="entry-cover image-grid-cover has-image">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Gezi / Tur</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(http://www.technocrazed.com/wp-content/uploads/2015/12/Airplane-wallpaper-112-640x360.jpg);" class="entry-cover image-grid-cover has-image">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Havalimanı Transferi</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(https://img-s2.onedio.com/id-5738f74cb6efafb314a46f07/rev-0/w-600/h-300/s-d707c9ec5af8f66dc5506a2796ac14fce1fbb35b.jpg	);" class="entry-cover image-grid-cover has-image">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Günlük Seyahat</a>
-					</div>
-				</div>
-				<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-					<div style="background-image: url(https://image.stern.de/8205460/16x9-940-529/3c6ed305ea6e6f63c0454fda4dbc5d02/hx/pic-grand-calfornia-2018--9-.jpg	);" class="entry-cover image-grid-cover has-image">
-						<a href="#" class="image-grid-clickbox"></a>
-						<a href="#" class="cover-wrapper">Karavan Kiralama </a>
-					</div>
-				</div>
+        <div class="row">
+        
+        	<c:set var="contestsPerPage" value="6" />
+			<c:set var="startIndex" value="${(currentPage - 1) * contestsPerPage}" />
+			<c:set var="endIndex" value="${startIndex + contestsPerPage}" />
+			
+            <c:forEach items="${contests}" var="contest" varStatus="loop">
+            
+            	<c:if test="${loop.index >= startIndex && loop.index < endIndex}">
+	                <div class="col-12 col-sm-6 col-md-4 image-grid-item">
+	                    <div style="background-image: url(${contest.path});" class="entry-cover image-grid-cover has-image">
+	                    	<input type="hidden" name="contest_num" value="${contest.post_num}" />
+	                        <a href="/community/contest_detail?contest_num=${contest.post_num}" class="image-grid-clickbox"></a>
+	                        <a href="/community/contest_detail?contest_num=${contest.post_num}" class="cover-wrapper">${contest.post_title}</a>
+	                    </div>
+	                </div>
+               </c:if>
+               
+               
+               
+            </c:forEach>
+        </div>
+        
+        
+        
+		<!-- 페이징 번호 표시 -->
+			<div class="pagination">
+			    <c:if test="${currentPage > 1}">
+			        <a href="/community/contest_list?page=${currentPage - 1}">이전</a>
+			    </c:if>
+			    
+			    <c:forEach begin="1" end="${totalPages}" var="pageNum">
+			        <c:choose>
+			            <c:when test="${pageNum == currentPage}">
+			                <strong>${pageNum}</strong>
+			            </c:when>
+			            <c:otherwise>
+			                <a href="/community/contest_list?page=${pageNum}">${pageNum}</a>
+			            </c:otherwise>
+			        </c:choose>
+			    </c:forEach>
+			    
+			    <c:if test="${currentPage < totalPages}">
+				    <a href="/community/contest_list?page=${currentPage + 1}">다음</a>
+				</c:if>
 			</div>
-		</div>
+    </div>
+    
+    
+
+		
 
 <footer>
 	<jsp:include page="../../../../footer.jsp"></jsp:include>

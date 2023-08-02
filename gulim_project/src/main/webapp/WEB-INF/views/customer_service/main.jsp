@@ -140,7 +140,8 @@
             var url = "https://192.168.0.68:3000/customerchat/" + id;
 
             // 새로운 URL로 이동
-            window.location.href = url;
+            window.open(url, "", "width=300,height=300");
+
         });
       });
 
@@ -192,6 +193,7 @@
                 <thead class="qusetion_help">
                     <td>문의 사항 남기기</td>
                     </thead>
+
             <td>
                <button class="question_btn" id="question_btn">
                     <img src="/files/images/고객문의2.png"/>

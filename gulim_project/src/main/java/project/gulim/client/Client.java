@@ -1,67 +1,76 @@
 package project.gulim.client;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import project.gulim.service.MainService;
 
 // 추천데이터 받아올 클라이언트
+@Component
 public class Client {
-	
-	
-	public List<Map<String, Object>> generate_recommendations(String loggedInUserId) {
-        List<Map<String, Object>> recommendations = new ArrayList<>();
 
-        try {
-        	
-        	 // 서버 정보 설정
-            String host = "192.168.0.41";
-            int port = 5555;
+    @Autowired
+    private HttpServletRequest request;
 
-        	
-        	
-            // 소켓 연결
-            Socket socket = new Socket(host, port);
-            
-            
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+    @Autowired
+    private MainService mainService;
 
-            // 현재 로그인 중인 id 전송
-            writer.write(loggedInUserId);
-            writer.newLine();
-            writer.flush();
-            
-    
-
-            // 바이트 스트림과 문자 스트림 간의 연결 담당
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            // 서버에서 받은 추천 결과 파싱
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // 예시로 추천 데이터를 JSON 형태로 받아서 파싱하여 리스트에 추가하는 방식
-            	Map<String, Object> recommendation = new HashMap<>();
-                // 추천 데이터를 적절하게 파싱하여 recommendation 맵에 추가
-                // 예: recommendation.put("book_title", "Recommended Book Title");
-                // 예: recommendation.put("character_role", "Recommended Character Role");
-                recommendations.add(recommendation);
+    public void getRecommendations() {
+        // 쿠키에서 JWT 토큰 값 가져오기
+        Cookie[] cookies = request.getCookies();
+        String jwtToken = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
             }
-
-            // 연결 종료
-            socket.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-        return recommendations;
+        // JWT 토큰으로 로그인 중인 사용자 ID 가져오기
+        Claims claims = mainService.getClaims(jwtToken);
+        String id = claims.get("id", String.class);
+
+        // 추천 데이터를 가져올 서버 URL 설정
+        String serverUrl = "http://192.168.0.41:5555/get_recommendations";
+
+        // 서버와 통신을 위한 RestTemplate 객체 생성
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 서버로 ID 값을 JSON 형태로 보내고, 추천 데이터를 받아옴
+        String response = restTemplate.postForObject(serverUrl, id, String.class);
+
+        // 서버로부터 받은 추천 데이터 (JSON 형태)를 원하는 방식으로 처리하여 사용
+        // 예시) JSON 문자열을 자바 객체로 변환
+        List<Recommendation> recommendations = parseJson(response);
     }
 
+    // JSON 문자열을 자바 객체로 변환하는 메서드
+    private List<Recommendation> parseJson(String jsonString) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(jsonString, new TypeReference<List<Recommendation>>() {});
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // 자바 객체 클래스 (추천 데이터를 담을 클래스, 필요에 따라 변경 가능)
+    public static class Recommendation {
+        private String book_title;
+        private String character_role;
+
+        // Getter, Setter, 생성자 등은 필요에 따라 구현
+    }
 }

@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import project.gulim.dao.MypageDAO;
 import project.gulim.domain.CalenderDTO;
+import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.FriendDTO;
+import project.gulim.domain.JoinDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.TagDTO;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -139,15 +142,75 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Integer> selectAllJoinedRoomNumById(String id) {
+	public List<JoinDTO> selectAllJoinedRoomNumById(String id) {
 		
 		return mypageDAO.selectAllJoinedRoomNumById(id);
+	}
+	
+	@Override
+	public Integer selectJoinStateByJoinNum(Integer join_num) {
+		
+		return mypageDAO.selectJoinStateByJoinNum(join_num);
 	}
 
 	@Override
 	public String selectRoomNameByPK(Integer roon_num) {
 		
 		return mypageDAO.selectRoomNameByPK(roon_num);
+	}
+	
+	@Override
+	public void join_cancle(Integer join_num)  {
+		
+		mypageDAO.join_cancle(join_num);
+	}
+	
+	@Override
+	public void room_delete(Integer roon_num) {
+		
+		mypageDAO.room_delete(roon_num);
+	}
+	
+	@Override
+	public ChatingDTO select_room_detail(Integer roon_num) {
+		
+		return mypageDAO.select_room_detail(roon_num);
+	}
+	
+	@Override
+	public List<String> select_tag_by_room_num(Integer roon_num) {
+		
+		return mypageDAO.select_tag_by_room_num(roon_num);
+	}
+	
+	@Override
+	public void room_modify(ChatingDTO room) {
+		
+		mypageDAO.room_modify(room);
+	}
+	
+	@Override
+	public void delete_room_img(Integer roon_num) {
+		
+		mypageDAO.delete_room_img(roon_num);
+	}
+	
+	@Override
+	public void delete_room_tag(Integer roon_num) {
+		
+		mypageDAO.delete_room_tag(roon_num);
+	}
+	
+	@Override
+	public void inc_curr_member(Integer roon_num) {
+		
+		mypageDAO.inc_curr_member(roon_num);
+	}
+	
+	@Override
+	public void dec_curr_member(Integer roon_num) {
+		
+		mypageDAO.dec_curr_member(roon_num);
 	}
 
 	public ArrayList<Integer> char_sheet_list(Integer room_num){
@@ -209,6 +272,25 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.agree_brother(join_num);
 	}
 //=========== END of 친구관리 ======================================================================================================	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 
 
 

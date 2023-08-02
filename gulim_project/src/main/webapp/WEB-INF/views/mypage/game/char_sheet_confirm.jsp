@@ -231,7 +231,7 @@ $(document).ready(function(){
 //동료영입
 	$('#agree').click(function(){
 		swal.fire("동료로 영입한다!").then(function(){
-			location.href= "/mypage/game/agree_brother?join_num=${sheet.join_num}";
+			location.href= "/mypage/game/agree_brother?join_num=${sheet.join_num}&room_num=${sheet.room_num}";
 		});
 	});
 //동료반환

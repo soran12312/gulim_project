@@ -260,8 +260,8 @@ input:focus {
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
-
-	<div class="cart-wrap">
+<div class="mainbackpage">
+	<div class="cart-wrap margindiv">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -406,7 +406,8 @@ input:focus {
 			</div>
 		</div>
 	</div>
-
+</div>
+<jsp:include page="../../../../footer.jsp"></jsp:include>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import project.gulim.domain.CalenderDTO;
+import project.gulim.domain.ChatingDTO;
 import project.gulim.domain.FriendDTO;
+import project.gulim.domain.JoinDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.MessageDTO;
 import project.gulim.domain.PostDTO;
 import project.gulim.domain.QuestionDTO;
+import project.gulim.domain.TagDTO;
 
 public interface MypageService {
 	//=========== START of 쪽지 ======================================================================================================	
@@ -32,7 +35,7 @@ public interface MypageService {
 	public List<Map> selectRoomById(String id);
 	public Integer selectNumOfJoinByRoomNum(Integer roon_num);
 	public String selectImgPathByRoomNum(Integer roon_num);
-	public List<Integer> selectAllJoinedRoomNumById(String id);
+	public List<JoinDTO> selectAllJoinedRoomNumById(String id);
 	public String selectRoomNameByPK(Integer roon_num);
 	public ArrayList<Integer> char_sheet_list(Integer room_num);
 	public HashMap find_joininfo(Integer list);
@@ -40,6 +43,16 @@ public interface MypageService {
 	public ArrayList<HashMap> skills(Integer sheet_num);
 	public ArrayList<HashMap> items(Integer inventory_num);
 	public void agree_brother(Integer join_num);
+	public Integer selectJoinStateByJoinNum(Integer join_num);
+	public void join_cancle(Integer join_num);
+	public void room_delete(Integer roon_num);
+	public ChatingDTO select_room_detail(Integer roon_num);
+	public List<String> select_tag_by_room_num(Integer roon_num);
+	public void room_modify(ChatingDTO room);
+	public void delete_room_img(Integer roon_num);
+	public void delete_room_tag(Integer roon_num);
+	public void inc_curr_member(Integer roon_num);
+	public void dec_curr_member(Integer roon_num);
 	//=========== END of 게임관리 ========================================================================================================
 	//=========== START of 나의 게시물 ======================================================================================================	
 	public ArrayList<HashMap> my_post(PostDTO post);
