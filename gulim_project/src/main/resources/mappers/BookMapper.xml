@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.gulim.dao.BookDAO">
+	<!-- 유저 id basket db 저장-->
+	<insert id="saveCart" parameterType="project.gulim.domain.BasketDTO" useGeneratedKeys="true" keyProperty="basket_num">
+	    INSERT INTO basket (id) VALUES (#{id})
+	</insert>
+	
+	
+	<!-- purchase db 장바구니, 책 번호 저장 -->
+	<insert id="savePurchase" parameterType="map">
+	    INSERT INTO purchase (basket_num, book_num, amount)
+	    VALUES (#{basket_num}, #{book_num}, #{amount})
+	</insert>
+	
+	
+	<!-- 장바구니에 해당 책번호 있는지 확인 -->
+	<select id="getBookAmountInBasket" parameterType="map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM basket AS b
+	    JOIN purchase p ON b.basket_num = p.basket_num
+	    JOIN book b2 ON p.book_num = b2.book_num
+	    WHERE b.basket_num = #{book_num} AND p.purchase_state = 0 AND sub_num IS NULL
+	</select>
+	
+	
+	<!-- 장바구니에 책있으면 수량 추가 -->
+	<update id="updatePurchaseAmount" parameterType="map">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN book b2 ON p.book_num = b2.book_num
+		SET p.amount = #{amount}
+		WHERE b.basket_num = #{basket_num} AND b2.book_num = #{book_num}
+	</update>
+	
+	
+	<!-- 장바구니 리스트 -->
+	<select id="getUserBasketBook" parameterType="java.lang.Integer" resultType="map">
+		SELECT *
+		FROM basket AS b 
+		JOIN purchase p ON b.basket_num = p.basket_num
+		JOIN book b2 ON p.book_num = b2.book_num
+		JOIN image i ON i.book_num = b2.book_num
+		WHERE b.basket_num = #{basket_num} AND p.purchase_state = 0 AND p.sub_num IS NULL
+	</select>
+	
+	
+	
+	
+	
+
+</mapper>

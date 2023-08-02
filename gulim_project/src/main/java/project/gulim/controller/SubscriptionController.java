@@ -93,7 +93,8 @@ public class SubscriptionController {
 	            // 장바구니 정보를 구성하여 DB에 저장
 	            BasketDTO basketData = new BasketDTO();
 	            basketData.setId(id);
-	            cartService.saveCart(basketData);
+	            // 장바구니번호 auto increment
+	            cartService.saveCart(basketData);  // 장바구니 db 저장
             }    
             
             

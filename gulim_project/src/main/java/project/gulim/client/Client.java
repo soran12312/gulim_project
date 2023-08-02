@@ -1,10 +1,15 @@
 package project.gulim.client;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,35 +29,69 @@ public class Client {
     @Autowired
     private MainService mainService;
 
-    public void getRecommendations() {
-        // 쿠키에서 JWT 토큰 값 가져오기
-        Cookie[] cookies = request.getCookies();
-        String jwtToken = null;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
+    public void getRecommendations(String userId) {
+    	
+    	try {
+    		
+    		// 쿠키에서 JWT 토큰 값 가져오기
+            Cookie[] cookies = request.getCookies();
+            String jwtToken = null;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("access_token")) {
+                        jwtToken = cookie.getValue();
+                        break;
+                    }
                 }
             }
-        }
 
-        // JWT 토큰으로 로그인 중인 사용자 ID 가져오기
-        Claims claims = mainService.getClaims(jwtToken);
-        String id = claims.get("id", String.class);
+            // JWT 토큰으로 로그인 중인 사용자 ID 가져오기
+            Claims claims = mainService.getClaims(jwtToken);
+            String id = claims.get("id", String.class);
 
-        // 추천 데이터를 가져올 서버 URL 설정
-        String serverUrl = "http://192.168.0.41:5555/get_recommendations";
+            
+            // 서버 정보 설정
+            String serverHost = "192.168.0.41";
+            int serverPort = 5555;
 
-        // 서버와 통신을 위한 RestTemplate 객체 생성
-        RestTemplate restTemplate = new RestTemplate();
+            // 소켓 연결
+            Socket socket = new Socket(serverHost, serverPort);
 
-        // 서버로 ID 값을 JSON 형태로 보내고, 추천 데이터를 받아옴
-        String response = restTemplate.postForObject(serverUrl, id, String.class);
+            // 아이디 전송
+            OutputStream outputStream = socket.getOutputStream();
+            outputStream.write(id.getBytes("UTF-8"));
+            
+            
+            // 추가 데이터를 기록하거나 다른작업을 수행할 준비
+            outputStream.flush();
 
-        // 서버로부터 받은 추천 데이터 (JSON 형태)를 원하는 방식으로 처리하여 사용
-        // 예시) JSON 문자열을 자바 객체로 변환
-        List<Recommendation> recommendations = parseJson(response);
+            // 바이트 스트림과 문자 스트림간의 연결 담당
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            
+            
+            // 서버로 ID 값을 JSON 형태로 보내고, 추천 데이터를 받아옴
+            String response = reader.readLine();
+
+            // 서버로부터 받은 추천 데이터 (JSON 형태)를 원하는 방식으로 처리하여 사용
+            // 예시) JSON 문자열을 자바 객체로 변환
+            List<Recommendation> recommendations = parseJson(response);
+            
+            
+            System.out.println(recommendations);
+
+            // 연결 종료
+            socket.close();
+    		
+    		
+    		
+    		
+    	}
+    	
+    	 catch (IOException e) {
+             e.printStackTrace();
+         }
+
     }
 
     // JSON 문자열을 자바 객체로 변환하는 메서드

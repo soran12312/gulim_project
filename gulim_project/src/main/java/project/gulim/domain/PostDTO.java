@@ -1,7 +1,5 @@
 package project.gulim.domain;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data

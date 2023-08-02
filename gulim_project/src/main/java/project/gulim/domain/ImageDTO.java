@@ -1,6 +1,5 @@
 package project.gulim.domain;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

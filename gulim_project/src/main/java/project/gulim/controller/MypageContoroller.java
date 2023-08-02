@@ -141,7 +141,7 @@ public class MypageContoroller {
 	
 	
 	
-//쪽지상세보기로 이동
+    //쪽지상세보기로 이동
 	@RequestMapping("/detail_message")
 	public String detail_message(Integer num, Model m) {
 		//글넘버 가지고 서비스단으로 이동해서 해당 메세지데이터 가져오기
@@ -154,7 +154,7 @@ public class MypageContoroller {
 	
 
 	
-//쪽지 보내기
+    //쪽지 보내기
 	@RequestMapping("/save_message")
 	public String save_message(
 								@RequestParam ("message_title") String message_title, 

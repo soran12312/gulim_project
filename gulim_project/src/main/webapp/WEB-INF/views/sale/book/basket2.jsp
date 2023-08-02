@@ -278,63 +278,25 @@ input:focus {
 							</thead>
 							<tbody>
 								<c:choose>
-									<c:when test="${subscription == null}">
+									<c:when test="${book == null}">
 										<tr>
 											<td colspan="4">장바구니에 상품이 없습니다.</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach items="${subscription}" var="subscription">
+										<c:forEach items="${book}" var="book">
 											<tr>
 											
 												<td>
 													<div class="display-flex align-center">
 														<div class="img-product">
-															<!-- <img
-																src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-																alt="" class="mCS_img_loaded"> -->
-															
-															
-															<c:choose>
-																<c:when test="${subscription.price == 9900}">
-							                                        <img src="/files/images/mypage/1.png" alt="" class="mCS_img_loaded">
-							                                    </c:when>
-																<c:when test="${subscription.price == 15000}">
-							                                        <img src="/files/images/mypage/3.png" alt="" class="mCS_img_loaded">
-							                                    </c:when>
-																<c:when test="${subscription.price == 29900}">
-							                                        <img src="/files/images/mypage/6.png" alt="" class="mCS_img_loaded">
-							                                    </c:when>
-																<c:when test="${subscription.price == 55000}">
-							                                        <img src="/files/images/mypage/12.png" alt="" class="mCS_img_loaded">
-							                                    </c:when>
-																<%-- <c:otherwise>
-							                                        기타
-							                                    </c:otherwise> --%>
-															</c:choose>
-															
-																
+							                                  <img src="${book.path}" alt="" class="mCS_img_loaded">
 														</div>
 													
 														<div class="name-product">
-															<input type="hidden" name="product-id" value="${subscription.sub_num}" class="product-id">
-															<c:choose>
-																<c:when test="${subscription.price == 9900}">
-							                                        1개월
-							                                    </c:when>
-																<c:when test="${subscription.price == 15000}">
-							                                        3개월
-							                                    </c:when>
-																<c:when test="${subscription.price == 29900}">
-							                                        6개월
-							                                    </c:when>
-																<c:when test="${subscription.price == 55000}">
-							                                        12개월
-							                                    </c:when>
-																<%-- <c:otherwise>
-							                                        기타
-							                                    </c:otherwise> --%>
-															</c:choose>
+															<input type="hidden" name="product-id" value="${book.book_num}" class="product-id">
+															
+															
 														</div>
 														
 													</div>
@@ -343,20 +305,20 @@ input:focus {
 													<form action="#" class="count-inlineflex">
 														<div class="qtyminus" >-</div>
 														
-														<input type="text" name="quantity" value="${subscription.amount}" class="qty">
+														<input type="text" name="quantity" value="${book.amount}" class="qty">
 														<div class="qtyplus" >+</div>
 													</form>
 												</td>
 												<td>
 													<div class="total">
-														<div class="price" data-price="${subscription.price * subscription.amount}">
-															${subscription.price * subscription.amount} 
+														<div class="price" data-price="${book.price * book.amount}">
+															${book.price * book.amount} 
 														</div>
 													</div>
 												</td>
 												<td>
 													<a href="" title="" > 
-														<span class="pull-right" id="slide-submenu" onclick="showConfirmationPopup(${subscription.sub_num})">
+														<span class="pull-right" id="slide-submenu" onclick="showConfirmationPopup(${book.book_num})">
 												                <i class="fa fa-times"></i>
 												         </span>
 													</a>
@@ -384,7 +346,7 @@ input:focus {
 									</tr>
 									<tr>
 										<td>배송비</td>
-										<td class="free-shipping">0원</td>
+										<td class="free-shipping">2500원</td>
 									</tr>
 									<tr class="total-row">
 										<td>총금액</td>
@@ -527,7 +489,7 @@ input:focus {
 	             cartTotal += parseInt($(this).text());
 	         });
 
-	         const shippingCost = 0; // 배송비 2500원
+	         const shippingCost = 2500; // 배송비 2500원
 	         const subTotal = cartTotal;
 	         const total = cartTotal + shippingCost;
 
