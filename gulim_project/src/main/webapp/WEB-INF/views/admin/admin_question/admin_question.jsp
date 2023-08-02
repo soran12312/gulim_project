@@ -9,26 +9,31 @@
             <script type="text/javascript">
 
             $(function() {
-            
+                // 메세지 이벤트 등록
                 window.addEventListener("message", (event) => {
               
                   console.log("Received message: ", event.data);
                   console.log(event);
-                  
-                  if(event.data.message === "user_connect"){
+                    //event.data.message가 "user_connect" 라면
+                    if(event.data.message === "user_connect"){
+                        // iframe 만듬
                         var iframe=document.createElement("iframe");
+                        //새로 만든 iframe의 id 값을 받아온 userId로 지정
                         $("#live_chat").children().last().attr('id', event.data.userId);
-                        
+                        //iframe 속성
                         iframe.src = "https://192.168.0.68:3000/customerchat/123";
-                        iframe.style.height = "300px";
-                        iframe.style.width = "300px";
+                        iframe.style.height = "auto";
+                        iframe.style.width = "600px";
+                        iframe.scrolling = "no";
                         
+                        //만든 iframe을 "live_chat"의 자식으로 붙힘
                         document.getElementById("live_chat").appendChild(iframe);
                         console.log("second_iframe"+"불림")
-
+                    // 만약에 event.data.message 가 "leave_chatting" 이라면
                     }else if (event.data.message === "leave_chatting") {
-                   
+                        // 해당 유저의 iframe 삭제함
                     	$("#"+event.data.userId).remove();
+                        
                		}
                     
                 },true)
@@ -41,8 +46,8 @@
         <body>
             <jsp:include page="../../../../header_after.jsp"></jsp:include>
             <div class="mybotpage" id="live_chat">
-                <iframe src="https://192.168.0.68:3000/customerchat/123" style="height: 300px; width: 300px;" class="first_iframe"></iframe>        
-
+                <iframe src="https://192.168.0.68:3000/customerchat/123" style="height: 600px; width: 600px;" scrolling="no"></iframe>
+            </div>   
             </div>
         </body>
         <jsp:include page="../../../../footer.jsp"></jsp:include>

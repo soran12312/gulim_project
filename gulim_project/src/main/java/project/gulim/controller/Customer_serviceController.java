@@ -31,41 +31,53 @@ public class Customer_serviceController {
 	@RequestMapping("/main")
 	public String main(HttpServletRequest request,Model m,MemberDTO member) {
 		
-		
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
+		//쿠키 배열에 요청 받은 쿠키 담음
+				Cookie[] cookies = request.getCookies();
+			    String jwtToken = null;
+			    
+			    // 쿠키가 null이 아니라면
+			    if (cookies != null) {
+			    	// 반복문 구동
+		            for (Cookie cookie : cookies) {
+		            	//쿠키 이름이 access_token이랑 같으면
+		                if (cookie.getName().equals("access_token")) {
+		                	//토큰에 쿠키의 값 넣음
+		                    jwtToken = cookie.getValue();
+		                    break;
+		                }
+		            }
+		        }
 	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-	    
+	    // jwtToken을 사용하여 클레임 정보를 가져옵니다.	    
 	    Claims claims = mainService.getClaims(jwtToken);
+	    // 클레임 정보에서 "id" 값을 가져와서 String 타입으로 변환합니다.
 	    String id = claims.get("id", String.class);
+	    // 가져온 id 값을 member 객체에 설정합니다.
 	    member.setId(id);
 	    m.addAttribute("member", member);
-	    System.out.println(member);
+
 	return "/customer_service/main";
 	}
 	
 	@RequestMapping("/question")
 	public String question(QuestionDTO questionDTO,HttpServletRequest request,Model m) {
 		
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	    
-	    if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    jwtToken = cookie.getValue();
-                    break;
-                }
-            }
-        }
+		//쿠키 배열에 요청 받은 쿠키 담음
+				Cookie[] cookies = request.getCookies();
+			    String jwtToken = null;
+			    
+			    // 쿠키가 null이 아니라면
+			    if (cookies != null) {
+			    	// 반복문 구동
+		            for (Cookie cookie : cookies) {
+		            	//쿠키 이름이 access_token이랑 같으면
+		                if (cookie.getName().equals("access_token")) {
+		                	//토큰에 쿠키의 값 넣음
+		                    jwtToken = cookie.getValue();
+		                    break;
+		                }
+		            }
+		        }
 	    
 	    Claims claims = mainService.getClaims(jwtToken);
 	    String id = claims.get("id", String.class);
@@ -109,14 +121,9 @@ public class Customer_serviceController {
 	@ResponseBody
 	public Integer chating(@RequestParam String id){
 		
-		System.out.println(">>>>>>불림");
+		// 매니저 여부를 판단
 		Integer manager = customer_service.isManager(id);
 		
 		return manager;
 	}
-	
-	
-	
-	
-	
 }

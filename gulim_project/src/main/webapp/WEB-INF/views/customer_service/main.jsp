@@ -140,8 +140,7 @@
             var url = "https://192.168.0.68:3000/customerchat/" + id;
 
             // 새로운 URL로 이동
-            window.open(url, "", "width=300,height=300");
-
+            window.open(url, "", "width=630,height=630");
         });
       });
 

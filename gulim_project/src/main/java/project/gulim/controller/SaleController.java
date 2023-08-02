@@ -45,14 +45,14 @@ public class SaleController {
 		
 	}
 	
-	
+	//책 리스트 보는것
 	@RequestMapping("/book/book_list")
 	public String book_list() {
 		return "/sale/book/book_list";
 	}
 	
 	
-	
+		// 책 상세보기
 	  @RequestMapping("/book/book_detail") 
 	  public String book_detail(BookDTO book,Model m){ 
 		  
