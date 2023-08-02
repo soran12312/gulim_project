@@ -21,8 +21,8 @@
                         //새로 만든 iframe의 id 값을 받아온 userId로 지정
                         $("#live_chat").children().last().attr('id', event.data.userId);
                         //iframe 속성
-                        iframe.src = "https://192.168.0.68:3000/customerchat/123";
-                        iframe.style.height = "auto";
+                        iframe.src = "https://localhost:3000/customerchat/123";
+                        iframe.style.height = "600px";
                         iframe.style.width = "600px";
                         iframe.scrolling = "no";
                         
@@ -46,7 +46,7 @@
         <body>
             <jsp:include page="../../../../header_after.jsp"></jsp:include>
             <div class="mybotpage" id="live_chat">
-                <iframe src="https://192.168.0.68:3000/customerchat/123" style="height: 600px; width: 600px;" scrolling="no"></iframe>
+                <iframe src="https://localhost:3000/customerchat/123" style="height: 600px; width: 600px;" scrolling="no"></iframe>
             </div>   
             </div>
         </body>

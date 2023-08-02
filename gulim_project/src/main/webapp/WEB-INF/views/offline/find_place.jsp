@@ -70,47 +70,36 @@
         infowindow: infowindow
         }); // end markerinfomation
 
-
-
-
-
-
-
-
-
-
-
+        $('.place_name_css').each(function(event) {
+        $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
+        // this 클릭시
+        $(this).click(function() {
         
-    $('.place_name_css').each(function(event) {
-    $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
-    // this 클릭시
-    $(this).click(function() {
-       
-    var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
-    var marker = markers[markerIndex];
-    if (marker) {
-        //지도 이동
-      map.panTo(marker.getPosition());
-      //마커 생성
-      var infowindowContent = '<div style="padding:15px;" class="div_info"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
-      // 생성된 마커의 정보 저장
-       var iwRemoveable = true;
-        var infowindow = new kakao.maps.InfoWindow({
-        content: infowindowContent,
-        removable : iwRemoveable
-        });      
-      // 맵에 마커 생성
-        infowindow.open(map, marker);
-        removable.click(function(){
-        })
+        var markerIndex = $(this).data('marker-index'); // 저장된 인덱스 데이터 가져오기
+        var marker = markers[markerIndex];
+        if (marker) {
+            //지도 이동
+        map.panTo(marker.getPosition());
+        //마커 생성
+        var infowindowContent = '<div style="padding:15px;" class="div_info"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
+        // 생성된 마커의 정보 저장
+        var iwRemoveable = true;
+            var infowindow = new kakao.maps.InfoWindow({
+            content: infowindowContent,
+            removable : iwRemoveable
+            });      
+        // 맵에 마커 생성
+            infowindow.open(map, marker);
+            removable.click(function(){
+            })
 
-      // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
-       $("#place_partnership").click(function() {
-        infowindow.close();;
-      });// end click func
-    }// end if
-  }); // end this func
-}); // end place_name_css func
+        // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
+        $("#place_partnership").click(function() {
+            infowindow.close();;
+            });// end click func
+            }// end if
+        }); // end this func
+        }); // end place_name_css func
  
     }// end for
 
@@ -120,18 +109,18 @@
     // 지도에 있는 마커에 정보 담기
     for (var i = 0; i < markerinfomation.length; i++) {
     var markerInfo = markerinfomation[i];
-    
-    function addClickListener(markerInfo) {
-        //마커에 마우스 올리면 발생하는 이벤트
-        kakao.maps.event.addListener(markerInfo.marker, 'mouseover', function() {           
-        markerInfo.infowindow.open(map, markerInfo.marker);
-        });
-        kakao.maps.event.addListener(markerInfo.marker, 'mouseout', function() {
-        markerInfo.infowindow.close();
-        });
-    }
-    addClickListener(markerInfo);
-    }
+        
+        function addClickListener(markerInfo) {
+            //마커에 마우스 올리면 발생하는 이벤트
+            kakao.maps.event.addListener(markerInfo.marker, 'mouseover', function() {           
+            markerInfo.infowindow.open(map, markerInfo.marker);
+            });
+            kakao.maps.event.addListener(markerInfo.marker, 'mouseout', function() {
+            markerInfo.infowindow.close();
+            });
+        }
+        addClickListener(markerInfo);
+        }
 
 
         //기존에 존재하는 마커를 지우기 위한 함수
@@ -419,7 +408,7 @@ $("#place_partnership").click(function() {
     <title>모임 장소 찾기</title>
 </head>
 <body>
-<div class="mypagebackpage">
+<div class="mapbackpage">
     <!-- 헤더 -->
     <jsp:include page="../../../header_after.jsp"></jsp:include>
     <jsp:include page="../../../sidebar.jsp"></jsp:include>

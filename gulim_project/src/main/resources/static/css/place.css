@@ -181,7 +181,7 @@
 .mybotpage {
   width: 100%;
   height: 1024px;
-  background-image:url("/files/images/wallpaper/배경4.jpg");
+  background-image:url("/files/images/wallpaper/배경7.jpg");
   background-size: cover;
   opacity: 1;
   overflow: hidden;
@@ -477,13 +477,21 @@ padding: 10px;
 	left: 690px;
 }
 
+/*지도 배경*/
+.mapbackpage{
+	width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경5.png");
+  background-size: cover;
+  overflow: hidden;
+}
+
 
 /*여기 부터는 상품 상세 보기 salesbook*/
-
 .bookpage {
   width: 100%;
   height: 1024px;
-  background-image:url("/files/images/wallpaper/배경4.jpg");
+  background-image:url("/files/images/wallpaper/배경6.png");
   background-size: cover;
   overflow: hidden;
 }
