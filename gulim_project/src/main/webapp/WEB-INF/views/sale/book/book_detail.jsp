@@ -130,6 +130,39 @@ function redirectToCart() {
     window.location.href = '/sale/basket2'; 
 }
 
+
+
+$('#purchase').click(function() {
+    const bookData = {
+        book_num: $('input[name="book_num"]').val(),
+    };
+
+    console.log(bookData);
+
+    completePurchase(bookData); 
+});
+
+function completePurchase(bookData) {
+    // AJAX 요청
+    $.ajax({
+        url: '/api/complete-purchase', 
+        method: 'POST',
+        data: JSON.stringify(bookData), // 요청하면서 줄 데이터 
+        contentType: 'application/json', 
+        //dataType: 'json', 
+        success: function(response) {       // 서버에서 준 결과를 response라는 변수에 담음
+            // 성공
+            console.log('Purchase completed successfully');
+            alert('구매가 완료되었습니다.'); // Display a modal with a message
+        },
+        error: function(xhr, status, error) {
+            console.error('Error completing the purchase:', error);
+        }
+    });    
+}
+
+
+
     
     </script>
 </html>

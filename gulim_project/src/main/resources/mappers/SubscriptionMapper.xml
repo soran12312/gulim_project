@@ -27,7 +27,8 @@
 	<select id="getUserBasketNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
 	    SELECT basket_num
 	    FROM basket
-	    WHERE id = #{id}
+	    WHERE id = #{id} and delivery_state is null
+	    LIMIT 1
 	</select>
 	
 	
@@ -38,7 +39,7 @@
 		ON b.basket_num = p.basket_num
 		join subscribe s 
 		ON p.sub_num = s.sub_num
-		WHERE b.basket_num = #{basketNum} and p.purchase_state = 0 and book_num is null
+		WHERE b.basket_num = #{basketNum} and p.purchase_state = 0 and book_num is null 
 	</select>
 	
 	
@@ -163,5 +164,4 @@
 	</insert>
 	
 
-	
 </mapper>

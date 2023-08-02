@@ -408,16 +408,16 @@ input:focus {
 	        });
 
 	        function updateCartItem(qtyInput) {
-	        	const productId = qtyInput.closest("tr").find(".product-id").val();
+	        	const bookId = qtyInput.closest("tr").find(".product-id").val();
 	            const newQty = parseInt(qtyInput.val());
-	            const jsonData= { sub_num: productId, amount: newQty };
+	            const jsonData= { book_num: bookId, amount: newQty };
 	            // console.log(jsonData);
 	            // console.log(productId);
 	            // console.log(newQty);
 
 	            $.ajax({
 	                type: "POST",
-	                url: "/api/update-quantity", 
+	                url: "/api/update-book", 
 	                contentType: "application/json",
 	                data: JSON.stringify(jsonData), // json데이터로 변환
 	                success: function (response) {
@@ -440,22 +440,22 @@ input:focus {
 	 
 
 		// X버튼 클릭시
-	   function showConfirmationPopup(subscriptionId) {
+	   function showConfirmationPopup(bookId) {
 	        if (confirm("정말로 삭제하시겠습니까?")) {
-	            deleteCartItem(subscriptionId);
+	            deleteCartItem(bookId);
 	        } 
 	    }
 
 		// 장바구니 삭제
-	    function deleteCartItem(subscriptionId) {
+	    function deleteCartItem(bookId) {
 
-	    	console.log("Deleting Subscription ID:"+ subscriptionId); 
+	    	console.log("Deleting book ID:"+ bookId); 
 		    
 	        $.ajax({
 	            type: "POST",
-	            url: "/api/delete-subscription", // 서버의 컨트롤러 URL
+	            url: "/api/delete-book", // 서버의 컨트롤러 URL
 	            contentType: "application/json",
-	            data: JSON.stringify({ sub_num: subscriptionId }),     // 요청하면서 준 데이터
+	            data: JSON.stringify({ book_num:  bookId}),     // 요청하면서 준 데이터
 	            success: function (response) {
 	                alert("삭제되었습니다.");
 	                // 삭제가 성공하면 해당 구독권의 행을 화면에서 삭제
@@ -513,7 +513,7 @@ input:focus {
 	            const productId = $(this).find(".product-id").val();
 	            const quantity = parseInt($(this).find(".qty").val());
 	            const cartItem = {
-	                sub_num: productId, // sub_num 속성 추가
+	                book_num: productId, // sub_num 속성 추가
 	                amount: quantity    // amount 속성은 이미 정의되어 있음
 	            };
 	            cartItems.push(cartItem);
@@ -522,7 +522,7 @@ input:focus {
 		    // 결제 및 데이터베이스 업데이트를 위해 카트 항목을 서버로 보냄
 		    $.ajax({
 		        type: "POST",
-		        url: "/api/checkout",
+		        url: "/api/bookcheckout",
 		        contentType: "application/json",
 		        data: JSON.stringify(cartItems),
 		        success: function (response) {

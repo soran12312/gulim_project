@@ -18,10 +18,11 @@
 	
 	<!-- 장바구니에 해당 책번호 있는지 확인 -->
 	<select id="getBookAmountInBasket" parameterType="map" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM basket AS b
+		SELECT p.amount
+	    FROM basket b
 	    JOIN purchase p ON b.basket_num = p.basket_num
 	    JOIN book b2 ON p.book_num = b2.book_num
-	    WHERE b.basket_num = #{book_num} AND p.purchase_state = 0 AND sub_num IS NULL
+	    WHERE b.basket_num = #{userBasketNumber} AND p.purchase_state = 0 AND p.book_num = #{book_num} AND p.sub_num IS NULL
 	</select>
 	
 	
@@ -46,8 +47,63 @@
 	</select>
 	
 	
+	<!-- +, - 버튼 수량 수정 -->
+	<update id="updateQuantity" parameterType="java.lang.Integer">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN book b2 ON p.book_num = b2.book_num
+		SET p.amount = #{amount}
+		WHERE p.book_num = #{book_num}
+	
+	</update>
 	
 	
 	
+	
+	
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteQuantity">
+		DELETE p
+		FROM purchase p INNER JOIN book b
+		ON p.book_num = b.book_num 
+		WHERE b.book_num = #{book_num}
+
+	</delete>
+	
+	
+	<!-- 결제 완료 purchase_state update -->
+	<update id="updatePurchaseState" parameterType="map">
+		UPDATE purchase p
+		JOIN basket b ON b.basket_num = p.basket_num
+		JOIN book b2 ON p.book_num = b2.book_num
+		SET p.purchase_state = 1
+		WHERE p.book_num = #{book_num}
+	</update>
+	
+	
+	
+	<!-- 결제완료 장바구니 db 저장  -->
+	<update id="updateBasket" parameterType="map" >
+		UPDATE basket b1
+		JOIN purchase p ON b1.basket_num = p.basket_num
+		SET b1.basket_address = #{address},
+		    b1.tel = #{tel},
+		    b1.recipient_name = #{name},
+		    b1.delivery_state  = '배송대기',
+		    b1.purchase_date  = NOW()
+		    
+		WHERE p.basket_num = #{userBasketNumber}
+	</update>
+	
+	
+	
+	<!-- 상세에서 구매하기 -->
+	<update id="purchase" parameterType="java.lang.Integer">
+		UPDATE purchase p
+		SET p.purchase_state = 1
+		WHERE p.book_num = #{book_num}
+	</update>
+
 
 </mapper>

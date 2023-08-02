@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import project.gulim.domain.BasketDTO;
 import project.gulim.domain.PurchaseDTO;
 import project.gulim.domain.SubscribeDTO;
+import project.gulim.service.BookService;
 import project.gulim.service.CartService;
 import project.gulim.service.MainService;
 import project.gulim.service.SubscriptionService;
@@ -43,6 +44,9 @@ public class SubscriptionController {
     
     @Autowired
     private CartService cartService;
+    
+    @Autowired
+    private BookService bookService;
     
     private final UiUtils uiUtils = new UiUtils();
     
@@ -85,10 +89,12 @@ public class SubscriptionController {
             
             subscriptionService.saveSubscription(subscriptionData);        // db저장
             
+            
+            // 유저의 장바구니번호
             Integer userBasketNumber = subscriptionService.getUserBasketNumber(id);
             
 
-            // 장바구니 번호가 없을때
+            // 로그인 중인 id의 장바구니 번호가 없으면
             if (userBasketNumber == null) {
 	            // 장바구니 정보를 구성하여 DB에 저장
 	            BasketDTO basketData = new BasketDTO();

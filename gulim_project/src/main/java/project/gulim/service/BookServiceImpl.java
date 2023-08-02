@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import project.gulim.dao.BookDAO;
 import project.gulim.domain.BasketDTO;
 import project.gulim.domain.BookDTO;
+import project.gulim.domain.PurchaseDTO;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -48,8 +49,46 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<BookDTO> getUserBasketBook(Integer basketNum) {
 		// TODO Auto-generated method stub
+		
+		List<BookDTO> list = bookDAO.getUserBasketBook(basketNum);
+
+		
 		return bookDAO.getUserBasketBook(basketNum);
+		
 	}
+
+	@Override
+	public void deleteQuantity(PurchaseDTO book_num) {
+		// TODO Auto-generated method stub
+		bookDAO.deleteQuantity(book_num);
+	}
+
+	@Override
+	public Integer updateQuantity(Integer book_num, Integer amount) {
+		// TODO Auto-generated method stub
+		return bookDAO.updateQuantity(book_num, amount);
+	}
+
+	@Override
+	public void updatePurchaseState(Map<String, Integer> cartItem) {
+		// TODO Auto-generated method stub
+		bookDAO.updatePurchaseState(cartItem);
+	}
+
+	@Override
+	public void updateBasket(String address, String tel, String name, Integer userBasketNumber) {
+		// TODO Auto-generated method stub
+		bookDAO.updateBasket(address, tel, name, userBasketNumber);
+	}
+
+	@Override
+	public void purchase(Integer sub_num) {
+		// TODO Auto-generated method stub
+		bookDAO.purchase(sub_num);
+	}
+
+	
+	
 	
 
 }

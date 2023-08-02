@@ -29,27 +29,11 @@ public class Client {
     @Autowired
     private MainService mainService;
 
-    public void getRecommendations(String userId) {
+    public List<Recommendation> getRecommendations(String userId) {
     	
     	try {
     		
-    		// 쿠키에서 JWT 토큰 값 가져오기
-            Cookie[] cookies = request.getCookies();
-            String jwtToken = null;
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("access_token")) {
-                        jwtToken = cookie.getValue();
-                        break;
-                    }
-                }
-            }
-
-            // JWT 토큰으로 로그인 중인 사용자 ID 가져오기
-            Claims claims = mainService.getClaims(jwtToken);
-            String id = claims.get("id", String.class);
-
-            
+    		
             // 서버 정보 설정
             String serverHost = "192.168.0.41";
             int serverPort = 5555;
@@ -59,7 +43,7 @@ public class Client {
 
             // 아이디 전송
             OutputStream outputStream = socket.getOutputStream();
-            outputStream.write(id.getBytes("UTF-8"));
+            outputStream.write(userId.getBytes("UTF-8"));
             
             
             // 추가 데이터를 기록하거나 다른작업을 수행할 준비
@@ -91,6 +75,7 @@ public class Client {
     	 catch (IOException e) {
              e.printStackTrace();
          }
+		return null;
 
     }
 

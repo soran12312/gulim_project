@@ -5,6 +5,7 @@ import java.util.Map;
 
 import project.gulim.domain.BasketDTO;
 import project.gulim.domain.BookDTO;
+import project.gulim.domain.PurchaseDTO;
 
 public interface BookService {
 
@@ -23,5 +24,25 @@ public interface BookService {
 	
 	// 장바구니 책 리스트
 	public List<BookDTO> getUserBasketBook(Integer basketNum);
+
+	
+	// 삭제
+	public void deleteQuantity(PurchaseDTO book_num);
+
+	
+	// 수량 업데이트
+	public Integer updateQuantity(Integer book_num, Integer amount);
+
+	
+	// 구매상태 1로 변경
+	public void updatePurchaseState(Map<String, Integer> cartItem);
+
+	// 결제 완료되면 장바구니에 주소, 전화번호, 이름 db저장
+	public void updateBasket(String address, String tel, String name, Integer userBasketNumber);
+
+	// 상세에서 구매
+	public void purchase(Integer sub_num);
+
+
 
 }
