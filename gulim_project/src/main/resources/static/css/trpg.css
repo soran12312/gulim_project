@@ -202,6 +202,17 @@ font-weight: bold;}
   left: 0px;
   overflow: hidden;
 }
+.gamebackpage{
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/게임배경.png");
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
 .all_marketing_message_back{
 	width: 400px;
 	height: 130px;
@@ -536,7 +547,7 @@ font-weight: bold;}
   background-image: url("/files/images/mypage/두루마리.png");
   opacity: 0.7;
   position: absolute;
-  top: 140px;
+  top: 150px;
   left: 100px;
 
   overflow: hidden;
@@ -552,7 +563,7 @@ font-weight: bold;}
 .subnav_menu a:active, /* 마우스호버없음 */
 .subnav_menu a{
   display: block;
-  padding-top: 35px;
+  padding-top: 45px;
   padding-left: 10px;
   font-family: NeoDunggeunmo Code, Inter;
   font-weight: Regular;
@@ -577,42 +588,42 @@ font-weight: bold;}
 /* 이거 _post만 바꾸고 top조정하면 메뉴선택 바뀜 */
 .subnav_select_message { 
   position: absolute;
-  top: 20px;
+  top: 25px;
   left: 10px;
 }
 .subnav_select_calendar{ 
   position: absolute;
-  top: 85px;
+  top: 100px;
   left: 10px;
 }
 .subnav_select_mygame{
   position: absolute;
-  top: 150px;
+  top: 175px;
   left: 10px;
 }
 .subnav_select_info{
   position: absolute;
-  top: 220px;
+  top: 255px;
   left: 10px;
 }
 .subnav_select_post{
   position: absolute;
-  top: 285px;
+  top: 330px;
   left: 10px;
 }
 .subnav_select_qna{
   position: absolute;
-  top: 350px;
+  top: 405px;
   left: 10px;
 }
 .subnav_select_friends{
   position: absolute;
-  top: 420px;
+  top: 480px;
   left: 10px;
 }
 .subnav_select_purchase{
   position: absolute;
-  top: 480px;
+  top: 580px;
   left: 10px;	
 }
 .subnav_select_contest{
@@ -639,8 +650,9 @@ font-weight: bold;}
 .message_back {
   width: 1000px;
   height: 574px;
-  background: rgba(217,217,217,1);
-  opacity: 0.5;
+  background-image: url("/files/images/mypage/양피지4.png");
+  background-size: cover;
+  opacity: 0.8;
   position: absolute;
   top: 186px;
   left: 500px;
@@ -956,14 +968,14 @@ font-weight: bold;}
 }
 .bxslider_size2{
 	position: relative;
-	top:80px;
+	top:50px;
 	left:50px;
 	width: 930px;
 	text-align: center;
 }
 .bxslider_size3{
 	position: relative;
-	top:110px;
+	top:80px;
 	left:50px;
 	width: 930px;
 	text-align: center;
@@ -2268,6 +2280,7 @@ purchase_bookname{
 	font-size: 20px;
 	font-family: NeoDunggeunmo Code, Inter;	
 }
+/* ================ END OF CHAR_SHEET LIST ====================== */
 /* ================ START OF SALE ====================== */
 .salemainBook{
 	width: 400px;
@@ -2374,10 +2387,36 @@ purchase_bookname{
     border-bottom-right-radius: 20px;
 	width: 1200px;
 	color: black;
-	margin-left: auto;
+	margin-left: auto; 
 	margin-right: auto;
 	font-family: NeoDunggeunmo Code, Inter;	
 }
 /* ================  END OF SALE ====================== */
-/* ================ END OF CHAR_SHEET LIST ====================== */
+/* ================ START OF 커뮤 ====================== */
+/* 배경 */
+.cumu_wallpaper {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경6.jpg");
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}
+.cumu_fred_bord{
+	background: rgba(0,0,0,0.7);
+	border: rgba(0,0,0,0.7);
+	box-shadow: 0px 0px 10px 10px  rgba(0,0,0,0.7);
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+	width: 1200px;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: NeoDunggeunmo Code, Inter;	
+	padding-top: 50px;
+}
+
+/* ================ END OF 커뮤 ====================== */
 /* ================ END OF GAME ====================== */

@@ -149,7 +149,6 @@ $(document).ready(function(){
 				<a href ="/mypage/my_question">나의 문의사항</a>
 				<a href ="/mypage/friends">친구관리</a>
 				<a href ="/mypage/my_purchase">결제내역</a>
-				<a href ="/mypage/my_contest">공모전</a>
 			</div>
 	</div>
 	

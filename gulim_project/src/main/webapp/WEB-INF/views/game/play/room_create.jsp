@@ -54,7 +54,7 @@ function previewImage(event) {
 </script>
 </head>
 <body>
-<div class="mypagebackpage">
+<div class="gamebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
 	<div class = "createRoomdiv">
 		<form action="/game/play/room_insert" method="post" enctype="multipart/form-data">

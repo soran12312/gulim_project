@@ -160,6 +160,10 @@ section.notice {
 .btn-dark {
 	background: #555;
 	color: #fff;
+	margin-top: 30px;
+	font-size: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .btn-dark:hover, .btn-dark:focus {
@@ -239,7 +243,6 @@ section.notice {
 .row {
 	width: 100%;
 	height: 1024px;
-	background-image: url("/files/images/커뮤니티.jpg");
 	opacity: 0.8;
 	background-size: cover;
 	opacity: 1;
@@ -254,12 +257,13 @@ section.notice {
 
 
 <body class="d-flex flex-column min-vh-100">
+<div class = "cumu_wallpaper">	
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
 
 	<section class="notice">
-	
+
 	
 	<div class = "row">
 	
@@ -281,7 +285,7 @@ section.notice {
 			
 
 		<!-- board list area -->
-		<div id="board-list">
+		<div id="board-list" class="cumu_fred_bord">
 		
 			
 				<div class="container">
@@ -357,10 +361,10 @@ section.notice {
 				</div>
 			</div>
 		</div>
-		
+
 
 	</section>
-	
+</div>		
 	
 	<script>
 

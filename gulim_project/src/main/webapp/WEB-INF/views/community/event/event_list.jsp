@@ -165,7 +165,6 @@
 .row {
 	width: 100%;
 	height: 1024px;
-	background-image: url("/files/images/커뮤니티.jpg");
 	background-size: cover;
 	opacity: 1;
 	overflow: hidden;
@@ -182,6 +181,7 @@
 
 </head>
 <body>
+	<div class="cumu_wallpaper">
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
@@ -418,7 +418,7 @@
 		
 		
 	</div>
-
+</div>
 </body>
 
 <footer>

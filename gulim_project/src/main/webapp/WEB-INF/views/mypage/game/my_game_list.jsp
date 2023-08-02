@@ -23,7 +23,8 @@ $(function(){
 	touchEnabled : (navigator.maxTouchPoints > 0),
 	minSlides : 1,
 	maxSlides : 3,
-	slideWidth : 300
+	slideWidth : 300,
+	pager:false
 	
 	});
 
@@ -39,7 +40,7 @@ const chatRoomJoin = (event,room_num) => {
 		,success	: function(result){
 			//alert(result);
 			var url = "https://192.168.0.68:3000/"+room_num+"/"+result;
-			window.open(url, 'Chatting Room','width=1300,height=900');
+			window.open(url, 'Chatting Room','width=1500,height=907');
 		}
 		,error	: function(err){
 			alert('error');
@@ -84,7 +85,6 @@ const roomDelete = (event,room_num) => {
 				<a href ="/mypage/my_question">나의 문의사항</a>
 				<a href ="/mypage/friends">친구관리</a>
 				<a href ="/mypage/my_purchase">결제내역</a>
-				<a href ="/mypage/my_contest">공모전</a>
 			</div>
 	</div>
 	<div class ="game_back"></div>
