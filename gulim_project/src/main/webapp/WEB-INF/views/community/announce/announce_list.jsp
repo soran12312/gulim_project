@@ -81,10 +81,11 @@ section.notice {
    width: 100%;
    border-top: 1px solid #ccc;
    border-bottom: 1px solid #ccc;
+   color: white;
 }
 
 .board-table a {
-   color: #333;
+   color: white;
    display: inline-block;
    line-height: 1.4;
    word-break: break-all;
@@ -110,6 +111,7 @@ section.notice {
 
 .board-table th, .board-table td {
    padding: 14px 0;
+   color: white;
 }
 
 .board-table tbody td {
@@ -230,7 +232,6 @@ section.notice {
 .row {
 	width: 100%;
 	height: 1024px;
-	background-image: url("/files/images/wallpaper/배경3.jpg");
 	background-size: cover;
 	opacity: 1;
 	opacity: 0.8;
@@ -246,6 +247,7 @@ section.notice {
 
 
 <body class="d-flex flex-column min-vh-100">
+<div class="cumu_wallpaper">
    <header>
       <jsp:include page="../../../../header_after.jsp"></jsp:include>
    </header>
@@ -274,7 +276,7 @@ section.notice {
       
 
       <!-- board list area -->
-      <div id="board-list">
+      <div id="board-list" class="cumu_fred_bord">
          <div class="container">
             <table class="board-table">
                <thead>
@@ -349,7 +351,7 @@ section.notice {
    
    
    
-   
+</div>
    
    
    
