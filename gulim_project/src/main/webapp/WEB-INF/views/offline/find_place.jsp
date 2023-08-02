@@ -45,36 +45,44 @@
 
     // 처음 웹에 들어오면 데이터 베이스 값을 받아다가 마커를 만든다
     for (var i = 0; i < locals.length; i++) {
-    var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
-    //마커 클릭했을 때 정보 표시
-    var infoContent = '<div style="padding:15px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
-   
-    var infowindow = new kakao.maps.InfoWindow({
+        var markerPosition = new kakao.maps.LatLng(locals[i].latitude, locals[i].longitude);
+       
+        //마커 클릭했을 때 정보 표시 
+        var infoContent = '<div style="margin:20px;"><strong>' + locals[i].place_name + '</strong><hr>' + locals[i].tel + '<hr><p>' + locals[i].place_address + '</p></div>';
+        var infowindow = new kakao.maps.InfoWindow({
         content: infoContent,
-        
-    });
-    
-    //마커 안에 들어갈 정보
-    var marker = new kakao.maps.Marker({
+        }); // end infowindow
+
+        //마커 안에 들어갈 정보
+        var marker = new kakao.maps.Marker({
         position: markerPosition,
         map: map,
         place_name: locals[i].place_name,
         tel: locals[i].tel,
-        place_address: locals[i].place_address
-    });
+        address: locals[i].place_address
+        });// end marker
+        
+        markers.push(marker);
 
-    markers.push(marker);
-
-    // 마커 정보 객체에 담기
-    markerinfomation.push({
+        // 마커 정보 객체에 담기
+        markerinfomation.push({
         marker: marker,
         infowindow: infowindow
-    });
-    
+        }); // end markerinfomation
 
+
+
+
+
+
+
+
+
+
+
+        
     $('.place_name_css').each(function(event) {
     $(this).data('marker-index', event); // 해당 요소에 인덱스 데이터 저장
-
     // this 클릭시
     $(this).click(function() {
        
@@ -84,7 +92,7 @@
         //지도 이동
       map.panTo(marker.getPosition());
       //마커 생성
-      var infowindowContent = '<div style="padding:15px;"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
+      var infowindowContent = '<div style="padding:15px;" class="div_info"><strong>' + locals[markerIndex].place_name + '</strong><hr>' + locals[markerIndex].tel + '<hr>' + '<p>'+locals[markerIndex].place_address +'</p>'+ '</div>';
       // 생성된 마커의 정보 저장
        var iwRemoveable = true;
         var infowindow = new kakao.maps.InfoWindow({
@@ -93,14 +101,12 @@
         });      
       // 맵에 마커 생성
         infowindow.open(map, marker);
-        
         removable.click(function(){
-        infowindow.close();
         })
 
       // 제휴매장 보기 버튼 , 전체 매장 보기 버튼 클릭시 infowindow 창 닫기
-       $("#place_partnership, #place_allplace").click(function() {
-        infowindow.close();
+       $("#place_partnership").click(function() {
+        infowindow.close();;
       });// end click func
     }// end if
   }); // end this func
@@ -370,7 +376,7 @@ $("#place_partnership").click(function() {
 
         for (var i = 1; i <= totalPages; i++) {
             //a 태그 생성 그 안에 숫자 1개씩 찍어줌
-            var pageLink = $("<a href='#'></a>").text(i);
+            var pageLink = $("<a href='#'></a>").text(" " + i);
 
             if (i == page) {
                 pageLink.addClass("active");
@@ -465,7 +471,7 @@ $("#place_partnership").click(function() {
     </div>
 
     <div class="place_partnership_box"></div>
-    <span class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시고 결제 하실 때 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</span>
+<span class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시면 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</span>
 
 </div>
 </body>
