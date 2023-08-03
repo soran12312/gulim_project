@@ -459,9 +459,9 @@ $("#place_partnership").click(function() {
         </table>
     </div>
 
-    <div class="place_partnership_box"></div>
-<span class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시면 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</span>
-
+    <div class="place_partnership_box">
+<div class="place_partnership_benefit">제휴매장 혜택은 매장을 이용하시면 "굴림 사이트회원"을 인증하시면 10% 할인 된 가격으로 이용하실 수 있습니다!!</div>
+</div>
 </div>
 </body>
 <jsp:include page="../../../footer.jsp"></jsp:include>

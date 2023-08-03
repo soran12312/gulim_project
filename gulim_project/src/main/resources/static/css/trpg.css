@@ -2322,7 +2322,7 @@ purchase_bookname{
 	height: 800px;
 	position: relative;
 	left: 400px;
-	margin-left: 400px;
+	margin-left: 5%;
 }
 .subscribepagename{
 	color: white;
@@ -2345,7 +2345,7 @@ purchase_bookname{
 	height: 400px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 150px;
+	margin-top: 50px;
 	padding: 30px;
 	font-size: 15px;
 	font-family: NeoDunggeunmo Code, Inter;	
@@ -2417,6 +2417,12 @@ purchase_bookname{
 	font-family: NeoDunggeunmo Code, Inter;	
 	padding-top: 50px;
 }
-
+.bookpage {
+  width: 100%;
+  height: 1024px;
+  background-image:url("/files/images/wallpaper/배경6.png");
+  background-size: cover;
+  overflow: hidden;
+}
 /* ================ END OF 커뮤 ====================== */
 /* ================ END OF GAME ====================== */
