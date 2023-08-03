@@ -124,9 +124,9 @@
                     <li class="selected_sidebar mm-active-selected"><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    <li ><a href="/admin/live_question" class="live_question"><i 
+                    <li ><a onclick="chat_GPT_open()" class="live_question"><i 
                                 class="icon icon-single-copy-06"></i><span class="nav-text">실시간 문의사항</span></a>
-            </li>
+                    </li>
                 </ul>
             </div>
         </div>

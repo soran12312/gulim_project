@@ -413,5 +413,12 @@
 		from character_sheet
 		group by char_class
 	</select>
-
+	
+	
+	<select id="manager" resultType="Integer">
+		SELECT manager FROM member WHERE id = #{id}
+	</select>
+	
+	
+	
 </mapper>

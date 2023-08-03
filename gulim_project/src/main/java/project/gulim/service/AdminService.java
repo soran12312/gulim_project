@@ -71,4 +71,6 @@ public interface AdminService {
 	public void insertProduct(BookDTO boDTO, ImageDTO iDTO);
 	
 	public List<CharacterSheetDTO> classForStats();
+	
+	public Integer manager(String id);
 }

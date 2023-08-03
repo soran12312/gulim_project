@@ -321,3 +321,8 @@
     
 })(jQuery);
 // jQuery end
+
+
+const chat_GPT_open = () => {
+	window.open("/admin/live_question", 'chat_GOPT','width=1000,height=1000');
+}

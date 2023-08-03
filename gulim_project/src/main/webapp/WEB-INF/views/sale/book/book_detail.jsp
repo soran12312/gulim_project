@@ -120,7 +120,7 @@ function showModal() {
 // 모달 장바구니페이지 이동
 function redirectToCart() {
     // Redirect the user to the cart page
-    window.location.href = '/sale/basket2'; 
+    window.parent.location.href = '/sale/basket2'; 
 }
 
 

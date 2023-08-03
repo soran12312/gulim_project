@@ -1009,6 +1009,7 @@ public class AdminController {
 	
 	@RequestMapping("/live_question")
 	public String live_question(Model m) {
+		
 		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
@@ -1022,16 +1023,8 @@ public class AdminController {
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
 		String userId = claims.get("id", String.class);
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setId(userId);
-
-		// 사용자 ID로 데이터베이스에서 사용자 정보를 가져옵니다. 'selectByById'는 실제 사용자 정보를 가져오는 메서드입니다.
-		MemberDTO ifManager = mainService.selectById(memberDTO);
-
-		// 'manager' 값이 1이 아닌 경우 로그인페이지로 리다이렉트 
-		if(ifManager.getManager() != 1) {
-		    return uiUtils.showMessageWithRedirect("매니저 권한이 필요한 페이지입니다.", "/main/login_main?id=" + userId, Method.GET, null, m);
-		}
+	
+		m.addAttribute("userId",userId);
 		return "/admin/admin_question/admin_question";
 	}
 

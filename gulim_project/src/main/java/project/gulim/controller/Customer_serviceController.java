@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import project.gulim.constant.Method;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.QuestionDTO;
 import project.gulim.service.Customer_service;
@@ -114,15 +115,29 @@ public class Customer_serviceController {
 	    //questionDTO에 id 붙힘
 	    questionDTO.setId(id);
 		customer_service.send_question(questionDTO);
-		return "/mypage/my_question";
+		return "redirect:/mypage/my_question";
 	}
 	
 	@RequestMapping("/customer_chat")
 	@ResponseBody
-	public Integer chating(@RequestParam String id){
+	public Integer chating(@RequestParam String id, HttpServletRequest request){
 		
-		// 매니저 여부를 판단
-		Integer manager = customer_service.isManager(id);
+		Cookie[] cookies = request.getCookies();
+	    String jwtToken = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			jwtToken = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+
+		// 토큰에서 객체 Claims 추출
+		Claims claims = mainService.getClaims(jwtToken);
+
+		Integer manager = claims.get("manager", Integer.class);
 		
 		return manager;
 	}
