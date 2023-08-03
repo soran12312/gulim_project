@@ -11,15 +11,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
-
-<style>
-
-	
-</style>
-
-
-
-
 <script type="text/javascript">
 $(document).ready(function(){
 		$('.salemainBook').click(function(){
@@ -29,6 +20,16 @@ $(document).ready(function(){
 		$('.salemaincoupon').click(function(){
 			location.href="./subscribe";
 		});
+
+
+		$('.salemainBook').hover(function(){
+       		$(this).css('cursor','pointer');
+		 });
+			
+		
+		$('.salemaincoupon').hover(function(){
+       		$(this).css('cursor','pointer');
+		 });
 });
 
 </script>

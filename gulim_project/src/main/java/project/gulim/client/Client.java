@@ -62,7 +62,7 @@ public class Client {
             List<Recommendation> recommendations = parseJson(response);
             
             
-            System.out.println(recommendations);
+            // System.out.println(recommendations);
 
             // 연결 종료
             socket.close();

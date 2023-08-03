@@ -430,14 +430,31 @@
 }
 
 
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/files/images/wallpaper/배경6.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 .row {
-	width: 100%;
-	height: 1024px;
-	background-image: url("/files/images/커뮤니티.jpg");
-	background-size: cover;
-	opacity: 1;
-	overflow: hidden;
-} 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 </style>
@@ -496,7 +513,7 @@
 		                        
 								<div class="form-group">
 		                            <div class="col-lg-12">
-                                        <textarea class="form-control" name="post_content" >${post.post_content}
+                                        <textarea class="form-control summernote" name="post_content" >${post.post_content}
 	                                        <c:forEach var="image" items="${images}">
 	                                        	<div class="note-editable card-block" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" style="height: 300px;">
 	                                        		<p><img src="${image.path}" data-filename="images.png" style="width: 168px;"></p>

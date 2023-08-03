@@ -134,8 +134,9 @@
      <!-- 이벤트 게시판 게시글 수 카운팅 -->
     <select id="countContest" resultType="int">
         select count(*)
-		from post p left outer join image i 
-		on p.post_num = i.post_num left outer join contest c ON p.contest_num = c.contest_num 
+		from post p 
+		left outer join image i on p.post_num = i.post_num 
+		inner join contest c ON p.contest_num = c.contest_num
 		where p.board = '공모전'
     </select>
     
@@ -215,18 +216,25 @@
 	
 	<!-- 공모전 리스트 조회 -->
 	<select id="findAllContest" resultType="Map">
-		select *
-		from post p left outer join image i 
-		on p.post_num = i.post_num left outer join contest c ON p.contest_num = c.contest_num 
-		where p.board = '공모전'
+		SELECT p.post_num, p.post_title, p.id, p.writing_date, p.post_content, p.board, p.subject, p.view_count, 
+		c.contest_num,c.contest_title,c.contest_content, p.post_state, i.img_num, i.origin_img_name, i.`path`, i.img_size, i.book_num, i.room_num
+		FROM post p 
+		LEFT OUTER JOIN image i ON p.post_num = i.post_num 
+		INNER JOIN contest c ON p.contest_num = c.contest_num
+		WHERE p.board = '공모전'
+		ORDER BY
+		c.contest_num DESC
 	</select>
 	
 	
 	<select id="findContest" resultType="project.gulim.domain.ContestDTO" >
-		select *
-		from post p left outer join image i 
-		on p.post_num = i.post_num left outer join contest c ON p.contest_num = c.contest_num 
-		where c.contest_num = #{post_num}
+	
+		SELECT contest_title, contest_content
+		from post p 
+		left outer join image i on p.post_num = i.post_num 
+		inner join contest c ON p.contest_num = c.contest_num
+		where c.contest_num = #{contest_num}
+		limit 1
 	</select>
 
 </mapper>

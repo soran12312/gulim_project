@@ -291,7 +291,7 @@
 	<div class="container">
 		
 		<div class="heading-section">
-            <h2>contest Details</h2>
+            <h2>${contests.contest_title}</h2>
         </div>
 		
 	
@@ -350,7 +350,7 @@
 	        	<div class="col-md-6">
 	        		<div class="event-dtl">
         				<div class="event-info">
-		        			<div class="event-name">${contests.contest_title}</div>
+		        			<%-- <div class="event-name">${contests.contest_title}</div> --%>
 		        			
 		        			
 		        		</div>
@@ -373,7 +373,7 @@
 				
 				
 				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-				  		${contest.contest_content}
+				  		${contests.contest_content}
 				  	</div>
 			  	
 				  	<!-- <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">

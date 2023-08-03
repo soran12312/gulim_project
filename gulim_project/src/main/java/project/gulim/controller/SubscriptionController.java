@@ -78,12 +78,12 @@ public class SubscriptionController {
 
             Claims claims = mainService.getClaims(jwtToken);
             String id = claims.get("id", String.class); // 로그인한 사용자 id
-            System.out.println(id);
+//            System.out.println(id);
 
             
             subscriptionData.setId(id);
 
-            System.out.println(subscriptionData);
+//            System.out.println(subscriptionData);
             
             
             
@@ -108,14 +108,14 @@ public class SubscriptionController {
             // 카트에 넣으려는 구독권 가격 있는지 확인
             Integer price = subscriptionData.getPrice();
             Integer existingAmount = subscriptionService.getExistingSubscriptionAmount(price,userBasketNumber);
-            System.out.println("existingAmount:" + existingAmount);
+//            System.out.println("existingAmount:" + existingAmount);
             
             
             
             // 해당 구독권 장바구니에 있으면 수량 증가
             if (existingAmount != null) {
                 Integer updatedAmount = existingAmount + 1;
-                System.out.println(updatedAmount);
+//                System.out.println(updatedAmount);
                 
                 Map<String, Object> params = new HashMap<>();
                 params.put("updatedAmount", updatedAmount);
@@ -134,7 +134,7 @@ public class SubscriptionController {
                 purchaseData.setSub_num(subscriptionData.getSub_num());
                 purchaseData.setAmount(1);   
                 subscriptionService.savePurchase(purchaseData); // db 저장
-                System.out.println(purchaseData);
+//                System.out.println(purchaseData);
             }
 
             

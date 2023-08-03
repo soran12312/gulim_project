@@ -5,12 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../css/place.css" rel="stylesheet" />
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/place.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
 
 </head>
 
@@ -92,7 +98,7 @@ function showModal() {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="cartModalLabel">Subscription Added to Cart</h5>
+                        <h5 class="modal-title" id="cartModalLabel">book Added to Cart</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

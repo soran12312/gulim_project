@@ -86,7 +86,7 @@ public class CommunityController {
 	        for (String imageBase64 : imageBase64List) {
 	            // 이미지 처리 로직
 	            // ...
-	        	System.out.println(imageBase64);
+//	        	System.out.println(imageBase64);
 	        	// base64 디코딩
 	            byte[] imageData = Base64.getDecoder().decode(imageBase64);
 
@@ -97,8 +97,8 @@ public class CommunityController {
 	            String path = "/files/free_img/" + originImageName + ".png";
 				String realPath = getRealPath("static/files/free_img/")+"\\"+ originImageName + ".png";
 				
-				System.out.println(realPath);
-				System.out.println(path);
+//				System.out.println(realPath);
+//				System.out.println(path);
 	            
 	            
 	            Long imageSize = (long)imageData.length;
@@ -136,7 +136,7 @@ public class CommunityController {
 			    String contentWithoutImages = removeImageTags(postContent);
 			    params.setPost_content(contentWithoutImages);
 				
-				System.out.println(params); 
+//				System.out.println(params); 
 				
 				// post  DB에 저장
 			    communityService.savePost(params);
@@ -164,7 +164,7 @@ public class CommunityController {
 			String id = claims.get("id", String.class);      // 로그인한 사용자 id
 			params.setId(id);                                // 
 			
-			System.out.println(params); 
+//			System.out.println(params); 
 			
 			// db저장
 		    communityService.savePost(params);
@@ -324,7 +324,7 @@ public class CommunityController {
         model.addAttribute("post", post);
         
         List<ImageDTO> images = communityService.findImagesByPostNum(post_num);
-        System.out.println(images);
+//        System.out.println(images);
         model.addAttribute("images", images);
 	     
         Cookie[] cookies = request.getCookies();
@@ -378,7 +378,7 @@ public class CommunityController {
 	    String contentWithoutImages = removeImageTags(postContent);
 	    params.setPost_content(contentWithoutImages);
 
-	    System.out.println(params);
+//	    System.out.println(params);
 
 	    // Fetch the current list of images for the post from the database
 	    List<ImageDTO> currentImages = communityService.getImagesByPostId(params.getPost_num());
@@ -395,7 +395,7 @@ public class CommunityController {
 	    for (String imageBase64 : imageBase64List) {
 	        // 이미지 처리 로직
 	        // ...
-	        System.out.println(imageBase64);
+//	        System.out.println(imageBase64);
 	        // base64 디코딩
 	        byte[] imageData = Base64.getDecoder().decode(imageBase64);
 
@@ -404,8 +404,8 @@ public class CommunityController {
 	        String path = "/files/free_img/" + originImageName + ".png";
 	        String realPath = getRealPath("static/files/free_img/") + "\\" + originImageName + ".png";
 
-	        System.out.println(realPath);
-	        System.out.println(path);
+//	        System.out.println(realPath);
+//	        System.out.println(path);
 
 	        Long imageSize = (long) imageData.length;
 
@@ -462,12 +462,12 @@ public class CommunityController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 
-		System.out.println(events);
+//		System.out.println(events);
 		
 		List<ImageDTO>eventimages =  communityService.findEventImg();
 		model.addAttribute("eventimages", eventimages);
 		
-		System.out.println(eventimages);
+//		System.out.println(eventimages);
 		
 		return "community/event/event_list";
 	}
@@ -479,7 +479,7 @@ public class CommunityController {
 		// Retrieve the image and post content based on the postNum value
 		PostDTO event = communityService.findPostById(post_num);
         List<ImageDTO> images = communityService.findImagesByPostNum(post_num);
-        System.out.println(images);
+//        System.out.println(images);
         
 	    
 	    // Add the image and post content to the model for the view
@@ -528,10 +528,10 @@ public class CommunityController {
 	
 	// 공모전 상세
 	@RequestMapping("/contest_detail")
-	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer post_num) {
+	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer contest_num) {
 		
 		
-		ContestDTO contests = communityService.findContest(post_num);
+		ContestDTO contests = communityService.findContest(contest_num);
 		
 		model.addAttribute("contests", contests);
 		

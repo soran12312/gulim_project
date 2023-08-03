@@ -147,6 +147,10 @@ body {
 
 }
 
+.selected-text {
+    color: white;
+  }
+
 
 </style>
 </head>
@@ -399,6 +403,9 @@ body {
 
 			const selectedImageContainer = $('#selected-image-container');
 			selectedImageContainer.show();
+
+			const selectedTextElements = $('#image-month, #image-price');
+		    selectedTextElements.addClass('selected-text');
 
 			if (cartButton && shareButton) {
 				cartButton.show();

@@ -227,9 +227,9 @@ public class CommunityServiceImpl implements CommunityService{
 
 
 	@Override
-	public ContestDTO findContest(Integer post_num) {
+	public ContestDTO findContest(Integer contest_num) {
 		// TODO Auto-generated method stub
-		return communityDAO.findContest(post_num);
+		return communityDAO.findContest(contest_num);
 	}
 	
 	

@@ -51,7 +51,7 @@ public class BookController {
            
            Integer book_num = Integer.parseInt(book_num_string);
            
-           System.out.println("book_num : " + book_num);
+//           System.out.println("book_num : " + book_num);
            
             
             // 장바구니 테이블에 id값 저장
@@ -70,7 +70,7 @@ public class BookController {
 
             Claims claims = mainService.getClaims(jwtToken);
             String id = claims.get("id", String.class); // 로그인한 사용자 id
-            System.out.println(id);
+//            System.out.println(id);
 
             
             BasketDTO basketData = new BasketDTO();
@@ -79,7 +79,7 @@ public class BookController {
             
             // 로그인 중인 id의 장바구니 번호가 있으면
             Integer BasketNumber = subscriptionService.getUserBasketNumber(id);
-            System.out.println("BasketNumber : " + BasketNumber);
+//            System.out.println("BasketNumber : " + BasketNumber);
             
 
             // 로그인 중인 id의 장바구니 번호가 없으면
@@ -91,13 +91,13 @@ public class BookController {
 
             // 해당 장바구니에 같은 책이 있는지 확인
             Integer existingBookAmount = bookService.getBookAmountInBasket(BasketNumber, book_num);
-            System.out.println("existingBookAmount: " + existingBookAmount);
+//            System.out.println("existingBookAmount: " + existingBookAmount);
 
             // 있으면 원래 수량 +1
             if (existingBookAmount != null) {
             	
             	Integer updatedAmount = existingBookAmount + 1;
-                System.out.println(updatedAmount);
+//                System.out.println(updatedAmount);
             	
                 Map<String, Object> updateData = new HashMap<>();
                 updateData.put("basket_num", BasketNumber);
@@ -110,7 +110,7 @@ public class BookController {
                 purchaseData.put("basket_num", BasketNumber);
                 purchaseData.put("book_num", book_num);
                 purchaseData.put("amount", 1);
-                System.out.println(purchaseData);
+//                System.out.println(purchaseData);
                 bookService.savePurchase(purchaseData);
             }
             
@@ -141,6 +141,7 @@ public class BookController {
          
             return ResponseEntity.ok("Quantity updated successfully");
         } catch (Exception e) {
+        	e.printStackTrace();
         	System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update quantity");
         }
@@ -159,18 +160,18 @@ public class BookController {
     @PostMapping("/update-book")
     public boolean updateQuantity(@RequestBody Map<String, Object> requestData) {
         try {
-        	System.out.println("*************************");
-        	System.out.println(requestData);
-        	System.out.println("*************************");
+//        	System.out.println("*************************");
+//        	System.out.println(requestData);
+//        	System.out.println("*************************");
             String book_num_string = requestData.get("book_num").toString();
             Integer book_num = Integer.parseInt(book_num_string);
             
             String amount_string = requestData.get("amount").toString();
             Integer amount = Integer.parseInt(amount_string);
-            System.out.println("*************************");
+//            System.out.println("*************************");
 
-            System.out.println(book_num);
-            System.out.println(amount);
+//            System.out.println(book_num);
+//            System.out.println(amount);
 
             // Update the quantity in the database using the subscriptionService
             
@@ -199,7 +200,7 @@ public class BookController {
     @PostMapping("/bookcheckout")
     @Transactional
     public ResponseEntity<String> handleCheckout(@RequestBody List<Map<String, Integer>> cartItems) {
-        System.out.println(cartItems);
+//        System.out.println(cartItems);
     	
         try {
         	
@@ -223,17 +224,17 @@ public class BookController {
                 }
 
                 Claims claims = mainService.getClaims(jwtToken);
-                System.out.println(claims);
+//                System.out.println(claims);
                 String id = claims.get("id", String.class); // 로그인한 사용자 id
-                System.out.println(id);
+//                System.out.println(id);
                 String address = claims.get("address", String.class); // 주소
-                System.out.println(address);
+//                System.out.println(address);
                 
                 String tel = claims.get("tel", String.class); // 전화번호
-                System.out.println(tel);
+//                System.out.println(tel);
                 
                 String name = claims.get("name", String.class); // 수령인
-                System.out.println(name);
+//                System.out.println(name);
                 
                 // purchase_state 1 업데이트
                 bookService.updatePurchaseState(cartItem);
