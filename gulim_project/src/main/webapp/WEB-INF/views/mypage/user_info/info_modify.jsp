@@ -223,16 +223,19 @@ function find_info(){
 
 
 //※ function title	:	find_playlist 
-//※ function info	:	회원정보리스트를 result로 가져와서 회원정보란의 value에 넣는 함수
+//※ function info	:	플레이리스트를 result로 가져와서 플레이리스트란의 value에 넣는 함수
 function find_playlist(){
+	
 	// /mypage/user_info/find_playlist id 보내기
 	$.ajax({
 			type 		: 'post'
 			,data 		: {id: my_id}                
 			,url 		: '/mypage/user_info/find_playlist'
-			//가져온 회원정보(result)값을 회원정보 input태그에 value에 입력
+			//가져온 플레이리스트(result)값을 플레이리스트 input태그에 value에 입력
 			,success 	: function(result){
 							var table = $('#playlist');
+							// 이전 검색 결과를 지우고 새로운 결과를 출력하기 위해 테이블을 비움
+							table.empty();
 							for (var i = 0; i < result.length; i++) {
 								var room_name		= result[i].room_name
 								if (result[i].next_play_date == null){
