@@ -6,12 +6,14 @@
 
 	<select id="sales" resultType="map">
 
-		SELECT SUM(p.amount) AS total_amount, b.book_title, b.genre, b.adult, i.`path`, b.book_num
+		SELECT sum(amount) as total_amount,b.book_title, b.genre, b.adult, i.`path`, b.book_num
 		FROM book b
-		INNER JOIN image i ON b.book_num = i.book_num
-		INNER JOIN purchase p ON p.book_num = b.book_num
-		GROUP BY b.book_num, b.book_title, b.genre, b.adult, i.`path`
-		ORDER BY total_amount DESC
+		inner join image i 
+		on b.book_num = i.book_num
+		INNER JOIN purchase p
+		ON b.book_num = p.book_num
+		INNER JOIN basket ba
+		ON p.basket_num = ba.basket_num
 		LIMIT 4;
 		
 	</select>

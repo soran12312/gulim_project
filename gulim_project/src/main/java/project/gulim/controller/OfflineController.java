@@ -20,21 +20,20 @@ public class OfflineController {
 
 	@RequestMapping("/map")
 	public String find_place(Model m,PlaceDTO vo){
-		
+		// 지도에 마커를 만들기
 		List<PlaceDTO> Marker = offlineService.getMarker(vo);
 		
 		m.addAttribute("Marker",Marker);
-		
-		
-		return "/offline/find_place";
+
+		return "/offline/find_place";	
 	}
 	
 	
 	@RequestMapping("/show_partnership")
 	@ResponseBody
+	//파트너쉽 매장 보기
 	public List<PlaceDTO> showPartnership(PlaceDTO vo) {
 	    List<PlaceDTO> showPartnership = offlineService.showPartnership(vo);
-	 
 	    
 	    return showPartnership;
 	}
