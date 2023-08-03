@@ -261,6 +261,7 @@ section.notice {
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
+	<jsp:include page="../../../../sidebar.jsp"></jsp:include>
 
 	<section class="notice">
 

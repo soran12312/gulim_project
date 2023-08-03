@@ -53,7 +53,7 @@ public class MariaDBToElasticSearch_Survey {
             ResultSet resultSet = statement.executeQuery(sql);
 
             // JSON 매핑을 위한 ObjectMapper 객체 생성
-            	// 즉, Java객체를 JSON 문자열로 변환하는 직렬화 or JSON 문자열을 Java 객체로 변환하는 역직렬화
+            // 즉, Java객체를 JSON 문자열로 변환하는 직렬화 or JSON 문자열을 Java 객체로 변환하는 역직렬화
             ObjectMapper objectMapper = new ObjectMapper();
 
             // 결과 집합 반복

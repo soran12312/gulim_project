@@ -42,9 +42,11 @@ public class ExceptionController {
 		return "redirect:/error_page/wrong_contect";
 	}
 	
+	// 엑세스 토큰 만료 시 발생하는 ExpiredJwtException 핸들링
 	@ExceptionHandler(ExpiredJwtException.class)
 	public String handleExpiredJwtException(ExpiredJwtException ex) {
 		System.out.println("엑세스토큰 만료");
+		// 이용자가 기존에 가려고했던 uri얻어와서 토큰 정상재발급 시 기존 uri로 보냄
 		String fullPath = req.getRequestURI();
 		System.out.println(fullPath);
 		
@@ -134,12 +136,14 @@ public class ExceptionController {
 			
 			System.out.println(refresh_token_expiration);
 			
-			long refresh_token_valid = refresh_token_expiration.getRefresh_token_valid().getTime() - System.currentTimeMillis(); // 만료 날짜와 현재 시간의 차이를 계산
+			// 만료 날짜와 현재 시간의 차이를 계산
+			long refresh_token_valid = refresh_token_expiration.getRefresh_token_valid().getTime() - System.currentTimeMillis(); 
 			
 			Cookie cookie = new Cookie("access_token", accessToken);
 			
 			cookie.setHttpOnly(true); // 보안설정 -> JavaScript코드로 쿠키에 접근 불가
-	        cookie.setMaxAge((int) (refresh_token_valid / 1000)); // 쿠키 유효기간은 초 단위로 설정 -> 엑세스토큰 유효기한 1시간 // 쿠키에 남아있는 기한 리프레쉬토큰과 같게
+			// 쿠키 유효기간은 초 단위로 설정 -> 엑세스토큰 유효기한 1시간 // 쿠키에 남아있는 기한 리프레쉬토큰과 같게
+	        cookie.setMaxAge((int) (refresh_token_valid / 1000)); 
 	        cookie.setPath("/"); // 쿠키의 범위를 전체 애플리케이션으로 설정 (루트 패스 이하 모든 경로에서 쿠키 접근 가능)
 	        res.addCookie(cookie);
 	        

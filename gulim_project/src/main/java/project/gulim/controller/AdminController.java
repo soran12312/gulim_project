@@ -70,11 +70,14 @@ public class AdminController {
 	@Autowired
 	private MainService mainService;
 	
+	// 클라이언트로부터 HTTP 요청을 받기 위한 객체
 	@Autowired
 	private HttpServletRequest request;
 	
+	// UI에서 리다이렉트 거는 메소드 사용하기 위해 인스턴스 선언한 객체
 	private final UiUtils uiUtils = new UiUtils();
 	
+	// ElasticSearch 클러스터 호스트 및 포트 설정 (주소는 적절하게 변경)
 	private static final String ES_HOST = "localhost";
     private static final int ES_PORT = 9200;
     
@@ -82,6 +85,7 @@ public class AdminController {
 	@RequestMapping("/question")
 	public String viewPage_question(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -89,6 +93,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -120,6 +125,7 @@ public class AdminController {
 	@RequestMapping("/member_management")
 	public String viewPage_member_management(Model m) { // 페이지 이동(DB접속없는경우)
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -127,6 +133,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -158,6 +165,7 @@ public class AdminController {
 	@RequestMapping("/place_list")
 	public String viewPage_place_list(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -165,6 +173,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -188,6 +197,7 @@ public class AdminController {
 	@RequestMapping("/sales_stats")
 	public String viewPage_sales_stats(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -195,6 +205,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -227,6 +238,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/month", method = RequestMethod.POST)
     public List<HashMap> salesStats_month(@RequestBody String purchase_year_mon) {
+		// substring으로 연도만 추출
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
 		return adminService.salesStatsMonth(year);
 	}
@@ -234,6 +246,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/month_sub", method = RequestMethod.POST)
     public List<HashMap> salesStats_month_subs(@RequestBody String purchase_year_mon) {
+		// substring으로 연도만 추출
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
 		return adminService.salesStatsMonth_subs(year);
 	}
@@ -241,6 +254,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/month_book", method = RequestMethod.POST)
     public List<HashMap> salesStatsMonth_book(@RequestBody String purchase_year_mon) {
+		// substring으로 연도만 추출
 		String year = purchase_year_mon.substring(purchase_year_mon.length() - 4);
 		return adminService.salesStatsMonth_book(year);
 	}
@@ -248,6 +262,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/day", method = RequestMethod.POST)
     public List<HashMap> salesStatsDay(@RequestBody String purchase_day) {
+		// substring으로 yyyy-MM-dd만 추출
 		String day = purchase_day.substring(purchase_day.length() - 10);
 		return adminService.salesStatsDay(day);
 	}
@@ -255,6 +270,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/day_subs", method = RequestMethod.POST)
     public List<HashMap> salesStatsDay_subs(@RequestBody String purchase_day) {
+		// substring으로 yyyy-MM-dd만 추출
 		String day = purchase_day.substring(purchase_day.length() - 10);
 		return adminService.salesStatsDay_subs(day);
 	}
@@ -262,6 +278,7 @@ public class AdminController {
 	@ResponseBody
     @RequestMapping(value = "/sales_stats/day_book", method = RequestMethod.POST)
     public List<HashMap> salesStatsDay_book(@RequestBody String purchase_day) {
+		// substring으로 yyyy-MM-dd만 추출
 		String day = purchase_day.substring(purchase_day.length() - 10);
 		return adminService.salesStatsDay_book(day);
 	}
@@ -269,6 +286,7 @@ public class AdminController {
 	@RequestMapping("/delivery_refund")
 	public String viewPageDeliveryRefund(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -276,6 +294,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -305,6 +324,7 @@ public class AdminController {
 	@RequestMapping("/view_list")
 	public String viewPage_view_list(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -312,6 +332,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -336,6 +357,7 @@ public class AdminController {
 	@RequestMapping("/insert_form")
 	public String viewPage_insert_form(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -343,6 +365,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -369,18 +392,25 @@ public class AdminController {
 	    
 	    // post_content 값에서 base64 인코딩된 이미지 값을 추출
 	    List<String> imageBase64List = extractBase64Image(postContent);
+	    // 인코딩된 이미지 값이 있다면
 	    if (!imageBase64List.isEmpty()) {
 	    	for (String imageBase64 : imageBase64List) {
+	    		// base64로 인코딩된 문자열을 디코딩하여 원래의 바이트 배열로 변환함
 	    		byte[] imageData = Base64.getDecoder().decode(imageBase64);
 	    		
+	    		// 고유한 파일 이름 생성
 	    		String originImageName = generateUniqueFileName();
+	    		// 바이트배열의 길이
 	            Long imageSize = (long)imageData.length;
 	            
+	            // URL이 localhost든 192.168.0.68이든 상관없이 인식하기 위해 basePath 설정
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
+	            // 현재 시간으로 파일명 구분하기 위해
 	            Long time = System.currentTimeMillis();
 	            
+	            // post 폴더에 파일 저장 위해
 	            String path = "/admin/images/post/" + time + "_" + originImageName;
 				String realPath = getRealPath("static/admin/images/post/")+"\\"+ time + "_" + originImageName;
 	            
@@ -392,13 +422,15 @@ public class AdminController {
 	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
-	            String jwtToken = adminService.getJwtTokenFromCookies(request);
+	    		// JWT 토큰 쿠키에셔 가져옴
+	    		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 	    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
 	    		if(jwtToken == null) {
 	    		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 	    		}
 
+	    		// 토큰에서 객체 Claims 추출
 	    		Claims claims = mainService.getClaims(jwtToken);
 
 	    		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -425,13 +457,15 @@ public class AdminController {
 			    adminService.insertNoContest(pDTO, iDTO);
 	    	}
 	    }else {// 이미지가 포함되지 않은 경우
-	    	String jwtToken = adminService.getJwtTokenFromCookies(request);
+			// JWT 토큰 쿠키에셔 가져옴
+			String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 			// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
 			if(jwtToken == null) {
 			    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 			}
 
+			// 토큰에서 객체 Claims 추출
 			Claims claims = mainService.getClaims(jwtToken);
 
 			// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -466,20 +500,27 @@ public class AdminController {
 		// 이미지 등록 여부 확인
 	    String contestContent = cDTO.getContest_content();
 	    
-	    // post_content 값에서 base64 인코딩된 이미지 값을 추출
+	    // contest_content 값에서 base64 인코딩된 이미지 값을 추출
 	    List<String> imageBase64List = extractBase64Image(contestContent);
+	 // 인코딩된 이미지 값이 있다면
 	    if (!imageBase64List.isEmpty()) {
 	    	for (String imageBase64 : imageBase64List) {
+	    		// base64로 인코딩된 문자열을 디코딩하여 원래의 바이트 배열로 변환함
 	    		byte[] imageData = Base64.getDecoder().decode(imageBase64);
 	    		
+	    		// 고유한 파일 이름 생성
 	    		String originImageName = generateUniqueFileName();
+	    		// 바이트배열의 길이
 	            Long imageSize = (long)imageData.length;
 	            
+	            // URL이 localhost든 192.168.0.68이든 상관없이 인식하기 위해 basePath 설정
 	            String baseURL = request.getRequestURL().toString();
 	            String basePath = baseURL.substring(0, baseURL.lastIndexOf("/admin"));
 
+	            // 현재 시간으로 파일명 구분하기 위해
 	            Long time = System.currentTimeMillis();
 	            
+	            // contest 폴더에 파일 저장 위해
 	            String path = "/admin/images/contest/" + time + "_" + originImageName;
 				String realPath = getRealPath("static/admin/images/contest/")+"\\"+ time + "_" + originImageName;
 	            
@@ -491,13 +532,15 @@ public class AdminController {
 	            iDTO.setPath(path); 
 	            iDTO.setImg_size(imageSize);
 	            
-	            String jwtToken = adminService.getJwtTokenFromCookies(request);
+	    		// JWT 토큰 쿠키에셔 가져옴
+	    		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 	    		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
 	    		if(jwtToken == null) {
 	    		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 	    		}
 
+	    		// 토큰에서 객체 Claims 추출
 	    		Claims claims = mainService.getClaims(jwtToken);
 
 	    		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -523,13 +566,15 @@ public class AdminController {
 			    adminService.insertYesContest(pDTO, iDTO, cDTO);
 	    	}
 	    }else {// 이미지가 포함되지 않은 경우
-	    	String jwtToken = adminService.getJwtTokenFromCookies(request);
+			// JWT 토큰 쿠키에셔 가져옴
+			String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 			// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
 			if(jwtToken == null) {
 			    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 			}
 
+			// 토큰에서 객체 Claims 추출
 			Claims claims = mainService.getClaims(jwtToken);
 
 			// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -559,14 +604,18 @@ public class AdminController {
 	
 	// base64 인코딩된 이미지 값을 추출
 	private List<String> extractBase64Image(String content) {
+		// base64 이미지를 저장할 리스트
 	    List<String> base64Images = new ArrayList<>();
 
-	    // <img> 태그의 base64 인코딩된 이미지 값을 추출
+	    // <img> 태그 내의 base64 인코딩된 이미지 값을 추출하기 위한 정규 표현식 패턴
 	    Pattern pattern = Pattern.compile("<img[^>]+src=\"data:image/[^>]+base64,([^\"]+)\"");
 	    Matcher matcher = pattern.matcher(content);
 
+	    // 정규 표현식 패턴과 일치하는 모든 base64 이미지 값을 찾음
 		while (matcher.find()) {
+			// 첫 번째 괄호 안의 값, 즉 base64 인코딩된 이미지 부분만 추출
 			String base64Image = matcher.group(1);
+			// 추출한 base64 이미지 값을 리스트에 추가
 		    base64Images.add(base64Image);
 		}
 
@@ -583,8 +632,6 @@ public class AdminController {
 	// 이미지 파일 저장
 	   private void saveImageFile(byte[] imageData, String imagePath, String fileName) {
 	       try {
-
-	           
 	           // 이미지 파일 생성
 	           File imageFile = new File(imagePath);
 	           FileOutputStream fos = new FileOutputStream(imageFile);
@@ -601,6 +648,7 @@ public class AdminController {
 		return content.replaceAll("<img[^>]+>", "");
 	}
 
+	// Ajax로 게시중/게시중단 설정
 	@ResponseBody
 	@RequestMapping(value = "/view_list", method = RequestMethod.POST)
 	public void changePostState(@RequestBody PostDTO pDTO) {
@@ -610,6 +658,7 @@ public class AdminController {
 	@RequestMapping("/product_list")
 	public String viewPage_product_list(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -617,6 +666,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -640,6 +690,7 @@ public class AdminController {
 	@RequestMapping("/product_insert")
 	public String viewPage_product_insert(Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -647,6 +698,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -668,6 +720,7 @@ public class AdminController {
 	@RequestMapping(value="/product_modify", method=RequestMethod.GET)
 	public String viewPage_product_modify(BookDTO boDTO, Model m) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -675,6 +728,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -719,114 +773,107 @@ public class AdminController {
 	
 	@RequestMapping(value="/product_insert", method=RequestMethod.POST)
 	public String insertProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m) {
-		try {
+	    try {
+	        // 발행일 포맷 변경
 	        String issueDateString = boDTO.getIssue_date();
-	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd"); // This should match the format of issueDateString
-	        Date issueDate = inputFormat.parse(issueDateString); // Convert string to Date
-
-	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월"); // This is your desired format
-	        String formattedDate = outputFormat.format(issueDate); // Convert Date to string in the desired format
-
-	        boDTO.setIssue_date(formattedDate); // Update the issue_date
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        Date issueDate = inputFormat.parse(issueDateString);
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월");
+	        String formattedDate = outputFormat.format(issueDate);
+	        // 발행일 업데이트
+	        boDTO.setIssue_date(formattedDate);
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
-		
-		try {
-			if(file == null || file.isEmpty()) {
+
+	    try {
+	        // 파일이 첨부되지 않았을 경우의 처리
+	        if (file == null || file.isEmpty()) {
 	            System.out.println("파일 첨부 실패");
 	            adminService.insertProduct(boDTO, null);
 	        }
-	        
-	        //스트링 originFilename에 파일 오리진네임 가져와서 넣기
+
+	        // 이미지 파일 정보 설정
 	        iDTO.setOrigin_img_name(file.getOriginalFilename());
 	        iDTO.setImg_size(file.getSize());
-	        
-	        System.out.println("getOriginalFilename: "+file.getOriginalFilename());
-	        System.out.println("getSize: "+file.getSize());
-	        
-	        Long time = System.currentTimeMillis();
-	        
-	        System.out.println("time: "+time);
-	        		        
-		    String path = "/admin/images/product/" + time + "_"  + iDTO.getOrigin_img_name();
-		    String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
-		    
-		    System.out.println("path: "+path);
-		    System.out.println("realPath: "+realPath);
-		    
-		    iDTO.setPath(path);
-		        
-		    File serverFile = new File(realPath);
-		    
-		    System.out.println("serverFile: "+serverFile);
-		        
-		    try {
-		    	file.transferTo(serverFile);
-		        adminService.insertProduct(boDTO, iDTO);
-		    }catch (Exception e) {
-		    	System.out.println("실패: " + e.toString());
-		    	e.printStackTrace();
-		    }
-		}catch(Exception e){
-			System.out.println("실패: " + e.toString());
 
+	        // 현재 시간 밀리초로 구하기
+	        Long time = System.currentTimeMillis();
+
+	        // 상품 이미지 경로 생성
+	        String path = "/admin/images/product/" + time + "_" + iDTO.getOrigin_img_name();
+	        String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
+
+	        // 이미지 경로 설정
+	        iDTO.setPath(path);
+
+	        // 서버에 파일 저장
+	        File serverFile = new File(realPath);
+
+	        try {
+	            // 파일을 서버에 전송
+	            file.transferTo(serverFile);
+	            // 상품 정보 삽입
+	            adminService.insertProduct(boDTO, iDTO); 
+	        } catch (Exception e) {
+	            System.out.println("실패: " + e.toString());
+	            e.printStackTrace();
+	        }
+	    } catch (Exception e) {
+	        System.out.println("실패: " + e.toString());
 	        adminService.insertProduct(boDTO, null);
-		}
-		
-		
-		List<HashMap> listProduct = adminService.listProduct();
+	    }
+
+	    List<HashMap> listProduct = adminService.listProduct();
 	    m.addAttribute("listProduct", listProduct);
-	    
+
 	    return "/admin/product/product_list";
 	}
+
 	
 	
 	@RequestMapping(value="/product_modify", method=RequestMethod.POST)
 	public String updateProduct(@RequestParam("file") MultipartFile file, BookDTO boDTO, ImageDTO iDTO, Model m){
 	    try {
+	    	// 발행일 포맷 변경
 	        String issueDateString = boDTO.getIssue_date();
-	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd"); // This should match the format of issueDateString
-	        Date issueDate = inputFormat.parse(issueDateString); // Convert string to Date
-
-	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월"); // This is your desired format
-	        String formattedDate = outputFormat.format(issueDate); // Convert Date to string in the desired format
-
-	        boDTO.setIssue_date(formattedDate); // Update the issue_date
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        Date issueDate = inputFormat.parse(issueDateString);
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년 MM월");
+	        String formattedDate = outputFormat.format(issueDate);
+	        // 발행일 업데이트
+	        boDTO.setIssue_date(formattedDate);
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
 	    try {
+	    	// 파일이 첨부되지 않았을 경우의 처리
 	        if(file == null || file.isEmpty()) {
 	            System.out.println("파일 첨부 실패");
 	            adminService.updateProduct(boDTO, null);
 	        }
 	        
-	        //스트링 originFilename에 파일 오리진네임 가져와서 넣기
+	        // 이미지 파일 정보 설정
 	        iDTO.setOrigin_img_name(file.getOriginalFilename());
 	        iDTO.setImg_size(file.getSize());
 	        
-	        System.out.println("getOriginalFilename: "+file.getOriginalFilename());
-	        System.out.println("getSize: "+file.getSize());
-	        
+	        // 현재 시간 밀리초로 구하기
 	        Long time = System.currentTimeMillis();
 	        
-	        System.out.println("time: "+time);
-	        		        
+	        // 상품 이미지 경로 생성	        
 		    String path = "/admin/images/product/" + time + "_"  + iDTO.getOrigin_img_name();
 		    String realPath = getRealPath("static/admin/images/product/") + "\\" + time + "_" + iDTO.getOrigin_img_name();
 		    
-		    System.out.println("path: "+path);
-		    System.out.println("realPath: "+realPath);
-		    
+		    // 이미지 경로 설정
 		    iDTO.setPath(path);
-		        
+
+		    // 서버에 파일 저장
 		    File serverFile = new File(realPath);
-		    
-		    System.out.println("serverFile: "+serverFile);
 		        
 		    try {
+		    	// 파일을 서버에 전송
 		    	file.transferTo(serverFile);
+		    	// 상품 정보 삽입
 		        adminService.updateProduct(boDTO, iDTO);
 		    }catch (Exception e) {
 		    	System.out.println("실패: " + e.toString());
@@ -834,7 +881,6 @@ public class AdminController {
 		    }
 	    } catch(Exception e) {
 	        System.out.println("실패: " + e.toString());
-
 	        adminService.updateProduct(boDTO, null);
 	    }
 	    
@@ -846,8 +892,11 @@ public class AdminController {
 	
 	public static String getRealPath(String resourcePath) {
         try {
+        	// ClassPathResource를 사용하여 리소스 경로를 나타내는 객체 생성
             ClassPathResource classPathResource = new ClassPathResource(resourcePath);
+            // 해당 리소스의 URI를 가져와 Path 객체로 변환
             Path path = Paths.get(classPathResource.getURI());
+            // 실제 파일 시스템 경로를 문자열로 변환하여 반환
             return path.toString();
         } catch (IOException e) {
             e.printStackTrace();
@@ -859,6 +908,7 @@ public class AdminController {
 	@RequestMapping("/game_stats")
 	public String viewPage_game_stats(Model m, CharacterSheetDTO csDTO) {
 		
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -866,6 +916,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.
@@ -893,6 +944,7 @@ public class AdminController {
 
 	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
 
+	    	// "survey" 인덱스에 대한 검색 요청 객체 생성
 	        SearchRequest searchRequest = new SearchRequest("survey");
 	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
@@ -901,6 +953,7 @@ public class AdminController {
 	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
 
 	        searchRequest.source(searchSourceBuilder);
+	        // 검색 요청을 실행하고 응답을 받음
 	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 	        SearchHits hits = searchResponse.getHits();
 
@@ -912,9 +965,11 @@ public class AdminController {
 
 	    } catch (IOException e) {
 	        e.printStackTrace();
+	        // 내부 서버 오류 상태 코드로 응답 반환
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
 
+	    // 검색 결과를 담은 데이터를 정상 응답으로 반환
 	    return ResponseEntity.ok(data);
 	}
 	
@@ -924,6 +979,7 @@ public class AdminController {
 
 	    try (RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
 
+	    	// "survey" 인덱스에 대한 검색 요청 객체 생성
 	        SearchRequest searchRequest = new SearchRequest("character_sheet");
 	        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
@@ -932,6 +988,7 @@ public class AdminController {
 	        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
 
 	        searchRequest.source(searchSourceBuilder);
+	        // 검색 요청을 실행하고 응답을 받음
 	        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 	        SearchHits hits = searchResponse.getHits();
 
@@ -943,14 +1000,16 @@ public class AdminController {
 
 	    } catch (IOException e) {
 	        e.printStackTrace();
+	        // 내부 서버 오류 상태 코드로 응답 반환
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
-
+	    // 검색 결과를 담은 데이터를 정상 응답으로 반환
 	    return ResponseEntity.ok(data);
 	}
 	
 	@RequestMapping("/live_question")
 	public String live_question(Model m) {
+		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);
 
 		// 로그인 안한 상태로 페이지 접속시 로그인페이지 리다이렉트 
@@ -958,6 +1017,7 @@ public class AdminController {
 		    return uiUtils.showMessageWithRedirect("로그인 후 이용가능한  페이지입니다.", "/main/main", Method.GET, null, m);
 		}
 
+		// 토큰에서 객체 Claims 추출
 		Claims claims = mainService.getClaims(jwtToken);
 
 		// 'userId'는 실제 Claims에서 사용자 ID를 나타내는 필드명으로, 실제 환경에 맞게 변경해야 합니다.

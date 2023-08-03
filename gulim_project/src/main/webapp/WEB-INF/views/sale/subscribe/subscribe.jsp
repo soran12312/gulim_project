@@ -154,7 +154,7 @@ body {
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
-<div class="mainbackpage">
+<div class="bookpage">
 	<div class="cartbtn">
 		<button class="suvscribeBtn" id = "moveCart"  onclick="redirectToCartPage()">장바구니</button>
 	</div>

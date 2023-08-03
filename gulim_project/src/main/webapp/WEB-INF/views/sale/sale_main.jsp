@@ -36,7 +36,7 @@ $(document).ready(function(){
 <body>
 <jsp:include page="../../../header_after.jsp"></jsp:include>
 
-	<div class= "mainbackpage" >
+	<div class= "bookpage" >
 		<div class="salemaindiv">
 			<button class="salemainBook">설정집<br/>구매</button>
 			<button class="salemaincoupon">구독권<br/>구매</button>

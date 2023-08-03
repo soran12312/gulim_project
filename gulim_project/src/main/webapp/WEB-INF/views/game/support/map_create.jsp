@@ -39,11 +39,12 @@ $(document).ready(function(){
 <body>s
 <div class="gamebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
+<jsp:include page="../../../../sidebar.jsp"></jsp:include>
 <a href = "/game/support/etc"> ㆍ</a>
 	<table class="game_roomlist_nav">
 		<tr>
-			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/support/galme_reccommend ">게임 추천</a></td>
-			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/support/room_list">생성된 방</a></td>
+			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/reccommend/game_reccommend ">게임 추천</a></td>
+			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/play/room_list">생성된 방</a></td>
 			<td><a class="no_a_st2 game_roomlist_nav_a1" href = "/game/support/map_create">게임 지원</a></td>
 		</tr>
 		<tr><td colspan="3"><hr/></td></tr>

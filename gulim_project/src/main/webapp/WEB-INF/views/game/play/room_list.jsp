@@ -12,6 +12,7 @@
 <body>
 <div class="gamebackpage">
 <jsp:include page="../../../../header_after.jsp"></jsp:include>
+<jsp:include page="../../../../sidebar.jsp"></jsp:include>
 
 	<table class="game_roomlist_nav">
 		<tr>
