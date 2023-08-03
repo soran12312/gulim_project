@@ -49,7 +49,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="/admin/member_management" class="brand-logo">
+            <a href="/main/login_main" class="brand-logo">
                 <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
@@ -169,7 +169,7 @@
                                                     <th>문의사항</th>
                                                     <th>제목</th>
                                                     <th>문의내용</th>
-                                                    <th>답변</th>
+                                                    <th id="answerState">답변</th>
                                                     <th hidden>a</th>
                                                     <th hidden>b</th>
                                                 </tr>

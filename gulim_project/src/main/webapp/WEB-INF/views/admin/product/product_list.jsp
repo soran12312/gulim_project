@@ -49,7 +49,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="/admin/member_management" class="brand-logo">
+            <a href="/main/login_main" class="brand-logo">
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -160,7 +160,7 @@
                                         <table id="example" class="display productTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
-                                                    <th hidden></th>
+                                                    <th id="bookNum" hidden></th>
                                                     <th>이미지</th>
                                                     <th>상품명</th>
                                                     <th>상태</th>
