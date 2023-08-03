@@ -3,37 +3,46 @@
     
     /************ Start of 연간매출 ************/
     
-    var tableRows_ssyTable = document.querySelectorAll('.ssyTable tbody tr');
-    var data_year = [];
-    var chart_year;
-    
-    
-    var lineChartParent = document.getElementById('line_chart_2');
-		// SVG 요소를 찾아서 제거합니다.
-		var svgElement = lineChartParent.querySelector('svg');
-		if (svgElement) {
-		    lineChartParent.removeChild(svgElement);
-		}
-		var divElement = lineChartParent.querySelector('div');
-		if (divElement) {
-		    lineChartParent.removeChild(divElement);
-		}
+    // '.ssyTable tbody tr'에 해당하는 모든 테이블 행을 선택합니다.
+	var tableRows_ssyTable = document.querySelectorAll('.ssyTable tbody tr');
+	var data_year = []; // 년도별 데이터를 저장할 배열을 선언합니다.
+	var chart_year;
 	
-	    for (var i = 0; i < tableRows_ssyTable.length; i++) {
-	        var purchase_year = tableRows_ssyTable[i].querySelector('td:nth-child(1)').textContent;
-	        var total_book_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(2)').textContent);
-	        var total_subscribe_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(3)').textContent);
-	        var total_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(4)').textContent);
+	// 'line_chart_2' ID를 가진 부모 요소를 선택합니다.
+	var lineChartParent = document.getElementById('line_chart_2');
 	
-	        var rowData = {
-	            purchase_year: purchase_year,
-	            total_book_price: total_book_price,
-	            total_subscribe_price: total_subscribe_price,
-	            total_price: total_price
-	        };
+	// SVG 요소가 존재한다면 제거합니다. 이는 이전 차트가 있을 경우 새 차트를 그리기 위함입니다.
+	var svgElement = lineChartParent.querySelector('svg');
+	if (svgElement) {
+	    lineChartParent.removeChild(svgElement);
+	}
 	
-	        data_year.push(rowData);
-	    }
+	// div 요소가 존재한다면 제거합니다. 이전 차트의 일부일 수 있으므로 제거합니다.
+	var divElement = lineChartParent.querySelector('div');
+	if (divElement) {
+	    lineChartParent.removeChild(divElement);
+	}
+	
+	// 테이블의 모든 행에 대해 반복하면서 년도별 데이터를 추출합니다.
+	for (var i = 0; i < tableRows_ssyTable.length; i++) {
+	    // 각 열에서 필요한 데이터를 추출합니다.
+	    var purchase_year = tableRows_ssyTable[i].querySelector('td:nth-child(1)').textContent;
+	    var total_book_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(2)').textContent);
+	    var total_subscribe_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(3)').textContent);
+	    var total_price = parseInt(tableRows_ssyTable[i].querySelector('td:nth-child(4)').textContent);
+	
+	    // 추출한 데이터를 객체로 구성합니다.
+	    var rowData = {
+	        purchase_year: purchase_year,
+	        total_book_price: total_book_price,
+	        total_subscribe_price: total_subscribe_price,
+	        total_price: total_price
+	    };
+	
+	    // 구성한 객체를 data_year 배열에 추가합니다.
+	    data_year.push(rowData);
+	}
+
 	    
 	    chart_year = Morris.Area({
 	        element: 'line_chart_2',

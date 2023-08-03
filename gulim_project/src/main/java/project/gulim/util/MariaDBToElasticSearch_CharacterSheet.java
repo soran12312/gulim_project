@@ -37,16 +37,28 @@ public class MariaDBToElasticSearch_CharacterSheet {
     private static final String INDEX_NAME = "character_sheet";
 
     public void indexDataFromMariaDB() {
+    		// MariaDB 연결 설정
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        	 // SQL문 실행을 위한 객체	
              Statement statement = connection.createStatement();
+        	 // ElasticSearch 클라이언트 설정
+        		// 1. Elasticsearch 클러스트와 통신할 호스트의 세부 정보
+        		// 2. RestClient.builder 메소드 호출 - 호스트의 세부 정보 받아서 클라이언트 세부 설정 구성함
+        		// 3. RestHighLevelClient 객체 생성 - Elasticsearch와 상호작용할 수 있는 클라이언트 객체, 엘라스틱서치 사용 가능해짐
              RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost(ES_HOST, ES_PORT, "http")))) {
 
+        	// SQL 쿼리
             String sql = "SELECT sheet_num, char_propensity, char_class, species, str, dex, con, intelligence, wis, chr FROM character_sheet";
+            // 쿼리 실행
             ResultSet resultSet = statement.executeQuery(sql);
 
+            // JSON 매핑을 위한 ObjectMapper 객체 생성
+        	// 즉, Java객체를 JSON 문자열로 변환하는 직렬화 or JSON 문자열을 Java 객체로 변환하는 역직렬화
             ObjectMapper objectMapper = new ObjectMapper();
 
+            // 결과 집합 반복
             while (resultSet.next()) {
+            	// 결과 집합에서 필드 값을 가져오기
             	Integer sheetNum = resultSet.getInt("sheet_num");
                 String charPropensity = resultSet.getString("char_propensity");
                 String charClass = resultSet.getString("char_class");

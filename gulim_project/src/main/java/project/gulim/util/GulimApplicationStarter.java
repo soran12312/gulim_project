@@ -26,7 +26,6 @@ public class GulimApplicationStarter {
 
     public static void main(String[] args) {
         startPolling();
-        
         // 다른 패키지의 main 메소드를 실행
         GulimProjectApplication.main(args);
     }
