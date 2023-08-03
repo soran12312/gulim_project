@@ -20,7 +20,7 @@
   position: absolute;
   left: 150px;
   bottom: 690px;
- 
+  cursor: pointer;
 }
 
 /*전체 매장 보기 버튼*/
@@ -30,7 +30,7 @@
   position: absolute;
   left: 280px;
   bottom: 690px;
- 
+  cursor: pointer;
 }
 
 /*추천 모임 장소 글씨*/
@@ -93,13 +93,15 @@
 	bottom: 300px;
 	top:300px;
 	left: 1000px;
-	 opacity: 0.8;
+	opacity: 0.8;
+	
 }
 
 /*상세보기 이름 css*/
 .place_name_css{
 	text-align: center;
 	width: 350px;
+	cursor: pointer;
 }
 
 /*상세보기 전화번호 css*/
