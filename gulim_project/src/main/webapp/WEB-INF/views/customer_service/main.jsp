@@ -151,6 +151,7 @@
 <body>
 <section class="mybotpage">
     <jsp:include page="../../../header_after.jsp"></jsp:include>
+    <jsp:include page="../../../sidebar.jsp"></jsp:include>
 
     <div class="qusetion_lines"><hr></div>
 
