@@ -1677,7 +1677,7 @@ font-weight: bold;}
 	font-family: NeoDunggeunmo Code, Inter;
 	font-weight: normal;
 	font-size: 20px;
-	padding: 2%;
+	padding: 1%;
 }
 .purchase_goods{
 	width: 800px;
@@ -1691,7 +1691,7 @@ font-weight: bold;}
 }
 .purchase_goods_tr1 td img{
 	margin: 10px;
-	width: 100px;
+	width: 150px;
 }
 .bxslider_size_purchase_book{
 	padding-top: 30px;
@@ -1701,8 +1701,26 @@ font-weight: bold;}
 .purchase_bookimg img{
 	margin : auto;
 }
-purchase_bookname{
+.purchase_bookname{
+	padding-top:20px;
 	text-align: center;
+	font-size: 15px;
+}
+.purchase_pagename{
+	padding-top: 50px;
+	padding-right: 20px;
+	text-align: center;
+}
+.purchase_tag{
+	text-align: center;
+	font-size: 12px;
+	width:50px;
+    background-color : #FD786A;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: auto;
 }
 /* ================ END OF MY_PURCHASE ====================== */
 /* ================ START OF MY_CONTEST ====================== */

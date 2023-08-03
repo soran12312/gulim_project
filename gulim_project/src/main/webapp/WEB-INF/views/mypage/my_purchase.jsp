@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,8 @@
         touchEnabled : (navigator.maxTouchPoints > 0),
         minSlides : 1,
         maxSlides : 3,
-        slideWidth : 300
+        slideWidth : 300,
+        pager:false
         
         });
     });
@@ -65,7 +67,13 @@
 <span class="page_name">결제내역</span>
 <div class=" post_back_table">
     <div class="myfriend_pagename">구독권구매</div>
-    <div class="purchase_div">현재 구독은 [      ]일 만료됩니다. 현재 일회권은 [     ]개 사용가능합니다.</div>
+    <c:if test="${end != '0'}">
+        <div class="purchase_div">현재 구독은 [ ${end} ]일 만료됩니다. </div>
+    </c:if>
+    <c:if test="${end eq '0'}">
+        <div class="purchase_div">구독이 만료되었습니다. </div>
+    </c:if>
+   
     
     <div class="purchase_goods" >
         <table>
@@ -76,57 +84,33 @@
                 <td><img src="/files/images/mypage/12.png"></td>
             </tr>
             <tr class="purchase_goods_tr2 cursor">
-                <td><a>1개월 연장</a></td>
-                <td><a>3개월 연장</a></td>
-                <td><a>6개월 연장</a></td>
-                <td><a>12개월 연장</a></td>
+                <td><a href="/sale/subscribe"  class="no_a_st">1개월 연장</a></td>
+                <td><a href="/sale/subscribe"  class="no_a_st">3개월 연장</a></td>
+                <td><a href="/sale/subscribe"  class="no_a_st">6개월 연장</a></td>
+                <td><a href="/sale/subscribe" class="no_a_st">12개월 연장</a></td>
             </tr>
         </table>
     </div>
 <!-- =============END OF 결제내역============================================ -->	
 <!-- =============START OF 설정집 구매============================================ -->	
     <div class ="purchase_book">
-        <div class="myfriend_pagename">구매한 설정집</div>
+        <div class="purchase_pagename">구매한 설정집</div>
         <div class="bxslider_size_purchase_book">
             <ul class="bxslider">
                 <li><table>
+                    <c:forEach items="${list}" var="book">
                         <tr>
-                            <td class="purchase_bookimg"><img src="/files/images/game_imsi.jpg"></td>
+                            <td class="purchase_bookimg"><img src=${book.path}></td>
                             
                         </tr>
                         <tr>
-                            <td class="purchase_bookname">설정집이름</td>
+                            <td class="purchase_bookname">${book.title}</td>
                         </tr>
-                    </table>
-                </li>
-                <li><table>
-                    <tr>
-                        <td class="purchase_bookimg"><img src="/files/images/game_imsi.jpg"></td>
-                        
-                    </tr>
-                    <tr>
-                        <td class="purchase_bookname">설정집이름</td>
-                    </tr>
-                </table>
-            </li>
-            <li><table>
-                <tr>
-                    <td class="purchase_bookimg"><img src="/files/images/game_imsi.jpg"></td>
-                    
-                </tr>
-                <tr>
-                    <td class="purchase_bookname">설정집이름</td>
-                </tr>
-            </table>
-        </li>
-        <li><table>
-            <tr>
-                <td class="purchase_bookimg"><img src="/files/images/game_imsi.jpg"></td>
-                
-            </tr>
-            <tr>
-                <td class="purchase_bookname">설정집이름</td>
-            </tr>
+                        <tr>
+                            <td><div class = "purchase_tag">${book.state}</div></td>
+                            
+                        </tr>
+                    </c:forEach>
         </table>
     </li>
             </ul>
