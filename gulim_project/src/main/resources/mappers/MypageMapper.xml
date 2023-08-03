@@ -399,4 +399,21 @@
       SELECT * FROM question WHERE id=#{id}
    </select>
 <!-- =========== END of 나의 문의사항 ======================================================================================================	 -->
+<!-- =========== START of 나의 결제 ======================================================================================================	 -->
+	<select id="my_purchase" resultType="String">
+      SELECT end_date FROM subscribe WHERE id=#{id}
+      ORDER BY sub_num DESC
+	  LIMIT 1;
+   </select>
+   <select id="my_purchase2" resultType="java.util.HashMap">
+		SELECT   i.path, path
+				,b.book_title title
+				,k.delivery_state state
+		FROM basket k
+		INNER JOIN purchase p		ON k.basket_num  = p.basket_num
+		INNER JOIN book b		ON p.book_num  = b.book_num
+		INNER JOIN image i		ON b.book_num  = i.book_num
+		WHERE k.id = #{id}
+   </select>
+<!-- =========== END of 나의 결제 ======================================================================================================	 -->
 </mapper>

@@ -9,6 +9,17 @@
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+<style>
+
+	
+</style>
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 		$('.salemainBook').click(function(){

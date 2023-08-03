@@ -85,6 +85,10 @@ public interface MypageService {
 	public List<Integer> friend_playlist(String id);
 	public HashMap find_gamename(Integer num);
 	//=========== END of 친구관리 ======================================================================================================	
+	//=========== START of 결제내역 ======================================================================================================	
+	public String my_purchase(String id);
+	public List<HashMap> my_purchase2(String id);
+	//=========== END of 결제내역 ======================================================================================================	
 	
 	
 	

@@ -496,7 +496,7 @@
 		                        
 								<div class="form-group">
 		                            <div class="col-lg-12">
-                                        <textarea class="form-control summernote" name="post_content" >${post.post_content}
+                                        <textarea class="form-control" name="post_content" >${post.post_content}
 	                                        <c:forEach var="image" items="${images}">
 	                                        	<div class="note-editable card-block" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" style="height: 300px;">
 	                                        		<p><img src="${image.path}" data-filename="images.png" style="width: 168px;"></p>
