@@ -13,6 +13,7 @@
 <!-- START전체 div -->
 <div class="loginmain_wallpaper">
 <jsp:include page="../../../header_after.jsp"></jsp:include>
+<jsp:include page="../../../sidebar.jsp"></jsp:include>
 	<!-- 페이지 상단 ZEP연결+마케팅 메세지 -->
 	<div class="loginmain1">
 		<div class="loginmain1_back"></div>
@@ -28,24 +29,24 @@
 		<div class="loginmain_table_back">
 		<table class="loginmain_table">
 			<tr>
-				<td>화상채팅</td>
-				<td>오프라인 <br/>모임장소 찾기</td>
-				<td>커뮤니티</td>
+				<td><a class="no_a_st2" href="/game/play/room_list">화상채팅</a></td>
+				<td><a class="no_a_st2" href="/offline/map">오프라인 <br/>모임장소 찾기</a></td>
+				<td><a class="no_a_st2" href="/community/free_board_list">커뮤니티</a></td>
 			</tr>
 			<tr>
-				<td><img src="/files/images/화상채팅.jpg"/></td>
-				<td><img src="/files/images/모임장소 찾기.jpg"/></td>
-				<td><img src="/files/images/커뮤니티.jpg"/></td>
+				<td><a href="/game/play/room_list"><img src="/files/images/화상채팅.jpg"/></a></td>
+				<td><a href="/offline/map"><img src="/files/images/모임장소 찾기.jpg"/></a></td>
+				<td><a href="/community/free_board_list"><img src="/files/images/커뮤니티.jpg"/></a></td>
 			</tr>
 			<tr>
-				<td>초보자를 위한 <br/>역할 추천</td>
-				<td>근처 게이머 찾기</td>
-				<td>다양한 게임정보</td>
+				<td><a class="no_a_st2" href="/sale/book/book_list">설정집 추천</a></td>
+				<td><a class="no_a_st2" href="/game/support/map_create">지도 만들기</a></td>
+				<td><a class="no_a_st2" href="/sale/sale_main">설정집&구독권 구매</a></td>
 			</tr>
 			<tr>
-				<td><img src="/files/images/초보자가이드.jpg"/></td>
-				<td><img src="/files/images/지도.jpg"/></td>
-				<td><img src="/files/images/게임정보.jpg"/></td>
+				<td><a  href="/sale/book/book_list"><img src="/files/images/초보자가이드.jpg"/></a></td>
+				<td><a href="/game/support/map_create"><img src="/files/images/지도.jpg"/></a></td>
+				<td><a href="/sale/sale_main"><img src="/files/images/게임정보.jpg"/></a></td>
 			</tr>
 		</table>
 		</div>

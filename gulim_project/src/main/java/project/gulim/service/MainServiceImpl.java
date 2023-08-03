@@ -346,13 +346,17 @@ public class MainServiceImpl implements MainService{
 	// jwt 생성
 	@Override
 	public JwtDTO createJwt(MemberDTO member) {
+		// 토큰 유효기한 생성
 		Date access_token_valid = getExpireDateAccessToken();
 		Date refresh_token_valid = getExpireDateRefreshToken();
+		// 리프레쉬토큰에 담을 유저정보(id만)
 		MemberDTO ref_tk_value = new MemberDTO();
 		ref_tk_value.setId(member.getId());
+		// 엑세스토큰, 리프레쉬토큰 생성
         String accessToken = createToken(member, access_token_valid);
         String refreshToken = createToken(ref_tk_value, refresh_token_valid);
         
+        // db에 생성한 토큰 등록
         JwtDTO jwt = new JwtDTO();
         jwt.setAccess_token(accessToken);
         jwt.setRefresh_token(refreshToken);

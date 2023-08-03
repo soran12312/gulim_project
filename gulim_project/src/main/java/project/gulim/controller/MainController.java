@@ -139,12 +139,10 @@ public class MainController {
 				}
 			}
 		}
-		
 		// db에서 해당 엑세스토큰 사용정지(기존에 로그아웃 안하고 그냥 인터넷 창 껏을 때 쿠키에 남아있는 엑세스토큰 db에서 삭제)
 		if(access_token != null) mainService.setJwtStateDiscard(access_token);
 		
 		MemberDTO member = mainService.selectById(id);
-		
 		JwtDTO jwt = mainService.createJwt(member);
 		
 		Cookie cookie1 = new Cookie("access_token", jwt.getAccess_token());

@@ -260,7 +260,7 @@ input:focus {
 	<header>
 		<jsp:include page="../../../../header_after.jsp"></jsp:include>
 	</header>
-<div class="mainbackpage">
+<div class="bookpage">
 	<div class="cart-wrap margindiv">
 		<div class="container">
 			<div class="row">
