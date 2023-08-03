@@ -18,6 +18,8 @@
     
     //***********문의사항 start ***********//
     
+    $('#answerState').click();
+    
     // 문의사항 테이블
     var table_question = $('.questionTable').DataTable();
     // 이전에 있던 답변창
@@ -202,6 +204,8 @@
 	
 	//*********** 환불 start ***********//
 	
+	$('#orderNum').click();
+	
 	// 환불 테이블의 tbody 내의 tr을 클릭했을 시
     $('.refundTable tbody').on('click', '.refund-link', function(e) {
 		// selected 클래스 지우기(선택 취소)
@@ -236,6 +240,8 @@
 	//*********** 환불 end ***********//
 	
 	//*********** 관리자 글목록 start ***********//
+	
+	$('#writeNum').click();
 	
 	// 관리자 글목록 테이블의 tbody 내의 tr을 클릭했을 시
 	$('.postTable tbody').on('click', '.post-link', function(e) {
@@ -297,6 +303,9 @@
 	//*********** 관리자 글목록 end ***********//
 	
 	//*********** 상품 등록 및 수정 start ***********//
+	
+	$('#bookNum').click();
+	
 	$('.productTable tbody').on('click', '.product-link', function(e) {
 		e.preventDefault();
 		$('tbody tr').removeClass('selected');
@@ -308,10 +317,12 @@
 		
 	});
 	
-	
-	
-	
     //*********** 상품 등록 및 수정 end ***********//
     
 })(jQuery);
 // jQuery end
+
+
+const chat_GPT_open = () => {
+	window.open("/admin/live_question", 'chat_GOPT','width=1000,height=1000');
+}

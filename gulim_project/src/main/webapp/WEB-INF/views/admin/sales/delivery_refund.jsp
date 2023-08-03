@@ -49,7 +49,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="/admin/member_management" class="brand-logo">
+            <a href="/main/login_main" class="brand-logo">
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
 
@@ -161,7 +161,7 @@
                                         <table id="example" class="display refundTable" style="min-width: 845px">
                                             <thead>
                                                 <tr>
-                                                    <th>주문번호</th>
+                                                    <th id="orderNum">주문번호</th>
                                                     <th>ID</th>
                                                     <th>주문일자</th>
                                                     <th>상품명</th>

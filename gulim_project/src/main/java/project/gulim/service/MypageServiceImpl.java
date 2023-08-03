@@ -272,11 +272,15 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.agree_brother(join_num);
 	}
 //=========== END of 친구관리 ======================================================================================================	
+//=========== START of 결제내역 ======================================================================================================	
+	public String my_purchase(String id) {
+		return mypageDAO.my_purchase(id);
 
-	
-
-	
-
+	}
+	public List<HashMap> my_purchase2(String id){
+		return mypageDAO.my_purchase2(id);
+	}
+//=========== END of 결제내역 ======================================================================================================	
 	
 
 	

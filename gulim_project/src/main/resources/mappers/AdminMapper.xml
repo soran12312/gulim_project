@@ -304,6 +304,7 @@
 		FROM purchase p
 		INNER JOIN book b ON p.book_num = b.book_num
 		INNER JOIN basket bk ON p.basket_num = bk.basket_num
+		WHERE p.purchase_state=1
 		GROUP BY bk.basket_num
 		ORDER BY p.purchase_num DESC
 	</select>
@@ -366,6 +367,7 @@
 	<select id="listProduct" resultType="HashMap">
 		select i.path path, b.book_num book_num, b.book_title book_title, b.sale_state sale_state, b.stock stock
 		from book b left outer join image i on b.book_num = i.book_num
+		ORDER BY b.book_num DESC
 	</select>
 	
 	<!-- 상품 불러오기 -->
@@ -411,5 +413,12 @@
 		from character_sheet
 		group by char_class
 	</select>
-
+	
+	
+	<select id="manager" resultType="Integer">
+		SELECT manager FROM member WHERE id = #{id}
+	</select>
+	
+	
+	
 </mapper>

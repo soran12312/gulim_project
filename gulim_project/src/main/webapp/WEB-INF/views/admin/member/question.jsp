@@ -49,7 +49,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="/admin/member_management" class="brand-logo">
+            <a href="/main/login_main" class="brand-logo">
                 <!-- 굴림 로고 이미지 -->
                 <img class="logo-image" src="/files/images/LOGO_white_ver.png" alt="">
             </a>
@@ -125,9 +125,9 @@
                     <li><a href="/admin/game_stats"><i 
                                 class="icon icon-app-store"></i><span class="nav-text">게임 통계</span></a>
                     </li>
-                    <li ><a href="/admin/live_question" class="live_question"><i 
+                    <li ><a onclick="chat_GPT_open()" class="live_question"><i 
                         class="icon icon-single-copy-06"></i><span class="nav-text">실시간 문의사항</span></a>
-    </li>
+                    </li>
 
                 </ul>
             </div>
@@ -169,7 +169,7 @@
                                                     <th>문의사항</th>
                                                     <th>제목</th>
                                                     <th>문의내용</th>
-                                                    <th>답변</th>
+                                                    <th id="answerState">답변</th>
                                                     <th hidden>a</th>
                                                     <th hidden>b</th>
                                                 </tr>

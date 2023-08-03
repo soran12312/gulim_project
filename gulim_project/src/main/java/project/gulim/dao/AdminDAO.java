@@ -81,4 +81,5 @@ public interface AdminDAO {
 	
 	public List<CharacterSheetDTO> classForStats();
 	
+	public Integer manager(String id);
 }

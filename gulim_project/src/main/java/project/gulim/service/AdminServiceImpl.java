@@ -155,5 +155,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.classForStats();
 	}
 	
-
+	public Integer manager(String id) {
+		return adminDAO.manager(id);
+	}
 }

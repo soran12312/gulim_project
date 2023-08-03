@@ -790,9 +790,29 @@ public class MypageContoroller {
 	
 //=========== END of 친구관리 ========================================================================================================
 //=========== START of 결제내역 ======================================================================================================	
+	@RequestMapping("/my_purchase")
+	public String my_purchase(Model m){
+		String id = myId_is_in_cookies();
+		
+		//마지막 구독권 종료일 가져와서 넣기
+		String end = mypageService.my_purchase(id);
+		if(end==null) {end = "0";}
+		m.addAttribute("end",end);
+		
+		//결제내역 가져오기
+		List<HashMap> list = mypageService.my_purchase2(id);
+		for(HashMap map: list) {
+			System.out.println("title:  "+map.get("title") );
+			System.out.println("path:  "+map.get("path") );
+			System.out.println("state:  "+map.get("state") );
+		}
+		
+		m.addAttribute("list", list);
+		
+		return "/mypage/my_purchase";
+	}
+	
 //=========== END of 결제내역 ========================================================================================================
-//=========== START of 공모전 ======================================================================================================	
-//=========== END of 공모전 =======================================================================================================
 	
 	
 //쿠키기준으로 아이디값 받기
