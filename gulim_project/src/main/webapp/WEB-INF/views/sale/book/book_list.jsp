@@ -13,8 +13,9 @@
 <div class="bookpage">
     
 
-    <iframe src="https://localhost:3000/sales" style="height: 1052px; width: 1624px; border: none; " scrolling="no"></iframe>
+    <iframe src="https://192.168.0.68:3000/sales" style="height: 1052px; width: 1624px; border: none; " scrolling="no"></iframe>
     
 </div>
 </body>
+
 </html>
