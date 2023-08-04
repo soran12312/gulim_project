@@ -97,8 +97,10 @@
         <div class="purchase_pagename">구매한 설정집</div>
         <div class="bxslider_size_purchase_book">
             <ul class="bxslider">
-                <li><table>
+                
                     <c:forEach items="${list}" var="book">
+                    <li class="purchase_li">
+                    <table class="purchase_table">
                         <tr>
                             <td class="purchase_bookimg"><img src=${book.path}></td>
                             
@@ -110,9 +112,10 @@
                             <td><div class = "purchase_tag">${book.state}</div></td>
                             
                         </tr>
+                    </table>
+                    </li>
                     </c:forEach>
-        </table>
-    </li>
+        
             </ul>
         </div>
     </div>

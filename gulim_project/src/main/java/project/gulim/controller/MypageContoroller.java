@@ -806,7 +806,7 @@ public class MypageContoroller {
 			System.out.println("path:  "+map.get("path") );
 			System.out.println("state:  "+map.get("state") );
 		}
-		
+		System.out.println(list);
 		m.addAttribute("list", list);
 		
 		return "/mypage/my_purchase";
