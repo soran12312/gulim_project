@@ -1008,7 +1008,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/live_question")
-	public String live_question(Model m) {
+	public String live_question(Model m,String id) {
 		
 		// JWT 토큰 쿠키에셔 가져옴
 		String jwtToken = adminService.getJwtTokenFromCookies(request);

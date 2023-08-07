@@ -120,24 +120,8 @@ public class Customer_serviceController {
 	
 	@RequestMapping("/customer_chat")
 	@ResponseBody
-	public Integer chating(@RequestParam String id, HttpServletRequest request){
-		
-		Cookie[] cookies = request.getCookies();
-	    String jwtToken = null;
-	      
-	    if (cookies != null) {
-	    	for (Cookie cookie : cookies) {
-	    		if (cookie.getName().equals("access_token")) {
-	    			jwtToken = cookie.getValue();
-	                break;
-	            }
-	        }
-	    }
-
-		// 토큰에서 객체 Claims 추출
-		Claims claims = mainService.getClaims(jwtToken);
-
-		Integer manager = claims.get("manager", Integer.class);
+	public Integer chating(@RequestParam String id){
+		Integer manager = customer_service.isManager(id);
 		
 		return manager;
 	}

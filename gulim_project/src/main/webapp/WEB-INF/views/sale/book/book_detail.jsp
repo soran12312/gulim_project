@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="../../css/place.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -21,7 +20,7 @@
 </head>
 
 <body>
-	<section >
+	<div>
 		<h1 class="book_text">많이 보는 설정집</h1>
 		<div class="book_hr">
 			<hr />
@@ -57,8 +56,10 @@
 
 		<button class="pocket book_btn" id="cart">장바구니</button>
 		<button class="purchase book_btns" id="purchase">구매하기</button>
-	</section>
+	</div>
+
 </body>
+	
 <script type="text/javascript">
 
 

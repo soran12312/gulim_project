@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,11 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="/files/images/favicon-32x32.png">
 <link href="/css/trpg.css" rel="stylesheet">
+<script type="text/javascript">
+const goAdminPage = () => {
+	location.href='/admin/question';
+}
+</script>
 </head>
 <body>
 <!-- START전체 div -->
@@ -17,7 +23,13 @@
 	<!-- 페이지 상단 ZEP연결+마케팅 메세지 -->
 	<div class="loginmain1">
 		<div class="loginmain1_back"></div>
-		<button class="go_zep">Gulim<br/>!!Go!!</button>
+		<c:if test="${manager eq 1}">
+			<button class="go_zep" onclick="goAdminPage()">Gulim<br/>!!Go!!</button>
+		</c:if>
+		<c:if test="${manager eq 0}">
+			<button class="go_zep">Gulim<br/>!!Go!!</button>
+		</c:if>
+		
 		<div class="loginmain1_message">굴림 세상으로 떠나지 않아도 웹으로도 접속할 수 있어요.<br/>
 			하지만 굴림세상에서 즐겨보시는 건 어떨까요?</div>
 		

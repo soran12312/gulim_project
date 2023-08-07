@@ -489,9 +489,9 @@ padding: 10px;
 
 
 /*여기 부터는 상품 상세 보기 salesbook*/
+
 .bookpage {
   width: 100% ;
-  height: 1024px;
   background-image:url("/files/images/wallpaper/배경6.png");
   background-size: cover;
   overflow: hidden;

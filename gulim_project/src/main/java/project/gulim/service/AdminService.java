@@ -72,5 +72,5 @@ public interface AdminService {
 	
 	public List<CharacterSheetDTO> classForStats();
 	
-	public Integer manager(String id);
+
 }
