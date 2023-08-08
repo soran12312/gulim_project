@@ -254,7 +254,7 @@
 <div class="popup_content popup_char">
     <strong class ="popstrong" >Q.캐릭터 시트가 뭐예요?</strong>
     <h2 class = "popH2" >A.게임에 참가할 캐릭터의 상세한 설정입니다! </h2>
-    <a  class="popa no_a_st2" href="#"><span>캐릭터 시트 작성 하러가기</span></a><br>
+    <a  class="popa no_a_st2" href="https://192.168.0.68:8080/game/play/room_list"><span>캐릭터 시트 작성 하러가기</span></a><br>
     <button class="pop_btn">닫기</button>
 </div>
 

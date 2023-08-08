@@ -17,7 +17,7 @@
 	<table class="game_roomlist_nav">
 		<tr>
 			<td><a class="no_a_st2" href = "/game/support/galme_reccommend ">게임 추천</a></td>
-			<td><a class="no_a_st2" href = "/game/support/room_list">생성된 방</a></td>
+			<td><a class="no_a_st2" href = "#">생성된 방</a></td>
 			<td><a class="no_a_st2" href = "/game/support/map_create">게임 지원</a></td>
 		</tr>
 		<tr><td colspan="3"><hr/></td></tr>

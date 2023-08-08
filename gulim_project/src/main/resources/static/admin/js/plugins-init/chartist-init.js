@@ -28,7 +28,7 @@
 	$('#textSurvey').text($('.btn-prb').text());
 	
 	// 서버로부터 설문조사 데이터를 가져옵니다.
-	fetch('https://localhost:8080/admin/game_stats/survey')
+	fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 		.then(response => response.json())
 		.then(data => {
 			// 'data'는 문서의 배열
@@ -78,7 +78,7 @@
 		$('#textSurvey').text($('.btn-prb').text());
 	
 		// 서버로부터 설문조사 데이터를 가져옵니다.
-		fetch('https://localhost:8080/admin/game_stats/survey')
+		fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 			.then(response => response.json())
 			.then(data => {
 				// 문서의 배열로 'data' 변수 정의
@@ -127,7 +127,7 @@
 		// 설문조사 텍스트 설정
 		$('#textSurvey').text($('.btn-pt').text());
 	
-		fetch('https://localhost:8080/admin/game_stats/survey')
+		fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 			.then(response => response.json())
 			.then(data => {
 				// 문서의 배열로 'data' 변수 정의
@@ -177,7 +177,7 @@
 		// 설문조사 텍스트 설정
 		$('#textSurvey').text($('.btn-pg').text());
 	
-		fetch('https://localhost:8080/admin/game_stats/survey')
+		fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 			.then(response => response.json())
 			.then(data => {
 				// 문서의 배열로 'data' 변수 정의
@@ -224,7 +224,7 @@
 		$('#textSurvey').text($('.btn-pc').text());
 	
 		// 서버에서 설문 데이터를 가져옴
-		fetch('https://localhost:8080/admin/game_stats/survey')
+		fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 			.then(response => response.json())
 			.then(data => {
 				// 'data'는 문서의 배열이라고 가정
@@ -275,7 +275,7 @@
 		$('#textSurvey').text($('.btn-pgen').text());
 			
 	    // 서버에 설문조사 결과를 요청합니다.
-		fetch('https://localhost:8080/admin/game_stats/survey')
+		fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
 	        // 빈도수를 추적하기 위한 맵 객체를 생성합니다.
@@ -323,7 +323,7 @@
 	    $('#textSurvey').text($('.btn-ps').text());
 	
 	    // 서버에서 종족에 대한 설문조사 결과를 가져옵니다.
-	    fetch('https://localhost:8080/admin/game_stats/survey')
+	    fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
 	        // 빈도수를 추적하기 위한 객체를 생성합니다.
@@ -369,7 +369,7 @@
 	    $('#textSurvey').text($('.btn-wgen').text());
 	    
 	    // 서버에서 플레이해보고 싶은 장르에 대한 설문조사 결과를 가져옵니다.
-	    fetch('https://localhost:8080/admin/game_stats/survey')
+	    fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
 	        // 빈도수를 저장하기 위한 객체를 초기화합니다.
@@ -420,7 +420,7 @@
 	    $('#textSurvey').text($('.btn-os').text());
 	
 	    // 서버에서 다른 사이트 이용 경험에 대한 설문조사 결과를 가져옵니다.
-	    fetch('https://localhost:8080/admin/game_stats/survey')
+	    fetch('https://192.168.0.68:8080/admin/game_stats/survey')
 	    .then(response => response.json())
 	    .then(data => {
 	        const frequencyMap = {};
@@ -492,7 +492,7 @@
 	$('#textFlavor').text($('.btn-pfs').text());
 	
 	// 서버에서 캐릭터 성향에 대한 데이터를 가져옵니다.
-	fetch('https://localhost:8080/admin/game_stats/character_sheet')
+	fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
 	    .then(response => response.json())
 	    .then(data => {
 	        // 빈도수를 저장하기 위한 객체를 초기화합니다.
@@ -540,7 +540,7 @@
 		$('#textFlavor').text($('.btn-pfs').text());
 	
 		// 서버에서 캐릭터 성향에 대한 데이터를 가져옵니다.
-		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+		fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
 		.then(response => response.json())
 		.then(data => {
 			// 빈도수를 저장하기 위한 객체를 초기화합니다.
@@ -589,7 +589,7 @@
 		$('#textFlavor').text($('.btn-pfc').text());
 	
 		// 서버에서 캐릭터 클래스에 대한 데이터를 가져옵니다.
-		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+		fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
 		.then(response => response.json())
 		.then(data => {
 			// 빈도수를 저장하기 위한 객체를 초기화합니다.
@@ -638,7 +638,7 @@
 		$('#textFlavor').text($('.btn-pfsp').text());
 	
 		// 서버에서 캐릭터 종(species)에 대한 데이터를 가져옵니다.
-		fetch('https://localhost:8080/admin/game_stats/character_sheet')
+		fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
 		.then(response => response.json())
 		.then(data => {
 			// 빈도수를 저장하기 위한 객체를 초기화합니다.
@@ -690,7 +690,7 @@
       
       var char_class = $('#class-select option:first').val();
       
-      fetch('https://localhost:8080/admin/game_stats/character_sheet')
+      fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
        .then(response => response.json())
        .then(data => {
            // 'data' is an array of documents
@@ -777,7 +777,7 @@
       $('.card-body').on('change', '#class-select', function(e) {
          char_class = $(this).val();
          
-         fetch('https://localhost:8080/admin/game_stats/character_sheet')
+         fetch('https://192.168.0.68:8080/admin/game_stats/character_sheet')
           .then(response => response.json())
           .then(data => {
               // 'data' is an array of documents

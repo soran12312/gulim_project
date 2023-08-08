@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import project.gulim.config.ConfigUtils;
+import project.gulim.constant.Method;
 import project.gulim.domain.JwtDTO;
 import project.gulim.domain.MemberDTO;
 import project.gulim.domain.SurveyDTO;
 import project.gulim.service.MainService;
+import project.gulim.util.UiUtils;
 
 @Controller
 @RequestMapping("/main")
@@ -28,6 +31,8 @@ public class MainController {
 
 	@Autowired
 	private MainService mainService;
+	
+	private final UiUtils uiUtils = new UiUtils();
 	
 	@Autowired
 	private ConfigUtils util;
@@ -126,7 +131,7 @@ public class MainController {
 	
 	// 로그인 jwt토큰 생성
 	@RequestMapping("/login")
-	public String login(MemberDTO id) {
+	public String login(MemberDTO id, Model m) {
 		
 		String access_token = null;
 		
@@ -158,8 +163,41 @@ public class MainController {
 		cookie2.setMaxAge((int) (refresh_token_valid / 1000)); // 쿠키 유효기간은 초 단위로 설정
 		cookie2.setPath("/"); // 쿠키의 범위를 전체 애플리케이션으로 설정 (루트 패스 이하 모든 경로에서 쿠키 접근 가능)
         res.addCookie(cookie2);
+        
+        
 		
-		return "/main/login_main";
+		return "redirect:/main/login_main";
+	}
+	
+	// 메인페이지로 넘어갈 때 관리자여부 체크하여 모델에 add
+	@RequestMapping("/login_main")
+	public String login_main(Model m) {
+		
+		Cookie[] cookies = req.getCookies();
+	    String access_token = null;
+	      
+	    if (cookies != null) {
+	    	for (Cookie cookie : cookies) {
+	    		if (cookie.getName().equals("access_token")) {
+	    			access_token = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	    
+	    Claims claims = mainService.getClaims(access_token);
+        
+        Integer manager = claims.get("manager", Integer.class);
+        
+        Integer member_state = claims.get("member_state", Integer.class);
+        
+        if(member_state == 1) {
+        	return uiUtils.showMessageWithRedirect("제재되셨습니다.", "/main/logout", Method.GET, null, m);
+        }
+        
+        m.addAttribute("manager", manager);
+		
+        return "/main/login_main";
 	}
 	
 	// 회원가입
