@@ -77,5 +77,5 @@ public interface CommunityService {
 	public int countAllAnnounce();
 
 
-	public ContestDTO findContest(Integer contest_num);
+	public List<Map> findContest(Integer contest_num);
 }

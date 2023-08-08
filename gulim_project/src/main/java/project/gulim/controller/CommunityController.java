@@ -519,19 +519,16 @@ public class CommunityController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
 		
-		
-		
-		
 		return "community/contest/contest_list";
 	}
 	
 	
 	// 공모전 상세
 	@RequestMapping("/contest_detail")
-	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer contest_num) {
+	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer post_num) {
 		
 		
-		ContestDTO contests = communityService.findContest(contest_num);
+		List<Map> contests = communityService.findContest(post_num);
 		
 		model.addAttribute("contests", contests);
 		

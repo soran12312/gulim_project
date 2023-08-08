@@ -6,17 +6,12 @@
 <head>
 <meta charset="UTF-8">
 
-
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="../../css/place.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-
 
 </head>
 
@@ -94,25 +89,23 @@ function addToCart(bookData) {
 
 function showModal() {
     const modalContent = `
-        <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="cartModalLabel">book Added to Cart</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        선택하신 상품이 장바구니에 담겼습니다.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">계속 쇼핑하기</button>
-                        <button type="button" class="btn btn-primary" onclick="redirectToCart()">장바구니로 이동</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    	<div id="modal">
+	        <div class="modal-dialog">
+	          <div class="modal-content">
+	            <div class="modal-header">
+	              <h4 class="modal-title">book Added to Cart</h4>
+	              <button type="button" class="close" id="close-modal">&times;</button>
+	            </div>
+	            <div class="modal-body">
+	              <p>선택하신 상품이 장바구니에 담겼습니다.</p>
+	            </div>
+	            <div class="modal-footer">
+	              <button type="button" class="btn btn-secondary" id="close-modal">계속 쇼핑하기</button>
+	              <button type="button" class="btn btn-primary" onclick="redirectToCart()">장바구니로 이동</button>
+	            </div>
+	          </div>
+	        </div>
+	     </div>
     `;
 
     // Append the modal content to the body

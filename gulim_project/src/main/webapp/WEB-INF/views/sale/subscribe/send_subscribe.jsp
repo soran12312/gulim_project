@@ -57,11 +57,13 @@
 	                method: 'POST',
 	                data: { price: price, id: id },
 	                success: function (response) {
-	                    //alert(response); // 성공메세지
+	                    //alert(response); 
+	                    alert('구독권을 보냈습니다');
 	                	window.close();
 	                },
 	                error: function (xhr, status, error) {
-	                    alert('Failed to send subscription: ' + error); 
+	                    alert('구독권을 보내지 못했습니다'); 
+	                    window.close();
 	                },
 	            });
 	        });

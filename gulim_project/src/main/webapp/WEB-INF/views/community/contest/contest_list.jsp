@@ -133,10 +133,10 @@ footer {
             
             	<c:if test="${loop.index >= startIndex && loop.index < endIndex}">
 	                <div class="col-12 col-sm-6 col-md-4 image-grid-item">
-	                    <div style="background-image: url(${contest.path}.png);" class="entry-cover image-grid-cover has-image">
-	                    	<input type="hidden" name="contest_num" value="${contest.contest_num}" />
-	                        <a href="/community/contest_detail?contest_num=${contest.contest_num}" class="image-grid-clickbox"></a>
-	                        <a href="/community/contest_detail?contest_num=${contest.contest_num}" class="cover-wrapper">${contest.contest_title}</a>
+	                    <div style="background-image: url('${contest.path}.png');" class="entry-cover image-grid-cover has-image">
+	                    	<input type="hidden" name="contest_num" value="${contest.post_num}" />
+	                        <a href="/community/contest_detail?contest_num=${contest.post_num}" class="image-grid-clickbox"></a>
+	                        <a href="/community/contest_detail?contest_num=${contest.post_num}" class="cover-wrapper">${contest.contest_title}</a>
 	                    </div>
 	                </div>
                </c:if>

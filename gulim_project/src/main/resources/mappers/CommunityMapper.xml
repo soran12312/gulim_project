@@ -227,9 +227,9 @@
 	</select>
 	
 	
-	<select id="findContest" resultType="project.gulim.domain.ContestDTO" >
+	<select id="findContest" resultType="map" >
 	
-		SELECT contest_title, contest_content
+		SELECT contest_title, contest_content, i.`path` path
 		from post p 
 		left outer join image i on p.post_num = i.post_num 
 		inner join contest c ON p.contest_num = c.contest_num

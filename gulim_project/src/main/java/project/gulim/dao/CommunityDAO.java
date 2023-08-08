@@ -109,7 +109,7 @@ public interface CommunityDAO {
 
 
 
-	public ContestDTO findContest(Integer post_num);
+	public List<Map> findContest(Integer post_num);
 
 
 	
