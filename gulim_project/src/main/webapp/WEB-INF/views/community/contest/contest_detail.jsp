@@ -280,6 +280,15 @@
 	text-transform: uppercase;
 	cursor: pointer;
 }
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+
 </style>
 
 </head>
@@ -374,6 +383,9 @@
 				
 				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
 				  		${contests.contest_content}
+				  		<c:if test="${not empty contestimages.path}">
+					        <img src="${contestimages.path}.png" alt="Contest Image">
+					    </c:if>
 				  	</div>
 			  	
 				  	<!-- <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">

@@ -1,82 +1,80 @@
-
 /*전체*/
 .place_section {
-  width: 100%;
-  height: 1024px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
+	width: 100%;
+	height: 1024px;
+	background: rgba(255, 255, 255, 1);
+	opacity: 1;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
 }
-
 
 /* 제휴매장보기 버튼*/
 .place_partnership {
-  width: 100px;
-  color: rgba(255, 255, 255, 1); 
-  background-color: rgb(255, 0, 0);
-  position: absolute;
-  left: 150px;
-  bottom: 690px;
-  cursor: pointer;
+	width: 100px;
+	color: rgba(255, 255, 255, 1);
+	background-color: rgb(255, 0, 0);
+	position: absolute;
+	left: 150px;
+	bottom: 690px;
+	cursor: pointer;
 }
 
 /*전체 매장 보기 버튼*/
 .place_allplace {
-  width: 100px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  left: 280px;
-  bottom: 690px;
-  cursor: pointer;
+	width: 100px;
+	color: rgba(0, 0, 0, 1);
+	position: absolute;
+	left: 280px;
+	bottom: 690px;
+	cursor: pointer;
 }
 
 /*추천 모임 장소 글씨*/
 .place_recommend {
-  width: 300px;
-  color: white;
-  position: absolute;
-  top: 115px;
-  left: 850px;
-  font-family: Inter;
-  font-size:40px;
-  text-align: center;
-  font-family: 'system-ui';
+	width: 300px;
+	color: white;
+	position: absolute;
+	top: 115px;
+	left: 850px;
+	font-family: Inter;
+	font-size: 40px;
+	text-align: center;
+	font-family: 'system-ui';
 }
 /*지도*/
 .place_map {
-  width: 802px;
-  height: 674px;
-  opacity: 1;
-  position: absolute;
-  top: 278px;
-  left: 150px;
-  overflow: hidden;
+	width: 802px;
+	height: 674px;
+	opacity: 1;
+	position: absolute;
+	top: 278px;
+	left: 150px;
+	overflow: hidden;
 }
 /*카페 상세보기*/
 .place_detail {
-  width: 447px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 400px;
-  left: 1100px;
-  font-family: Inter;
-  font-weight: Regular;
-  opacity: 1;
-  text-align: left;
+	width: 447px;
+	color: rgba(0, 0, 0, 1);
+	position: absolute;
+	top: 400px;
+	left: 1100px;
+	font-family: Inter;
+	font-weight: Regular;
+	opacity: 1;
+	text-align: left;
 }
 
-.place_line{
+.place_line {
 	position: absolute;
 	width: 500px;
 	bottom: 500px;
-	top:200px;
+	top: 200px;
 	left: 750px;
 }
 
-.place_lines{
+.place_lines {
 	position: absolute;
 	width: 500px;
 	bottom: 500px;
@@ -85,78 +83,74 @@
 }
 
 /*상세보기 테이블*/
-.place_detail_table{
+.place_detail_table {
 	position: absolute;
 	background: white;
 	width: 700px;
-	height : 500px;
+	height: 500px;
 	bottom: 300px;
-	top:300px;
+	top: 300px;
 	left: 1000px;
 	opacity: 0.8;
-	
 }
 
 /*상세보기 이름 css*/
-.place_name_css{
+.place_name_css {
 	text-align: center;
 	width: 350px;
 	cursor: pointer;
 }
 
 /*상세보기 전화번호 css*/
-.place_tel_css{
+.place_tel_css {
 	text-align: center;
 	width: 250px;
 }
 /*상세보기 주소 css*/
-.address_css{
+.address_css {
 	text-align: center;
 	width: 700px;
 }
 
-
-
 /*제휴 글씨 박스*/
 .place_partnership_box {
-  width: 700px;
-  height: 100px;
-  position: absolute;
-  top: 830px;
-  left: 1000px;
-  background-image:url("/files/images/wallpaper/제휴 매장 박스.png");
-  background-size: cover;
-  overflow: hidden;
+	width: 700px;
+	height: 100px;
+	position: absolute;
+	top: 830px;
+	left: 1000px;
+	background-image: url("/files/images/wallpaper/제휴 매장 박스.png");
+	background-size: cover;
+	overflow: hidden;
 }
 /*제휴 글씨*/
 .place_partnership_benefit {
-  width: 550px;
-  color: rgba(0,0,0,1);
-  position: relative;
-  top: 30px;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: Regular;
-  opacity: 1;
-  text-align:center;
-  font-family: 'NeoDunggeunmo Code';
-  margin: auto;
-  text-align: center;
+	width: 550px;
+	color: rgba(0, 0, 0, 1);
+	position: relative;
+	top: 30px;
+	font-family: Inter;
+	font-size: 20px;
+	font-weight: Regular;
+	opacity: 1;
+	text-align: center;
+	font-family: 'NeoDunggeunmo Code';
+	margin: auto;
+	text-align: center;
 }
 /*다음 버튼*/
-.place_next{
+.place_next {
 	position: absolute;
 	left: 660px;
 	bottom: 1px;
 	font-size: 20px;
 }
 /*이전 버튼*/
-.place_prev{
+.place_prev {
 	position: absolute;
 	bottom: 1px;
 	font-size: 20px;
 }
-
 
 /* 페이징 시 숫자 포커스*/
 .active {
@@ -164,14 +158,12 @@
 }
 
 /* 페이지 숫자*/
-.pagination{
-	
+.pagination {
 	position: absolute;
 	bottom: 1px;
 	left: 280px;
 	white-space: nowrap;
 }
-
 
 /*이 위에는 지도에 관한 css 임*/
 /*****************************/
@@ -180,162 +172,151 @@
 
 /*문의사항 배경*/
 .mybotpage {
-  width: 100%;
-  height: 1024px;
-  background-image:url("/files/images/wallpaper/배경7.jpg");
-  background-size: cover;
-  opacity: 1;
-  overflow: hidden;
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/wallpaper/배경7.jpg");
+	background-size: cover;
+	opacity: 1;
+	overflow: hidden;
 }
 
 .mybotpages {
-  width: 100%;
-  height: 1024px;
-  background-image:url("/files/images/wallpaper/배경3.jpg");
-  background-size: cover;
-  opacity: 1;
-  overflow: hidden;
+	width: 100%;
+	height: 1024px;
+	background-image: url("/files/images/wallpaper/배경3.jpg");
+	background-size: cover;
+	opacity: 1;
+	overflow: hidden;
 }
-
-
-
 
 /*회색 배경*/
 .question_box {
-  width: 1400px;
-  height: 700px;
-  background: rgba(217,217,217,0.8);
-  
-  position: absolute;
-  top: 250px;
-  left: 200px;
-  overflow: hidden;
+	width: 1400px;
+	height: 700px;
+	background: rgba(217, 217, 217, 0.8);
+	position: absolute;
+	top: 250px;
+	left: 200px;
+	overflow: hidden;
 }
 
 /*문의 사항 제목 */
-.question_title{
+.question_title {
 	position: absolute;
-	width : 1021px;
+	width: 1021px;
 	left: 180px;
 	top: 60px;
 }
 
 /*문의 사항 내용*/
-.question_content{
+.question_content {
 	position: absolute;
-	width : 1021px;
+	width: 1021px;
 	height: 500px;
 	top: 100px;
 	left: 180px;
 }
 /*옵션 박스*/
-.qustion_type{
+.qustion_type {
 	position: absolute;
-	width : 500px;
+	width: 500px;
 	left: 180px;
 	top: 20px;
 }
 /*아이디 입력 창*/
-.question_id{
+.question_id {
 	position: absolute;
 	left: 700px;
 	top: 20px;
-	width : 500px;
+	width: 500px;
 }
 /*문의사항 보내기 버튼*/
-.question_submit{
+.question_submit {
 	position: absolute;
 	left: 1100px;
 	bottom: 50px;
 }
 
-
 /*고객 센터 글씨*/
-.question_question{
-  width: 400px;
-  color: white;
-  position: absolute;
-  top: 115px;
-  left: 730px;
-  font-family: Inter;
-  font-size:40px;
-  text-align: center;
-  font-family: 'system-ui';
+.question_question {
+	width: 400px;
+	color: white;
+	position: absolute;
+	top: 115px;
+	left: 730px;
+	font-family: Inter;
+	font-size: 40px;
+	text-align: center;
+	font-family: 'system-ui';
 }
 
 /*팝업 백그라운드 색상*/
 .popup_overlay {
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background-color: rgba(0, 0, 0, 0.5);
- display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
 }
 
 /*팝업*/
 .popup_content {
- position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- background-image: url("/files/images/간판.png");
- background-size: contain;;
- width: 595px;
- height: 300px;
- padding: 20px;
- text-align: center;
- display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-image: url("/files/images/간판.png");
+	background-size: contain;;
+	width: 595px;
+	height: 300px;
+	padding: 20px;
+	text-align: center;
+	display: none;
 }
 
 /* a태그 속성없애기 */
-.no_a_st2 a:link,/* 링크컬러화이트 */
-.no_a_st2 a:visited,/* 방문햇던링크컬러화이트 */
-.no_a_st2 a:active,
-.no_a_st2{
-  text-decoration-line : none;
-  color: white;
-  text-decoration:none; /* 마우스호버없음 */
-  cursor: pointer;
+.no_a_st2 a:link, /* 링크컬러화이트 */ .no_a_st2 a:visited, /* 방문햇던링크컬러화이트 */
+	.no_a_st2 a:active, .no_a_st2 {
+	text-decoration-line: none;
+	color: white;
+	text-decoration: none; /* 마우스호버없음 */
+	cursor: pointer;
 }
-
 
 /* 테이블 스타일 */
 .table_wrapper {
-	position:absolute;
-	top:300px;
+	position: absolute;
+	top: 300px;
 	left: 400px;
-	
-
 }
 
 /*문의 사항 테이블*/
-.question_table{
-border-collapse: collapse;
-left: 100px;
+.question_table {
+	border-collapse: collapse;
+	left: 100px;
 }
-        
+
 .question_td {
-padding: 10px;
+	padding: 10px;
 }
 
 /*자주 묻는 문의 사항 버튼*/
-.question_button{
-    border: none;
-    padding: 0;
-    cursor: pointer;
+.question_button {
+	border: none;
+	padding: 0;
+	cursor: pointer;
 	width: 250px;
 	height: 150px;
 	font-size: 25px;
-    color:white;
+	color: white;
 	background-color: rgba(116, 116, 116, 0.8);
 	box-shadow: 0px 0px 5px 5px rgba(116, 116, 116, 0.8);
 }
 
-
 /*자주 찾는 문의 사항*/
-.question_head_first{
+.question_head_first {
 	position: absolute;
 	font-size: 25px;
 	color: white;
@@ -343,9 +324,8 @@ padding: 10px;
 	left: 800px;
 }
 
-
 /*다른 도움이 필요하신가요? 글씨*/
-.question_head_second{
+.question_head_second {
 	position: absolute;
 	font-size: 25px;
 	color: white;
@@ -354,49 +334,47 @@ padding: 10px;
 }
 /*툭툭 문의하기 버튼*/
 .question_btn {
-  position: absolute;
-  background: none;
-  border: none;
-  top: 780px;
-  left: 600px;
-  cursor: pointer;
-  width: 250px;
-  height: 150px;
+	position: absolute;
+	background: none;
+	border: none;
+	top: 780px;
+	left: 600px;
+	cursor: pointer;
+	width: 250px;
+	height: 150px;
 }
 /*버튼 안에 이미지*/
 .question_btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
-
 
 /*문의 사항 남기기 버튼*/
 .question_btns {
-  position: absolute;
-  background: none;
-  border: none;
-  top: 765px;
-  left: 990px;
-  cursor: pointer;
-  width: 250px;
-  height: 150px;
+	position: absolute;
+	background: none;
+	border: none;
+	top: 765px;
+	left: 990px;
+	cursor: pointer;
+	width: 250px;
+	height: 150px;
 }
 /*버튼 안에 이미지*/
 .question_btns img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
-
 /*버튼안에 있는 Q*/
-.question_Q{
+.question_Q {
 	color: black;
 }
 
 /*버튼 안에 이미지*/
-.question_img{
+.question_img {
 	position: absolute;
 	width: 50px;
 	height: 50px;
@@ -405,7 +383,7 @@ padding: 10px;
 }
 
 /*문의 사항 남기기*/
-.qusetion_help{
+.qusetion_help {
 	position: absolute;
 	font-size: 25px;
 	color: white;
@@ -414,34 +392,31 @@ padding: 10px;
 	text-align: center;
 }
 /*툭툭 문의하기*/
-.qusetion_helps{
+.qusetion_helps {
 	position: absolute;
 	font-size: 25px;
 	color: white;
 	top: 750px;
 	left: 640px;
-	
 }
 
-
-
 /* 팝업 닫기 버튼 */
-.pop_btn{
+.pop_btn {
 	position: relative;
-	top:130px;
+	top: 130px;
 	width: 50px;
 	height: 30px;
 	font-family: 'NeoDunggeunmo Code';
 	font-size: 15px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #C7813C;
-    border: 3px solid #7B4E23;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-color: #C7813C;
+	border: 3px solid #7B4E23;
 }
 /* pop내용 */
-.popstrong{
+.popstrong {
 	margin-top: 200px;
 	font-family: 'NeoDunggeunmo Code';
 	position: relative;
@@ -450,27 +425,30 @@ padding: 10px;
 	position: relative;
 	top: 50px;
 }
-.popH2{
+
+.popH2 {
 	position: relative;
-	top:80px;
+	top: 80px;
 	width: 400px;
 	font-family: 'NeoDunggeunmo Code';
 	color: white;
 	margin: auto;
 }
-.popa{
+
+.popa {
 	position: relative;
-	top:100px;}
+	top: 100px;
+}
 /*선*/
-.qusetion_line{
+.qusetion_line {
 	position: absolute;
 	width: 500px;
 	bottom: 500px;
-	top:170px;
+	top: 170px;
 	left: 690px;
 }
 /*선*/
-.qusetion_lines{
+.qusetion_lines {
 	position: absolute;
 	width: 500px;
 	bottom: 500px;
@@ -479,257 +457,318 @@ padding: 10px;
 }
 
 /*지도 배경*/
-.mapbackpage{
+.mapbackpage {
 	width: 100%;
-  height: 1024px;
-  background-image:url("/files/images/wallpaper/배경5.png");
-  background-size: cover;
-  overflow: hidden;
+	height: 1024px;
+	background-image: url("/files/images/wallpaper/배경5.png");
+	background-size: cover;
+	overflow: hidden;
 }
 
-
 /*여기 부터는 상품 상세 보기 salesbook*/
-
 .bookpage {
-  width: 100% ;
-  background-image:url("/files/images/wallpaper/배경6.png");
-  background-size: cover;
-  overflow: hidden;
+	width: 100%;
+	background-image: url("/files/images/wallpaper/배경6.png");
+	background-size: cover;
+	overflow: hidden;
 }
 
 .book_text {
-    text-align: center;
-    color: rgb(255, 255, 255);
+	text-align: center;
+	color: rgb(255, 255, 255);
 }
 
 .book_item {
-    width: 300px;
-    margin: 10px;
+	width: 300px;
+	margin: 10px;
 }
 
 .book_image {
-    left: 300px;
-    position: absolute;
-    height: 400px;
-    width: 300px;
-    top: 100px;
+	left: 300px;
+	position: absolute;
+	height: 400px;
+	width: 300px;
+	top: 100px;
 }
 
 .book_title {
-    font-size: 20px;
-    font-weight: bold;
-    position: absolute;
-    color: rgb(255, 255, 255);
-    left: 700px;
-    top: 150px;
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	color: rgb(255, 255, 255);
+	left: 700px;
+	top: 150px;
 }
 
 .book_simple_info {
-    font-size: 17px;
-    font-weight: bold;
-    position: absolute;
-    color: rgb(255, 255, 255);
-    left: 700px;
-    top: 250px;
-    width: 700px;
-    height: 180px;
-    overflow: auto;
+	font-size: 17px;
+	font-weight: bold;
+	position: absolute;
+	color: rgb(255, 255, 255);
+	left: 700px;
+	top: 250px;
+	width: 700px;
+	height: 180px;
+	overflow: auto;
 }
 
 .book_writer {
-    font-size: 20px;
-    font-weight: bold;
-    position: absolute;
-    color: rgb(255, 255, 255);
-    left: 1200px;
-    top: 150px;
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	color: rgb(255, 255, 255);
+	left: 1200px;
+	top: 150px;
 }
 
 .book_price {
-    font-size: 30px;
-    font-weight: bold;
-    color: rgb(255, 255, 255); 
-    position: absolute;
-    left: 700px;
-    top: 450px;
+	font-size: 30px;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	left: 700px;
+	top: 450px;
 }
 
-.book_btn{
-   	font-size: 17px;
-    font-weight: bold;
-    color: black;
-    position: absolute;
-    left: 1000px;
-    top: 450px;
-}
-
-.book_btns{
+.book_btn {
 	font-size: 17px;
-    font-weight: bold;
-    color: black;
-    position: absolute;
-    left: 1100px;
-    top: 450px;
+	font-weight: bold;
+	color: black;
+	position: absolute;
+	left: 1000px;
+	top: 450px;
 }
 
-
-
+.book_btns {
+	font-size: 17px;
+	font-weight: bold;
+	color: black;
+	position: absolute;
+	left: 1100px;
+	top: 450px;
+}
 
 .book_detail {
-    font-size: 17px;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    position: absolute;
-    left: 300px;
-    top: 600px;
-    width: 1200px;
-    height: 350px;
-    overflow: auto;
+	font-size: 17px;
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	position: absolute;
+	left: 300px;
+	top: 600px;
+	width: 1200px;
+	height: 350px;
+	overflow: auto;
 }
 
 .book_view_container {
-    position: absolute;
-    color: rgb(255, 255, 255);
-    left: 300px;
-    top: 500px;
+	position: absolute;
+	color: rgb(255, 255, 255);
+	left: 300px;
+	top: 500px;
 }
+
 .book_views_container {
-    position: absolute;
-    left: 300px;
-    top: 570px;
-    width: 1200px;
-}
-.book_hr{
-    position: absolute;
-    width: 1200px;
-    left: 300px;
-    top: 70px;
+	position: absolute;
+	left: 300px;
+	top: 570px;
+	width: 1200px;
 }
 
-
-
-
-
-
+.book_hr {
+	position: absolute;
+	width: 1200px;
+	left: 300px;
+	top: 70px;
+}
 
 #modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-dialog {
-  margin: 15% auto;
-  width: 60%;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
+	margin: 15% auto;
+	width: 60%;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
 }
 
 .modal-content {
-  padding: 20px;
+	padding: 20px;
 }
 
 .modal-header {
-  padding: 10px 15px;
-  border-bottom: 1px solid #eee;
-  background-color: #f7f7f7;
-  border-radius: 5px 5px 0 0;
+	padding: 10px 15px;
+	border-bottom: 1px solid #eee;
+	background-color: #f7f7f7;
+	border-radius: 5px 5px 0 0;
 }
 
 .modal-title {
-  margin: 0;
+	margin: 0;
 }
 
 .modal-body {
-  padding: 15px;
+	padding: 15px;
 }
 
 .modal-footer {
-  padding: 10px 15px;
-  border-top: 1px solid #eee;
-  background-color: #f7f7f7;
-  border-radius: 0 0 5px 5px;
-  text-align: right;
+	padding: 10px 15px;
+	border-top: 1px solid #eee;
+	background-color: #f7f7f7;
+	border-radius: 0 0 5px 5px;
+	text-align: right;
 }
 
 .btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+	color: #fff;
+	background-color: #0069d9;
+	border-color: #0062cc;
 }
 
 .btn-secondary {
-  color: #444;
-  background-color: #f7f7f7;
-  border-color: #ddd;
+	color: #444;
+	background-color: #f7f7f7;
+	border-color: #ddd;
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary:active {
-  color: #444;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+	color: #444;
+	background-color: #e6e6e6;
+	border-color: #adadad;
 }
 
 .close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.5;
-  cursor: pointer;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	opacity: 0.5;
+	cursor: pointer;
 }
 
 .close:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
+#modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+}
 
+.modal-dialog {
+	width: 400px;
+	background-color: #ffffff;
+	border-radius: 6px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
 
+.modal-content {
+	padding: 15px;
+}
 
+.modal-header {
+	padding: 10px 15px;
+	background-color: #f1f1f1;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
 
+.modal-title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+}
 
+.close {
+	font-size: 24px;
+	font-weight: 600;
+	color: #000;
+	cursor: pointer;
+	opacity: 0.7;
+}
 
+.close:hover {
+	opacity: 1;
+}
 
+.modal-body {
+	font-size: 16px;
+	padding: 20px 0;
+}
 
+.modal-footer {
+	padding: 10px 15px;
+	background-color: #f1f1f1;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	display: flex;
+	justify-content: flex-end;
+}
 
+.modal-footer button {
+	margin-left: 10px;
+}
 
+/* Button Styles */
+.btn {
+	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
 
+.btn-secondary {
+	background-color: #f1f1f1;
+	color: #000;
+}
 
+.btn-primary {
+	background-color: #007bff;
+	color: #fff;
+}
 
-
-
-
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #0056b3;
+}

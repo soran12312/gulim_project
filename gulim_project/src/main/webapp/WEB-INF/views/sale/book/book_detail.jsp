@@ -115,8 +115,17 @@ function showModal() {
     $('body').append(modalContent);
 
     // Show the modal
-    $('#cartModal').modal('show');
+    $('#modal').modal('show');
 }
+
+
+function closeModal() {
+    // Hide the modal
+    $('#modal').modal('hide');
+
+    // Remove the modal from the DOM after it's hidden
+    $('#modal').remove();
+  }
 
 
 // 모달 장바구니페이지 이동
@@ -132,7 +141,7 @@ $('#purchase').click(function() {
         book_num: $('input[name="book_num"]').val(),
     };
 
-    console.log(bookData);
+    //console.log(bookData);
 
     completePurchase(bookData); 
 });
@@ -147,7 +156,7 @@ function completePurchase(bookData) {
         //dataType: 'json', 
         success: function(response) {       // 서버에서 준 결과를 response라는 변수에 담음
             // 성공
-            console.log('Purchase completed successfully');
+            //console.log('Purchase completed successfully');
             alert('구매가 완료되었습니다.'); // Display a modal with a message
         },
         error: function(xhr, status, error) {

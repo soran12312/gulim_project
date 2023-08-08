@@ -528,9 +528,13 @@ public class CommunityController {
 	public String contestlistdetail(Model model,@RequestParam(value="contest_num" , required=true) Integer post_num) {
 		
 		
-		List<Map> contests = communityService.findContest(post_num);
+		ContestDTO  contests = communityService.findContest(post_num);
 		
 		model.addAttribute("contests", contests);
+		
+		
+		ImageDTO contestimages =  communityService.findContestImg(post_num);
+		model.addAttribute("contestimages", contestimages);
 		
 		return "community/contest/contest_detail";
 	}

@@ -131,7 +131,7 @@
     </select>
     
     
-     <!-- 이벤트 게시판 게시글 수 카운팅 -->
+     <!-- 공모전 게시판 게시글 수 카운팅 -->
     <select id="countContest" resultType="int">
         select count(*)
 		from post p 
@@ -193,7 +193,7 @@
 	
 	
 	
-	<!-- 이벤트 조회 -->
+	<!-- 이벤트 리스트 조회 -->
 	<select id="findAllEvent" resultType="project.gulim.domain.PostDTO">
 		SELECT *
 		FROM post 
@@ -205,7 +205,7 @@
 	
 	<!-- 이벤트 이미지 조회 -->
 	<select id="findEventImg" resultType="project.gulim.domain.ImageDTO">
-		SELECT image.origin_img_name , image.post_num
+		SELECT image.origin_img_name , image.post_num , image.`path` path
 		FROM post LEFT OUTER JOIN image
 		ON post.post_num = image.post_num
 		WHERE
@@ -217,7 +217,7 @@
 	<!-- 공모전 리스트 조회 -->
 	<select id="findAllContest" resultType="Map">
 		SELECT p.post_num, p.post_title, p.id, p.writing_date, p.post_content, p.board, p.subject, p.view_count, 
-		c.contest_num,c.contest_title,c.contest_content, p.post_state, i.img_num, i.origin_img_name, i.`path`, i.img_size, i.book_num, i.room_num
+		c.contest_num,c.contest_title,c.contest_content, p.post_state, i.img_num, i.origin_img_name, i.`path` path, i.img_size, i.book_num, i.room_num
 		FROM post p 
 		LEFT OUTER JOIN image i ON p.post_num = i.post_num 
 		INNER JOIN contest c ON p.contest_num = c.contest_num
@@ -227,13 +227,25 @@
 	</select>
 	
 	
-	<select id="findContest" resultType="map" >
+	<!-- 공모전 상세 -->
+	<select id="findContest" parameterType="int" resultType="project.gulim.domain.ContestDTO" >
 	
 		SELECT contest_title, contest_content, i.`path` path
 		from post p 
 		left outer join image i on p.post_num = i.post_num 
 		inner join contest c ON p.contest_num = c.contest_num
-		where c.contest_num = #{contest_num}
+		where p.post_num = #{contest_num}
+		limit 1
+	</select>
+	
+	
+	<select id="findContestImg" parameterType="int" resultType="project.gulim.domain.ImageDTO" >
+	
+		SELECT contest_title, contest_content, i.`path` path
+		from post p 
+		left outer join image i on p.post_num = i.post_num 
+		inner join contest c ON p.contest_num = c.contest_num
+		where p.post_num = #{contest_num}
 		limit 1
 	</select>
 

@@ -222,7 +222,7 @@
 											<c:choose>
 												<c:when test="${event.post_state == 1}">
 													<img class="resized-image"
-														src="/images/gulim/${eventimage.origin_img_name}.png"
+														src="${eventimage.path}.png"
 														onclick="return false;">
 													<input type="hidden" name="post_num"
 														value="${event.post_num}">
@@ -230,7 +230,7 @@
 												<c:otherwise>
 													<a href="./event_detail?post_num=${event.post_num}"> <img
 														class="resized-image"
-														src="/images/gulim/${eventimage.origin_img_name}.png">
+														src="${eventimage.path}.png">
 													</a>
 												</c:otherwise>
 											</c:choose>

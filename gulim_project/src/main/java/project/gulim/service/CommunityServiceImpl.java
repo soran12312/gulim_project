@@ -227,9 +227,17 @@ public class CommunityServiceImpl implements CommunityService{
 
 
 	@Override
-	public List<Map> findContest(Integer contest_num) {
+	public ContestDTO  findContest(Integer contest_num) {
 		// TODO Auto-generated method stub
 		return communityDAO.findContest(contest_num);
+	}
+
+
+
+	@Override
+	public ImageDTO findContestImg(Integer contest_num) {
+		// TODO Auto-generated method stub
+		return communityDAO.findContestImg(contest_num);
 	}
 	
 	

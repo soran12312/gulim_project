@@ -280,6 +280,14 @@
 	text-transform: uppercase;
 	cursor: pointer;
 }
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
 </style>
 
 </head>
@@ -291,7 +299,7 @@
 	<div class="container">
 		
 		<div class="heading-section">
-            <h2>event Details</h2>
+           <%--  <h2>${event.post_title}</h2> --%>
         </div>
 		
 	
@@ -302,7 +310,7 @@
 	        		<div class="col-md-6">
 	        			<div class="item">
 	        			
-	        				<img src="/images/gulim/${image.origin_img_name}.png">
+	        				<img src="${image.path}.png">
 	        			</div>
 	        		</div>
 	        	</c:forEach>
